@@ -7,6 +7,7 @@ import tempfile
 import unittest
 
 from reference import expected
+from readme_report import composite_scores
 from run_benchmarks import ROOT, execute, generate_readme, parse_result, summarize
 
 
@@ -83,12 +84,27 @@ class HarnessTests(unittest.TestCase):
             report = json.loads((path / "results/latest.json").read_text(encoding="utf-8"))
             self.assertEqual(report["cases"]["fibonacci/aquarius"]["summary"]["status"], "unavailable")
             self.assertEqual(report["cases"]["fibonacci/python"]["summary"]["status"], "ok")
-            self.assertIn("UNAVAILABLE", generate_readme(report))
+            self.assertIn("無法使用", generate_readme(report))
+            self.assertIsNone(composite_scores(report))
             before = (path / "README.md").read_bytes()
             subprocess.run([sys.executable, str(ROOT / "run_benchmarks.py"), "--report-only",
                             str(path / "results/latest.json"), "--readme", str(path / "README.md")],
                            check=True, capture_output=True, timeout=30)
             self.assertEqual((path / "README.md").read_bytes(), before)
+
+    def test_composite_score_uses_equal_weight_geometric_mean(self):
+        report = {"benchmarks": {"first": {}, "second": {}}, "cases": {}}
+        for name, times in [("first", {"python": 10, "node": 5, "aquarius": 40}),
+                            ("second", {"python": 1000, "node": 2000, "aquarius": 4000})]:
+            for language, duration in times.items():
+                report["cases"][f"{name}/{language}"] = {
+                    "summary": {"status": "ok", "median_ms": duration}}
+        scores = composite_scores(report)
+        self.assertAlmostEqual(scores["python"], 100)
+        self.assertAlmostEqual(scores["node"], 100)
+        self.assertAlmostEqual(scores["aquarius"], 25)
+        report["cases"]["second/node"]["summary"]["status"] = "failed"
+        self.assertIsNone(composite_scores(report))
 
 
 if __name__ == "__main__":

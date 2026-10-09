@@ -23,6 +23,7 @@ import time
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
 from reference import expected
+from readme_report import generate_readme
 
 ROOT = Path(__file__).resolve().parent
 LANGUAGES = {"aquarius": ("AquariusLang", ".aqua"), "python": ("Python", ".py"),
@@ -192,133 +193,6 @@ def summarize(record, repetitions):
             "cv_percent": statistics.stdev(values) / statistics.mean(values) * 100 if len(values) > 1 else 0.0}
 
 
-def md(value):
-    return str(value).replace("|", "\\|").replace("\n", " ").replace("\r", " ")
-
-
-def generate_readme(report):
-    config, env = report["config"], report["environment"]
-    lines = ["# AquariusLang vs. Python vs. Node.js", "",
-             "A desktop execution benchmark with ten classic algorithms, 30 standalone source scripts, "
-             "and a Python runner that validates results and generates this README plus JSON/CSV reports.", "",
-             "## Run it", "", "Requirements: Python 3.10+, Node.js, and the AquariusLang desktop VM "
-             "(`AquariusDesktopVMREPL`, including its bundled dependencies). No Python packages or npm install required. "
-             "The Aquarius scripts use AquariusLangTW keywords and bilingual built-ins; older English-only interpreters are not compatible.", "",
-             "```powershell", "python run_benchmarks.py", "# Fast correctness check with smaller inputs:",
-             "python run_benchmarks.py --profile smoke --repetitions 1 --warmups 0",
-             "# Override runtime discovery when necessary:",
-             'python run_benchmarks.py --aquarius "C:\\Aquarius\\AquariusDesktopVMREPL.exe" --node "C:\\Program Files\\nodejs\\node.exe"',
-             "# Limit the workload selection:", "python run_benchmarks.py --benchmarks fibonacci sieve matrix",
-             "# Rebuild README from an existing report without running benchmarks:",
-             "python run_benchmarks.py --report-only results/latest.json",
-             "# Harness and reference checks:", "python -m unittest discover -s tests -v", "```", "",
-             "If `python` is an unconfigured pyenv shim, invoke an installed `python.exe` directly. "
-             "The runner uses its own interpreter for the Python benchmarks by default. Use `--python PATH` to override it. "
-             "It searches the process PATH and, on Windows, current user/system PATH entries, so a newly added Aquarius PATH works "
-             "even in an older terminal session. Runtime overrides accept one executable path, not shell command strings.", "",
-             "The runner stages source copies in a temporary directory and replaces only each script's `benchmark_n` declaration "
-             "with its selected manifest size. Original scripts run directly with the standard sizes. "
-             "Outputs go into a dated `results/` directory; `results/latest.json` and `README.md` are regenerated after each run. "
-             "Use `--output-dir`, `--readme`, `--timeout`, `--seed`, `--repetitions`, and `--warmups` to customize a run. "
-             "Exit code 1 means at least one runtime was unavailable or a case failed validation; failures remain visible in reports.", "",
-             "## Measurement method", "",
-             "- Each sample launches a fresh process; Python measures elapsed wall time with `perf_counter_ns` around "
-             "process launch through exit and captured output. Source loading, parsing/compilation, runtime startup, "
-             "allocation, garbage collection, algorithm execution, and output are included.",
-             "- Aquarius executes `.aqua` source on its desktop VM. Python uses CPython source execution; Node.js uses V8 source execution. "
-             "No precompiled bottles, NumPy, native algorithm libraries, worker threads, or built-in sort are used in timed workloads.",
-             "- Discarded warmup processes prime OS file caches; they do **not** preserve a JIT or VM across measured processes. "
-             "Each round shuffles all benchmark/language cases with a recorded seed and runs them sequentially.",
-             "- Every warmup and measured sample must match an untimed Python correctness oracle. Integers match exactly; "
-             "spectral norm squared uses relative tolerance 1e-9 and absolute tolerance 1e-12. "
-             "Nonzero exits, timeouts, missing/extra output, nonfinite results, and checksum mismatches fail the case.",
-             "- Aquarius integer `/` truncates; matching Python `//` and Node.js `Math.trunc` implement that arithmetic. "
-             "Floating workloads use doubles (`d` literals in Aquarius). Standard inputs keep integer intermediates within signed 32-bit range.",
-             "- Aquarius `push`/`加入` copies the array. Python and Node.js deliberately use copy-and-append "
-             "during corresponding array construction. Thus sieve, sorting, and matrix setup include quadratic copying; "
-             "these are matched baseline implementations, not idiomatic peak-performance versions of each language.",
-             "- Medians describe these scripts on this machine. Small workloads can be dominated by startup; "
-             "results do not isolate steady-state algorithm speed or establish a universal language ranking. "
-             "CPU frequency, thermal state, background work, and scheduler noise are uncontrolled. "
-             "Memory use and CPU time are not measured; RAM below describes the machine.", "",
-             "## Latest run", "",
-             f"- Started: {md(report['started_at'])}", f"- Finished: {md(report['finished_at'])}",
-             f"- Timezone: {md(config['timezone'])}",
-             f"- Profile: `{config['profile']}`; {config['repetitions']} measured samples and {config['warmups']} discarded warmups per case",
-             f"- Order seed: {config['seed']}; per-process timeout: {config['timeout_seconds']:g} seconds",
-             f"- OS: {md(env['os'])}", f"- Architecture: {md(env['architecture'])}",
-             f"- CPU: {md(env['cpu'])}; logical CPUs: {env['logical_cpus']}",
-             f"- Installed RAM: {env['ram_bytes'] / 1024**3:.2f} GiB" if env['ram_bytes'] else "- Installed RAM: unavailable",
-             f"- Active power plan: {md(env['power_plan'] or 'Unavailable')}",
-             f"- Python orchestrator: {md(env['python_runner'])}",
-             f"- Timer resolution: {env['timer_resolution_seconds']:.3g} seconds", "",
-             "| Runtime | Version / build | Executable |", "| --- | --- | --- |"]
-    for lang, (title, _) in LANGUAGES.items():
-        runtime = report["runtimes"][lang]
-        lines.append(f"| {title} | {md(runtime.get('version', runtime.get('error')))} | "
-                     f"{md(runtime.get('executable', 'Unavailable'))} |")
-    aqua = report["runtimes"]["aquarius"]
-    if aqua.get("available"):
-        lines += ["", f"Aquarius release directory: `{aqua['release_directory']}`.", "",
-                  f"Aquarius apphost SHA-256: `{aqua['executable_sha256']}`."]
-        for filename, fingerprint in aqua.get("assemblies_sha256", {}).items():
-            lines.append(f"- `{filename}` SHA-256: `{fingerprint}`")
-    lines += ["", "## Results", "", "All durations are milliseconds. Lower is faster. "
-              "Ratios are median runtime / median Python runtime; values below 1 mean faster than Python for this workload.", "",
-              "| Algorithm | n | Aquarius median | Python median | Node.js median | Aquarius / Python | Node.js / Python |",
-              "| --- | ---: | ---: | ---: | ---: | ---: | ---: |"]
-    for name in report["benchmarks"]:
-        spec = report["benchmarks"][name]
-        summaries = {lang: report["cases"][f"{name}/{lang}"]["summary"] for lang in LANGUAGES}
-        cells = [f"{s['median_ms']:.3f}" if s["status"] == "ok" else s["status"].upper() for s in summaries.values()]
-        def ratio(lang):
-            s, py = summaries[lang], summaries["python"]
-            return f"{s['median_ms'] / py['median_ms']:.2f}x" if s["status"] == py["status"] == "ok" else "—"
-        lines.append(f"| {spec['title']} | {spec['n']} | " + " | ".join(cells) +
-                     f" | {ratio('aquarius')} | {ratio('node')} |")
-    lines += ["", "### Timing variability", "", "CV is sample standard deviation / mean. "
-              "With one sample, variability cannot be estimated and is shown as a dash.", "",
-              "| Algorithm | Runtime | Min ms | Max ms | Std. dev. ms | CV | Valid samples |",
-              "| --- | --- | ---: | ---: | ---: | ---: | ---: |"]
-    for record in report["cases"].values():
-        summary = record["summary"]
-        valid = sum(s["status"] == "ok" for s in record["samples"])
-        if summary["status"] == "ok":
-            sd = f"{summary['stdev_ms']:.3f}" if config["repetitions"] > 1 else "—"
-            cv = f"{summary['cv_percent']:.1f}%" if config["repetitions"] > 1 else "—"
-            lines.append(f"| {record['benchmark']} | {LANGUAGES[record['language']][0]} | "
-                         f"{summary['min_ms']:.3f} | {summary['max_ms']:.3f} | {sd} | {cv} | {valid}/{config['repetitions']} |")
-        else:
-            lines.append(f"| {record['benchmark']} | {LANGUAGES[record['language']][0]} | — | — | — | — | {valid}/{config['repetitions']} |")
-    failures = []
-    for key, record in report["cases"].items():
-        if record.get("unavailable"):
-            failures.append(f"- `{key}`: {md(record['unavailable'])}")
-        for phase in ("warmups", "samples"):
-            for index, sample in enumerate(record[phase]):
-                if sample["status"] != "ok":
-                    failures.append(f"- `{key}` {phase} #{index + 1}: {md(sample['error'])}")
-    lines += ["", "## Validation", ""]
-    if failures:
-        lines += failures
-    else:
-        lines.append("All runtime outputs matched the correctness oracles for every warmup and measured sample.")
-    lines += ["", "| Algorithm | Expected result | Workload |", "| --- | ---: | --- |"]
-    for spec in report["benchmarks"].values():
-        lines.append(f"| {spec['title']} | {spec['expected']} | {spec['description']} |")
-    lines += ["", "## Reproducibility artifacts", "",
-              f"- Raw samples, output, commands, execution order, metadata, executable hashes, and source hashes: `{report['artifacts']['json']}`",
-              f"- Summary statistics and raw samples as CSV: `{report['artifacts']['summary_csv']}` and `{report['artifacts']['samples_csv']}`",
-              "- `benchmarks.json`: standard/smoke input sizes and workload definitions.",
-              "- `benchmarks/aquarius/`, `benchmarks/python/`, `benchmarks/node/`: standalone scripts.",
-              "- `reference.py`: untimed correctness oracles; `tests/`: harness/reference regression checks.", "",
-              "This README is generated by `run_benchmarks.py`; edits will be overwritten on the next run. "
-              "The JSON preserves hashes of both original and staged scripts and the manifest, runner, and oracle. "
-              "Temporary command paths identify the files used during the run; they are removed afterward. "
-              "Keep the source and its matching report together when comparing runs.", ""]
-    return "\n".join(lines)
-
-
 def write_artifacts(report, directory, readme):
     directory.mkdir(parents=True, exist_ok=True)
     json_path = directory / "results.json"
@@ -405,7 +279,7 @@ def main(argv=None):
               "environment": environment_info(),
               "runtimes": {lang: runtime_info(lang, exe) for lang, exe in executables.items()},
               "benchmarks": {}, "cases": {}, "execution_order": [],
-              "source_sha256": {p.name: sha256(p) for p in (manifest_path, Path(__file__), ROOT / "reference.py")},
+              "source_sha256": {p.name: sha256(p) for p in (manifest_path, Path(__file__), ROOT / "reference.py", ROOT / "readme_report.py")},
               "artifacts": {"json": str(directory / "results.json"),
                             "summary_csv": str(directory / "summary.csv"), "samples_csv": str(directory / "samples.csv")}}
     rng = random.Random(args.seed)
