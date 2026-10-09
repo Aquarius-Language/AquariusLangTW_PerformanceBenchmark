@@ -1,0 +1,7 @@
+變數 benchmark_n = 6;
+變數 ack = 函式(m, n) {
+    如果 (m == 0) { 回傳 n + 1; }
+    如果 (n == 0) { 回傳 ack(m - 1, 1); }
+    回傳 ack(m - 1, ack(m, n - 1));
+};
+印出("RESULT", ack(3, benchmark_n));

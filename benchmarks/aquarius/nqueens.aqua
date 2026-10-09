@@ -1,0 +1,17 @@
+變數 benchmark_n = 8;
+變數 board = [];
+迴圈 (變數 i = 0; i < benchmark_n; i++) { board = 加入(board, 0); }
+變數 solve = 函式(row) {
+    如果 (row == benchmark_n) { 回傳 1; }
+    變數 count = 0;
+    迴圈 (變數 col = 0; col < benchmark_n; col++) {
+        變數 safe = 真;
+        迴圈 (變數 prev = 0; prev < row; prev++) {
+            變數 delta = row - prev;
+            如果 (board[prev] == col || board[prev] == col - delta || board[prev] == col + delta) { safe = 假; 中斷; }
+        }
+        如果 (safe) { board[row] = col; count += solve(row + 1); }
+    }
+    回傳 count;
+};
+印出("RESULT", solve(0));

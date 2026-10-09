@@ -1,0 +1,9 @@
+變數 benchmark_n = 10000;
+變數 checksum = 0;
+迴圈 (變數 start = 1; start <= benchmark_n; start++) {
+    迴圈 (變數 value = start; value != 1; checksum++) {
+        變數 half = value / 2;
+        如果 (half * 2 == value) { value = half; } 否則 { value = value * 3 + 1; }
+    }
+}
+印出("RESULT", checksum);
