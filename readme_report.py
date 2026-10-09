@@ -1,7 +1,7 @@
 """繁體中文 README 與跨演算法綜合分數。只使用報告中的既有實測資料。"""
 import math
 
-LANGUAGES = {"aquarius": "AquariusLang", "python": "Python", "node": "Node.js"}
+LANGUAGES = {"aquarius": "星泉", "python": "Python", "node": "Node.js"}
 WORKLOADS = {
     "fibonacci": ("遞迴費波那契", "使用樸素遞迴，不使用記憶化。"),
     "ackermann": ("阿克曼函數", "計算 A(3, n)，測試巢狀遞迴呼叫。"),
@@ -43,7 +43,7 @@ def md(value):
 def generate_readme(report):
     config, env = report["config"], report["environment"]
     scores = composite_scores(report)
-    lines = ["# AquariusLang、Python、Node.js 桌面執行效能評比", ""]
+    lines = ["# 星泉、Python、Node.js 桌面執行效能評比", ""]
     if scores:
         ranking = sorted(scores, key=scores.get, reverse=True)
         top = ranking[0]
@@ -65,8 +65,8 @@ def generate_readme(report):
               "不同測試組合與輸入規模的分數不可直接比較。", "",
               "本專案提供十種經典演算法、三十份可獨立執行的腳本，以及負責驗證結果、產生 README 與 JSON／CSV 報告的 Python 主控程式。", "",
               "## 執行方式", "",
-              "需求：Python 3.10 以上、Node.js，以及 AquariusLang 桌面 VM（`AquariusDesktopVMREPL` 與隨附相依檔案）。"
-              "不需要安裝 Python 套件或執行 npm install。Aquarius 腳本使用 AquariusLangTW 的繁體中文關鍵字與雙語內建函式，"
+              "需求：Python 3.10 以上、Node.js，以及星泉桌面 VM（`AquariusDesktopVMREPL` 與隨附相依檔案）。"
+              "不需要安裝 Python 套件或執行 npm install。星泉腳本使用星泉繁體中文版的繁體中文關鍵字與雙語內建函式，"
               "舊版僅支援英文的直譯器無法執行。", "",
               "```powershell", "python run_benchmarks.py", "# 使用較小輸入，快速檢查正確性：",
               "python run_benchmarks.py --profile smoke --repetitions 1 --warmups 0",
@@ -79,7 +79,7 @@ def generate_readme(report):
               "若 `python` 是尚未設定版本的 pyenv 代理程式，請直接呼叫已安裝的 `python.exe`。"
               "主控程式預設使用自身的 Python 直譯器執行測試，也可用 `--python PATH` 指定其他版本。"
               "它會搜尋目前程序的 PATH；在 Windows 上也會搜尋使用者與系統的最新 PATH，"
-              "因此舊終端工作階段也能找到新加入的 Aquarius 路徑。執行環境參數只接受單一執行檔路徑。", "",
+              "因此舊終端工作階段也能找到新加入的星泉路徑。執行環境參數只接受單一執行檔路徑。", "",
               "主控程式會在暫存目錄建立原始碼副本，只將 `benchmark_n` 的宣告替換為所選輸入規模。"
               "直接執行原始腳本時，採用標準規模。每次測量會建立帶有日期的 `results/` 子目錄，"
               "並重新產生 `results/latest.json` 與 `README.md`。"
@@ -88,16 +88,16 @@ def generate_readme(report):
               "## 測量方法", "",
               "- 每筆樣本都啟動新的程序。Python 使用 `perf_counter_ns`，測量從啟動至程序結束並擷取輸出的實際經過時間。"
               "計時包含原始碼載入、解析／編譯、執行環境啟動、記憶體配置、垃圾回收、演算法與輸出。",
-              "- Aquarius 桌面 VM 執行 `.aqua` 原始碼，Python 執行 Python 原始碼，Node.js 使用 V8 執行 JavaScript。"
+              "- 星泉桌面 VM 執行 `.aqua` 原始碼，Python 執行 Python 原始碼，Node.js 使用 V8 執行 JavaScript。"
               "計時腳本不使用預編譯腳本瓶、NumPy、原生演算法函式庫、工作執行緒或內建排序。",
               "- 暖身程序的樣本會捨棄，作用是預熱作業系統檔案快取；不同程序之間不保留 JIT 或 VM 狀態。"
               "每輪以記錄的隨機種子打亂所有演算法／語言組合，再依序執行。",
               "- 每筆暖身與正式樣本都必須符合未納入計時的 Python 參考答案。整數必須完全相同；"
               "譜範數平方的相對容許誤差為 1e-9，絕對容許誤差為 1e-12。"
               "非零結束碼、逾時、缺少或多餘的標準輸出、非有限數值、校驗值不符，都會使該測試失敗。",
-              "- Aquarius 的整數 `/` 會截斷小數，Python `//` 與 Node.js `Math.trunc` 使用相對應的運算。"
-              "浮點測試採用雙精度（Aquarius 使用 `d` 字面值）；標準輸入的整數中間值均在帶正負號的 32 位元範圍內。",
-              "- Aquarius 的 `push`／`加入` 會複製陣列；Python 與 Node.js 對應的建構步驟也使用複製後追加。"
+              "- 星泉的整數 `/` 會截斷小數，Python `//` 與 Node.js `Math.trunc` 使用相對應的運算。"
+              "浮點測試採用雙精度（星泉使用 `d` 字面值）；標準輸入的整數中間值均在帶正負號的 32 位元範圍內。",
+              "- 星泉的 `push`／`加入` 會複製陣列；Python 與 Node.js 對應的建構步驟也使用複製後追加。"
               "因此篩法、排序與矩陣初始化包含平方級的複製成本。這組測試比較相應的基準實作，未針對各語言做極限最佳化。",
               "- 小型工作負載可能主要反映啟動成本。結果未單獨測量穩態演算法速度，也不代表所有程式的語言排名。"
               "CPU 頻率、溫度、背景工作與排程雜訊未受控制。未測量程序記憶體用量與 CPU 時間；下方 RAM 為機器配備。", "",
@@ -122,14 +122,14 @@ def generate_readme(report):
         lines.append(f"| {title} | {md(version)} | {md(runtime.get('executable', '無法取得'))} |")
     aqua = report["runtimes"]["aquarius"]
     if aqua.get("available"):
-        lines += ["", f"Aquarius 發行目錄：`{aqua['release_directory']}`。", "",
-                  f"Aquarius 啟動執行檔 SHA-256：`{aqua['executable_sha256']}`。", ""]
+        lines += ["", f"星泉發行目錄：`{aqua['release_directory']}`。", "",
+                  f"星泉啟動執行檔 SHA-256：`{aqua['executable_sha256']}`。", ""]
         for filename, fingerprint in aqua.get("assemblies_sha256", {}).items():
             lines.append(f"- `{filename}` SHA-256：`{fingerprint}`")
     lines += ["", "## 各項效能結果", "",
               "耗時單位為毫秒（ms），越低越快。耗時倍率 = 該語言耗時中位數 ÷ Python 耗時中位數；"
               "小於 1 表示該項測試比 Python 快。此耗時倍率與開頭的速度分數方向相反。", "",
-              "| 演算法 | n | Aquarius 中位數 | Python 中位數 | Node.js 中位數 | Aquarius／Python 耗時倍率 | Node.js／Python 耗時倍率 |",
+              "| 演算法 | n | 星泉中位數 | Python 中位數 | Node.js 中位數 | 星泉／Python 耗時倍率 | Node.js／Python 耗時倍率 |",
               "| --- | ---: | ---: | ---: | ---: | ---: | ---: |"]
     for name, spec in report["benchmarks"].items():
         summaries = {lang: report["cases"][f"{name}/{lang}"]["summary"] for lang in LANGUAGES}
