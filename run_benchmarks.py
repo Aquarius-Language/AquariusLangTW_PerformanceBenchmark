@@ -256,8 +256,7 @@ def main(argv=None):
     parser.add_argument("--timeout", type=timeout_value, default=120.0)
     parser.add_argument("--seed", type=int, default=20261010)
     parser.add_argument("--timezone", default="Asia/Taipei")
-    parser.add_argument("--aquarius", help="AquariusDesktop for source mode, or aqua for precompiled mode")
-    parser.add_argument("--aquarius-mode", choices=["source", "precompiled"], default="source", help="Include source compilation, or build once outside process timing")
+    parser.add_argument("--aquarius", help="aqua compiler executable (defaults to searching PATH); builds Wasm before timing")
     parser.add_argument("--python", default=sys.executable, help="Python executable (defaults to this interpreter)")
     parser.add_argument("--node", help="Node.js executable")
     parser.add_argument("--output-dir", type=Path, default=ROOT / "results")
@@ -279,12 +278,12 @@ def main(argv=None):
             parser.error("Timezone database unavailable or unknown timezone; use Asia/Taipei or install tzdata")
     started = datetime.now(tz)
     directory = args.output_dir.resolve() / started.strftime("%Y%m%d-%H%M%S-%f")
-    executables = {"aquarius": resolve_executable(args.aquarius, (["aqua.exe", "aqua"] if args.aquarius_mode == "precompiled" else ["AquariusDesktop.exe", "AquariusDesktop"])),
+    executables = {"aquarius": resolve_executable(args.aquarius, ["aqua.exe", "aqua"]),
                    "python": resolve_executable(args.python, []),
                    "node": resolve_executable(args.node, ["node"])}
     report = {"schema_version": 1, "started_at": started.isoformat(),
               "config": {"profile": args.profile, "repetitions": args.repetitions, "warmups": args.warmups,
-                         "timeout_seconds": args.timeout, "seed": args.seed, "timezone": args.timezone, "aquarius_mode": args.aquarius_mode},
+                         "timeout_seconds": args.timeout, "seed": args.seed, "timezone": args.timezone, "aquarius_mode": "precompiled"},
               "environment": environment_info(),
               "runtimes": {lang: runtime_info(lang, exe) for lang, exe in executables.items()},
               "benchmarks": {}, "cases": {}, "execution_order": [],
@@ -316,7 +315,7 @@ def main(argv=None):
                           "source": str(source.relative_to(ROOT)), "source_sha256": sha256(source),
                           "staged_sha256": sha256(target), "command": [exe, str(target)] if exe else None,
                           "warmups": [], "samples": []}
-                if exe and lang == "aquarius" and args.aquarius_mode == "precompiled":
+                if exe and lang == "aquarius":
                     wasm = target.with_suffix(".wasm")
                     command = [exe, "build", str(target), "--root", str(target.parent), "-o", str(wasm)]
                     begin = time.perf_counter_ns()

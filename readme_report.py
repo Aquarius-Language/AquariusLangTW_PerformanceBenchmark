@@ -66,14 +66,14 @@ def generate_readme(report):
               "不同測試組合與輸入規模的分數不可直接比較。", "",
               "本專案提供十種經典演算法、三十份可獨立執行的腳本，以及負責驗證結果、產生 README 與 JSON／CSV 報告的 Python 主控程式。", "",
               "## 執行方式", "",
-              "需求：Python 3.10 以上、Node.js，以及星泉 Wasm 編譯器與桌面主機（`aqua`、`AquariusDesktop` 與隨附相依檔案）。"
+              "需求：Python 3.10 以上、Node.js，以及星泉 Wasm 編譯器（`aqua` 與隨附相依檔案）。"
               "不需要安裝 Python 套件或執行 npm install。星泉腳本使用星泉繁體中文版的繁體中文關鍵字與雙語內建函式，"
               "舊版僅支援英文的直譯器無法執行。", "",
               "```powershell", "python run_benchmarks.py", "# 使用較小輸入，快速檢查正確性：",
               "python run_benchmarks.py --profile smoke --repetitions 1 --warmups 0",
               "# 必要時指定執行檔路徑：",
-              'python run_benchmarks.py --aquarius "C:\\Aquarius\\AquariusDesktop.exe" --node "C:\\Program Files\\nodejs\\node.exe"',
-              "# 僅執行指定演算法：", "python run_benchmarks.py --benchmarks fibonacci sieve matrix", "# 編譯於計時前完成，測量部署的 Wasm 程式：", "python run_benchmarks.py --aquarius C:\\Aquarius\\aqua.exe --aquarius-mode precompiled",
+              'python run_benchmarks.py --aquarius "C:\\Aquarius\\aqua.exe" --node "C:\\Program Files\\nodejs\\node.exe"',
+              "# 僅執行指定演算法：", "python run_benchmarks.py --benchmarks fibonacci sieve matrix",
               "# 使用既有資料重新產生 README，不重新測量：",
               "python run_benchmarks.py --report-only results/latest.json",
               "# 執行主控程式與參考答案測試：", "python -m unittest discover -s tests -v", "```", "",
@@ -88,8 +88,8 @@ def generate_readme(report):
               "結束碼 1 表示至少一個執行環境無法使用或測試驗證失敗；報告仍會保留失敗資訊。", "",
               "## 測量方法", "",
               "- 每筆樣本都啟動新的程序。Python 使用 `perf_counter_ns`，測量從啟動至程序結束並擷取輸出的實際經過時間。"
-              "計時包含執行環境啟動、引擎編譯、記憶體配置、垃圾回收、演算法與輸出；source 模式也計入星泉原始碼編譯。",
-              "- 星泉 source 模式使用 AquariusDesktop 執行原始碼；precompiled 模式使用 aqua 在計時前建立 Wasm，再計時 aqua run。"
+              "計時包含執行環境啟動、引擎編譯、記憶體配置、垃圾回收、演算法與輸出。",
+              "- 星泉一律使用 `aqua build` 在計時前建立 Wasm，再計時 `aqua run`；Wasm 生成不計入樣本耗時。"
               "Python 執行原始碼，Node.js 使用 V8；沒有 NumPy、原生演算法函式庫、工作執行緒或內建排序。",
               "- 暖身程序的樣本會捨棄，作用是預熱作業系統檔案快取；不同程序之間不保留 JIT 或 VM 狀態。"
               "每輪以記錄的隨機種子打亂所有演算法／語言組合，再依序執行。",
