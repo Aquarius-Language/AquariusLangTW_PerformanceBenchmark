@@ -43,6 +43,7 @@ def md(value):
 def generate_readme(report):
     config, env = report["config"], report["environment"]
     scores = composite_scores(report)
+    aquarius_timing = "程式啟動與預先編譯 Wasm 載入（Wasm 生成不計入耗時，引擎編譯仍計入）" if config.get("aquarius_mode") == "precompiled" else "程式啟動與原始碼載入／編譯"
     lines = ["# 星泉、Python、Node.js 桌面執行效能評比", ""]
     if scores:
         ranking = sorted(scores, key=scores.get, reverse=True)
@@ -52,7 +53,7 @@ def generate_readme(report):
                          for lang in ranking[1:])
         lines += [f"**本次綜合效能：{score_text}（越高越快）。** 相較 {LANGUAGES[top]}，{gaps}。", "",
                   f"以 Python 為 100 分，將本次 {len(report['benchmarks'])} 項演算法的相對速度等權重取幾何平均。"
-                  "計時包含程式啟動與原始碼載入／編譯，分數代表本機這組腳本的整體執行表現。", "",
+                  f"計時包含{aquarius_timing}，分數代表本機這組腳本的整體執行表現。", "",
                   "| 排名 | 程式語言 | 綜合分數 | 相對 Python 的綜合速度 |",
                   "| ---: | --- | ---: | ---: |"]
         for place, language in enumerate(ranking, 1):
@@ -65,14 +66,14 @@ def generate_readme(report):
               "不同測試組合與輸入規模的分數不可直接比較。", "",
               "本專案提供十種經典演算法、三十份可獨立執行的腳本，以及負責驗證結果、產生 README 與 JSON／CSV 報告的 Python 主控程式。", "",
               "## 執行方式", "",
-              "需求：Python 3.10 以上、Node.js，以及星泉桌面 VM（`AquariusDesktopVMREPL` 與隨附相依檔案）。"
+              "需求：Python 3.10 以上、Node.js，以及星泉 Wasm 編譯器與桌面主機（`aqua`、`AquariusDesktop` 與隨附相依檔案）。"
               "不需要安裝 Python 套件或執行 npm install。星泉腳本使用星泉繁體中文版的繁體中文關鍵字與雙語內建函式，"
               "舊版僅支援英文的直譯器無法執行。", "",
               "```powershell", "python run_benchmarks.py", "# 使用較小輸入，快速檢查正確性：",
               "python run_benchmarks.py --profile smoke --repetitions 1 --warmups 0",
               "# 必要時指定執行檔路徑：",
-              'python run_benchmarks.py --aquarius "C:\\Aquarius\\AquariusDesktopVMREPL.exe" --node "C:\\Program Files\\nodejs\\node.exe"',
-              "# 僅執行指定演算法：", "python run_benchmarks.py --benchmarks fibonacci sieve matrix",
+              'python run_benchmarks.py --aquarius "C:\\Aquarius\\AquariusDesktop.exe" --node "C:\\Program Files\\nodejs\\node.exe"',
+              "# 僅執行指定演算法：", "python run_benchmarks.py --benchmarks fibonacci sieve matrix", "# 編譯於計時前完成，測量部署的 Wasm 程式：", "python run_benchmarks.py --aquarius C:\\Aquarius\\aqua.exe --aquarius-mode precompiled",
               "# 使用既有資料重新產生 README，不重新測量：",
               "python run_benchmarks.py --report-only results/latest.json",
               "# 執行主控程式與參考答案測試：", "python -m unittest discover -s tests -v", "```", "",
@@ -87,9 +88,9 @@ def generate_readme(report):
               "結束碼 1 表示至少一個執行環境無法使用或測試驗證失敗；報告仍會保留失敗資訊。", "",
               "## 測量方法", "",
               "- 每筆樣本都啟動新的程序。Python 使用 `perf_counter_ns`，測量從啟動至程序結束並擷取輸出的實際經過時間。"
-              "計時包含原始碼載入、解析／編譯、執行環境啟動、記憶體配置、垃圾回收、演算法與輸出。",
-              "- 星泉桌面 VM 執行 `.aqua` 原始碼，Python 執行 Python 原始碼，Node.js 使用 V8 執行 JavaScript。"
-              "計時腳本不使用預編譯腳本瓶、NumPy、原生演算法函式庫、工作執行緒或內建排序。",
+              "計時包含執行環境啟動、引擎編譯、記憶體配置、垃圾回收、演算法與輸出；source 模式也計入星泉原始碼編譯。",
+              "- 星泉 source 模式使用 AquariusDesktop 執行原始碼；precompiled 模式使用 aqua 在計時前建立 Wasm，再計時 aqua run。"
+              "Python 執行原始碼，Node.js 使用 V8；沒有 NumPy、原生演算法函式庫、工作執行緒或內建排序。",
               "- 暖身程序的樣本會捨棄，作用是預熱作業系統檔案快取；不同程序之間不保留 JIT 或 VM 狀態。"
               "每輪以記錄的隨機種子打亂所有演算法／語言組合，再依序執行。",
               "- 每筆暖身與正式樣本都必須符合未納入計時的 Python 參考答案。整數必須完全相同；"
@@ -112,6 +113,7 @@ def generate_readme(report):
               f"- 實體 RAM：{env['ram_bytes'] / 1024**3:.2f} GiB" if env['ram_bytes'] else "- 實體 RAM：無法取得",
               f"- 使用中的電源計畫：{md(env['power_plan'] or '無法取得')}",
               f"- Python 主控程式版本：{md(env['python_runner'])}",
+              f"- 行程 CPU 親和性遮罩：`{env.get('process_affinity_mask', '未固定／未取得')}`",
               f"- 計時器解析度：{env['timer_resolution_seconds']:.3g} 秒", "",
               "| 執行環境 | 版本／組建 | 執行檔 |", "| --- | --- | --- |"]
     for lang, title in LANGUAGES.items():

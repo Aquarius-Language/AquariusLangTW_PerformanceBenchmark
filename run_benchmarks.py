@@ -79,10 +79,11 @@ def runtime_info(language, executable):
         return {"available": False, "error": "Executable not found; use the explicit runtime option."}
     info = {"available": True, "executable": executable, "executable_sha256": sha256(executable)}
     if language == "aquarius":
-        # This VM exposes --help but no --version. Fingerprint the actual shipped VM.
+        # Fingerprint the selected compiler, core, engine and native engine binary.
         info["version"] = "No version flag; see binary fingerprint and release directory"
         info["release_directory"] = str(Path(executable).parent)
-        for filename in ("AquariusLangVM.dll", "AquariusDesktopVMREPL.dll"):
+        info["backend"] = "compiled-wasm" if Path(executable).with_name("Wasmtime.Dotnet.dll").is_file() else "legacy-vm" if Path(executable).with_name("AquariusLangVM.dll").is_file() else "unknown"
+        for filename in ("AquariusCore.dll", "AquariusDesktop.dll", "Wasmtime.Dotnet.dll", "wasmtime.dll", "libwasmtime.so", "libwasmtime.dylib", "AquariusLangVM.dll", "AquariusDesktopVMREPL.dll"):
             path = Path(executable).with_name(filename)
             if path.is_file():
                 info.setdefault("assemblies_sha256", {})[filename] = sha256(path)
@@ -116,6 +117,13 @@ def environment_info():
         if ctypes.windll.kernel32.GlobalMemoryStatusEx(ctypes.byref(memory)):
             info["ram_bytes"] = memory.total_physical
         info["power_plan"] = command_output(["powercfg.exe", "/GETACTIVESCHEME"])
+        kernel = ctypes.WinDLL("kernel32", use_last_error=True)
+        kernel.GetCurrentProcess.restype = ctypes.c_void_p
+        kernel.GetProcessAffinityMask.argtypes = [ctypes.c_void_p, ctypes.POINTER(ctypes.c_size_t), ctypes.POINTER(ctypes.c_size_t)]
+        process_mask, system_mask = ctypes.c_size_t(), ctypes.c_size_t()
+        if kernel.GetProcessAffinityMask(kernel.GetCurrentProcess(), ctypes.byref(process_mask), ctypes.byref(system_mask)):
+            info["process_affinity_mask"] = hex(process_mask.value)
+
     else:
         try:
             info["ram_bytes"] = os.sysconf("SC_PAGE_SIZE") * os.sysconf("SC_PHYS_PAGES")
@@ -248,7 +256,8 @@ def main(argv=None):
     parser.add_argument("--timeout", type=timeout_value, default=120.0)
     parser.add_argument("--seed", type=int, default=20261010)
     parser.add_argument("--timezone", default="Asia/Taipei")
-    parser.add_argument("--aquarius", help="Path to AquariusDesktopVMREPL executable")
+    parser.add_argument("--aquarius", help="AquariusDesktop for source mode, or aqua for precompiled mode")
+    parser.add_argument("--aquarius-mode", choices=["source", "precompiled"], default="source", help="Include source compilation, or build once outside process timing")
     parser.add_argument("--python", default=sys.executable, help="Python executable (defaults to this interpreter)")
     parser.add_argument("--node", help="Node.js executable")
     parser.add_argument("--output-dir", type=Path, default=ROOT / "results")
@@ -270,12 +279,12 @@ def main(argv=None):
             parser.error("Timezone database unavailable or unknown timezone; use Asia/Taipei or install tzdata")
     started = datetime.now(tz)
     directory = args.output_dir.resolve() / started.strftime("%Y%m%d-%H%M%S-%f")
-    executables = {"aquarius": resolve_executable(args.aquarius, ["AquariusDesktopVMREPL.exe", "AquariusDesktopVMREPL"]),
+    executables = {"aquarius": resolve_executable(args.aquarius, (["aqua.exe", "aqua"] if args.aquarius_mode == "precompiled" else ["AquariusDesktop.exe", "AquariusDesktop"])),
                    "python": resolve_executable(args.python, []),
                    "node": resolve_executable(args.node, ["node"])}
     report = {"schema_version": 1, "started_at": started.isoformat(),
               "config": {"profile": args.profile, "repetitions": args.repetitions, "warmups": args.warmups,
-                         "timeout_seconds": args.timeout, "seed": args.seed, "timezone": args.timezone},
+                         "timeout_seconds": args.timeout, "seed": args.seed, "timezone": args.timezone, "aquarius_mode": args.aquarius_mode},
               "environment": environment_info(),
               "runtimes": {lang: runtime_info(lang, exe) for lang, exe in executables.items()},
               "benchmarks": {}, "cases": {}, "execution_order": [],
@@ -307,6 +316,16 @@ def main(argv=None):
                           "source": str(source.relative_to(ROOT)), "source_sha256": sha256(source),
                           "staged_sha256": sha256(target), "command": [exe, str(target)] if exe else None,
                           "warmups": [], "samples": []}
+                if exe and lang == "aquarius" and args.aquarius_mode == "precompiled":
+                    wasm = target.with_suffix(".wasm")
+                    command = [exe, "build", str(target), "--root", str(target.parent), "-o", str(wasm)]
+                    begin = time.perf_counter_ns()
+                    build = subprocess.run(command, cwd=stage, capture_output=True, text=True, encoding="utf-8", timeout=args.timeout, stdin=subprocess.DEVNULL)
+                    record["build"] = {"command": command, "elapsed_ms": (time.perf_counter_ns() - begin) / 1e6, "exit_code": build.returncode, "stdout": build.stdout, "stderr": build.stderr}
+                    if build.returncode != 0 or not wasm.is_file():
+                        raise RuntimeError(f"Wasm build failed for {name}: {build.stderr}")
+                    record["wasm_sha256"] = sha256(wasm)
+                    record["command"] = [exe, "run", str(wasm)]
                 if not exe:
                     record["unavailable"] = report["runtimes"][lang]["error"]
                 report["cases"][f"{name}/{lang}"] = record
