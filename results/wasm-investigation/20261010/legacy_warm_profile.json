@@ -1,0 +1,369 @@
+{
+  "method": "Bytecode compiled once and reused in one .NET process; 3 warmups then 3 timed executions. Minimal builtins match the Wasm profile, including exact push helper. Parsing/compilation excluded.",
+  "dotnet": "8.0.31",
+  "results": {
+    "ackermann": {
+      "samples": [
+        {
+          "elapsed_ms": 88.1705,
+          "allocated_bytes": 115082600,
+          "gc_collections": [
+            9,
+            0,
+            0
+          ]
+        },
+        {
+          "elapsed_ms": 89.4636,
+          "allocated_bytes": 115082536,
+          "gc_collections": [
+            9,
+            0,
+            0
+          ]
+        },
+        {
+          "elapsed_ms": 75.2446,
+          "allocated_bytes": 115088728,
+          "gc_collections": [
+            10,
+            0,
+            0
+          ]
+        }
+      ],
+      "result": "RESULT 509",
+      "valid": true
+    },
+    "binary_trees": {
+      "samples": [
+        {
+          "elapsed_ms": 46.1715,
+          "allocated_bytes": 93319648,
+          "gc_collections": [
+            7,
+            0,
+            0
+          ]
+        },
+        {
+          "elapsed_ms": 43.6302,
+          "allocated_bytes": 93319648,
+          "gc_collections": [
+            8,
+            0,
+            0
+          ]
+        },
+        {
+          "elapsed_ms": 42.3168,
+          "allocated_bytes": 93319648,
+          "gc_collections": [
+            7,
+            0,
+            0
+          ]
+        }
+      ],
+      "result": "RESULT 65528",
+      "valid": true
+    },
+    "collatz": {
+      "samples": [
+        {
+          "elapsed_ms": 418.8187,
+          "allocated_bytes": 560791120,
+          "gc_collections": [
+            45,
+            0,
+            0
+          ]
+        },
+        {
+          "elapsed_ms": 406.5216,
+          "allocated_bytes": 560791120,
+          "gc_collections": [
+            45,
+            0,
+            0
+          ]
+        },
+        {
+          "elapsed_ms": 405.9968,
+          "allocated_bytes": 560791120,
+          "gc_collections": [
+            44,
+            0,
+            0
+          ]
+        }
+      ],
+      "result": "RESULT 849666",
+      "valid": true
+    },
+    "fibonacci": {
+      "samples": [
+        {
+          "elapsed_ms": 224.1502,
+          "allocated_bytes": 662328952,
+          "gc_collections": [
+            53,
+            0,
+            0
+          ]
+        },
+        {
+          "elapsed_ms": 234.2568,
+          "allocated_bytes": 662328952,
+          "gc_collections": [
+            52,
+            0,
+            0
+          ]
+        },
+        {
+          "elapsed_ms": 231.9433,
+          "allocated_bytes": 662329480,
+          "gc_collections": [
+            53,
+            0,
+            0
+          ]
+        }
+      ],
+      "result": "RESULT 317811",
+      "valid": true
+    },
+    "mandelbrot": {
+      "samples": [
+        {
+          "elapsed_ms": 117.1288,
+          "allocated_bytes": 148515616,
+          "gc_collections": [
+            12,
+            0,
+            0
+          ]
+        },
+        {
+          "elapsed_ms": 117.8941,
+          "allocated_bytes": 148515616,
+          "gc_collections": [
+            11,
+            0,
+            0
+          ]
+        },
+        {
+          "elapsed_ms": 121.2886,
+          "allocated_bytes": 148515616,
+          "gc_collections": [
+            12,
+            0,
+            0
+          ]
+        }
+      ],
+      "result": "RESULT 129059",
+      "valid": true
+    },
+    "matrix": {
+      "samples": [
+        {
+          "elapsed_ms": 58.627,
+          "allocated_bytes": 98949160,
+          "gc_collections": [
+            8,
+            0,
+            0
+          ]
+        },
+        {
+          "elapsed_ms": 60.4464,
+          "allocated_bytes": 98949160,
+          "gc_collections": [
+            8,
+            0,
+            0
+          ]
+        },
+        {
+          "elapsed_ms": 63.1004,
+          "allocated_bytes": 98949160,
+          "gc_collections": [
+            8,
+            0,
+            0
+          ]
+        }
+      ],
+      "result": "RESULT 545940",
+      "valid": true
+    },
+    "noop": {
+      "samples": [
+        {
+          "elapsed_ms": 0.0006,
+          "allocated_bytes": 1816,
+          "gc_collections": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "elapsed_ms": 0.0004,
+          "allocated_bytes": 1816,
+          "gc_collections": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "elapsed_ms": 0.0012,
+          "allocated_bytes": 1816,
+          "gc_collections": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "result": "RESULT 0",
+      "valid": true
+    },
+    "nqueens": {
+      "samples": [
+        {
+          "elapsed_ms": 37.4019,
+          "allocated_bytes": 38587944,
+          "gc_collections": [
+            3,
+            0,
+            0
+          ]
+        },
+        {
+          "elapsed_ms": 36.8994,
+          "allocated_bytes": 38587416,
+          "gc_collections": [
+            3,
+            0,
+            0
+          ]
+        },
+        {
+          "elapsed_ms": 37.3679,
+          "allocated_bytes": 38587416,
+          "gc_collections": [
+            3,
+            0,
+            0
+          ]
+        }
+      ],
+      "result": "RESULT 92",
+      "valid": true
+    },
+    "quicksort": {
+      "samples": [
+        {
+          "elapsed_ms": 17.4152,
+          "allocated_bytes": 42604752,
+          "gc_collections": [
+            4,
+            0,
+            0
+          ]
+        },
+        {
+          "elapsed_ms": 17.4222,
+          "allocated_bytes": 42604752,
+          "gc_collections": [
+            3,
+            0,
+            0
+          ]
+        },
+        {
+          "elapsed_ms": 17.0249,
+          "allocated_bytes": 42604752,
+          "gc_collections": [
+            3,
+            0,
+            0
+          ]
+        }
+      ],
+      "result": "RESULT 616973",
+      "valid": true
+    },
+    "sieve": {
+      "samples": [
+        {
+          "elapsed_ms": 28.693,
+          "allocated_bytes": 420053200,
+          "gc_collections": [
+            33,
+            0,
+            0
+          ]
+        },
+        {
+          "elapsed_ms": 29.6162,
+          "allocated_bytes": 420053200,
+          "gc_collections": [
+            33,
+            0,
+            0
+          ]
+        },
+        {
+          "elapsed_ms": 28.9954,
+          "allocated_bytes": 420053200,
+          "gc_collections": [
+            34,
+            0,
+            0
+          ]
+        }
+      ],
+      "result": "RESULT 1229",
+      "valid": true
+    },
+    "spectral_norm": {
+      "samples": [
+        {
+          "elapsed_ms": 146.3484,
+          "allocated_bytes": 207796024,
+          "gc_collections": [
+            17,
+            0,
+            0
+          ]
+        },
+        {
+          "elapsed_ms": 147.0232,
+          "allocated_bytes": 207796024,
+          "gc_collections": [
+            17,
+            0,
+            0
+          ]
+        },
+        {
+          "elapsed_ms": 147.1054,
+          "allocated_bytes": 207796024,
+          "gc_collections": [
+            16,
+            0,
+            0
+          ]
+        }
+      ],
+      "result": "RESULT 1.6236011690579908",
+      "valid": true
+    }
+  }
+}

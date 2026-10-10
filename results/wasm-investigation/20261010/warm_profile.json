@@ -1,0 +1,908 @@
+{
+  "method": "Same WasmProgram reused in one .NET process; 3 warmups then 3 timed executions. Each Execute still creates its own store/imports. Minimal builtins preserve print results and use the exact DesktopBuiltins push helper. Import counters run separately from timings.",
+  "dotnet": "8.0.31",
+  "results": {
+    "ackermann": {
+      "samples": [
+        {
+          "elapsed_ms": 141.4862,
+          "allocated_bytes": 155722496,
+          "gc_collections": [
+            12,
+            0,
+            0
+          ]
+        },
+        {
+          "elapsed_ms": 140.6201,
+          "allocated_bytes": 155722432,
+          "gc_collections": [
+            13,
+            0,
+            0
+          ]
+        },
+        {
+          "elapsed_ms": 132.4271,
+          "allocated_bytes": 155722432,
+          "gc_collections": [
+            12,
+            0,
+            0
+          ]
+        }
+      ],
+      "import_calls": {
+        "checkpoint": 947532,
+        "constant": 517203,
+        "void": 0,
+        "null": 172232,
+        "pop": 172234,
+        "duplicate": 0,
+        "load": 774798,
+        "declare": 2,
+        "assign": 0,
+        "compoundAssign": 0,
+        "add": 85866,
+        "subtract": 172232,
+        "multiply": 0,
+        "divide": 0,
+        "less": 0,
+        "greater": 0,
+        "lessEqual": 0,
+        "greaterEqual": 0,
+        "equal": 258600,
+        "notEqual": 0,
+        "and": 0,
+        "or": 0,
+        "not": 0,
+        "negate": 0,
+        "incrementPrefix": 0,
+        "incrementPostfix": 0,
+        "truth": 258600,
+        "isBreak": 172232,
+        "closure": 1,
+        "call": 172234,
+        "returned": 172233,
+        "array": 0,
+        "checkHashKey": 0,
+        "hash": 0,
+        "index": 0,
+        "checkArrayWrite": 0,
+        "writeIndex": 0,
+        "member": 0,
+        "resolveMemberFunction": 0,
+        "enterLoop": 0,
+        "loopCondition": 0,
+        "nextIteration": 0,
+        "break": 0,
+        "leaveLoop": 0,
+        "error": 0
+      },
+      "total_import_calls": 3875999,
+      "wasm_export_entries": 344468,
+      "result": "RESULT 509",
+      "valid": true
+    },
+    "binary_trees": {
+      "samples": [
+        {
+          "elapsed_ms": 105.0043,
+          "allocated_bytes": 120894448,
+          "gc_collections": [
+            10,
+            0,
+            0
+          ]
+        },
+        {
+          "elapsed_ms": 103.2402,
+          "allocated_bytes": 120889056,
+          "gc_collections": [
+            9,
+            0,
+            0
+          ]
+        },
+        {
+          "elapsed_ms": 105.8555,
+          "allocated_bytes": 120894448,
+          "gc_collections": [
+            10,
+            0,
+            0
+          ]
+        }
+      ],
+      "import_calls": {
+        "checkpoint": 524252,
+        "constant": 458693,
+        "void": 0,
+        "null": 65520,
+        "pop": 65550,
+        "duplicate": 0,
+        "load": 458715,
+        "declare": 13,
+        "assign": 0,
+        "compoundAssign": 8,
+        "add": 65520,
+        "subtract": 131040,
+        "multiply": 0,
+        "divide": 0,
+        "less": 9,
+        "greater": 0,
+        "lessEqual": 0,
+        "greaterEqual": 0,
+        "equal": 131056,
+        "notEqual": 0,
+        "and": 0,
+        "or": 0,
+        "not": 0,
+        "negate": 0,
+        "incrementPrefix": 0,
+        "incrementPostfix": 8,
+        "truth": 131056,
+        "isBreak": 65536,
+        "closure": 2,
+        "call": 131057,
+        "returned": 131056,
+        "array": 65528,
+        "checkHashKey": 0,
+        "hash": 0,
+        "index": 65520,
+        "checkArrayWrite": 0,
+        "writeIndex": 0,
+        "member": 0,
+        "resolveMemberFunction": 0,
+        "enterLoop": 1,
+        "loopCondition": 9,
+        "nextIteration": 8,
+        "break": 0,
+        "leaveLoop": 1,
+        "error": 0
+      },
+      "total_import_calls": 2490158,
+      "wasm_export_entries": 262114,
+      "result": "RESULT 65528",
+      "valid": true
+    },
+    "collatz": {
+      "samples": [
+        {
+          "elapsed_ms": 825.6599,
+          "allocated_bytes": 560449432,
+          "gc_collections": [
+            44,
+            0,
+            0
+          ]
+        },
+        {
+          "elapsed_ms": 831.383,
+          "allocated_bytes": 560449432,
+          "gc_collections": [
+            45,
+            0,
+            0
+          ]
+        },
+        {
+          "elapsed_ms": 844.558,
+          "allocated_bytes": 560449432,
+          "gc_collections": [
+            45,
+            0,
+            0
+          ]
+        }
+      ],
+      "import_calls": {
+        "checkpoint": 5149256,
+        "constant": 3123046,
+        "void": 0,
+        "null": 0,
+        "pop": 2579002,
+        "duplicate": 0,
+        "load": 5138000,
+        "declare": 859669,
+        "assign": 849666,
+        "compoundAssign": 0,
+        "add": 282022,
+        "subtract": 0,
+        "multiply": 1131688,
+        "divide": 849666,
+        "less": 0,
+        "greater": 0,
+        "lessEqual": 10001,
+        "greaterEqual": 0,
+        "equal": 849666,
+        "notEqual": 859666,
+        "and": 0,
+        "or": 0,
+        "not": 0,
+        "negate": 0,
+        "incrementPrefix": 0,
+        "incrementPostfix": 859666,
+        "truth": 849666,
+        "isBreak": 1709332,
+        "closure": 0,
+        "call": 1,
+        "returned": 0,
+        "array": 0,
+        "checkHashKey": 0,
+        "hash": 0,
+        "index": 0,
+        "checkArrayWrite": 0,
+        "writeIndex": 0,
+        "member": 0,
+        "resolveMemberFunction": 0,
+        "enterLoop": 10001,
+        "loopCondition": 869667,
+        "nextIteration": 859666,
+        "break": 0,
+        "leaveLoop": 10001,
+        "error": 0
+      },
+      "total_import_calls": 26849348,
+      "wasm_export_entries": 1258,
+      "result": "RESULT 849666",
+      "valid": true
+    },
+    "fibonacci": {
+      "samples": [
+        {
+          "elapsed_ms": 652.8262,
+          "allocated_bytes": 851594656,
+          "gc_collections": [
+            68,
+            0,
+            0
+          ]
+        },
+        {
+          "elapsed_ms": 655.483,
+          "allocated_bytes": 851594392,
+          "gc_collections": [
+            68,
+            0,
+            0
+          ]
+        },
+        {
+          "elapsed_ms": 643.9716,
+          "allocated_bytes": 851594392,
+          "gc_collections": [
+            68,
+            0,
+            0
+          ]
+        }
+      ],
+      "import_calls": {
+        "checkpoint": 4113829,
+        "constant": 2056915,
+        "void": 0,
+        "null": 514228,
+        "pop": 514230,
+        "duplicate": 0,
+        "load": 3599601,
+        "declare": 2,
+        "assign": 0,
+        "compoundAssign": 0,
+        "add": 514228,
+        "subtract": 1028456,
+        "multiply": 0,
+        "divide": 0,
+        "less": 1028457,
+        "greater": 0,
+        "lessEqual": 0,
+        "greaterEqual": 0,
+        "equal": 0,
+        "notEqual": 0,
+        "and": 0,
+        "or": 0,
+        "not": 0,
+        "negate": 0,
+        "incrementPrefix": 0,
+        "incrementPostfix": 0,
+        "truth": 1028457,
+        "isBreak": 514228,
+        "closure": 1,
+        "call": 1028458,
+        "returned": 1028457,
+        "array": 0,
+        "checkHashKey": 0,
+        "hash": 0,
+        "index": 0,
+        "checkArrayWrite": 0,
+        "writeIndex": 0,
+        "member": 0,
+        "resolveMemberFunction": 0,
+        "enterLoop": 0,
+        "loopCondition": 0,
+        "nextIteration": 0,
+        "break": 0,
+        "leaveLoop": 0,
+        "error": 0
+      },
+      "total_import_calls": 16969547,
+      "wasm_export_entries": 2056916,
+      "result": "RESULT 317811",
+      "valid": true
+    },
+    "mandelbrot": {
+      "samples": [
+        {
+          "elapsed_ms": 233.4348,
+          "allocated_bytes": 148317336,
+          "gc_collections": [
+            12,
+            0,
+            0
+          ]
+        },
+        {
+          "elapsed_ms": 243.4821,
+          "allocated_bytes": 148314808,
+          "gc_collections": [
+            11,
+            0,
+            0
+          ]
+        },
+        {
+          "elapsed_ms": 246.0097,
+          "allocated_bytes": 148317336,
+          "gc_collections": [
+            12,
+            0,
+            0
+          ]
+        }
+      ],
+      "import_calls": {
+        "checkpoint": 845524,
+        "constant": 438621,
+        "void": 0,
+        "null": 0,
+        "pop": 567760,
+        "duplicate": 0,
+        "load": 2135828,
+        "declare": 161222,
+        "assign": 258118,
+        "compoundAssign": 6400,
+        "add": 393577,
+        "subtract": 135539,
+        "multiply": 793634,
+        "divide": 6480,
+        "less": 142020,
+        "greater": 0,
+        "lessEqual": 135459,
+        "greaterEqual": 0,
+        "equal": 0,
+        "notEqual": 0,
+        "and": 135459,
+        "or": 0,
+        "not": 0,
+        "negate": 0,
+        "incrementPrefix": 0,
+        "incrementPostfix": 135539,
+        "truth": 0,
+        "isBreak": 425737,
+        "closure": 0,
+        "call": 1,
+        "returned": 0,
+        "array": 0,
+        "checkHashKey": 0,
+        "hash": 0,
+        "index": 0,
+        "checkArrayWrite": 0,
+        "writeIndex": 0,
+        "member": 0,
+        "resolveMemberFunction": 0,
+        "enterLoop": 6481,
+        "loopCondition": 142020,
+        "nextIteration": 135539,
+        "break": 0,
+        "leaveLoop": 6481,
+        "error": 0
+      },
+      "total_import_calls": 7007439,
+      "wasm_export_entries": 208,
+      "result": "RESULT 129059",
+      "valid": true
+    },
+    "matrix": {
+      "samples": [
+        {
+          "elapsed_ms": 110.3857,
+          "allocated_bytes": 99006800,
+          "gc_collections": [
+            8,
+            0,
+            0
+          ]
+        },
+        {
+          "elapsed_ms": 108.5027,
+          "allocated_bytes": 99004272,
+          "gc_collections": [
+            7,
+            0,
+            0
+          ]
+        },
+        {
+          "elapsed_ms": 110.8168,
+          "allocated_bytes": 99004272,
+          "gc_collections": [
+            8,
+            0,
+            0
+          ]
+        }
+      ],
+      "import_calls": {
+        "checkpoint": 308326,
+        "constant": 14270,
+        "void": 0,
+        "null": 0,
+        "pop": 202778,
+        "duplicate": 0,
+        "load": 1047291,
+        "declare": 8196,
+        "assign": 4050,
+        "compoundAssign": 93150,
+        "add": 186300,
+        "subtract": 4050,
+        "multiply": 279450,
+        "divide": 4050,
+        "less": 97382,
+        "greater": 0,
+        "lessEqual": 0,
+        "greaterEqual": 0,
+        "equal": 0,
+        "notEqual": 0,
+        "and": 0,
+        "or": 0,
+        "not": 0,
+        "negate": 0,
+        "incrementPrefix": 0,
+        "incrementPostfix": 95265,
+        "truth": 0,
+        "isBreak": 105390,
+        "closure": 0,
+        "call": 4051,
+        "returned": 0,
+        "array": 2,
+        "checkHashKey": 0,
+        "hash": 0,
+        "index": 182250,
+        "checkArrayWrite": 0,
+        "writeIndex": 0,
+        "member": 0,
+        "resolveMemberFunction": 0,
+        "enterLoop": 2117,
+        "loopCondition": 97382,
+        "nextIteration": 95265,
+        "break": 0,
+        "leaveLoop": 2117,
+        "error": 0
+      },
+      "total_import_calls": 2833132,
+      "wasm_export_entries": 4122,
+      "result": "RESULT 545940",
+      "valid": true
+    },
+    "noop": {
+      "samples": [
+        {
+          "elapsed_ms": 0.0816,
+          "allocated_bytes": 22016,
+          "gc_collections": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "elapsed_ms": 0.0862,
+          "allocated_bytes": 22016,
+          "gc_collections": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "elapsed_ms": 0.0805,
+          "allocated_bytes": 22016,
+          "gc_collections": [
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "import_calls": {
+        "checkpoint": 2,
+        "constant": 2,
+        "void": 0,
+        "null": 0,
+        "pop": 0,
+        "duplicate": 0,
+        "load": 1,
+        "declare": 0,
+        "assign": 0,
+        "compoundAssign": 0,
+        "add": 0,
+        "subtract": 0,
+        "multiply": 0,
+        "divide": 0,
+        "less": 0,
+        "greater": 0,
+        "lessEqual": 0,
+        "greaterEqual": 0,
+        "equal": 0,
+        "notEqual": 0,
+        "and": 0,
+        "or": 0,
+        "not": 0,
+        "negate": 0,
+        "incrementPrefix": 0,
+        "incrementPostfix": 0,
+        "truth": 0,
+        "isBreak": 0,
+        "closure": 0,
+        "call": 1,
+        "returned": 0,
+        "array": 0,
+        "checkHashKey": 0,
+        "hash": 0,
+        "index": 0,
+        "checkArrayWrite": 0,
+        "writeIndex": 0,
+        "member": 0,
+        "resolveMemberFunction": 0,
+        "enterLoop": 0,
+        "loopCondition": 0,
+        "nextIteration": 0,
+        "break": 0,
+        "leaveLoop": 0,
+        "error": 0
+      },
+      "total_import_calls": 6,
+      "wasm_export_entries": 2,
+      "result": "RESULT 0",
+      "valid": true
+    },
+    "nqueens": {
+      "samples": [
+        {
+          "elapsed_ms": 81.6064,
+          "allocated_bytes": 38421632,
+          "gc_collections": [
+            4,
+            0,
+            0
+          ]
+        },
+        {
+          "elapsed_ms": 83.0241,
+          "allocated_bytes": 38418840,
+          "gc_collections": [
+            3,
+            0,
+            0
+          ]
+        },
+        {
+          "elapsed_ms": 86.9859,
+          "allocated_bytes": 38418840,
+          "gc_collections": [
+            3,
+            0,
+            0
+          ]
+        }
+      ],
+      "import_calls": {
+        "checkpoint": 416773,
+        "constant": 51194,
+        "void": 0,
+        "null": 48717,
+        "pop": 215129,
+        "duplicate": 0,
+        "load": 788605,
+        "declare": 82126,
+        "assign": 13672,
+        "compoundAssign": 2056,
+        "add": 48808,
+        "subtract": 93504,
+        "multiply": 0,
+        "divide": 0,
+        "less": 66502,
+        "greater": 0,
+        "lessEqual": 0,
+        "greaterEqual": 0,
+        "equal": 142313,
+        "notEqual": 0,
+        "and": 0,
+        "or": 93504,
+        "not": 0,
+        "negate": 0,
+        "incrementPrefix": 0,
+        "incrementPostfix": 48816,
+        "truth": 64529,
+        "isBreak": 148623,
+        "closure": 1,
+        "call": 2066,
+        "returned": 2057,
+        "array": 1,
+        "checkHashKey": 0,
+        "hash": 0,
+        "index": 140256,
+        "checkArrayWrite": 2056,
+        "writeIndex": 2056,
+        "member": 0,
+        "resolveMemberFunction": 0,
+        "enterLoop": 17686,
+        "loopCondition": 66502,
+        "nextIteration": 48816,
+        "break": 13664,
+        "leaveLoop": 17686,
+        "error": 0
+      },
+      "total_import_calls": 2637718,
+      "wasm_export_entries": 4124,
+      "result": "RESULT 92",
+      "valid": true
+    },
+    "quicksort": {
+      "samples": [
+        {
+          "elapsed_ms": 38.7503,
+          "allocated_bytes": 42589680,
+          "gc_collections": [
+            3,
+            0,
+            0
+          ]
+        },
+        {
+          "elapsed_ms": 38.9209,
+          "allocated_bytes": 42589680,
+          "gc_collections": [
+            4,
+            0,
+            0
+          ]
+        },
+        {
+          "elapsed_ms": 38.5218,
+          "allocated_bytes": 42589680,
+          "gc_collections": [
+            3,
+            0,
+            0
+          ]
+        }
+      ],
+      "import_calls": {
+        "checkpoint": 199427,
+        "constant": 53977,
+        "void": 15270,
+        "null": 4314,
+        "pop": 117079,
+        "duplicate": 0,
+        "load": 245172,
+        "declare": 27149,
+        "assign": 4000,
+        "compoundAssign": 17795,
+        "add": 5760,
+        "subtract": 4000,
+        "multiply": 8000,
+        "divide": 5760,
+        "less": 22879,
+        "greater": 16348,
+        "lessEqual": 14196,
+        "greaterEqual": 0,
+        "equal": 0,
+        "notEqual": 0,
+        "and": 0,
+        "or": 0,
+        "not": 0,
+        "negate": 0,
+        "incrementPrefix": 0,
+        "incrementPostfix": 16805,
+        "truth": 13738,
+        "isBreak": 77384,
+        "closure": 1,
+        "call": 3761,
+        "returned": 0,
+        "array": 1,
+        "checkHashKey": 0,
+        "hash": 0,
+        "index": 46794,
+        "checkArrayWrite": 11330,
+        "writeIndex": 11330,
+        "member": 0,
+        "resolveMemberFunction": 0,
+        "enterLoop": 14198,
+        "loopCondition": 39686,
+        "nextIteration": 25488,
+        "break": 0,
+        "leaveLoop": 14198,
+        "error": 0
+      },
+      "total_import_calls": 1035840,
+      "wasm_export_entries": 5530,
+      "result": "RESULT 616973",
+      "valid": true
+    },
+    "sieve": {
+      "samples": [
+        {
+          "elapsed_ms": 46.6,
+          "allocated_bytes": 420323328,
+          "gc_collections": [
+            33,
+            0,
+            0
+          ]
+        },
+        {
+          "elapsed_ms": 46.2823,
+          "allocated_bytes": 420325856,
+          "gc_collections": [
+            34,
+            0,
+            0
+          ]
+        },
+        {
+          "elapsed_ms": 44.9139,
+          "allocated_bytes": 420323328,
+          "gc_collections": [
+            33,
+            0,
+            0
+          ]
+        }
+      ],
+      "import_calls": {
+        "checkpoint": 141519,
+        "constant": 28221,
+        "void": 0,
+        "null": 8844,
+        "pop": 74196,
+        "duplicate": 0,
+        "load": 193722,
+        "declare": 31,
+        "assign": 10001,
+        "compoundAssign": 18210,
+        "add": 0,
+        "subtract": 0,
+        "multiply": 125,
+        "divide": 0,
+        "less": 0,
+        "greater": 0,
+        "lessEqual": 37108,
+        "greaterEqual": 0,
+        "equal": 0,
+        "notEqual": 0,
+        "and": 0,
+        "or": 0,
+        "not": 0,
+        "negate": 0,
+        "incrementPrefix": 0,
+        "incrementPostfix": 20099,
+        "truth": 10098,
+        "isBreak": 37080,
+        "closure": 0,
+        "call": 10002,
+        "returned": 0,
+        "array": 1,
+        "checkHashKey": 0,
+        "hash": 0,
+        "index": 10098,
+        "checkArrayWrite": 16983,
+        "writeIndex": 16983,
+        "member": 0,
+        "resolveMemberFunction": 0,
+        "enterLoop": 28,
+        "loopCondition": 37108,
+        "nextIteration": 37080,
+        "break": 0,
+        "leaveLoop": 28,
+        "error": 0
+      },
+      "total_import_calls": 707565,
+      "wasm_export_entries": 10027,
+      "result": "RESULT 1229",
+      "valid": true
+    },
+    "spectral_norm": {
+      "samples": [
+        {
+          "elapsed_ms": 333.8971,
+          "allocated_bytes": 235437080,
+          "gc_collections": [
+            19,
+            0,
+            0
+          ]
+        },
+        {
+          "elapsed_ms": 336.721,
+          "allocated_bytes": 235434288,
+          "gc_collections": [
+            18,
+            0,
+            0
+          ]
+        },
+        {
+          "elapsed_ms": 336.0579,
+          "allocated_bytes": 235437080,
+          "gc_collections": [
+            19,
+            0,
+            0
+          ]
+        }
+      ],
+      "import_calls": {
+        "checkpoint": 1604308,
+        "constant": 725078,
+        "void": 0,
+        "null": 0,
+        "pop": 732524,
+        "duplicate": 0,
+        "load": 2322398,
+        "declare": 292851,
+        "assign": 144180,
+        "compoundAssign": 144120,
+        "add": 576000,
+        "subtract": 0,
+        "multiply": 288120,
+        "divide": 288001,
+        "less": 148973,
+        "greater": 0,
+        "lessEqual": 0,
+        "greaterEqual": 0,
+        "equal": 0,
+        "notEqual": 0,
+        "and": 0,
+        "or": 0,
+        "not": 0,
+        "negate": 0,
+        "incrementPrefix": 0,
+        "incrementPostfix": 146530,
+        "truth": 144000,
+        "isBreak": 583540,
+        "closure": 2,
+        "call": 144221,
+        "returned": 144000,
+        "array": 3,
+        "checkHashKey": 0,
+        "hash": 0,
+        "index": 144240,
+        "checkArrayWrite": 2400,
+        "writeIndex": 2400,
+        "member": 0,
+        "resolveMemberFunction": 0,
+        "enterLoop": 2443,
+        "loopCondition": 148973,
+        "nextIteration": 146530,
+        "break": 0,
+        "leaveLoop": 2443,
+        "error": 0
+      },
+      "total_import_calls": 8878278,
+      "wasm_export_entries": 288262,
+      "result": "RESULT 1.6236011690579908",
+      "valid": true
+    }
+  }
+}

@@ -1,0 +1,15 @@
+變數 benchmark_n = 80;
+變數 checksum = 0;
+迴圈 (變數 y = 0; y < benchmark_n; y++) {
+    變數 ci = 2.0d * y / benchmark_n - 1.0d;
+    迴圈 (變數 x = 0; x < benchmark_n; x++) {
+        變數 cr = 3.0d * x / benchmark_n - 2.0d;
+        變數 zr = 0.0d; 變數 zi = 0.0d; 變數 count = 0;
+        迴圈 (變數 escape_guard = 0; count < 60 && zr * zr + zi * zi <= 4.0d; count++) {
+            變數 next_r = zr * zr - zi * zi + cr;
+            zi = 2.0d * zr * zi + ci; zr = next_r;
+        }
+        checksum += count;
+    }
+}
+印出("RESULT", checksum);
