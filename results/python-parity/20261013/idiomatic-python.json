@@ -1,0 +1,505 @@
+{
+  "method": "Measure separately labeled Python construction variants; preserve algorithms.\n\nFresh processes, one discarded warmup and five randomized samples per case.\nDo not overwrite the published benchmark or its sources.\n",
+  "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+  "seed": 20261013,
+  "cases": {
+    "sieve/copy_append": {
+      "benchmark": "sieve",
+      "variant": "copy_append",
+      "source": "from time import perf_counter_ns\nbenchmark_n = 10000\nbenchmark_start = perf_counter_ns()\nflags = []\n# Copy-and-append matches Aquarius push's allocation semantics.\nfor i in range(benchmark_n + 1):\n    flags = flags + [True]\nflags[0] = False\nflags[1] = False\np = 2\nwhile p * p <= benchmark_n:\n    if flags[p]:\n        j = p * p\n        while j <= benchmark_n:\n            flags[j] = False\n            j += p\n    p += 1\ncount = 0\nfor i in range(2, benchmark_n + 1):\n    if flags[i]:\n        count += 1\nbenchmark_result = count\nbenchmark_elapsed_ms = (perf_counter_ns() - benchmark_start) / 1e6\nprint(\"RESULT\", benchmark_result)\nprint(\"ELAPSED_MS\", benchmark_elapsed_ms)\n",
+      "sha256": "a80a5996ea98458dd0ebb025281e4a96b4c1438880199c98af0f91eff2cbeddb",
+      "command": [
+        "C:\\Users\\templ\\.pyenv\\pyenv-win\\versions\\3.12.10\\python.exe",
+        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\idiomatic-jfs987vt\\sieve_copy_append.py"
+      ],
+      "warmups": [
+        {
+          "elapsed_ms": 35.3883,
+          "process_elapsed_ms": 67.86,
+          "exit_code": 0,
+          "stdout": "RESULT 1229\nELAPSED_MS 35.3883\n",
+          "stderr": "",
+          "status": "ok",
+          "result": "1229",
+          "round": 1
+        }
+      ],
+      "samples": [
+        {
+          "elapsed_ms": 35.4878,
+          "process_elapsed_ms": 63.4552,
+          "exit_code": 0,
+          "stdout": "RESULT 1229\nELAPSED_MS 35.4878\n",
+          "stderr": "",
+          "status": "ok",
+          "result": "1229",
+          "round": 1
+        },
+        {
+          "elapsed_ms": 35.5053,
+          "process_elapsed_ms": 59.5009,
+          "exit_code": 0,
+          "stdout": "RESULT 1229\nELAPSED_MS 35.5053\n",
+          "stderr": "",
+          "status": "ok",
+          "result": "1229",
+          "round": 2
+        },
+        {
+          "elapsed_ms": 35.3866,
+          "process_elapsed_ms": 61.1344,
+          "exit_code": 0,
+          "stdout": "RESULT 1229\nELAPSED_MS 35.3866\n",
+          "stderr": "",
+          "status": "ok",
+          "result": "1229",
+          "round": 3
+        },
+        {
+          "elapsed_ms": 36.5122,
+          "process_elapsed_ms": 62.6969,
+          "exit_code": 0,
+          "stdout": "RESULT 1229\nELAPSED_MS 36.5122\n",
+          "stderr": "",
+          "status": "ok",
+          "result": "1229",
+          "round": 4
+        },
+        {
+          "elapsed_ms": 36.6033,
+          "process_elapsed_ms": 63.2035,
+          "exit_code": 0,
+          "stdout": "RESULT 1229\nELAPSED_MS 36.6033\n",
+          "stderr": "",
+          "status": "ok",
+          "result": "1229",
+          "round": 5
+        }
+      ],
+      "summary": {
+        "status": "ok",
+        "median_ms": 35.5053,
+        "min_ms": 35.3866,
+        "max_ms": 36.6033,
+        "mean_ms": 35.89904,
+        "stdev_ms": 0.6038815306001658,
+        "cv_percent": 1.682166237872004
+      }
+    },
+    "sieve/idiomatic": {
+      "benchmark": "sieve",
+      "variant": "idiomatic",
+      "source": "from time import perf_counter_ns\nbenchmark_n = 10000\nbenchmark_start = perf_counter_ns()\nflags = [True] * (benchmark_n + 1)\nflags[0] = False\nflags[1] = False\np = 2\nwhile p * p <= benchmark_n:\n    if flags[p]:\n        j = p * p\n        while j <= benchmark_n:\n            flags[j] = False\n            j += p\n    p += 1\ncount = 0\nfor i in range(2, benchmark_n + 1):\n    if flags[i]:\n        count += 1\nbenchmark_result = count\nbenchmark_elapsed_ms = (perf_counter_ns() - benchmark_start) / 1e6\nprint(\"RESULT\", benchmark_result)\nprint(\"ELAPSED_MS\", benchmark_elapsed_ms)\n",
+      "sha256": "693256e94bfa84706e6afdafc48d1982e1cb7925f9a37abee80a063659fbf953",
+      "command": [
+        "C:\\Users\\templ\\.pyenv\\pyenv-win\\versions\\3.12.10\\python.exe",
+        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\idiomatic-jfs987vt\\sieve_idiomatic.py"
+      ],
+      "warmups": [
+        {
+          "elapsed_ms": 1.1452,
+          "process_elapsed_ms": 35.2124,
+          "exit_code": 0,
+          "stdout": "RESULT 1229\nELAPSED_MS 1.1452\n",
+          "stderr": "",
+          "status": "ok",
+          "result": "1229",
+          "round": 1
+        }
+      ],
+      "samples": [
+        {
+          "elapsed_ms": 1.1579,
+          "process_elapsed_ms": 25.118,
+          "exit_code": 0,
+          "stdout": "RESULT 1229\nELAPSED_MS 1.1579\n",
+          "stderr": "",
+          "status": "ok",
+          "result": "1229",
+          "round": 1
+        },
+        {
+          "elapsed_ms": 1.0309,
+          "process_elapsed_ms": 25.3656,
+          "exit_code": 0,
+          "stdout": "RESULT 1229\nELAPSED_MS 1.0309\n",
+          "stderr": "",
+          "status": "ok",
+          "result": "1229",
+          "round": 2
+        },
+        {
+          "elapsed_ms": 1.0708,
+          "process_elapsed_ms": 25.1417,
+          "exit_code": 0,
+          "stdout": "RESULT 1229\nELAPSED_MS 1.0708\n",
+          "stderr": "",
+          "status": "ok",
+          "result": "1229",
+          "round": 3
+        },
+        {
+          "elapsed_ms": 1.1149,
+          "process_elapsed_ms": 26.632,
+          "exit_code": 0,
+          "stdout": "RESULT 1229\nELAPSED_MS 1.1149\n",
+          "stderr": "",
+          "status": "ok",
+          "result": "1229",
+          "round": 4
+        },
+        {
+          "elapsed_ms": 1.1836,
+          "process_elapsed_ms": 25.7932,
+          "exit_code": 0,
+          "stdout": "RESULT 1229\nELAPSED_MS 1.1836\n",
+          "stderr": "",
+          "status": "ok",
+          "result": "1229",
+          "round": 5
+        }
+      ],
+      "summary": {
+        "status": "ok",
+        "median_ms": 1.1149,
+        "min_ms": 1.0309,
+        "max_ms": 1.1836,
+        "mean_ms": 1.11162,
+        "stdev_ms": 0.06228103242561094,
+        "cv_percent": 5.6027268693988
+      }
+    },
+    "quicksort/copy_append": {
+      "benchmark": "quicksort",
+      "variant": "copy_append",
+      "source": "from time import perf_counter_ns\nbenchmark_n = 2000\ndef sort(a, lo, hi):\n    i, j = lo, hi\n    pivot = a[(lo + hi) // 2]\n    while i <= j:\n        while a[i] < pivot:\n            i += 1\n        while a[j] > pivot:\n            j -= 1\n        if i <= j:\n            tmp = a[i]\n            a[i] = a[j]\n            a[j] = tmp\n            i += 1\n            j -= 1\n    if lo < j:\n        sort(a, lo, j)\n    if i < hi:\n        sort(a, i, hi)\n\nbenchmark_start = perf_counter_ns()\nvalues = []\nseed = 42\nfor i in range(benchmark_n):\n    raw = seed * 251 + 17\n    seed = raw - (raw // 65536) * 65536\n    values = values + [seed]\n\nsort(values, 0, benchmark_n - 1)\nchecksum = 0\nfor i in range(benchmark_n):\n    if i > 0 and values[i] < values[i - 1]:\n        raise RuntimeError(\"Unsorted output\")\n    checksum += values[i] * (i + 1)\n    checksum -= (checksum // 1000003) * 1000003\nbenchmark_result = checksum\nbenchmark_elapsed_ms = (perf_counter_ns() - benchmark_start) / 1e6\nprint(\"RESULT\", benchmark_result)\nprint(\"ELAPSED_MS\", benchmark_elapsed_ms)\n",
+      "sha256": "31b9d6c74ce3d3e4ff55b2a81a3d6203eaa44fa24b024394742f777f1e607138",
+      "command": [
+        "C:\\Users\\templ\\.pyenv\\pyenv-win\\versions\\3.12.10\\python.exe",
+        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\idiomatic-jfs987vt\\quicksort_copy_append.py"
+      ],
+      "warmups": [
+        {
+          "elapsed_ms": 4.1775,
+          "process_elapsed_ms": 33.9144,
+          "exit_code": 0,
+          "stdout": "RESULT 616973\nELAPSED_MS 4.1775\n",
+          "stderr": "",
+          "status": "ok",
+          "result": "616973",
+          "round": 1
+        }
+      ],
+      "samples": [
+        {
+          "elapsed_ms": 4.0074,
+          "process_elapsed_ms": 27.9894,
+          "exit_code": 0,
+          "stdout": "RESULT 616973\nELAPSED_MS 4.0074\n",
+          "stderr": "",
+          "status": "ok",
+          "result": "616973",
+          "round": 1
+        },
+        {
+          "elapsed_ms": 4.0269,
+          "process_elapsed_ms": 28.0425,
+          "exit_code": 0,
+          "stdout": "RESULT 616973\nELAPSED_MS 4.0269\n",
+          "stderr": "",
+          "status": "ok",
+          "result": "616973",
+          "round": 2
+        },
+        {
+          "elapsed_ms": 4.0005,
+          "process_elapsed_ms": 28.3645,
+          "exit_code": 0,
+          "stdout": "RESULT 616973\nELAPSED_MS 4.0005\n",
+          "stderr": "",
+          "status": "ok",
+          "result": "616973",
+          "round": 3
+        },
+        {
+          "elapsed_ms": 3.8299,
+          "process_elapsed_ms": 28.9957,
+          "exit_code": 0,
+          "stdout": "RESULT 616973\nELAPSED_MS 3.8299\n",
+          "stderr": "",
+          "status": "ok",
+          "result": "616973",
+          "round": 4
+        },
+        {
+          "elapsed_ms": 3.9092,
+          "process_elapsed_ms": 28.372,
+          "exit_code": 0,
+          "stdout": "RESULT 616973\nELAPSED_MS 3.9092\n",
+          "stderr": "",
+          "status": "ok",
+          "result": "616973",
+          "round": 5
+        }
+      ],
+      "summary": {
+        "status": "ok",
+        "median_ms": 4.0005,
+        "min_ms": 3.8299,
+        "max_ms": 4.0269,
+        "mean_ms": 3.95478,
+        "stdev_ms": 0.08326618161054349,
+        "cv_percent": 2.105456728580186
+      }
+    },
+    "quicksort/idiomatic": {
+      "benchmark": "quicksort",
+      "variant": "idiomatic",
+      "source": "from time import perf_counter_ns\nbenchmark_n = 2000\ndef sort(a, lo, hi):\n    i, j = lo, hi\n    pivot = a[(lo + hi) // 2]\n    while i <= j:\n        while a[i] < pivot:\n            i += 1\n        while a[j] > pivot:\n            j -= 1\n        if i <= j:\n            tmp = a[i]\n            a[i] = a[j]\n            a[j] = tmp\n            i += 1\n            j -= 1\n    if lo < j:\n        sort(a, lo, j)\n    if i < hi:\n        sort(a, i, hi)\n\nbenchmark_start = perf_counter_ns()\nvalues = []\nseed = 42\nfor i in range(benchmark_n):\n    raw = seed * 251 + 17\n    seed = raw - (raw // 65536) * 65536\n    values.append(seed)\n\nsort(values, 0, benchmark_n - 1)\nchecksum = 0\nfor i in range(benchmark_n):\n    if i > 0 and values[i] < values[i - 1]:\n        raise RuntimeError(\"Unsorted output\")\n    checksum += values[i] * (i + 1)\n    checksum -= (checksum // 1000003) * 1000003\nbenchmark_result = checksum\nbenchmark_elapsed_ms = (perf_counter_ns() - benchmark_start) / 1e6\nprint(\"RESULT\", benchmark_result)\nprint(\"ELAPSED_MS\", benchmark_elapsed_ms)\n",
+      "sha256": "c1c3648eb7f8ba07076569b0a9e5c1b524f2e9fa1ef50cb30cfcd8c0e9463522",
+      "command": [
+        "C:\\Users\\templ\\.pyenv\\pyenv-win\\versions\\3.12.10\\python.exe",
+        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\idiomatic-jfs987vt\\quicksort_idiomatic.py"
+      ],
+      "warmups": [
+        {
+          "elapsed_ms": 1.4058,
+          "process_elapsed_ms": 45.1911,
+          "exit_code": 0,
+          "stdout": "RESULT 616973\nELAPSED_MS 1.4058\n",
+          "stderr": "",
+          "status": "ok",
+          "result": "616973",
+          "round": 1
+        }
+      ],
+      "samples": [
+        {
+          "elapsed_ms": 1.3885,
+          "process_elapsed_ms": 25.6686,
+          "exit_code": 0,
+          "stdout": "RESULT 616973\nELAPSED_MS 1.3885\n",
+          "stderr": "",
+          "status": "ok",
+          "result": "616973",
+          "round": 1
+        },
+        {
+          "elapsed_ms": 1.4545,
+          "process_elapsed_ms": 28.186,
+          "exit_code": 0,
+          "stdout": "RESULT 616973\nELAPSED_MS 1.4545\n",
+          "stderr": "",
+          "status": "ok",
+          "result": "616973",
+          "round": 2
+        },
+        {
+          "elapsed_ms": 1.4047,
+          "process_elapsed_ms": 26.6892,
+          "exit_code": 0,
+          "stdout": "RESULT 616973\nELAPSED_MS 1.4047\n",
+          "stderr": "",
+          "status": "ok",
+          "result": "616973",
+          "round": 3
+        },
+        {
+          "elapsed_ms": 1.4084,
+          "process_elapsed_ms": 27.89,
+          "exit_code": 0,
+          "stdout": "RESULT 616973\nELAPSED_MS 1.4084\n",
+          "stderr": "",
+          "status": "ok",
+          "result": "616973",
+          "round": 4
+        },
+        {
+          "elapsed_ms": 1.4085,
+          "process_elapsed_ms": 25.7764,
+          "exit_code": 0,
+          "stdout": "RESULT 616973\nELAPSED_MS 1.4085\n",
+          "stderr": "",
+          "status": "ok",
+          "result": "616973",
+          "round": 5
+        }
+      ],
+      "summary": {
+        "status": "ok",
+        "median_ms": 1.4084,
+        "min_ms": 1.3885,
+        "max_ms": 1.4545,
+        "mean_ms": 1.41292,
+        "stdev_ms": 0.024661549018664592,
+        "cv_percent": 1.7454313774781725
+      }
+    },
+    "matrix/copy_append": {
+      "benchmark": "matrix",
+      "variant": "copy_append",
+      "source": "from time import perf_counter_ns\nbenchmark_n = 45\nbenchmark_start = perf_counter_ns()\na, b = [], []\nfor i in range(benchmark_n):\n    for j in range(benchmark_n):\n        x, y = i + j, i * 2 + j\n        a = a + [x - (x // 7) * 7]\n        b = b + [y - (y // 5) * 5]\nchecksum = 0\nfor i in range(benchmark_n):\n    for j in range(benchmark_n):\n        total = 0\n        for k in range(benchmark_n):\n            total += a[i * benchmark_n + k] * b[k * benchmark_n + j]\n        checksum += total\nbenchmark_result = checksum\nbenchmark_elapsed_ms = (perf_counter_ns() - benchmark_start) / 1e6\nprint(\"RESULT\", benchmark_result)\nprint(\"ELAPSED_MS\", benchmark_elapsed_ms)\n",
+      "sha256": "2972080b7987da688186649a1bb11183cd1c9b733364c04e71d8fb033fd08154",
+      "command": [
+        "C:\\Users\\templ\\.pyenv\\pyenv-win\\versions\\3.12.10\\python.exe",
+        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\idiomatic-jfs987vt\\matrix_copy_append.py"
+      ],
+      "warmups": [
+        {
+          "elapsed_ms": 12.4293,
+          "process_elapsed_ms": 46.539,
+          "exit_code": 0,
+          "stdout": "RESULT 545940\nELAPSED_MS 12.4293\n",
+          "stderr": "",
+          "status": "ok",
+          "result": "545940",
+          "round": 1
+        }
+      ],
+      "samples": [
+        {
+          "elapsed_ms": 11.9927,
+          "process_elapsed_ms": 36.3894,
+          "exit_code": 0,
+          "stdout": "RESULT 545940\nELAPSED_MS 11.9927\n",
+          "stderr": "",
+          "status": "ok",
+          "result": "545940",
+          "round": 1
+        },
+        {
+          "elapsed_ms": 13.3878,
+          "process_elapsed_ms": 39.0284,
+          "exit_code": 0,
+          "stdout": "RESULT 545940\nELAPSED_MS 13.3878\n",
+          "stderr": "",
+          "status": "ok",
+          "result": "545940",
+          "round": 2
+        },
+        {
+          "elapsed_ms": 13.4056,
+          "process_elapsed_ms": 41.8174,
+          "exit_code": 0,
+          "stdout": "RESULT 545940\nELAPSED_MS 13.4056\n",
+          "stderr": "",
+          "status": "ok",
+          "result": "545940",
+          "round": 3
+        },
+        {
+          "elapsed_ms": 11.113,
+          "process_elapsed_ms": 35.7354,
+          "exit_code": 0,
+          "stdout": "RESULT 545940\nELAPSED_MS 11.113\n",
+          "stderr": "",
+          "status": "ok",
+          "result": "545940",
+          "round": 4
+        },
+        {
+          "elapsed_ms": 11.3966,
+          "process_elapsed_ms": 37.7813,
+          "exit_code": 0,
+          "stdout": "RESULT 545940\nELAPSED_MS 11.3966\n",
+          "stderr": "",
+          "status": "ok",
+          "result": "545940",
+          "round": 5
+        }
+      ],
+      "summary": {
+        "status": "ok",
+        "median_ms": 11.9927,
+        "min_ms": 11.113,
+        "max_ms": 13.4056,
+        "mean_ms": 12.25914,
+        "stdev_ms": 1.0859150924450773,
+        "cv_percent": 8.858003844030472
+      }
+    },
+    "matrix/idiomatic": {
+      "benchmark": "matrix",
+      "variant": "idiomatic",
+      "source": "from time import perf_counter_ns\nbenchmark_n = 45\nbenchmark_start = perf_counter_ns()\na, b = [], []\nfor i in range(benchmark_n):\n    for j in range(benchmark_n):\n        x, y = i + j, i * 2 + j\n        a.append(x - (x // 7) * 7)\n        b.append(y - (y // 5) * 5)\nchecksum = 0\nfor i in range(benchmark_n):\n    for j in range(benchmark_n):\n        total = 0\n        for k in range(benchmark_n):\n            total += a[i * benchmark_n + k] * b[k * benchmark_n + j]\n        checksum += total\nbenchmark_result = checksum\nbenchmark_elapsed_ms = (perf_counter_ns() - benchmark_start) / 1e6\nprint(\"RESULT\", benchmark_result)\nprint(\"ELAPSED_MS\", benchmark_elapsed_ms)\n",
+      "sha256": "398a70ffb1e694d60f31236a8f2cd04f6a850a393bf60b857eea7af86148fddf",
+      "command": [
+        "C:\\Users\\templ\\.pyenv\\pyenv-win\\versions\\3.12.10\\python.exe",
+        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\idiomatic-jfs987vt\\matrix_idiomatic.py"
+      ],
+      "warmups": [
+        {
+          "elapsed_ms": 9.7745,
+          "process_elapsed_ms": 42.797,
+          "exit_code": 0,
+          "stdout": "RESULT 545940\nELAPSED_MS 9.7745\n",
+          "stderr": "",
+          "status": "ok",
+          "result": "545940",
+          "round": 1
+        }
+      ],
+      "samples": [
+        {
+          "elapsed_ms": 8.5135,
+          "process_elapsed_ms": 33.1947,
+          "exit_code": 0,
+          "stdout": "RESULT 545940\nELAPSED_MS 8.5135\n",
+          "stderr": "",
+          "status": "ok",
+          "result": "545940",
+          "round": 1
+        },
+        {
+          "elapsed_ms": 9.2798,
+          "process_elapsed_ms": 33.108,
+          "exit_code": 0,
+          "stdout": "RESULT 545940\nELAPSED_MS 9.2798\n",
+          "stderr": "",
+          "status": "ok",
+          "result": "545940",
+          "round": 2
+        },
+        {
+          "elapsed_ms": 8.4528,
+          "process_elapsed_ms": 33.3961,
+          "exit_code": 0,
+          "stdout": "RESULT 545940\nELAPSED_MS 8.4528\n",
+          "stderr": "",
+          "status": "ok",
+          "result": "545940",
+          "round": 3
+        },
+        {
+          "elapsed_ms": 9.8395,
+          "process_elapsed_ms": 35.3032,
+          "exit_code": 0,
+          "stdout": "RESULT 545940\nELAPSED_MS 9.8395\n",
+          "stderr": "",
+          "status": "ok",
+          "result": "545940",
+          "round": 4
+        },
+        {
+          "elapsed_ms": 8.3695,
+          "process_elapsed_ms": 34.0811,
+          "exit_code": 0,
+          "stdout": "RESULT 545940\nELAPSED_MS 8.3695\n",
+          "stderr": "",
+          "status": "ok",
+          "result": "545940",
+          "round": 5
+        }
+      ],
+      "summary": {
+        "status": "ok",
+        "median_ms": 8.5135,
+        "min_ms": 8.3695,
+        "max_ms": 9.8395,
+        "mean_ms": 8.89102,
+        "stdev_ms": 0.6436818756186937,
+        "cv_percent": 7.239685386138977
+      }
+    }
+  }
+}

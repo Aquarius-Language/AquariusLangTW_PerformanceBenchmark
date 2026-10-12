@@ -1,0 +1,74 @@
+[
+  {
+    "path": "AquariusCore/wasm/WasmCompiler.cs",
+    "measured_snapshot_path": "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\elapsed-source\\AquariusCore\\wasm\\WasmCompiler.cs",
+    "measured_snapshot_sha256": "18ea6084dfac8df30c2ee635b404761a40af138865a7483484441613910a2a57",
+    "current_source_path": "C:\\OfficialProjects\\AquariusLangTW\\AquariusCore\\wasm\\WasmCompiler.cs",
+    "current_source_sha256": "b6b1a770b1ef6db5fab37ee298d1a4ae6fdb9d503d6d26026f3afe311ae182a8",
+    "identical": false
+  },
+  {
+    "path": "AquariusCore/wasm/runtime/runtime.c",
+    "measured_snapshot_path": "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\elapsed-source\\AquariusCore\\wasm\\runtime\\runtime.c",
+    "measured_snapshot_sha256": "44faacffa17781629dee2afb5c970909c7468059035741b993bfea2daae3421c",
+    "current_source_path": "C:\\OfficialProjects\\AquariusLangTW\\AquariusCore\\wasm\\runtime\\runtime.c",
+    "current_source_sha256": "e1f419953e17266a39cfa17ab11974aae87f5ecbd5839e90cc150e9ab1092d8d",
+    "identical": false
+  },
+  {
+    "path": "AquariusCore/wasm/runtime/runtime.wasm",
+    "measured_snapshot_path": "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\elapsed-source\\AquariusCore\\wasm\\runtime\\runtime.wasm",
+    "measured_snapshot_sha256": "2ac77fff9ce91ae938f095dcc90a3eee1f9b3cfa46778bfa7c6c24ffc07fcff0",
+    "current_source_path": "C:\\OfficialProjects\\AquariusLangTW\\AquariusCore\\wasm\\runtime\\runtime.wasm",
+    "current_source_sha256": "6b72a268f28820fa48795ccc473af88fe50fb75bbe6f0b05008d3cfc03ce8c62",
+    "identical": false
+  },
+  {
+    "path": "AquariusCore/wasm/WasmRuntimeImage.cs",
+    "measured_snapshot_path": "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\elapsed-source\\AquariusCore\\wasm\\WasmRuntimeImage.cs",
+    "measured_snapshot_sha256": "7af4619738f28e918ca82c858f20f5a98145445db3bf92563ee25cfa42f3783f",
+    "current_source_path": "C:\\OfficialProjects\\AquariusLangTW\\AquariusCore\\wasm\\WasmRuntimeImage.cs",
+    "current_source_sha256": "7af4619738f28e918ca82c858f20f5a98145445db3bf92563ee25cfa42f3783f",
+    "identical": true
+  },
+  {
+    "path": "AquariusCore/wasm/WasmHostRuntime.cs",
+    "measured_snapshot_path": "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\elapsed-source\\AquariusCore\\wasm\\WasmHostRuntime.cs",
+    "measured_snapshot_sha256": "283d16b41eaecffe4fa56836228b1b2aeb111ea6d2271f09a01d9eb95dfae498",
+    "current_source_path": "C:\\OfficialProjects\\AquariusLangTW\\AquariusCore\\wasm\\WasmHostRuntime.cs",
+    "current_source_sha256": "32fc7d852c619e3af9af1065853d9fdd25c06ae5b687718fd0617e761e6c3163",
+    "identical": false
+  },
+  {
+    "path": "AquariusCore/wasm/WasmAbi.cs",
+    "measured_snapshot_path": "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\elapsed-source\\AquariusCore\\wasm\\WasmAbi.cs",
+    "measured_snapshot_sha256": "043bc9fbeba8b21e7aed7adffe53e9ef9100a80f207d0895b0f53b94f8155481",
+    "current_source_path": "C:\\OfficialProjects\\AquariusLangTW\\AquariusCore\\wasm\\WasmAbi.cs",
+    "current_source_sha256": "b1d0fb34f9df14487af3e6220c00e57abda1a9844d036f7aa8e3084ea19f8ceb",
+    "identical": false
+  },
+  {
+    "path": "AquariusCore/LoweringCompiler.cs",
+    "measured_snapshot_path": "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\elapsed-source\\AquariusCore\\LoweringCompiler.cs",
+    "measured_snapshot_sha256": "f5ee53303aa4c7243857ffd91d4570df809cca73450e3d3055f49f2a7a639fce",
+    "current_source_path": "C:\\OfficialProjects\\AquariusLangTW\\AquariusCore\\LoweringCompiler.cs",
+    "current_source_sha256": "f5ee53303aa4c7243857ffd91d4570df809cca73450e3d3055f49f2a7a639fce",
+    "identical": true
+  },
+  {
+    "path": "AquariusCore/LoweredProgram.cs",
+    "measured_snapshot_path": "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\elapsed-source\\AquariusCore\\LoweredProgram.cs",
+    "measured_snapshot_sha256": "0aac731f2bef7eb0ca45e0248aa33fb31d41e84caafb3943f008f3675687d23c",
+    "current_source_path": "C:\\OfficialProjects\\AquariusLangTW\\AquariusCore\\LoweredProgram.cs",
+    "current_source_sha256": "0aac731f2bef7eb0ca45e0248aa33fb31d41e84caafb3943f008f3675687d23c",
+    "identical": true
+  },
+  {
+    "path": "AquariusDesktop/runtime/WasmtimeEngine.cs",
+    "measured_snapshot_path": "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\elapsed-source\\AquariusDesktop\\runtime\\WasmtimeEngine.cs",
+    "measured_snapshot_sha256": "483da0e2b765daa46c29330cc972e5bf2e5082b0ab6b0d9457b44dc1fa14ce00",
+    "current_source_path": "C:\\OfficialProjects\\AquariusLangTW\\AquariusDesktop\\runtime\\WasmtimeEngine.cs",
+    "current_source_sha256": "483da0e2b765daa46c29330cc972e5bf2e5082b0ab6b0d9457b44dc1fa14ce00",
+    "identical": true
+  }
+]

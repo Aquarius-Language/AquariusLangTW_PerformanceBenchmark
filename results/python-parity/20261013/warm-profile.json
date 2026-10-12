@@ -1,0 +1,588 @@
+{
+  "method": "Original standard scripts compiled once, Wasm program and session reused, five in-process warmups then five samples. Workload timer excludes source/engine compilation and output. Execute timer also includes entry, output capture and cleanup. Counters run separately in a fresh session. Managed allocation is allocation traffic; guest heap is a high-water mark. Typed probes are hand-written Wasm for bounded standard inputs, without generic semantics or scheduler safepoints.",
+  "baseline": "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\results\\python-parity\\20261013\\latest.json",
+  "baseline_sha256": "37dc0fdec5f0bfd3836a21ae5658c00288455c845be1d779edd5a0c2c9045dd0",
+  "dotnet": "8.0.31",
+  "process_affinity_mask": "0xfffff",
+  "fingerprints": {
+    "AquariusCore.dll": "7dc624e7f9cf697a386c0789d4225f64c64fb0758c21220ef42fef072123ada1",
+    "AquariusDesktop.dll": "77c06e4be0717a9483733da816c510608b6f40ac46ebb4095403d4cb6de45a20",
+    "Wasmtime.Dotnet.dll": "ba2a630c87c6febfadbdf8670907ccbb024453e8197361d315fb1f7041c746f0",
+    "wasmtime.dll": "19b3880fbb92f1826c58ac9f5e2a472692b5fc3d012a1a7a41983ccf77544607"
+  },
+  "results": {
+    "fibonacci": {
+      "valid": true,
+      "samples": [
+        {
+          "execute_ms": 190.6119,
+          "workload_ms": 190.52710000000002,
+          "managed_allocated_bytes": 452296
+        },
+        {
+          "execute_ms": 189.9677,
+          "workload_ms": 189.8985,
+          "managed_allocated_bytes": 452256
+        },
+        {
+          "execute_ms": 189.0087,
+          "workload_ms": 188.9416000000001,
+          "managed_allocated_bytes": 452288
+        },
+        {
+          "execute_ms": 189.6763,
+          "workload_ms": 189.55950000000007,
+          "managed_allocated_bytes": 452296
+        },
+        {
+          "execute_ms": 189.9978,
+          "workload_ms": 189.93600000000015,
+          "managed_allocated_bytes": 452296
+        }
+      ],
+      "source_sha256": "a704f88df229610a91b0a97c44be28b261ef6c5a529a7294d33203a035723ebb",
+      "wasm_sha256": "476db89c473fef426fa65516b2fa17adb4936317958eb9a80079757f828c54f3",
+      "native_calls": 4,
+      "capability_lookups": 2,
+      "scheduler_entries": 1005,
+      "explicit_host_collection_calls": 1004,
+      "guest_heap_high_water_bytes": 21536,
+      "result": "RESULT 317811"
+    },
+    "ackermann": {
+      "valid": true,
+      "samples": [
+        {
+          "execute_ms": 40.0527,
+          "workload_ms": 39.9961000000003,
+          "managed_allocated_bytes": 105976
+        },
+        {
+          "execute_ms": 40.3278,
+          "workload_ms": 40.25030000000015,
+          "managed_allocated_bytes": 106056
+        },
+        {
+          "execute_ms": 41.6101,
+          "workload_ms": 41.56280000000015,
+          "managed_allocated_bytes": 105976
+        },
+        {
+          "execute_ms": 41.8099,
+          "workload_ms": 41.76539999999977,
+          "managed_allocated_bytes": 105976
+        },
+        {
+          "execute_ms": 40.8205,
+          "workload_ms": 40.764300000000276,
+          "managed_allocated_bytes": 105984
+        }
+      ],
+      "source_sha256": "f9d9b09e936d53adc0c2c533b42173ac637a62885e9140cd8521e529cb149b8b",
+      "wasm_sha256": "6a74d7e246b279b115e50b9f306d70cdfdf2118e080765ee8c9ad3d6e20cefb1",
+      "native_calls": 4,
+      "capability_lookups": 2,
+      "scheduler_entries": 232,
+      "explicit_host_collection_calls": 231,
+      "guest_heap_high_water_bytes": 369296,
+      "result": "RESULT 509"
+    },
+    "sieve": {
+      "valid": true,
+      "samples": [
+        {
+          "execute_ms": 10.0963,
+          "workload_ms": 10.05370000000039,
+          "managed_allocated_bytes": 17720
+        },
+        {
+          "execute_ms": 9.7768,
+          "workload_ms": 9.719499999999698,
+          "managed_allocated_bytes": 17720
+        },
+        {
+          "execute_ms": 12.1996,
+          "workload_ms": 12.163099999999758,
+          "managed_allocated_bytes": 17728
+        },
+        {
+          "execute_ms": 12.4308,
+          "workload_ms": 12.379399999999805,
+          "managed_allocated_bytes": 17728
+        },
+        {
+          "execute_ms": 12.5347,
+          "workload_ms": 12.490299999999934,
+          "managed_allocated_bytes": 17728
+        }
+      ],
+      "source_sha256": "3aa8c837e05a01001182d5304f4f869a658b2ba19da92bc070b67117cdf1de49",
+      "wasm_sha256": "65776eeec304b579f87417c065314c55adb63ffe26dae1db71221dfe580827c9",
+      "native_calls": 4,
+      "capability_lookups": 3,
+      "scheduler_entries": 35,
+      "explicit_host_collection_calls": 34,
+      "guest_heap_high_water_bytes": 837280,
+      "result": "RESULT 1229"
+    },
+    "quicksort": {
+      "valid": true,
+      "samples": [
+        {
+          "execute_ms": 10.5136,
+          "workload_ms": 10.479699999999866,
+          "managed_allocated_bytes": 24008
+        },
+        {
+          "execute_ms": 10.2741,
+          "workload_ms": 10.248799999999846,
+          "managed_allocated_bytes": 24008
+        },
+        {
+          "execute_ms": 10.2192,
+          "workload_ms": 10.19880000000012,
+          "managed_allocated_bytes": 24000
+        },
+        {
+          "execute_ms": 10.5005,
+          "workload_ms": 10.464300000000094,
+          "managed_allocated_bytes": 24008
+        },
+        {
+          "execute_ms": 10.4397,
+          "workload_ms": 10.397699999999986,
+          "managed_allocated_bytes": 24008
+        }
+      ],
+      "source_sha256": "ae62f2107fad89dd91a4d9e67812867c2ffa2c988b5fc822728cce4d4c1c0ace",
+      "wasm_sha256": "1df9126895374bc59204e4cf46ab88c61811d2a3216aa755b119ddf273fb9074",
+      "native_calls": 4,
+      "capability_lookups": 3,
+      "scheduler_entries": 49,
+      "explicit_host_collection_calls": 48,
+      "guest_heap_high_water_bytes": 153040,
+      "result": "RESULT 616973"
+    },
+    "matrix": {
+      "valid": true,
+      "samples": [
+        {
+          "execute_ms": 73.5111,
+          "workload_ms": 73.47720000000027,
+          "managed_allocated_bytes": 36096
+        },
+        {
+          "execute_ms": 74.3338,
+          "workload_ms": 74.27610000000004,
+          "managed_allocated_bytes": 36096
+        },
+        {
+          "execute_ms": 72.5691,
+          "workload_ms": 72.51579999999967,
+          "managed_allocated_bytes": 36096
+        },
+        {
+          "execute_ms": 70.9835,
+          "workload_ms": 70.94560000000001,
+          "managed_allocated_bytes": 36096
+        },
+        {
+          "execute_ms": 70.8087,
+          "workload_ms": 70.77320000000009,
+          "managed_allocated_bytes": 36096
+        }
+      ],
+      "source_sha256": "c0627d4c438b5ce327eb83855f9ae977d19c17a42d8326a00723660aa4f16d35",
+      "wasm_sha256": "5b96b5be93ffc21d5d959ea30dde1c4d1624e19167070512008b10e710edb600",
+      "native_calls": 4,
+      "capability_lookups": 3,
+      "scheduler_entries": 76,
+      "explicit_host_collection_calls": 75,
+      "guest_heap_high_water_bytes": 176608,
+      "result": "RESULT 545940"
+    },
+    "mandelbrot": {
+      "valid": true,
+      "samples": [
+        {
+          "execute_ms": 32.5721,
+          "workload_ms": 32.541299999999865,
+          "managed_allocated_bytes": 94792
+        },
+        {
+          "execute_ms": 34.3786,
+          "workload_ms": 34.34870000000001,
+          "managed_allocated_bytes": 94784
+        },
+        {
+          "execute_ms": 33.151,
+          "workload_ms": 33.11889999999994,
+          "managed_allocated_bytes": 94784
+        },
+        {
+          "execute_ms": 31.7294,
+          "workload_ms": 31.69800000000032,
+          "managed_allocated_bytes": 94784
+        },
+        {
+          "execute_ms": 33.2958,
+          "workload_ms": 33.26279999999997,
+          "managed_allocated_bytes": 94784
+        }
+      ],
+      "source_sha256": "74b87bc6b6e111aa5f695faf89587b787fde12aecaebcee3865232333198bdd8",
+      "wasm_sha256": "255c91db3bb0e6a725ba0a816595b52a3c9f7a8ee86379b387313aaa9246e33c",
+      "native_calls": 4,
+      "capability_lookups": 2,
+      "scheduler_entries": 207,
+      "explicit_host_collection_calls": 206,
+      "guest_heap_high_water_bytes": 2368,
+      "result": "RESULT 129059"
+    },
+    "nqueens": {
+      "valid": true,
+      "samples": [
+        {
+          "execute_ms": 16.6197,
+          "workload_ms": 16.586599999999635,
+          "managed_allocated_bytes": 47704
+        },
+        {
+          "execute_ms": 14.4852,
+          "workload_ms": 14.456499999999323,
+          "managed_allocated_bytes": 47704
+        },
+        {
+          "execute_ms": 14.9221,
+          "workload_ms": 14.88839999999982,
+          "managed_allocated_bytes": 47696
+        },
+        {
+          "execute_ms": 14.6397,
+          "workload_ms": 14.611700000000383,
+          "managed_allocated_bytes": 47704
+        },
+        {
+          "execute_ms": 14.8195,
+          "workload_ms": 14.782900000000154,
+          "managed_allocated_bytes": 47704
+        }
+      ],
+      "source_sha256": "58a704538048485fdc787cb95fb1b0fe36f9eede16998a6ad68d0d0ced313c1a",
+      "wasm_sha256": "89521260ef143b04e0a0cf21a609fc410c29128133386fe848457d995ce12072",
+      "native_calls": 4,
+      "capability_lookups": 3,
+      "scheduler_entries": 102,
+      "explicit_host_collection_calls": 101,
+      "guest_heap_high_water_bytes": 13024,
+      "result": "RESULT 92"
+    },
+    "binary_trees": {
+      "valid": true,
+      "samples": [
+        {
+          "execute_ms": 72.1356,
+          "workload_ms": 72.10609999999997,
+          "managed_allocated_bytes": 59832
+        },
+        {
+          "execute_ms": 70.8125,
+          "workload_ms": 70.78409999999985,
+          "managed_allocated_bytes": 59832
+        },
+        {
+          "execute_ms": 73.2406,
+          "workload_ms": 73.21350000000075,
+          "managed_allocated_bytes": 59832
+        },
+        {
+          "execute_ms": 72.2524,
+          "workload_ms": 72.22639999999956,
+          "managed_allocated_bytes": 59832
+        },
+        {
+          "execute_ms": 73.2472,
+          "workload_ms": 73.21979999999985,
+          "managed_allocated_bytes": 59832
+        }
+      ],
+      "source_sha256": "26e1d6dcf0281506ed3a0e748162d7ed840c8ec45d50ef6a781ca5d2bf726902",
+      "wasm_sha256": "b06f9907ab77e259b034d371d1fa7baaf08c2fec379816a9d10a9c9ca05e0dc1",
+      "native_calls": 4,
+      "capability_lookups": 2,
+      "scheduler_entries": 129,
+      "explicit_host_collection_calls": 128,
+      "guest_heap_high_water_bytes": 1188816,
+      "result": "RESULT 65528"
+    },
+    "spectral_norm": {
+      "valid": true,
+      "samples": [
+        {
+          "execute_ms": 124.0388,
+          "workload_ms": 124.01099999999951,
+          "managed_allocated_bytes": 177720
+        },
+        {
+          "execute_ms": 125.9134,
+          "workload_ms": 125.88289999999961,
+          "managed_allocated_bytes": 177720
+        },
+        {
+          "execute_ms": 125.4535,
+          "workload_ms": 125.42439999999988,
+          "managed_allocated_bytes": 177720
+        },
+        {
+          "execute_ms": 123.5547,
+          "workload_ms": 123.52390000000014,
+          "managed_allocated_bytes": 177720
+        },
+        {
+          "execute_ms": 125.4168,
+          "workload_ms": 125.3783999999996,
+          "managed_allocated_bytes": 177712
+        }
+      ],
+      "source_sha256": "5b709c7eefabbc7fb4cd13e389e8e59bca5b8bf4dbf7f1dfdb42efbd511e114d",
+      "wasm_sha256": "31ad71fecb7516a9d847f741b6eb446e2d7b366bc2a1f2b67405af653f4009db",
+      "native_calls": 4,
+      "capability_lookups": 3,
+      "scheduler_entries": 392,
+      "explicit_host_collection_calls": 391,
+      "guest_heap_high_water_bytes": 20272,
+      "result": "RESULT 1.6236011690579908"
+    },
+    "collatz": {
+      "valid": true,
+      "samples": [
+        {
+          "execute_ms": 188.2907,
+          "workload_ms": 188.26090000000022,
+          "managed_allocated_bytes": 565640
+        },
+        {
+          "execute_ms": 190.8221,
+          "workload_ms": 190.79379999999946,
+          "managed_allocated_bytes": 565640
+        },
+        {
+          "execute_ms": 189.7837,
+          "workload_ms": 189.7514000000001,
+          "managed_allocated_bytes": 565632
+        },
+        {
+          "execute_ms": 191.8797,
+          "workload_ms": 191.85120000000006,
+          "managed_allocated_bytes": 565640
+        },
+        {
+          "execute_ms": 186.1893,
+          "workload_ms": 186.15979999999945,
+          "managed_allocated_bytes": 565640
+        }
+      ],
+      "source_sha256": "3d26b87abd9c1d7765865c4ef103363c4108aff18ceb3457be7e34a4833c3c64",
+      "wasm_sha256": "f9bacc8d32278ad06cfb0dafe375bd8693172df21f4ef62ef1362164630e3841",
+      "native_calls": 4,
+      "capability_lookups": 2,
+      "scheduler_entries": 1258,
+      "explicit_host_collection_calls": 1257,
+      "guest_heap_high_water_bytes": 2032,
+      "result": "RESULT 849666"
+    }
+  },
+  "typed_probes": {
+    "fibonacci": {
+      "n": 28,
+      "expected": 317811,
+      "valid": true,
+      "elapsed_ms": [
+        1.4448,
+        1.3922,
+        1.5422,
+        1.5202,
+        1.4633
+      ]
+    },
+    "collatz": {
+      "n": 10000,
+      "expected": 849666,
+      "valid": true,
+      "elapsed_ms": [
+        1.3114,
+        1.1829,
+        1.22,
+        1.5156,
+        1.18
+      ]
+    }
+  },
+  "typed_probes_sha256": "0171bd49ab74d0d3e6dcccec2ff6b75f260cb1efd691d60621f66768976043f9",
+  "tuning_method": "Diagnostic engine wrapper changes only aqua_run budget or suppresses explicit host-to-guest aqua_collect calls. Allocation-pressure guest collection is retained. Six original numeric/array workloads; independent sessions; five warmups/five samples per mode; mode order shuffled deterministically. Not a production change or proof of host-resource/interactive correctness.",
+  "tuning_probes": {
+    "collatz/budget_65536": {
+      "valid": true,
+      "error": null,
+      "budget": 65536,
+      "skip_host_requested_collection": false,
+      "workload_ms": [
+        161.61529999999948,
+        160.5579000000016,
+        162.78329999999914,
+        158.33359999999993,
+        156.88950000000114
+      ]
+    },
+    "collatz/skip_host_requested_collection": {
+      "valid": false,
+      "error": "Invalid native service request.",
+      "budget": 4096,
+      "skip_host_requested_collection": true,
+      "workload_ms": []
+    },
+    "collatz/unchanged": {
+      "valid": true,
+      "error": null,
+      "budget": 4096,
+      "skip_host_requested_collection": false,
+      "workload_ms": [
+        185.46259999999893,
+        184.76879999999983,
+        188.35739999999896,
+        189.0695999999989,
+        189.75690000000031
+      ]
+    },
+    "fibonacci/unchanged": {
+      "valid": true,
+      "error": null,
+      "budget": 4096,
+      "skip_host_requested_collection": false,
+      "workload_ms": [
+        206.46310000000085,
+        188.85120000000097,
+        188.30220000000008,
+        188.23689999999988,
+        195.5650000000005
+      ]
+    },
+    "fibonacci/budget_65536": {
+      "valid": true,
+      "error": null,
+      "budget": 65536,
+      "skip_host_requested_collection": false,
+      "workload_ms": [
+        146.67000000000007,
+        146.27299999999923,
+        146.41660000000047,
+        147.1236000000008,
+        146.00990000000093
+      ]
+    },
+    "binary_trees/unchanged": {
+      "valid": true,
+      "error": null,
+      "budget": 4096,
+      "skip_host_requested_collection": false,
+      "workload_ms": [
+        72.78900000000067,
+        71.18029999999999,
+        76.17110000000139,
+        80.57270000000062,
+        80.78689999999915
+      ]
+    },
+    "binary_trees/budget_65536": {
+      "valid": true,
+      "error": null,
+      "budget": 65536,
+      "skip_host_requested_collection": false,
+      "workload_ms": [
+        30.02690000000075,
+        30.629000000000815,
+        31.09929999999804,
+        31.761099999999715,
+        32.82809999999881
+      ]
+    },
+    "spectral_norm/budget_65536": {
+      "valid": true,
+      "error": null,
+      "budget": 65536,
+      "skip_host_requested_collection": false,
+      "workload_ms": [
+        68.63769999999931,
+        79.75040000000081,
+        77.79969999999958,
+        69.61209999999846,
+        68.94599999999991
+      ]
+    },
+    "spectral_norm/unchanged": {
+      "valid": true,
+      "error": null,
+      "budget": 4096,
+      "skip_host_requested_collection": false,
+      "workload_ms": [
+        126.22039999999834,
+        125.95460000000094,
+        127.61259999999675,
+        125.14930000000095,
+        124.99959999999919
+      ]
+    },
+    "matrix/budget_65536": {
+      "valid": true,
+      "error": null,
+      "budget": 65536,
+      "skip_host_requested_collection": false,
+      "workload_ms": [
+        60.09519999999975,
+        61.807300000000396,
+        61.56260000000111,
+        61.95390000000043,
+        59.88999999999942
+      ]
+    },
+    "matrix/unchanged": {
+      "valid": true,
+      "error": null,
+      "budget": 4096,
+      "skip_host_requested_collection": false,
+      "workload_ms": [
+        70.77360000000044,
+        70.53059999999823,
+        71.27839999999924,
+        70.74569999999949,
+        70.6827000000012
+      ]
+    },
+    "mandelbrot/unchanged": {
+      "valid": true,
+      "error": null,
+      "budget": 4096,
+      "skip_host_requested_collection": false,
+      "workload_ms": [
+        34.63069999999789,
+        35.265699999999924,
+        34.00930000000153,
+        34.315999999998894,
+        34.11030000000028
+      ]
+    },
+    "mandelbrot/budget_65536": {
+      "valid": true,
+      "error": null,
+      "budget": 65536,
+      "skip_host_requested_collection": false,
+      "workload_ms": [
+        29.71860000000015,
+        29.757399999998597,
+        27.545200000000477,
+        27.688500000000204,
+        28.02010000000155
+      ]
+    }
+  }
+}

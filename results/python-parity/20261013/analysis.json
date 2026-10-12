@@ -1,0 +1,213 @@
+{
+  "baseline": {
+    "fibonacci": {
+      "aquarius_ms": 201.4882,
+      "python_ms": 26.4421,
+      "aquarius_over_python": 7.619977233275724,
+      "reduction_to_parity_percent": 86.87660121039346
+    },
+    "ackermann": {
+      "aquarius_ms": 41.8636,
+      "python_ms": 11.4402,
+      "aquarius_over_python": 3.6593416199017494,
+      "reduction_to_parity_percent": 72.67267984597598
+    },
+    "sieve": {
+      "aquarius_ms": 13.3562,
+      "python_ms": 37.5904,
+      "aquarius_over_python": 0.35530880224738226,
+      "reduction_to_parity_percent": 0
+    },
+    "quicksort": {
+      "aquarius_ms": 11.533199999999999,
+      "python_ms": 4.4772,
+      "aquarius_over_python": 2.575984990619137,
+      "reduction_to_parity_percent": 61.17989803350328
+    },
+    "matrix": {
+      "aquarius_ms": 74.72710000000001,
+      "python_ms": 12.6352,
+      "aquarius_over_python": 5.914200012663038,
+      "reduction_to_parity_percent": 83.09154242570634
+    },
+    "mandelbrot": {
+      "aquarius_ms": 34.6434,
+      "python_ms": 20.2562,
+      "aquarius_over_python": 1.710261549550261,
+      "reduction_to_parity_percent": 41.52941108551701
+    },
+    "nqueens": {
+      "aquarius_ms": 15.7889,
+      "python_ms": 3.6558,
+      "aquarius_over_python": 4.318863176322556,
+      "reduction_to_parity_percent": 76.84575872923382
+    },
+    "binary_trees": {
+      "aquarius_ms": 74.21470000000001,
+      "python_ms": 8.4051,
+      "aquarius_over_python": 8.829722430429147,
+      "reduction_to_parity_percent": 88.67461567587014
+    },
+    "spectral_norm": {
+      "aquarius_ms": 128.3678,
+      "python_ms": 14.481,
+      "aquarius_over_python": 8.864567364132311,
+      "reduction_to_parity_percent": 88.71913361450457
+    },
+    "collatz": {
+      "aquarius_ms": 194.5522,
+      "python_ms": 83.4082,
+      "aquarius_over_python": 2.3325308542805145,
+      "reduction_to_parity_percent": 57.128112660766625
+    }
+  },
+  "warm": {
+    "fibonacci": {
+      "workload_median_ms": 189.8985,
+      "managed_allocated_bytes_median": 452296,
+      "guest_heap_high_water_bytes": 21536,
+      "native_calls": 4,
+      "scheduler_entries": 1005,
+      "explicit_host_collection_calls": 1004
+    },
+    "ackermann": {
+      "workload_median_ms": 40.764300000000276,
+      "managed_allocated_bytes_median": 105976,
+      "guest_heap_high_water_bytes": 369296,
+      "native_calls": 4,
+      "scheduler_entries": 232,
+      "explicit_host_collection_calls": 231
+    },
+    "sieve": {
+      "workload_median_ms": 12.163099999999758,
+      "managed_allocated_bytes_median": 17728,
+      "guest_heap_high_water_bytes": 837280,
+      "native_calls": 4,
+      "scheduler_entries": 35,
+      "explicit_host_collection_calls": 34
+    },
+    "quicksort": {
+      "workload_median_ms": 10.397699999999986,
+      "managed_allocated_bytes_median": 24008,
+      "guest_heap_high_water_bytes": 153040,
+      "native_calls": 4,
+      "scheduler_entries": 49,
+      "explicit_host_collection_calls": 48
+    },
+    "matrix": {
+      "workload_median_ms": 72.51579999999967,
+      "managed_allocated_bytes_median": 36096,
+      "guest_heap_high_water_bytes": 176608,
+      "native_calls": 4,
+      "scheduler_entries": 76,
+      "explicit_host_collection_calls": 75
+    },
+    "mandelbrot": {
+      "workload_median_ms": 33.11889999999994,
+      "managed_allocated_bytes_median": 94784,
+      "guest_heap_high_water_bytes": 2368,
+      "native_calls": 4,
+      "scheduler_entries": 207,
+      "explicit_host_collection_calls": 206
+    },
+    "nqueens": {
+      "workload_median_ms": 14.782900000000154,
+      "managed_allocated_bytes_median": 47704,
+      "guest_heap_high_water_bytes": 13024,
+      "native_calls": 4,
+      "scheduler_entries": 102,
+      "explicit_host_collection_calls": 101
+    },
+    "binary_trees": {
+      "workload_median_ms": 72.22639999999956,
+      "managed_allocated_bytes_median": 59832,
+      "guest_heap_high_water_bytes": 1188816,
+      "native_calls": 4,
+      "scheduler_entries": 129,
+      "explicit_host_collection_calls": 128
+    },
+    "spectral_norm": {
+      "workload_median_ms": 125.3783999999996,
+      "managed_allocated_bytes_median": 177720,
+      "guest_heap_high_water_bytes": 20272,
+      "native_calls": 4,
+      "scheduler_entries": 392,
+      "explicit_host_collection_calls": 391
+    },
+    "collatz": {
+      "workload_median_ms": 189.7514000000001,
+      "managed_allocated_bytes_median": 565640,
+      "guest_heap_high_water_bytes": 2032,
+      "native_calls": 4,
+      "scheduler_entries": 1258,
+      "explicit_host_collection_calls": 1257
+    }
+  },
+  "tuning": {
+    "collatz": {
+      "baseline_4096_ms": 188.35739999999896,
+      "budget_65536_ms": 160.5579000000016,
+      "speedup": 1.1731431464910607
+    },
+    "fibonacci": {
+      "baseline_4096_ms": 188.85120000000097,
+      "budget_65536_ms": 146.41660000000047,
+      "speedup": 1.2898209629236055
+    },
+    "binary_trees": {
+      "baseline_4096_ms": 76.17110000000139,
+      "budget_65536_ms": 31.09929999999804,
+      "speedup": 2.4492866398924154
+    },
+    "spectral_norm": {
+      "baseline_4096_ms": 125.95460000000094,
+      "budget_65536_ms": 69.61209999999846,
+      "speedup": 1.8093779673361918
+    },
+    "matrix": {
+      "baseline_4096_ms": 70.74569999999949,
+      "budget_65536_ms": 61.56260000000111,
+      "speedup": 1.1491668642974502
+    },
+    "mandelbrot": {
+      "baseline_4096_ms": 34.315999999998894,
+      "budget_65536_ms": 28.02010000000155,
+      "speedup": 1.224692274474288
+    }
+  },
+  "typed": {
+    "fibonacci": {
+      "median_ms": 1.4633,
+      "generic_over_typed": 129.77414064101688,
+      "python_over_typed": 18.070183831066768
+    },
+    "collatz": {
+      "median_ms": 1.22,
+      "generic_over_typed": 155.5339344262296,
+      "python_over_typed": 68.36737704918032
+    }
+  },
+  "idiomatic_python": {
+    "sieve": {
+      "copy_append_ms": 35.5053,
+      "idiomatic_ms": 1.1149,
+      "speedup": 31.846174544802224,
+      "aquarius_baseline_over_idiomatic": 11.979729123688223
+    },
+    "quicksort": {
+      "copy_append_ms": 4.0005,
+      "idiomatic_ms": 1.4084,
+      "speedup": 2.840457256461232,
+      "aquarius_baseline_over_idiomatic": 8.18886679920477
+    },
+    "matrix": {
+      "copy_append_ms": 11.9927,
+      "idiomatic_ms": 8.5135,
+      "speedup": 1.4086685851882303,
+      "aquarius_baseline_over_idiomatic": 8.777482821401303
+    }
+  },
+  "baseline_geometric_mean_slowdown": 3.395209600411448,
+  "baseline_geometric_mean_reduction_percent": 70.5467373831997,
+  "geometric_mean_if_worst_three_reached_parity": 1.7918875964483498
+}
