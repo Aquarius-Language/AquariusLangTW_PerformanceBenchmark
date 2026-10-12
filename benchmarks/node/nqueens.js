@@ -1,7 +1,5 @@
 "use strict";
 const benchmark_n = 8;
-let board = [];
-for (let i = 0; i < benchmark_n; i++) board = board.concat([0]);
 function solve(row) {
   if (row === benchmark_n) return 1;
   let count = 0;
@@ -15,4 +13,11 @@ function solve(row) {
   }
   return count;
 }
-console.log("RESULT", solve(0));
+const benchmark_start = process.hrtime.bigint();
+let board = [];
+for (let i = 0; i < benchmark_n; i++) board = board.concat([0]);
+
+const benchmark_result = solve(0);
+const benchmark_elapsed_ms = Number(process.hrtime.bigint() - benchmark_start) / 1e6;
+console.log("RESULT", benchmark_result);
+console.log("ELAPSED_MS", benchmark_elapsed_ms);

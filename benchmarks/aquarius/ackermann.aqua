@@ -4,4 +4,8 @@
     如果 (n == 0) { 回傳 ack(m - 1, 1); }
     回傳 ack(m - 1, ack(m, n - 1));
 };
-印出("RESULT", ack(3, benchmark_n));
+變數 benchmark_start = 目前時間();
+變數 benchmark_result = ack(3, benchmark_n);
+變數 benchmark_elapsed_ms = 目前時間() - benchmark_start;
+印出("RESULT", benchmark_result);
+印出("ELAPSED_MS", benchmark_elapsed_ms);

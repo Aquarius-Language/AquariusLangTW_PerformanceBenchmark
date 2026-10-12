@@ -1,3 +1,4 @@
+from time import perf_counter_ns
 benchmark_n = 60
 
 def element(i, j):
@@ -12,6 +13,7 @@ def multiply(src, dst, transpose):
             total += coefficient * src[j]
         dst[i] = total
 
+benchmark_start = perf_counter_ns()
 u, v, temp = [], [], []
 for i in range(benchmark_n):
     u = u + [1.0]
@@ -26,4 +28,7 @@ uv, vv = 0.0, 0.0
 for i in range(benchmark_n):
     uv += u[i] * v[i]
     vv += v[i] * v[i]
-print("RESULT", uv / vv)
+benchmark_result = uv / vv
+benchmark_elapsed_ms = (perf_counter_ns() - benchmark_start) / 1e6
+print("RESULT", benchmark_result)
+print("ELAPSED_MS", benchmark_elapsed_ms)

@@ -8,7 +8,7 @@ import unittest
 
 from reference import expected
 from readme_report import composite_scores
-from run_benchmarks import ROOT, execute, generate_readme, parse_result, summarize
+from run_benchmarks import ROOT, execute, generate_readme, parse_result, parse_sample, summarize
 
 
 class ReferenceTests(unittest.TestCase):
@@ -26,7 +26,8 @@ class ReferenceTests(unittest.TestCase):
             with self.subTest(name=name):
                 output = subprocess.check_output([sys.executable, str(ROOT / "benchmarks/python" / f"{name}.py")],
                                                  text=True, timeout=30)
-                observed = parse_result(output)
+                observed, elapsed = parse_sample(output)
+                self.assertGreater(elapsed, 0)
                 answer = expected(name, spec["standard"])
                 if "relative_tolerance" in spec:
                     self.assertTrue(math.isclose(float(observed), answer, rel_tol=1e-9, abs_tol=1e-12))
@@ -53,15 +54,45 @@ class HarnessTests(unittest.TestCase):
             return execute([sys.executable, "-c", code], answer, spec or {}, timeout, Path(directory))
 
     def test_correctness_exit_and_timeout(self):
-        self.assertEqual(self.run_child("print('RESULT 7')")["status"], "ok")
-        self.assertEqual(self.run_child("print('RESULT 8')")["status"], "invalid")
-        self.assertEqual(self.run_child("print('RESULT 7'); raise SystemExit(2)")["status"], "invalid")
-        self.assertEqual(self.run_child("import time; time.sleep(2)", timeout=0.05)["status"], "timeout")
+        self.assertEqual(self.run_child("print('RESULT 7'); print('ELAPSED_MS 1')")["status"], "ok")
+        self.assertEqual(self.run_child("print('RESULT 8'); print('ELAPSED_MS 1')")["status"], "invalid")
+        self.assertEqual(self.run_child("print('RESULT 7'); print('ELAPSED_MS 1'); raise SystemExit(2)")["status"], "invalid")
+        timeout = self.run_child("import time; time.sleep(2)", timeout=0.05)
+        self.assertEqual(timeout["status"], "timeout")
+        self.assertIsNone(timeout["elapsed_ms"])
+        self.assertGreater(timeout["process_elapsed_ms"], 0)
+
+    def test_requires_valid_in_process_timing(self):
+        for output in ["RESULT 7", "ELAPSED_MS 1\nRESULT 7", "RESULT 7\nELAPSED_MS 1\nextra",
+                       "RESULT 7\nELAPSED_MS 1\nELAPSED_MS 2", "RESULT 7\nELAPSED_MS",
+                       *[f"RESULT 7\nELAPSED_MS {value}" for value in
+                         ["NaN", "Infinity", "-Infinity", "0", "-1", "nope", "1e309"]]]:
+            with self.subTest(output=output), self.assertRaises(ValueError):
+                parse_sample(output)
+        self.assertEqual(parse_sample("RESULT 7\r\nELAPSED_MS 0.0001\r\n"), (7, 0.0001))
+        missing = self.run_child("print('RESULT 7')")
+        self.assertEqual(missing["status"], "invalid")
+        self.assertIsNone(missing["elapsed_ms"])
+
+    def test_statistics_use_reported_duration_excluding_process_overhead(self):
+        sample = self.run_child("import time; time.sleep(0.1); print('RESULT 7'); print('ELAPSED_MS 0.125')")
+        self.assertEqual(sample["status"], "ok")
+        self.assertEqual(sample["elapsed_ms"], 0.125)
+        self.assertGreater(sample["process_elapsed_ms"], 100)
+        summary = summarize({"warmups": [], "samples": [sample]}, 1)
+        self.assertEqual(summary["median_ms"], 0.125)
+
+    def test_historical_diagnostic_requires_explicit_process_timing(self):
+        with tempfile.TemporaryDirectory(dir=self.work_root) as directory:
+            command = [sys.executable, "-c", "print('RESULT 7')"]
+            sample = execute(command, 7, {}, 5, Path(directory), timing="process")
+            self.assertEqual(sample["status"], "ok")
+            self.assertEqual(sample["elapsed_ms"], sample["process_elapsed_ms"])
 
     def test_float_tolerance(self):
         spec = {"relative_tolerance": 1e-9, "absolute_tolerance": 1e-12}
-        self.assertEqual(self.run_child("print('RESULT 1.0000000001')", 1.0, spec)["status"], "ok")
-        self.assertEqual(self.run_child("print('RESULT 1.001')", 1.0, spec)["status"], "invalid")
+        self.assertEqual(self.run_child("print('RESULT 1.0000000001'); print('ELAPSED_MS 1')", 1.0, spec)["status"], "ok")
+        self.assertEqual(self.run_child("print('RESULT 1.001'); print('ELAPSED_MS 1')", 1.0, spec)["status"], "invalid")
 
     def test_failed_warmup_invalidates_case(self):
         valid = {"status": "ok", "elapsed_ms": 10.0}
@@ -86,6 +117,7 @@ class HarnessTests(unittest.TestCase):
             self.assertEqual(report["cases"]["fibonacci/python"]["summary"]["status"], "ok")
             self.assertIn("無法使用", generate_readme(report))
             self.assertIsNone(composite_scores(report))
+            self.assertIsNone(report["scores"])
             before = (path / "README.md").read_bytes()
             subprocess.run([sys.executable, str(ROOT / "run_benchmarks.py"), "--report-only",
                             str(path / "results/latest.json"), "--readme", str(path / "README.md")],
@@ -105,6 +137,20 @@ class HarnessTests(unittest.TestCase):
         self.assertAlmostEqual(scores["aquarius"], 25)
         report["cases"]["second/node"]["summary"]["status"] = "failed"
         self.assertIsNone(composite_scores(report))
+
+    def test_fastest_language_is_always_normalized_to_100(self):
+        for fastest in ["node", "aquarius", "python"]:
+            with self.subTest(fastest=fastest):
+                times = {"python": 10, "node": 20, "aquarius": 40}
+                times[fastest] = 5
+                report = {"benchmarks": {"first": {}}, "cases": {
+                    f"first/{language}": {"summary": {"status": "ok", "median_ms": duration}}
+                    for language, duration in times.items()}}
+                scores = composite_scores(report)
+                self.assertEqual(max(scores.values()), 100)
+                self.assertEqual(scores[fastest], 100)
+                for language, duration in times.items():
+                    self.assertAlmostEqual(scores[language], 100 * 5 / duration)
 
 
 if __name__ == "__main__":

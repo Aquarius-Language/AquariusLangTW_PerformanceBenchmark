@@ -1,4 +1,5 @@
 變數 benchmark_n = 10000;
+變數 benchmark_start = 目前時間();
 變數 checksum = 0;
 迴圈 (變數 start = 1; start <= benchmark_n; start++) {
     迴圈 (變數 value = start; value != 1; checksum++) {
@@ -6,4 +7,7 @@
         如果 (half * 2 == value) { value = half; } 否則 { value = value * 3 + 1; }
     }
 }
-印出("RESULT", checksum);
+變數 benchmark_result = checksum;
+變數 benchmark_elapsed_ms = 目前時間() - benchmark_start;
+印出("RESULT", benchmark_result);
+印出("ELAPSED_MS", benchmark_elapsed_ms);

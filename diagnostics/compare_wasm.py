@@ -10,6 +10,7 @@ from datetime import datetime
 import json
 from pathlib import Path
 import random
+import re
 import statistics
 import subprocess
 import sys
@@ -51,7 +52,7 @@ def main():
         "started_at": datetime.now().astimezone().isoformat(),
         "environment": environment_info(),
         "config": {"repetitions": args.repetitions, "warmups": args.warmups,
-                   "timeout_seconds": args.timeout, "seed": 20261010},
+                   "timeout_seconds": args.timeout, "seed": 20261010, "timing": "process"},
         "fingerprints": {"legacy": fingerprint(legacy), "wasm": fingerprint(cli)},
         "builds": {}, "cases": {}, "execution_order": [],
     }
@@ -67,6 +68,10 @@ def main():
         else:
             spec = manifest[name]
             text = (ROOT / "benchmarks/aquarius" / f"{name}.aqua").read_text(encoding="utf-8")
+            # Historical VM releases cannot call the new clock builtin. This
+            # diagnostic deliberately compares whole-process startup and work.
+            text = re.sub(r'^變數 benchmark_(?:start|elapsed_ms) = .*;\n', '', text, flags=re.M)
+            text = re.sub(r'印出\("ELAPSED_MS", benchmark_elapsed_ms\);\s*', '', text)
             answer = expected(name, spec["standard"])
         source.write_text(text, encoding="utf-8")
         wasm = source.with_suffix(".wasm")
@@ -98,13 +103,13 @@ def main():
             rng.shuffle(keys)
             for key in keys:
                 case = report["cases"][key]
-                sample = execute(case["command"], case["expected"], case["spec"], args.timeout, directory)
+                sample = execute(case["command"], case["expected"], case["spec"], args.timeout, directory, timing="process")
                 case[phase].append(sample)
                 report["execution_order"].append({"case": key, "phase": phase, "round": round_number})
-                print(f"{phase} {round_number}: {key}: {sample['status']} {sample['elapsed_ms']:.3f} ms", flush=True)
+                print(f"{phase} {round_number}: {key}: {sample['status']} {sample['process_elapsed_ms']:.3f} ms", flush=True)
                 save()
     for key, case in report["cases"].items():
-        case["median_ms"] = statistics.median(s["elapsed_ms"] for s in case["samples"])
+        case["median_ms"] = statistics.median(s["process_elapsed_ms"] for s in case["samples"])
         case["valid"] = all(s["status"] == "ok" for phase in ["warmups", "samples"] for s in case[phase])
         print(f"{key}: median {case['median_ms']:.3f} ms, valid={case['valid']}", flush=True)
     report["finished_at"] = datetime.now().astimezone().isoformat()

@@ -1,6 +1,6 @@
 {
-  "schema_version": 1,
-  "started_at": "2026-10-10T23:39:31.239048+08:00",
+  "schema_version": 2,
+  "started_at": "2026-10-12T15:02:31.968894+08:00",
   "config": {
     "profile": "standard",
     "repetitions": 5,
@@ -8,7 +8,10 @@
     "timeout_seconds": 120.0,
     "seed": 20261010,
     "timezone": "Asia/Taipei",
-    "aquarius_mode": "precompiled"
+    "aquarius_mode": "precompiled",
+    "timing": "in-process",
+    "timing_boundary": "data initialization and computation; startup/compilation/output excluded",
+    "score_normalization": "fastest language = 100; equal-weight geometric mean of relative speeds"
   },
   "environment": {
     "os": "Windows-11-10.0.26200-SP0",
@@ -26,28 +29,30 @@
   "runtimes": {
     "aquarius": {
       "available": true,
-      "executable": "C:\\OfficialProjects\\AquariusLangTW\\dist\\releases\\AquariusCompiler-win-x64-20261010-225517-73f3c2c9\\aqua\\aqua.exe",
-      "executable_sha256": "231f993121e14c43eabf61ccec85637acd352d702f9296fc6fa06f530d10eaf8",
+      "executable": "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\elapsed-compiler\\bin\\AquariusCli\\release\\aqua.exe",
+      "executable_sha256": "49b61e4fd979ec507b36292e17812eb51626135c2704b63984070170bce15f5b",
+      "benchmark_timer": "目前時間() / currentTime() (monotonic milliseconds)",
       "version": "No version flag; see binary fingerprint and release directory",
-      "release_directory": "C:\\OfficialProjects\\AquariusLangTW\\dist\\releases\\AquariusCompiler-win-x64-20261010-225517-73f3c2c9\\aqua",
+      "release_directory": "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\elapsed-compiler\\bin\\AquariusCli\\release",
       "backend": "compiled-wasm",
       "assemblies_sha256": {
-        "AquariusCore.dll": "edc40f416738a9d95a9c6c5b70792afb4d1512878d15e627a6aa0fdc669225dc",
-        "AquariusDesktop.dll": "4e355753dc8aabedb950583459c402785c4163f9c8b0d15472e5c2705d6e83cc",
-        "Wasmtime.Dotnet.dll": "ba2a630c87c6febfadbdf8670907ccbb024453e8197361d315fb1f7041c746f0",
-        "wasmtime.dll": "19b3880fbb92f1826c58ac9f5e2a472692b5fc3d012a1a7a41983ccf77544607"
+        "AquariusCore.dll": "7dc624e7f9cf697a386c0789d4225f64c64fb0758c21220ef42fef072123ada1",
+        "AquariusDesktop.dll": "77c06e4be0717a9483733da816c510608b6f40ac46ebb4095403d4cb6de45a20",
+        "Wasmtime.Dotnet.dll": "ba2a630c87c6febfadbdf8670907ccbb024453e8197361d315fb1f7041c746f0"
       }
     },
     "python": {
       "available": true,
       "executable": "C:\\Users\\templ\\.pyenv\\pyenv-win\\versions\\3.12.10\\python.exe",
       "executable_sha256": "4d6f5f81a4bca11191c4c7c6b43632694d0a4ce74e068619d8fdc161d469859a",
+      "benchmark_timer": "time.perf_counter_ns() (nanoseconds / 1e6)",
       "version": "Python 3.12.10"
     },
     "node": {
       "available": true,
-      "executable": "C:\\Program Files\\nodejs\\node.exe",
+      "executable": "C:\\Program Files\\nodejs\\node.EXE",
       "executable_sha256": "9a4eb5f1c29c6a2e93852ead46b999e284a6a5ca8bab4d4e241d587d025a52de",
+      "benchmark_timer": "process.hrtime.bigint() (nanoseconds / 1e6)",
       "version": "v24.18.0"
     }
   },
@@ -141,18 +146,19 @@
       "language": "aquarius",
       "n": 28,
       "source": "benchmarks\\aquarius\\fibonacci.aqua",
-      "source_sha256": "fa9e9ddda59c2a565955d7450d4c9d6d57e7d507b815d4d2c3469051d658db5d",
-      "staged_sha256": "e0611d98cb082685dd109eac70948c8cc68cf532f7a6d2c25ce6f7168aa0a71a",
+      "source_sha256": "a704f88df229610a91b0a97c44be28b261ef6c5a529a7294d33203a035723ebb",
+      "staged_sha256": "a704f88df229610a91b0a97c44be28b261ef6c5a529a7294d33203a035723ebb",
       "command": [
-        "C:\\OfficialProjects\\AquariusLangTW\\dist\\releases\\AquariusCompiler-win-x64-20261010-225517-73f3c2c9\\aqua\\aqua.exe",
+        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\elapsed-compiler\\bin\\AquariusCli\\release\\aqua.exe",
         "run",
-        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\aquarius\\fibonacci.wasm"
+        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\aquarius\\fibonacci.wasm"
       ],
       "warmups": [
         {
-          "elapsed_ms": 340.1885,
+          "elapsed_ms": 195.2959,
+          "process_elapsed_ms": 405.8025,
           "exit_code": 0,
-          "stdout": "RESULT 317811\n",
+          "stdout": "RESULT 317811\nELAPSED_MS 195.2959\n",
           "stderr": "",
           "status": "ok",
           "result": "317811",
@@ -161,45 +167,50 @@
       ],
       "samples": [
         {
-          "elapsed_ms": 337.4583,
+          "elapsed_ms": 195.75730000000001,
+          "process_elapsed_ms": 415.4959,
           "exit_code": 0,
-          "stdout": "RESULT 317811\n",
+          "stdout": "RESULT 317811\nELAPSED_MS 195.75730000000001\n",
           "stderr": "",
           "status": "ok",
           "result": "317811",
           "round": 1
         },
         {
-          "elapsed_ms": 353.1134,
+          "elapsed_ms": 196.9607,
+          "process_elapsed_ms": 392.6636,
           "exit_code": 0,
-          "stdout": "RESULT 317811\n",
+          "stdout": "RESULT 317811\nELAPSED_MS 196.9607\n",
           "stderr": "",
           "status": "ok",
           "result": "317811",
           "round": 2
         },
         {
-          "elapsed_ms": 506.6888,
+          "elapsed_ms": 198.58610000000002,
+          "process_elapsed_ms": 399.7768,
           "exit_code": 0,
-          "stdout": "RESULT 317811\n",
+          "stdout": "RESULT 317811\nELAPSED_MS 198.58610000000002\n",
           "stderr": "",
           "status": "ok",
           "result": "317811",
           "round": 3
         },
         {
-          "elapsed_ms": 437.5125,
+          "elapsed_ms": 206.7996,
+          "process_elapsed_ms": 410.5452,
           "exit_code": 0,
-          "stdout": "RESULT 317811\n",
+          "stdout": "RESULT 317811\nELAPSED_MS 206.7996\n",
           "stderr": "",
           "status": "ok",
           "result": "317811",
           "round": 4
         },
         {
-          "elapsed_ms": 347.2703,
+          "elapsed_ms": 196.4678,
+          "process_elapsed_ms": 419.5027,
           "exit_code": 0,
-          "stdout": "RESULT 317811\n",
+          "stdout": "RESULT 317811\nELAPSED_MS 196.4678\n",
           "stderr": "",
           "status": "ok",
           "result": "317811",
@@ -208,28 +219,28 @@
       ],
       "build": {
         "command": [
-          "C:\\OfficialProjects\\AquariusLangTW\\dist\\releases\\AquariusCompiler-win-x64-20261010-225517-73f3c2c9\\aqua\\aqua.exe",
+          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\elapsed-compiler\\bin\\AquariusCli\\release\\aqua.exe",
           "build",
-          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\aquarius\\fibonacci.aqua",
+          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\aquarius\\fibonacci.aqua",
           "--root",
-          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\aquarius",
+          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\aquarius",
           "-o",
-          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\aquarius\\fibonacci.wasm"
+          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\aquarius\\fibonacci.wasm"
         ],
-        "elapsed_ms": 130.6723,
+        "elapsed_ms": 140.8113,
         "exit_code": 0,
-        "stdout": "Compiled 1 script(s) to C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\aquarius\\fibonacci.wasm\n",
+        "stdout": "Compiled 1 script(s) to C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\aquarius\\fibonacci.wasm\n",
         "stderr": ""
       },
-      "wasm_sha256": "d830b0cd38b5679c01916b7a6fb27d16dbdef7282b26fb082113a2551259e307",
+      "wasm_sha256": "f416aa828e668beb68fb3b581b22429716a4045c29fe54f1fc9ecaa3b6653d51",
       "summary": {
         "status": "ok",
-        "median_ms": 353.1134,
-        "min_ms": 337.4583,
-        "max_ms": 506.6888,
-        "mean_ms": 396.40866,
-        "stdev_ms": 73.51094790446523,
-        "cv_percent": 18.54423359582135
+        "median_ms": 196.9607,
+        "min_ms": 195.75730000000001,
+        "max_ms": 206.7996,
+        "mean_ms": 198.9143,
+        "stdev_ms": 4.529189649926347,
+        "cv_percent": 2.2769552766826453
       }
     },
     "fibonacci/python": {
@@ -237,17 +248,18 @@
       "language": "python",
       "n": 28,
       "source": "benchmarks\\python\\fibonacci.py",
-      "source_sha256": "9a3273bf53079d3ad9ba37361c4511e4441e0c98a32aecee2c25a3327b448eea",
-      "staged_sha256": "2166adf3023ade04ed55f25c9468fdd65ec756ea69e666027891b59eba251144",
+      "source_sha256": "51525cdf5fdae25b46b922d1ce72b0bebbf496354724a5da71461d7cd183280a",
+      "staged_sha256": "51525cdf5fdae25b46b922d1ce72b0bebbf496354724a5da71461d7cd183280a",
       "command": [
         "C:\\Users\\templ\\.pyenv\\pyenv-win\\versions\\3.12.10\\python.exe",
-        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\python\\fibonacci.py"
+        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\python\\fibonacci.py"
       ],
       "warmups": [
         {
-          "elapsed_ms": 54.0116,
+          "elapsed_ms": 25.0518,
+          "process_elapsed_ms": 73.7292,
           "exit_code": 0,
-          "stdout": "RESULT 317811\n",
+          "stdout": "RESULT 317811\nELAPSED_MS 25.0518\n",
           "stderr": "",
           "status": "ok",
           "result": "317811",
@@ -256,45 +268,50 @@
       ],
       "samples": [
         {
-          "elapsed_ms": 49.1892,
+          "elapsed_ms": 26.1752,
+          "process_elapsed_ms": 63.0785,
           "exit_code": 0,
-          "stdout": "RESULT 317811\n",
+          "stdout": "RESULT 317811\nELAPSED_MS 26.1752\n",
           "stderr": "",
           "status": "ok",
           "result": "317811",
           "round": 1
         },
         {
-          "elapsed_ms": 49.439,
+          "elapsed_ms": 26.6764,
+          "process_elapsed_ms": 52.1186,
           "exit_code": 0,
-          "stdout": "RESULT 317811\n",
+          "stdout": "RESULT 317811\nELAPSED_MS 26.6764\n",
           "stderr": "",
           "status": "ok",
           "result": "317811",
           "round": 2
         },
         {
-          "elapsed_ms": 66.4893,
+          "elapsed_ms": 26.7212,
+          "process_elapsed_ms": 71.6346,
           "exit_code": 0,
-          "stdout": "RESULT 317811\n",
+          "stdout": "RESULT 317811\nELAPSED_MS 26.7212\n",
           "stderr": "",
           "status": "ok",
           "result": "317811",
           "round": 3
         },
         {
-          "elapsed_ms": 61.4928,
+          "elapsed_ms": 25.4237,
+          "process_elapsed_ms": 65.3683,
           "exit_code": 0,
-          "stdout": "RESULT 317811\n",
+          "stdout": "RESULT 317811\nELAPSED_MS 25.4237\n",
           "stderr": "",
           "status": "ok",
           "result": "317811",
           "round": 4
         },
         {
-          "elapsed_ms": 48.7012,
+          "elapsed_ms": 25.0503,
+          "process_elapsed_ms": 59.311,
           "exit_code": 0,
-          "stdout": "RESULT 317811\n",
+          "stdout": "RESULT 317811\nELAPSED_MS 25.0503\n",
           "stderr": "",
           "status": "ok",
           "result": "317811",
@@ -303,12 +320,12 @@
       ],
       "summary": {
         "status": "ok",
-        "median_ms": 49.439,
-        "min_ms": 48.7012,
-        "max_ms": 66.4893,
-        "mean_ms": 55.0623,
-        "stdev_ms": 8.344250400125826,
-        "cv_percent": 15.15419878959983
+        "median_ms": 26.1752,
+        "min_ms": 25.0503,
+        "max_ms": 26.7212,
+        "mean_ms": 26.00936,
+        "stdev_ms": 0.7486579946811496,
+        "cv_percent": 2.8784175953623983
       }
     },
     "fibonacci/node": {
@@ -316,17 +333,18 @@
       "language": "node",
       "n": 28,
       "source": "benchmarks\\node\\fibonacci.js",
-      "source_sha256": "650b4eaa4a9c3173587b1abeb11bcffb1c0a310a26b55946c32782a9c9ce2711",
-      "staged_sha256": "52dd6997bb93a50065270001bea0b7d9db7e4bbe0a0e1e287319184e8d3757e9",
+      "source_sha256": "7e2ccb961006b8c302c025d7fbd419ea7903a5a9db992344e246c2f41b05ed8b",
+      "staged_sha256": "7e2ccb961006b8c302c025d7fbd419ea7903a5a9db992344e246c2f41b05ed8b",
       "command": [
-        "C:\\Program Files\\nodejs\\node.exe",
-        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\node\\fibonacci.js"
+        "C:\\Program Files\\nodejs\\node.EXE",
+        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\node\\fibonacci.js"
       ],
       "warmups": [
         {
-          "elapsed_ms": 42.1935,
+          "elapsed_ms": 2.2118,
+          "process_elapsed_ms": 56.7344,
           "exit_code": 0,
-          "stdout": "RESULT 317811\n",
+          "stdout": "RESULT 317811\nELAPSED_MS 2.2118\n",
           "stderr": "",
           "status": "ok",
           "result": "317811",
@@ -335,45 +353,50 @@
       ],
       "samples": [
         {
-          "elapsed_ms": 40.671,
+          "elapsed_ms": 3.9319,
+          "process_elapsed_ms": 165.8782,
           "exit_code": 0,
-          "stdout": "RESULT 317811\n",
+          "stdout": "RESULT 317811\nELAPSED_MS 3.9319\n",
           "stderr": "",
           "status": "ok",
           "result": "317811",
           "round": 1
         },
         {
-          "elapsed_ms": 39.0609,
+          "elapsed_ms": 2.0349,
+          "process_elapsed_ms": 46.7838,
           "exit_code": 0,
-          "stdout": "RESULT 317811\n",
+          "stdout": "RESULT 317811\nELAPSED_MS 2.0349\n",
           "stderr": "",
           "status": "ok",
           "result": "317811",
           "round": 2
         },
         {
-          "elapsed_ms": 57.2817,
+          "elapsed_ms": 2.0572,
+          "process_elapsed_ms": 54.1797,
           "exit_code": 0,
-          "stdout": "RESULT 317811\n",
+          "stdout": "RESULT 317811\nELAPSED_MS 2.0572\n",
           "stderr": "",
           "status": "ok",
           "result": "317811",
           "round": 3
         },
         {
-          "elapsed_ms": 42.1684,
+          "elapsed_ms": 2.0684,
+          "process_elapsed_ms": 61.1089,
           "exit_code": 0,
-          "stdout": "RESULT 317811\n",
+          "stdout": "RESULT 317811\nELAPSED_MS 2.0684\n",
           "stderr": "",
           "status": "ok",
           "result": "317811",
           "round": 4
         },
         {
-          "elapsed_ms": 39.9948,
+          "elapsed_ms": 2.0599,
+          "process_elapsed_ms": 68.7993,
           "exit_code": 0,
-          "stdout": "RESULT 317811\n",
+          "stdout": "RESULT 317811\nELAPSED_MS 2.0599\n",
           "stderr": "",
           "status": "ok",
           "result": "317811",
@@ -382,12 +405,12 @@
       ],
       "summary": {
         "status": "ok",
-        "median_ms": 40.671,
-        "min_ms": 39.0609,
-        "max_ms": 57.2817,
-        "mean_ms": 43.83536,
-        "stdev_ms": 7.601666900292331,
-        "cv_percent": 17.341404063505653
+        "median_ms": 2.0599,
+        "min_ms": 2.0349,
+        "max_ms": 3.9319,
+        "mean_ms": 2.43046,
+        "stdev_ms": 0.8394216717478767,
+        "cv_percent": 34.53756374299008
       }
     },
     "ackermann/aquarius": {
@@ -395,18 +418,19 @@
       "language": "aquarius",
       "n": 6,
       "source": "benchmarks\\aquarius\\ackermann.aqua",
-      "source_sha256": "2eb32aead9d1eb9949951bf3a915a247a5ca1b0e86a6223be9e6f853693411ad",
-      "staged_sha256": "14f7c671233ac6b7add53bc447aa72b93a28727580e0b61b1a0ababe216a8894",
+      "source_sha256": "f9d9b09e936d53adc0c2c533b42173ac637a62885e9140cd8521e529cb149b8b",
+      "staged_sha256": "f9d9b09e936d53adc0c2c533b42173ac637a62885e9140cd8521e529cb149b8b",
       "command": [
-        "C:\\OfficialProjects\\AquariusLangTW\\dist\\releases\\AquariusCompiler-win-x64-20261010-225517-73f3c2c9\\aqua\\aqua.exe",
+        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\elapsed-compiler\\bin\\AquariusCli\\release\\aqua.exe",
         "run",
-        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\aquarius\\ackermann.wasm"
+        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\aquarius\\ackermann.wasm"
       ],
       "warmups": [
         {
-          "elapsed_ms": 200.3463,
+          "elapsed_ms": 40.8603,
+          "process_elapsed_ms": 232.1035,
           "exit_code": 0,
-          "stdout": "RESULT 509\n",
+          "stdout": "RESULT 509\nELAPSED_MS 40.8603\n",
           "stderr": "",
           "status": "ok",
           "result": "509",
@@ -415,45 +439,50 @@
       ],
       "samples": [
         {
-          "elapsed_ms": 190.7979,
+          "elapsed_ms": 41.0672,
+          "process_elapsed_ms": 242.3119,
           "exit_code": 0,
-          "stdout": "RESULT 509\n",
+          "stdout": "RESULT 509\nELAPSED_MS 41.0672\n",
           "stderr": "",
           "status": "ok",
           "result": "509",
           "round": 1
         },
         {
-          "elapsed_ms": 192.0136,
+          "elapsed_ms": 43.378899999999994,
+          "process_elapsed_ms": 235.6031,
           "exit_code": 0,
-          "stdout": "RESULT 509\n",
+          "stdout": "RESULT 509\nELAPSED_MS 43.378899999999994\n",
           "stderr": "",
           "status": "ok",
           "result": "509",
           "round": 2
         },
         {
-          "elapsed_ms": 234.1255,
+          "elapsed_ms": 41.4227,
+          "process_elapsed_ms": 233.0913,
           "exit_code": 0,
-          "stdout": "RESULT 509\n",
+          "stdout": "RESULT 509\nELAPSED_MS 41.4227\n",
           "stderr": "",
           "status": "ok",
           "result": "509",
           "round": 3
         },
         {
-          "elapsed_ms": 196.9425,
+          "elapsed_ms": 42.212900000000005,
+          "process_elapsed_ms": 265.4051,
           "exit_code": 0,
-          "stdout": "RESULT 509\n",
+          "stdout": "RESULT 509\nELAPSED_MS 42.212900000000005\n",
           "stderr": "",
           "status": "ok",
           "result": "509",
           "round": 4
         },
         {
-          "elapsed_ms": 200.0528,
+          "elapsed_ms": 40.629000000000005,
+          "process_elapsed_ms": 234.6556,
           "exit_code": 0,
-          "stdout": "RESULT 509\n",
+          "stdout": "RESULT 509\nELAPSED_MS 40.629000000000005\n",
           "stderr": "",
           "status": "ok",
           "result": "509",
@@ -462,28 +491,28 @@
       ],
       "build": {
         "command": [
-          "C:\\OfficialProjects\\AquariusLangTW\\dist\\releases\\AquariusCompiler-win-x64-20261010-225517-73f3c2c9\\aqua\\aqua.exe",
+          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\elapsed-compiler\\bin\\AquariusCli\\release\\aqua.exe",
           "build",
-          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\aquarius\\ackermann.aqua",
+          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\aquarius\\ackermann.aqua",
           "--root",
-          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\aquarius",
+          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\aquarius",
           "-o",
-          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\aquarius\\ackermann.wasm"
+          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\aquarius\\ackermann.wasm"
         ],
-        "elapsed_ms": 121.7731,
+        "elapsed_ms": 140.5366,
         "exit_code": 0,
-        "stdout": "Compiled 1 script(s) to C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\aquarius\\ackermann.wasm\n",
+        "stdout": "Compiled 1 script(s) to C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\aquarius\\ackermann.wasm\n",
         "stderr": ""
       },
-      "wasm_sha256": "2a01e410bc8950812e8c7e290b181e31bc56dc79b5c37b841a7df3df38206f1a",
+      "wasm_sha256": "22ac39f8d6c773ef86b01c9f1c69eed81d39e052749677c10731b37ee0f8d3e8",
       "summary": {
         "status": "ok",
-        "median_ms": 196.9425,
-        "min_ms": 190.7979,
-        "max_ms": 234.1255,
-        "mean_ms": 202.78646,
-        "stdev_ms": 17.913265175924792,
-        "cv_percent": 8.833560769256877
+        "median_ms": 41.4227,
+        "min_ms": 40.629000000000005,
+        "max_ms": 43.378899999999994,
+        "mean_ms": 41.74214,
+        "stdev_ms": 1.0836587161094557,
+        "cv_percent": 2.596078485936408
       }
     },
     "ackermann/python": {
@@ -491,17 +520,18 @@
       "language": "python",
       "n": 6,
       "source": "benchmarks\\python\\ackermann.py",
-      "source_sha256": "4c08c91ea7c7ad6eac573f13df975961e31a340aca24b7ae720a0657be9b061f",
-      "staged_sha256": "9cea9a0052a1daa4f39703d3b3ed406f1b259a1843bc4bfc59ff97007a071fff",
+      "source_sha256": "02d40dff23a2174576814be8afc90d1bb6727abeaeb1914f5f6c94c0dfc167ea",
+      "staged_sha256": "02d40dff23a2174576814be8afc90d1bb6727abeaeb1914f5f6c94c0dfc167ea",
       "command": [
         "C:\\Users\\templ\\.pyenv\\pyenv-win\\versions\\3.12.10\\python.exe",
-        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\python\\ackermann.py"
+        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\python\\ackermann.py"
       ],
       "warmups": [
         {
-          "elapsed_ms": 39.0348,
+          "elapsed_ms": 10.7824,
+          "process_elapsed_ms": 50.1888,
           "exit_code": 0,
-          "stdout": "RESULT 509\n",
+          "stdout": "RESULT 509\nELAPSED_MS 10.7824\n",
           "stderr": "",
           "status": "ok",
           "result": "509",
@@ -510,45 +540,50 @@
       ],
       "samples": [
         {
-          "elapsed_ms": 31.9729,
+          "elapsed_ms": 10.7959,
+          "process_elapsed_ms": 51.5546,
           "exit_code": 0,
-          "stdout": "RESULT 509\n",
+          "stdout": "RESULT 509\nELAPSED_MS 10.7959\n",
           "stderr": "",
           "status": "ok",
           "result": "509",
           "round": 1
         },
         {
-          "elapsed_ms": 32.6162,
+          "elapsed_ms": 19.2809,
+          "process_elapsed_ms": 122.2281,
           "exit_code": 0,
-          "stdout": "RESULT 509\n",
+          "stdout": "RESULT 509\nELAPSED_MS 19.2809\n",
           "stderr": "",
           "status": "ok",
           "result": "509",
           "round": 2
         },
         {
-          "elapsed_ms": 33.4326,
+          "elapsed_ms": 10.8803,
+          "process_elapsed_ms": 51.3755,
           "exit_code": 0,
-          "stdout": "RESULT 509\n",
+          "stdout": "RESULT 509\nELAPSED_MS 10.8803\n",
           "stderr": "",
           "status": "ok",
           "result": "509",
           "round": 3
         },
         {
-          "elapsed_ms": 31.9543,
+          "elapsed_ms": 10.6628,
+          "process_elapsed_ms": 50.0278,
           "exit_code": 0,
-          "stdout": "RESULT 509\n",
+          "stdout": "RESULT 509\nELAPSED_MS 10.6628\n",
           "stderr": "",
           "status": "ok",
           "result": "509",
           "round": 4
         },
         {
-          "elapsed_ms": 30.9411,
+          "elapsed_ms": 11.7288,
+          "process_elapsed_ms": 68.7487,
           "exit_code": 0,
-          "stdout": "RESULT 509\n",
+          "stdout": "RESULT 509\nELAPSED_MS 11.7288\n",
           "stderr": "",
           "status": "ok",
           "result": "509",
@@ -557,12 +592,12 @@
       ],
       "summary": {
         "status": "ok",
-        "median_ms": 31.9729,
-        "min_ms": 30.9411,
-        "max_ms": 33.4326,
-        "mean_ms": 32.18342,
-        "stdev_ms": 0.9203155475161773,
-        "cv_percent": 2.859595243501708
+        "median_ms": 10.8803,
+        "min_ms": 10.6628,
+        "max_ms": 19.2809,
+        "mean_ms": 12.66974,
+        "stdev_ms": 3.7193408237213212,
+        "cv_percent": 29.35609431386375
       }
     },
     "ackermann/node": {
@@ -570,17 +605,18 @@
       "language": "node",
       "n": 6,
       "source": "benchmarks\\node\\ackermann.js",
-      "source_sha256": "f2ac318862abd35c388355c3226eedaaa4710338263d1f363fc999b5b2e843b6",
-      "staged_sha256": "f025f3f6b151b24ec749a0b8539b27327539f470ef3b42ce3f93cd5093b2f74a",
+      "source_sha256": "6606324a9f21212882f3b369c980ee9aeb208766d830200d0b6be74a4be2bfc9",
+      "staged_sha256": "6606324a9f21212882f3b369c980ee9aeb208766d830200d0b6be74a4be2bfc9",
       "command": [
-        "C:\\Program Files\\nodejs\\node.exe",
-        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\node\\ackermann.js"
+        "C:\\Program Files\\nodejs\\node.EXE",
+        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\node\\ackermann.js"
       ],
       "warmups": [
         {
-          "elapsed_ms": 51.0243,
+          "elapsed_ms": 0.6325,
+          "process_elapsed_ms": 79.0947,
           "exit_code": 0,
-          "stdout": "RESULT 509\n",
+          "stdout": "RESULT 509\nELAPSED_MS 0.6325\n",
           "stderr": "",
           "status": "ok",
           "result": "509",
@@ -589,45 +625,50 @@
       ],
       "samples": [
         {
-          "elapsed_ms": 38.641,
+          "elapsed_ms": 0.6704,
+          "process_elapsed_ms": 60.3522,
           "exit_code": 0,
-          "stdout": "RESULT 509\n",
+          "stdout": "RESULT 509\nELAPSED_MS 0.6704\n",
           "stderr": "",
           "status": "ok",
           "result": "509",
           "round": 1
         },
         {
-          "elapsed_ms": 44.6952,
+          "elapsed_ms": 0.638,
+          "process_elapsed_ms": 57.5798,
           "exit_code": 0,
-          "stdout": "RESULT 509\n",
+          "stdout": "RESULT 509\nELAPSED_MS 0.638\n",
           "stderr": "",
           "status": "ok",
           "result": "509",
           "round": 2
         },
         {
-          "elapsed_ms": 59.1511,
+          "elapsed_ms": 0.6356,
+          "process_elapsed_ms": 65.6791,
           "exit_code": 0,
-          "stdout": "RESULT 509\n",
+          "stdout": "RESULT 509\nELAPSED_MS 0.6356\n",
           "stderr": "",
           "status": "ok",
           "result": "509",
           "round": 3
         },
         {
-          "elapsed_ms": 38.2104,
+          "elapsed_ms": 0.6475,
+          "process_elapsed_ms": 46.0829,
           "exit_code": 0,
-          "stdout": "RESULT 509\n",
+          "stdout": "RESULT 509\nELAPSED_MS 0.6475\n",
           "stderr": "",
           "status": "ok",
           "result": "509",
           "round": 4
         },
         {
-          "elapsed_ms": 44.9697,
+          "elapsed_ms": 0.6468,
+          "process_elapsed_ms": 85.4117,
           "exit_code": 0,
-          "stdout": "RESULT 509\n",
+          "stdout": "RESULT 509\nELAPSED_MS 0.6468\n",
           "stderr": "",
           "status": "ok",
           "result": "509",
@@ -636,12 +677,12 @@
       ],
       "summary": {
         "status": "ok",
-        "median_ms": 44.6952,
-        "min_ms": 38.2104,
-        "max_ms": 59.1511,
-        "mean_ms": 45.13348,
-        "stdev_ms": 8.467495452434562,
-        "cv_percent": 18.761007244366183
+        "median_ms": 0.6468,
+        "min_ms": 0.6356,
+        "max_ms": 0.6704,
+        "mean_ms": 0.64766,
+        "stdev_ms": 0.013753472288843991,
+        "cv_percent": 2.123563642782323
       }
     },
     "sieve/aquarius": {
@@ -649,18 +690,19 @@
       "language": "aquarius",
       "n": 10000,
       "source": "benchmarks\\aquarius\\sieve.aqua",
-      "source_sha256": "bb79f0ba20ba7b87864041c8a56d90c303dbb26d06a782dca848f4f5b6b117c4",
-      "staged_sha256": "a8fc02130cc97fa22aa84f639f3772058b6e0a2aa9123d30c20f9e4fa14306d0",
+      "source_sha256": "3aa8c837e05a01001182d5304f4f869a658b2ba19da92bc070b67117cdf1de49",
+      "staged_sha256": "3aa8c837e05a01001182d5304f4f869a658b2ba19da92bc070b67117cdf1de49",
       "command": [
-        "C:\\OfficialProjects\\AquariusLangTW\\dist\\releases\\AquariusCompiler-win-x64-20261010-225517-73f3c2c9\\aqua\\aqua.exe",
+        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\elapsed-compiler\\bin\\AquariusCli\\release\\aqua.exe",
         "run",
-        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\aquarius\\sieve.wasm"
+        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\aquarius\\sieve.wasm"
       ],
       "warmups": [
         {
-          "elapsed_ms": 163.7334,
+          "elapsed_ms": 13.2187,
+          "process_elapsed_ms": 197.3977,
           "exit_code": 0,
-          "stdout": "RESULT 1229\n",
+          "stdout": "RESULT 1229\nELAPSED_MS 13.2187\n",
           "stderr": "",
           "status": "ok",
           "result": "1229",
@@ -669,45 +711,50 @@
       ],
       "samples": [
         {
-          "elapsed_ms": 163.5028,
+          "elapsed_ms": 13.2163,
+          "process_elapsed_ms": 256.1281,
           "exit_code": 0,
-          "stdout": "RESULT 1229\n",
+          "stdout": "RESULT 1229\nELAPSED_MS 13.2163\n",
           "stderr": "",
           "status": "ok",
           "result": "1229",
           "round": 1
         },
         {
-          "elapsed_ms": 162.3199,
+          "elapsed_ms": 13.370800000000001,
+          "process_elapsed_ms": 238.2743,
           "exit_code": 0,
-          "stdout": "RESULT 1229\n",
+          "stdout": "RESULT 1229\nELAPSED_MS 13.370800000000001\n",
           "stderr": "",
           "status": "ok",
           "result": "1229",
           "round": 2
         },
         {
-          "elapsed_ms": 163.7007,
+          "elapsed_ms": 13.628400000000001,
+          "process_elapsed_ms": 218.2948,
           "exit_code": 0,
-          "stdout": "RESULT 1229\n",
+          "stdout": "RESULT 1229\nELAPSED_MS 13.628400000000001\n",
           "stderr": "",
           "status": "ok",
           "result": "1229",
           "round": 3
         },
         {
-          "elapsed_ms": 222.6576,
+          "elapsed_ms": 13.759,
+          "process_elapsed_ms": 210.3539,
           "exit_code": 0,
-          "stdout": "RESULT 1229\n",
+          "stdout": "RESULT 1229\nELAPSED_MS 13.759\n",
           "stderr": "",
           "status": "ok",
           "result": "1229",
           "round": 4
         },
         {
-          "elapsed_ms": 168.1189,
+          "elapsed_ms": 14.0364,
+          "process_elapsed_ms": 216.6291,
           "exit_code": 0,
-          "stdout": "RESULT 1229\n",
+          "stdout": "RESULT 1229\nELAPSED_MS 14.0364\n",
           "stderr": "",
           "status": "ok",
           "result": "1229",
@@ -716,28 +763,28 @@
       ],
       "build": {
         "command": [
-          "C:\\OfficialProjects\\AquariusLangTW\\dist\\releases\\AquariusCompiler-win-x64-20261010-225517-73f3c2c9\\aqua\\aqua.exe",
+          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\elapsed-compiler\\bin\\AquariusCli\\release\\aqua.exe",
           "build",
-          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\aquarius\\sieve.aqua",
+          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\aquarius\\sieve.aqua",
           "--root",
-          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\aquarius",
+          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\aquarius",
           "-o",
-          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\aquarius\\sieve.wasm"
+          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\aquarius\\sieve.wasm"
         ],
-        "elapsed_ms": 124.5546,
+        "elapsed_ms": 137.0116,
         "exit_code": 0,
-        "stdout": "Compiled 1 script(s) to C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\aquarius\\sieve.wasm\n",
+        "stdout": "Compiled 1 script(s) to C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\aquarius\\sieve.wasm\n",
         "stderr": ""
       },
-      "wasm_sha256": "cd125fb241b0db3bde3b50b27904d061b0a0564b3b13e1e1f80ef1befd66f547",
+      "wasm_sha256": "789e9330814180e69c48717aae638bc1321eae927ca80f92b751210277588d07",
       "summary": {
         "status": "ok",
-        "median_ms": 163.7007,
-        "min_ms": 162.3199,
-        "max_ms": 222.6576,
-        "mean_ms": 176.05998,
-        "stdev_ms": 26.142031822851873,
-        "cv_percent": 14.84836691612249
+        "median_ms": 13.628400000000001,
+        "min_ms": 13.2163,
+        "max_ms": 14.0364,
+        "mean_ms": 13.60218,
+        "stdev_ms": 0.3225938189116462,
+        "cv_percent": 2.371633215496679
       }
     },
     "sieve/python": {
@@ -745,17 +792,18 @@
       "language": "python",
       "n": 10000,
       "source": "benchmarks\\python\\sieve.py",
-      "source_sha256": "30baeaf1fcb601209603f927b352767762b5c2ad30a0223d4b3d6f649219e311",
-      "staged_sha256": "f2cf99a8c5511c94688645418e918fe55b1845e95fdecf5ed2ebd62a7d276bfb",
+      "source_sha256": "a80a5996ea98458dd0ebb025281e4a96b4c1438880199c98af0f91eff2cbeddb",
+      "staged_sha256": "a80a5996ea98458dd0ebb025281e4a96b4c1438880199c98af0f91eff2cbeddb",
       "command": [
         "C:\\Users\\templ\\.pyenv\\pyenv-win\\versions\\3.12.10\\python.exe",
-        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\python\\sieve.py"
+        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\python\\sieve.py"
       ],
       "warmups": [
         {
-          "elapsed_ms": 68.2411,
+          "elapsed_ms": 36.987,
+          "process_elapsed_ms": 139.2132,
           "exit_code": 0,
-          "stdout": "RESULT 1229\n",
+          "stdout": "RESULT 1229\nELAPSED_MS 36.987\n",
           "stderr": "",
           "status": "ok",
           "result": "1229",
@@ -764,45 +812,50 @@
       ],
       "samples": [
         {
-          "elapsed_ms": 56.3811,
+          "elapsed_ms": 35.7592,
+          "process_elapsed_ms": 71.1515,
           "exit_code": 0,
-          "stdout": "RESULT 1229\n",
+          "stdout": "RESULT 1229\nELAPSED_MS 35.7592\n",
           "stderr": "",
           "status": "ok",
           "result": "1229",
           "round": 1
         },
         {
-          "elapsed_ms": 60.9844,
+          "elapsed_ms": 35.7301,
+          "process_elapsed_ms": 70.6363,
           "exit_code": 0,
-          "stdout": "RESULT 1229\n",
+          "stdout": "RESULT 1229\nELAPSED_MS 35.7301\n",
           "stderr": "",
           "status": "ok",
           "result": "1229",
           "round": 2
         },
         {
-          "elapsed_ms": 74.5617,
+          "elapsed_ms": 36.3116,
+          "process_elapsed_ms": 69.3877,
           "exit_code": 0,
-          "stdout": "RESULT 1229\n",
+          "stdout": "RESULT 1229\nELAPSED_MS 36.3116\n",
           "stderr": "",
           "status": "ok",
           "result": "1229",
           "round": 3
         },
         {
-          "elapsed_ms": 57.9593,
+          "elapsed_ms": 36.4432,
+          "process_elapsed_ms": 65.6508,
           "exit_code": 0,
-          "stdout": "RESULT 1229\n",
+          "stdout": "RESULT 1229\nELAPSED_MS 36.4432\n",
           "stderr": "",
           "status": "ok",
           "result": "1229",
           "round": 4
         },
         {
-          "elapsed_ms": 69.6406,
+          "elapsed_ms": 36.9155,
+          "process_elapsed_ms": 71.7731,
           "exit_code": 0,
-          "stdout": "RESULT 1229\n",
+          "stdout": "RESULT 1229\nELAPSED_MS 36.9155\n",
           "stderr": "",
           "status": "ok",
           "result": "1229",
@@ -811,12 +864,12 @@
       ],
       "summary": {
         "status": "ok",
-        "median_ms": 60.9844,
-        "min_ms": 56.3811,
-        "max_ms": 74.5617,
-        "mean_ms": 63.90542,
-        "stdev_ms": 7.857364148173357,
-        "cv_percent": 12.295301631963856
+        "median_ms": 36.3116,
+        "min_ms": 35.7301,
+        "max_ms": 36.9155,
+        "mean_ms": 36.23192,
+        "stdev_ms": 0.4983867143092803,
+        "cv_percent": 1.3755459669520143
       }
     },
     "sieve/node": {
@@ -824,17 +877,18 @@
       "language": "node",
       "n": 10000,
       "source": "benchmarks\\node\\sieve.js",
-      "source_sha256": "a77ae4d024b50d249d10322f2fae20c3fe376a02ce91a2596329e45f086bcf67",
-      "staged_sha256": "90cca95df6aa50d4248a6b9c01c94fe65b631f49606d83cea6a43ec81ed98cdc",
+      "source_sha256": "49e8e6bf7575e18115595693b6be995fb7627a3af70b92ea2792bdc80731d06a",
+      "staged_sha256": "49e8e6bf7575e18115595693b6be995fb7627a3af70b92ea2792bdc80731d06a",
       "command": [
-        "C:\\Program Files\\nodejs\\node.exe",
-        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\node\\sieve.js"
+        "C:\\Program Files\\nodejs\\node.EXE",
+        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\node\\sieve.js"
       ],
       "warmups": [
         {
-          "elapsed_ms": 65.437,
+          "elapsed_ms": 26.4342,
+          "process_elapsed_ms": 163.3867,
           "exit_code": 0,
-          "stdout": "RESULT 1229\n",
+          "stdout": "RESULT 1229\nELAPSED_MS 26.4342\n",
           "stderr": "",
           "status": "ok",
           "result": "1229",
@@ -843,45 +897,50 @@
       ],
       "samples": [
         {
-          "elapsed_ms": 65.6839,
+          "elapsed_ms": 37.2297,
+          "process_elapsed_ms": 113.8288,
           "exit_code": 0,
-          "stdout": "RESULT 1229\n",
+          "stdout": "RESULT 1229\nELAPSED_MS 37.2297\n",
           "stderr": "",
           "status": "ok",
           "result": "1229",
           "round": 1
         },
         {
-          "elapsed_ms": 83.9568,
+          "elapsed_ms": 25.0694,
+          "process_elapsed_ms": 83.7951,
           "exit_code": 0,
-          "stdout": "RESULT 1229\n",
+          "stdout": "RESULT 1229\nELAPSED_MS 25.0694\n",
           "stderr": "",
           "status": "ok",
           "result": "1229",
           "round": 2
         },
         {
-          "elapsed_ms": 89.1778,
+          "elapsed_ms": 24.843,
+          "process_elapsed_ms": 83.9151,
           "exit_code": 0,
-          "stdout": "RESULT 1229\n",
+          "stdout": "RESULT 1229\nELAPSED_MS 24.843\n",
           "stderr": "",
           "status": "ok",
           "result": "1229",
           "round": 3
         },
         {
-          "elapsed_ms": 86.9866,
+          "elapsed_ms": 25.5282,
+          "process_elapsed_ms": 81.0862,
           "exit_code": 0,
-          "stdout": "RESULT 1229\n",
+          "stdout": "RESULT 1229\nELAPSED_MS 25.5282\n",
           "stderr": "",
           "status": "ok",
           "result": "1229",
           "round": 4
         },
         {
-          "elapsed_ms": 66.0262,
+          "elapsed_ms": 25.5845,
+          "process_elapsed_ms": 80.7729,
           "exit_code": 0,
-          "stdout": "RESULT 1229\n",
+          "stdout": "RESULT 1229\nELAPSED_MS 25.5845\n",
           "stderr": "",
           "status": "ok",
           "result": "1229",
@@ -890,12 +949,12 @@
       ],
       "summary": {
         "status": "ok",
-        "median_ms": 83.9568,
-        "min_ms": 65.6839,
-        "max_ms": 89.1778,
-        "mean_ms": 78.36626,
-        "stdev_ms": 11.571226516147718,
-        "cv_percent": 14.765571964449647
+        "median_ms": 25.5282,
+        "min_ms": 24.843,
+        "max_ms": 37.2297,
+        "mean_ms": 27.65096,
+        "stdev_ms": 5.363714159330268,
+        "cv_percent": 19.397931063985727
       }
     },
     "quicksort/aquarius": {
@@ -903,18 +962,19 @@
       "language": "aquarius",
       "n": 2000,
       "source": "benchmarks\\aquarius\\quicksort.aqua",
-      "source_sha256": "70ad4c5e63f9ece80d877cb34ba3ba09b9d2d1abe4f17f633629e3a1ae48d49a",
-      "staged_sha256": "7288546dbd3d04e185828907f0a20b649a8bde44dca6fee26cda15a28204e96e",
+      "source_sha256": "ae62f2107fad89dd91a4d9e67812867c2ffa2c988b5fc822728cce4d4c1c0ace",
+      "staged_sha256": "ae62f2107fad89dd91a4d9e67812867c2ffa2c988b5fc822728cce4d4c1c0ace",
       "command": [
-        "C:\\OfficialProjects\\AquariusLangTW\\dist\\releases\\AquariusCompiler-win-x64-20261010-225517-73f3c2c9\\aqua\\aqua.exe",
+        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\elapsed-compiler\\bin\\AquariusCli\\release\\aqua.exe",
         "run",
-        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\aquarius\\quicksort.wasm"
+        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\aquarius\\quicksort.wasm"
       ],
       "warmups": [
         {
-          "elapsed_ms": 157.78,
+          "elapsed_ms": 11.4555,
+          "process_elapsed_ms": 203.0274,
           "exit_code": 0,
-          "stdout": "RESULT 616973\n",
+          "stdout": "RESULT 616973\nELAPSED_MS 11.4555\n",
           "stderr": "",
           "status": "ok",
           "result": "616973",
@@ -923,45 +983,50 @@
       ],
       "samples": [
         {
-          "elapsed_ms": 156.1515,
+          "elapsed_ms": 11.4062,
+          "process_elapsed_ms": 203.137,
           "exit_code": 0,
-          "stdout": "RESULT 616973\n",
+          "stdout": "RESULT 616973\nELAPSED_MS 11.4062\n",
           "stderr": "",
           "status": "ok",
           "result": "616973",
           "round": 1
         },
         {
-          "elapsed_ms": 169.2905,
+          "elapsed_ms": 10.9894,
+          "process_elapsed_ms": 203.32,
           "exit_code": 0,
-          "stdout": "RESULT 616973\n",
+          "stdout": "RESULT 616973\nELAPSED_MS 10.9894\n",
           "stderr": "",
           "status": "ok",
           "result": "616973",
           "round": 2
         },
         {
-          "elapsed_ms": 283.9235,
+          "elapsed_ms": 11.3443,
+          "process_elapsed_ms": 207.2438,
           "exit_code": 0,
-          "stdout": "RESULT 616973\n",
+          "stdout": "RESULT 616973\nELAPSED_MS 11.3443\n",
           "stderr": "",
           "status": "ok",
           "result": "616973",
           "round": 3
         },
         {
-          "elapsed_ms": 170.7864,
+          "elapsed_ms": 11.5698,
+          "process_elapsed_ms": 215.3136,
           "exit_code": 0,
-          "stdout": "RESULT 616973\n",
+          "stdout": "RESULT 616973\nELAPSED_MS 11.5698\n",
           "stderr": "",
           "status": "ok",
           "result": "616973",
           "round": 4
         },
         {
-          "elapsed_ms": 160.1112,
+          "elapsed_ms": 11.4606,
+          "process_elapsed_ms": 221.2053,
           "exit_code": 0,
-          "stdout": "RESULT 616973\n",
+          "stdout": "RESULT 616973\nELAPSED_MS 11.4606\n",
           "stderr": "",
           "status": "ok",
           "result": "616973",
@@ -970,28 +1035,28 @@
       ],
       "build": {
         "command": [
-          "C:\\OfficialProjects\\AquariusLangTW\\dist\\releases\\AquariusCompiler-win-x64-20261010-225517-73f3c2c9\\aqua\\aqua.exe",
+          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\elapsed-compiler\\bin\\AquariusCli\\release\\aqua.exe",
           "build",
-          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\aquarius\\quicksort.aqua",
+          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\aquarius\\quicksort.aqua",
           "--root",
-          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\aquarius",
+          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\aquarius",
           "-o",
-          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\aquarius\\quicksort.wasm"
+          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\aquarius\\quicksort.wasm"
         ],
-        "elapsed_ms": 130.924,
+        "elapsed_ms": 145.3456,
         "exit_code": 0,
-        "stdout": "Compiled 1 script(s) to C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\aquarius\\quicksort.wasm\n",
+        "stdout": "Compiled 1 script(s) to C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\aquarius\\quicksort.wasm\n",
         "stderr": ""
       },
-      "wasm_sha256": "3b9bedf52e26c869dc5d243be0e0951911256f91b28c58b9125ad936d65e243e",
+      "wasm_sha256": "22cacf6a3d21313cf348a22ee7ba03904b06d2bae1e29622be7ad52850d94e78",
       "summary": {
         "status": "ok",
-        "median_ms": 169.2905,
-        "min_ms": 156.1515,
-        "max_ms": 283.9235,
-        "mean_ms": 188.05262,
-        "stdev_ms": 53.943881814409686,
-        "cv_percent": 28.68552526117939
+        "median_ms": 11.4062,
+        "min_ms": 10.9894,
+        "max_ms": 11.5698,
+        "mean_ms": 11.35406,
+        "stdev_ms": 0.2200484446661691,
+        "cv_percent": 1.9380595546101491
       }
     },
     "quicksort/python": {
@@ -999,17 +1064,18 @@
       "language": "python",
       "n": 2000,
       "source": "benchmarks\\python\\quicksort.py",
-      "source_sha256": "f1c42acc16e7e8719a0b7096a05b6c71a46816b67c7cd115e4ae6d6227660877",
-      "staged_sha256": "97f77286c20bef8de4dae3bbd7c22f8a73d5881f6882d7d8d6d1a04c640f3d74",
+      "source_sha256": "31b9d6c74ce3d3e4ff55b2a81a3d6203eaa44fa24b024394742f777f1e607138",
+      "staged_sha256": "31b9d6c74ce3d3e4ff55b2a81a3d6203eaa44fa24b024394742f777f1e607138",
       "command": [
         "C:\\Users\\templ\\.pyenv\\pyenv-win\\versions\\3.12.10\\python.exe",
-        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\python\\quicksort.py"
+        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\python\\quicksort.py"
       ],
       "warmups": [
         {
-          "elapsed_ms": 30.8547,
+          "elapsed_ms": 4.8927,
+          "process_elapsed_ms": 75.0746,
           "exit_code": 0,
-          "stdout": "RESULT 616973\n",
+          "stdout": "RESULT 616973\nELAPSED_MS 4.8927\n",
           "stderr": "",
           "status": "ok",
           "result": "616973",
@@ -1018,45 +1084,50 @@
       ],
       "samples": [
         {
-          "elapsed_ms": 25.9901,
+          "elapsed_ms": 5.6714,
+          "process_elapsed_ms": 46.486,
           "exit_code": 0,
-          "stdout": "RESULT 616973\n",
+          "stdout": "RESULT 616973\nELAPSED_MS 5.6714\n",
           "stderr": "",
           "status": "ok",
           "result": "616973",
           "round": 1
         },
         {
-          "elapsed_ms": 27.158,
+          "elapsed_ms": 4.9209,
+          "process_elapsed_ms": 43.7324,
           "exit_code": 0,
-          "stdout": "RESULT 616973\n",
+          "stdout": "RESULT 616973\nELAPSED_MS 4.9209\n",
           "stderr": "",
           "status": "ok",
           "result": "616973",
           "round": 2
         },
         {
-          "elapsed_ms": 30.8117,
+          "elapsed_ms": 4.1452,
+          "process_elapsed_ms": 55.1416,
           "exit_code": 0,
-          "stdout": "RESULT 616973\n",
+          "stdout": "RESULT 616973\nELAPSED_MS 4.1452\n",
           "stderr": "",
           "status": "ok",
           "result": "616973",
           "round": 3
         },
         {
-          "elapsed_ms": 26.3011,
+          "elapsed_ms": 4.6393,
+          "process_elapsed_ms": 40.6303,
           "exit_code": 0,
-          "stdout": "RESULT 616973\n",
+          "stdout": "RESULT 616973\nELAPSED_MS 4.6393\n",
           "stderr": "",
           "status": "ok",
           "result": "616973",
           "round": 4
         },
         {
-          "elapsed_ms": 25.0915,
+          "elapsed_ms": 4.1309,
+          "process_elapsed_ms": 42.0239,
           "exit_code": 0,
-          "stdout": "RESULT 616973\n",
+          "stdout": "RESULT 616973\nELAPSED_MS 4.1309\n",
           "stderr": "",
           "status": "ok",
           "result": "616973",
@@ -1065,12 +1136,12 @@
       ],
       "summary": {
         "status": "ok",
-        "median_ms": 26.3011,
-        "min_ms": 25.0915,
-        "max_ms": 30.8117,
-        "mean_ms": 27.07048,
-        "stdev_ms": 2.2181025228785063,
-        "cv_percent": 8.193805661659884
+        "median_ms": 4.6393,
+        "min_ms": 4.1309,
+        "max_ms": 5.6714,
+        "mean_ms": 4.70154,
+        "stdev_ms": 0.6379195192185297,
+        "cv_percent": 13.56830994139218
       }
     },
     "quicksort/node": {
@@ -1078,17 +1149,18 @@
       "language": "node",
       "n": 2000,
       "source": "benchmarks\\node\\quicksort.js",
-      "source_sha256": "5a375087ad67b8896c3ff667a1238daa2f11ff979d2f3a088b206468de0724bb",
-      "staged_sha256": "27c1621a3b437845f8114278b1fd0f494a8aba3e33bfb74b78d8527fce1c7ab3",
+      "source_sha256": "89d6f4d297db0ecdb7af83150c6e5ee740e43a8d45bdc432325e2eb66e7aee44",
+      "staged_sha256": "89d6f4d297db0ecdb7af83150c6e5ee740e43a8d45bdc432325e2eb66e7aee44",
       "command": [
-        "C:\\Program Files\\nodejs\\node.exe",
-        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\node\\quicksort.js"
+        "C:\\Program Files\\nodejs\\node.EXE",
+        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\node\\quicksort.js"
       ],
       "warmups": [
         {
-          "elapsed_ms": 50.1344,
+          "elapsed_ms": 2.2532,
+          "process_elapsed_ms": 63.6272,
           "exit_code": 0,
-          "stdout": "RESULT 616973\n",
+          "stdout": "RESULT 616973\nELAPSED_MS 2.2532\n",
           "stderr": "",
           "status": "ok",
           "result": "616973",
@@ -1097,45 +1169,50 @@
       ],
       "samples": [
         {
-          "elapsed_ms": 39.7936,
+          "elapsed_ms": 2.5217,
+          "process_elapsed_ms": 77.1665,
           "exit_code": 0,
-          "stdout": "RESULT 616973\n",
+          "stdout": "RESULT 616973\nELAPSED_MS 2.5217\n",
           "stderr": "",
           "status": "ok",
           "result": "616973",
           "round": 1
         },
         {
-          "elapsed_ms": 41.8149,
+          "elapsed_ms": 2.2521,
+          "process_elapsed_ms": 118.6701,
           "exit_code": 0,
-          "stdout": "RESULT 616973\n",
+          "stdout": "RESULT 616973\nELAPSED_MS 2.2521\n",
           "stderr": "",
           "status": "ok",
           "result": "616973",
           "round": 2
         },
         {
-          "elapsed_ms": 77.8551,
+          "elapsed_ms": 2.2987,
+          "process_elapsed_ms": 63.3885,
           "exit_code": 0,
-          "stdout": "RESULT 616973\n",
+          "stdout": "RESULT 616973\nELAPSED_MS 2.2987\n",
           "stderr": "",
           "status": "ok",
           "result": "616973",
           "round": 3
         },
         {
-          "elapsed_ms": 44.1044,
+          "elapsed_ms": 2.5968,
+          "process_elapsed_ms": 74.361,
           "exit_code": 0,
-          "stdout": "RESULT 616973\n",
+          "stdout": "RESULT 616973\nELAPSED_MS 2.5968\n",
           "stderr": "",
           "status": "ok",
           "result": "616973",
           "round": 4
         },
         {
-          "elapsed_ms": 41.0216,
+          "elapsed_ms": 2.2575,
+          "process_elapsed_ms": 53.6086,
           "exit_code": 0,
-          "stdout": "RESULT 616973\n",
+          "stdout": "RESULT 616973\nELAPSED_MS 2.2575\n",
           "stderr": "",
           "status": "ok",
           "result": "616973",
@@ -1144,12 +1221,12 @@
       ],
       "summary": {
         "status": "ok",
-        "median_ms": 41.8149,
-        "min_ms": 39.7936,
-        "max_ms": 77.8551,
-        "mean_ms": 48.917919999999995,
-        "stdev_ms": 16.252602401369447,
-        "cv_percent": 33.22423030531439
+        "median_ms": 2.2987,
+        "min_ms": 2.2521,
+        "max_ms": 2.5968,
+        "mean_ms": 2.38536,
+        "stdev_ms": 0.16195048008573487,
+        "cv_percent": 6.789351715704753
       }
     },
     "matrix/aquarius": {
@@ -1157,18 +1234,19 @@
       "language": "aquarius",
       "n": 45,
       "source": "benchmarks\\aquarius\\matrix.aqua",
-      "source_sha256": "9a5c841ccf93c299e1b3c3abbcd2a72b7ebe772a4437276e93dacfa3897b7df6",
-      "staged_sha256": "89eb653842f72537fd3c9025ea585c5136dbfad469259942ab1bd85bf7381884",
+      "source_sha256": "c0627d4c438b5ce327eb83855f9ae977d19c17a42d8326a00723660aa4f16d35",
+      "staged_sha256": "c0627d4c438b5ce327eb83855f9ae977d19c17a42d8326a00723660aa4f16d35",
       "command": [
-        "C:\\OfficialProjects\\AquariusLangTW\\dist\\releases\\AquariusCompiler-win-x64-20261010-225517-73f3c2c9\\aqua\\aqua.exe",
+        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\elapsed-compiler\\bin\\AquariusCli\\release\\aqua.exe",
         "run",
-        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\aquarius\\matrix.wasm"
+        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\aquarius\\matrix.wasm"
       ],
       "warmups": [
         {
-          "elapsed_ms": 227.2297,
+          "elapsed_ms": 74.4764,
+          "process_elapsed_ms": 284.1423,
           "exit_code": 0,
-          "stdout": "RESULT 545940\n",
+          "stdout": "RESULT 545940\nELAPSED_MS 74.4764\n",
           "stderr": "",
           "status": "ok",
           "result": "545940",
@@ -1177,45 +1255,50 @@
       ],
       "samples": [
         {
-          "elapsed_ms": 220.1179,
+          "elapsed_ms": 74.1789,
+          "process_elapsed_ms": 364.2131,
           "exit_code": 0,
-          "stdout": "RESULT 545940\n",
+          "stdout": "RESULT 545940\nELAPSED_MS 74.1789\n",
           "stderr": "",
           "status": "ok",
           "result": "545940",
           "round": 1
         },
         {
-          "elapsed_ms": 233.9269,
+          "elapsed_ms": 73.6343,
+          "process_elapsed_ms": 260.5976,
           "exit_code": 0,
-          "stdout": "RESULT 545940\n",
+          "stdout": "RESULT 545940\nELAPSED_MS 73.6343\n",
           "stderr": "",
           "status": "ok",
           "result": "545940",
           "round": 2
         },
         {
-          "elapsed_ms": 224.8948,
+          "elapsed_ms": 74.9701,
+          "process_elapsed_ms": 288.4706,
           "exit_code": 0,
-          "stdout": "RESULT 545940\n",
+          "stdout": "RESULT 545940\nELAPSED_MS 74.9701\n",
           "stderr": "",
           "status": "ok",
           "result": "545940",
           "round": 3
         },
         {
-          "elapsed_ms": 228.6021,
+          "elapsed_ms": 73.7145,
+          "process_elapsed_ms": 282.2374,
           "exit_code": 0,
-          "stdout": "RESULT 545940\n",
+          "stdout": "RESULT 545940\nELAPSED_MS 73.7145\n",
           "stderr": "",
           "status": "ok",
           "result": "545940",
           "round": 4
         },
         {
-          "elapsed_ms": 233.2387,
+          "elapsed_ms": 73.6356,
+          "process_elapsed_ms": 285.7234,
           "exit_code": 0,
-          "stdout": "RESULT 545940\n",
+          "stdout": "RESULT 545940\nELAPSED_MS 73.6356\n",
           "stderr": "",
           "status": "ok",
           "result": "545940",
@@ -1224,28 +1307,28 @@
       ],
       "build": {
         "command": [
-          "C:\\OfficialProjects\\AquariusLangTW\\dist\\releases\\AquariusCompiler-win-x64-20261010-225517-73f3c2c9\\aqua\\aqua.exe",
+          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\elapsed-compiler\\bin\\AquariusCli\\release\\aqua.exe",
           "build",
-          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\aquarius\\matrix.aqua",
+          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\aquarius\\matrix.aqua",
           "--root",
-          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\aquarius",
+          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\aquarius",
           "-o",
-          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\aquarius\\matrix.wasm"
+          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\aquarius\\matrix.wasm"
         ],
-        "elapsed_ms": 122.5125,
+        "elapsed_ms": 143.9689,
         "exit_code": 0,
-        "stdout": "Compiled 1 script(s) to C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\aquarius\\matrix.wasm\n",
+        "stdout": "Compiled 1 script(s) to C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\aquarius\\matrix.wasm\n",
         "stderr": ""
       },
-      "wasm_sha256": "135d170597698ba4fd846818ff6c6765d8823513b1d0474f9d10f3e1c9d7eebd",
+      "wasm_sha256": "b5883896cfaffadd86863f781fc86ed64c153b3fc84875f12f8b1df4121c11f1",
       "summary": {
         "status": "ok",
-        "median_ms": 228.6021,
-        "min_ms": 220.1179,
-        "max_ms": 233.9269,
-        "mean_ms": 228.15608,
-        "stdev_ms": 5.800487227983524,
-        "cv_percent": 2.5423329625857543
+        "median_ms": 73.7145,
+        "min_ms": 73.6343,
+        "max_ms": 74.9701,
+        "mean_ms": 74.02668,
+        "stdev_ms": 0.5739281766911276,
+        "cv_percent": 0.7752990903970401
       }
     },
     "matrix/python": {
@@ -1253,17 +1336,18 @@
       "language": "python",
       "n": 45,
       "source": "benchmarks\\python\\matrix.py",
-      "source_sha256": "27d42d2d3b5e3a4daf2198813a36c8c4d04cf0c8af8b07f135903d719ac7620c",
-      "staged_sha256": "9ff653103085f0df72d5697d93da5ef7403ef6c3dc263b8e7fd85f6aa03097e6",
+      "source_sha256": "2972080b7987da688186649a1bb11183cd1c9b733364c04e71d8fb033fd08154",
+      "staged_sha256": "2972080b7987da688186649a1bb11183cd1c9b733364c04e71d8fb033fd08154",
       "command": [
         "C:\\Users\\templ\\.pyenv\\pyenv-win\\versions\\3.12.10\\python.exe",
-        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\python\\matrix.py"
+        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\python\\matrix.py"
       ],
       "warmups": [
         {
-          "elapsed_ms": 37.6854,
+          "elapsed_ms": 12.3894,
+          "process_elapsed_ms": 48.9413,
           "exit_code": 0,
-          "stdout": "RESULT 545940\n",
+          "stdout": "RESULT 545940\nELAPSED_MS 12.3894\n",
           "stderr": "",
           "status": "ok",
           "result": "545940",
@@ -1272,45 +1356,50 @@
       ],
       "samples": [
         {
-          "elapsed_ms": 34.5285,
+          "elapsed_ms": 13.9557,
+          "process_elapsed_ms": 49.7477,
           "exit_code": 0,
-          "stdout": "RESULT 545940\n",
+          "stdout": "RESULT 545940\nELAPSED_MS 13.9557\n",
           "stderr": "",
           "status": "ok",
           "result": "545940",
           "round": 1
         },
         {
-          "elapsed_ms": 32.9254,
+          "elapsed_ms": 12.4543,
+          "process_elapsed_ms": 57.2259,
           "exit_code": 0,
-          "stdout": "RESULT 545940\n",
+          "stdout": "RESULT 545940\nELAPSED_MS 12.4543\n",
           "stderr": "",
           "status": "ok",
           "result": "545940",
           "round": 2
         },
         {
-          "elapsed_ms": 45.5654,
+          "elapsed_ms": 12.5879,
+          "process_elapsed_ms": 44.5233,
           "exit_code": 0,
-          "stdout": "RESULT 545940\n",
+          "stdout": "RESULT 545940\nELAPSED_MS 12.5879\n",
           "stderr": "",
           "status": "ok",
           "result": "545940",
           "round": 3
         },
         {
-          "elapsed_ms": 33.8301,
+          "elapsed_ms": 12.2,
+          "process_elapsed_ms": 66.0052,
           "exit_code": 0,
-          "stdout": "RESULT 545940\n",
+          "stdout": "RESULT 545940\nELAPSED_MS 12.2\n",
           "stderr": "",
           "status": "ok",
           "result": "545940",
           "round": 4
         },
         {
-          "elapsed_ms": 35.7829,
+          "elapsed_ms": 13.0737,
+          "process_elapsed_ms": 47.6376,
           "exit_code": 0,
-          "stdout": "RESULT 545940\n",
+          "stdout": "RESULT 545940\nELAPSED_MS 13.0737\n",
           "stderr": "",
           "status": "ok",
           "result": "545940",
@@ -1319,12 +1408,12 @@
       ],
       "summary": {
         "status": "ok",
-        "median_ms": 34.5285,
-        "min_ms": 32.9254,
-        "max_ms": 45.5654,
-        "mean_ms": 36.52646,
-        "stdev_ms": 5.159582161667743,
-        "cv_percent": 14.125601445274857
+        "median_ms": 12.5879,
+        "min_ms": 12.2,
+        "max_ms": 13.9557,
+        "mean_ms": 12.85432,
+        "stdev_ms": 0.6928736840146265,
+        "cv_percent": 5.390200990909099
       }
     },
     "matrix/node": {
@@ -1332,17 +1421,18 @@
       "language": "node",
       "n": 45,
       "source": "benchmarks\\node\\matrix.js",
-      "source_sha256": "5460938f1749adc7371b17a1d81b505c7db55e07bd7cead468e1ccc194612d66",
-      "staged_sha256": "ec84a937fabc251dbcf970b0885e77254d56dfbc5ad2c650d91cf46aa5c8d996",
+      "source_sha256": "28159d3cb989057bc4ba05007f77f41401fb9f3876f3a359e0274c74661f33e2",
+      "staged_sha256": "28159d3cb989057bc4ba05007f77f41401fb9f3876f3a359e0274c74661f33e2",
       "command": [
-        "C:\\Program Files\\nodejs\\node.exe",
-        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\node\\matrix.js"
+        "C:\\Program Files\\nodejs\\node.EXE",
+        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\node\\matrix.js"
       ],
       "warmups": [
         {
-          "elapsed_ms": 45.8354,
+          "elapsed_ms": 4.1019,
+          "process_elapsed_ms": 48.7584,
           "exit_code": 0,
-          "stdout": "RESULT 545940\n",
+          "stdout": "RESULT 545940\nELAPSED_MS 4.1019\n",
           "stderr": "",
           "status": "ok",
           "result": "545940",
@@ -1351,45 +1441,50 @@
       ],
       "samples": [
         {
-          "elapsed_ms": 45.5397,
+          "elapsed_ms": 4.4658,
+          "process_elapsed_ms": 76.6262,
           "exit_code": 0,
-          "stdout": "RESULT 545940\n",
+          "stdout": "RESULT 545940\nELAPSED_MS 4.4658\n",
           "stderr": "",
           "status": "ok",
           "result": "545940",
           "round": 1
         },
         {
-          "elapsed_ms": 44.4816,
+          "elapsed_ms": 3.879,
+          "process_elapsed_ms": 47.5864,
           "exit_code": 0,
-          "stdout": "RESULT 545940\n",
+          "stdout": "RESULT 545940\nELAPSED_MS 3.879\n",
           "stderr": "",
           "status": "ok",
           "result": "545940",
           "round": 2
         },
         {
-          "elapsed_ms": 43.7965,
+          "elapsed_ms": 4.1498,
+          "process_elapsed_ms": 87.1966,
           "exit_code": 0,
-          "stdout": "RESULT 545940\n",
+          "stdout": "RESULT 545940\nELAPSED_MS 4.1498\n",
           "stderr": "",
           "status": "ok",
           "result": "545940",
           "round": 3
         },
         {
-          "elapsed_ms": 58.9426,
+          "elapsed_ms": 4.1655,
+          "process_elapsed_ms": 62.7231,
           "exit_code": 0,
-          "stdout": "RESULT 545940\n",
+          "stdout": "RESULT 545940\nELAPSED_MS 4.1655\n",
           "stderr": "",
           "status": "ok",
           "result": "545940",
           "round": 4
         },
         {
-          "elapsed_ms": 47.0504,
+          "elapsed_ms": 3.974,
+          "process_elapsed_ms": 55.276,
           "exit_code": 0,
-          "stdout": "RESULT 545940\n",
+          "stdout": "RESULT 545940\nELAPSED_MS 3.974\n",
           "stderr": "",
           "status": "ok",
           "result": "545940",
@@ -1398,12 +1493,12 @@
       ],
       "summary": {
         "status": "ok",
-        "median_ms": 45.5397,
-        "min_ms": 43.7965,
-        "max_ms": 58.9426,
-        "mean_ms": 47.962160000000004,
-        "stdev_ms": 6.259726481484633,
-        "cv_percent": 13.051385678803108
+        "median_ms": 4.1498,
+        "min_ms": 3.879,
+        "max_ms": 4.4658,
+        "mean_ms": 4.12682,
+        "stdev_ms": 0.22455532057824848,
+        "cv_percent": 5.441364551355486
       }
     },
     "mandelbrot/aquarius": {
@@ -1411,18 +1506,19 @@
       "language": "aquarius",
       "n": 80,
       "source": "benchmarks\\aquarius\\mandelbrot.aqua",
-      "source_sha256": "01d40b3a2fdea8b06faa5812be67e1a6d082b0365e1c8610e7bbf66a9d87b41c",
-      "staged_sha256": "e5fe83f2ff2e7a07620f68483bb67071a9c5b6b4ec695518b77619ebeec5fb20",
+      "source_sha256": "74b87bc6b6e111aa5f695faf89587b787fde12aecaebcee3865232333198bdd8",
+      "staged_sha256": "74b87bc6b6e111aa5f695faf89587b787fde12aecaebcee3865232333198bdd8",
       "command": [
-        "C:\\OfficialProjects\\AquariusLangTW\\dist\\releases\\AquariusCompiler-win-x64-20261010-225517-73f3c2c9\\aqua\\aqua.exe",
+        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\elapsed-compiler\\bin\\AquariusCli\\release\\aqua.exe",
         "run",
-        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\aquarius\\mandelbrot.wasm"
+        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\aquarius\\mandelbrot.wasm"
       ],
       "warmups": [
         {
-          "elapsed_ms": 195.2533,
+          "elapsed_ms": 33.2045,
+          "process_elapsed_ms": 266.5057,
           "exit_code": 0,
-          "stdout": "RESULT 129059\n",
+          "stdout": "RESULT 129059\nELAPSED_MS 33.2045\n",
           "stderr": "",
           "status": "ok",
           "result": "129059",
@@ -1431,45 +1527,50 @@
       ],
       "samples": [
         {
-          "elapsed_ms": 178.2414,
+          "elapsed_ms": 33.9238,
+          "process_elapsed_ms": 229.9259,
           "exit_code": 0,
-          "stdout": "RESULT 129059\n",
+          "stdout": "RESULT 129059\nELAPSED_MS 33.9238\n",
           "stderr": "",
           "status": "ok",
           "result": "129059",
           "round": 1
         },
         {
-          "elapsed_ms": 194.6427,
+          "elapsed_ms": 34.2526,
+          "process_elapsed_ms": 238.1633,
           "exit_code": 0,
-          "stdout": "RESULT 129059\n",
+          "stdout": "RESULT 129059\nELAPSED_MS 34.2526\n",
           "stderr": "",
           "status": "ok",
           "result": "129059",
           "round": 2
         },
         {
-          "elapsed_ms": 214.4708,
+          "elapsed_ms": 34.987,
+          "process_elapsed_ms": 227.2913,
           "exit_code": 0,
-          "stdout": "RESULT 129059\n",
+          "stdout": "RESULT 129059\nELAPSED_MS 34.987\n",
           "stderr": "",
           "status": "ok",
           "result": "129059",
           "round": 3
         },
         {
-          "elapsed_ms": 217.1441,
+          "elapsed_ms": 35.733399999999996,
+          "process_elapsed_ms": 233.8245,
           "exit_code": 0,
-          "stdout": "RESULT 129059\n",
+          "stdout": "RESULT 129059\nELAPSED_MS 35.733399999999996\n",
           "stderr": "",
           "status": "ok",
           "result": "129059",
           "round": 4
         },
         {
-          "elapsed_ms": 179.3153,
+          "elapsed_ms": 35.3973,
+          "process_elapsed_ms": 228.8562,
           "exit_code": 0,
-          "stdout": "RESULT 129059\n",
+          "stdout": "RESULT 129059\nELAPSED_MS 35.3973\n",
           "stderr": "",
           "status": "ok",
           "result": "129059",
@@ -1478,28 +1579,28 @@
       ],
       "build": {
         "command": [
-          "C:\\OfficialProjects\\AquariusLangTW\\dist\\releases\\AquariusCompiler-win-x64-20261010-225517-73f3c2c9\\aqua\\aqua.exe",
+          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\elapsed-compiler\\bin\\AquariusCli\\release\\aqua.exe",
           "build",
-          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\aquarius\\mandelbrot.aqua",
+          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\aquarius\\mandelbrot.aqua",
           "--root",
-          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\aquarius",
+          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\aquarius",
           "-o",
-          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\aquarius\\mandelbrot.wasm"
+          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\aquarius\\mandelbrot.wasm"
         ],
-        "elapsed_ms": 126.7636,
+        "elapsed_ms": 157.7132,
         "exit_code": 0,
-        "stdout": "Compiled 1 script(s) to C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\aquarius\\mandelbrot.wasm\n",
+        "stdout": "Compiled 1 script(s) to C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\aquarius\\mandelbrot.wasm\n",
         "stderr": ""
       },
-      "wasm_sha256": "3f0b05087792a3d18e24591f638f804c3cc5db57eb6e16ec01b1e42c1e6421fe",
+      "wasm_sha256": "b8b8bb925072b0a4fe8e16a3d1d7d604748143c495579b59e31c9c4d63d4fef6",
       "summary": {
         "status": "ok",
-        "median_ms": 194.6427,
-        "min_ms": 178.2414,
-        "max_ms": 217.1441,
-        "mean_ms": 196.76286,
-        "stdev_ms": 18.580386109362745,
-        "cv_percent": 9.443035189345563
+        "median_ms": 34.987,
+        "min_ms": 33.9238,
+        "max_ms": 35.733399999999996,
+        "mean_ms": 34.85882,
+        "stdev_ms": 0.7604350873019987,
+        "cv_percent": 2.1814711091826937
       }
     },
     "mandelbrot/python": {
@@ -1507,17 +1608,18 @@
       "language": "python",
       "n": 80,
       "source": "benchmarks\\python\\mandelbrot.py",
-      "source_sha256": "4900cdbb0b40af42bfdd8c132b0abe690aa099933ebbbdc08aea37a73a751751",
-      "staged_sha256": "14e012d80552044ffb80bf3d303beab5e6ff6239577b75f1703c3d8dfa85995f",
+      "source_sha256": "87aa7f46e45e6f6178fb722716833d5063c7e2f6de5734ba4a944cdc0dd7e09f",
+      "staged_sha256": "87aa7f46e45e6f6178fb722716833d5063c7e2f6de5734ba4a944cdc0dd7e09f",
       "command": [
         "C:\\Users\\templ\\.pyenv\\pyenv-win\\versions\\3.12.10\\python.exe",
-        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\python\\mandelbrot.py"
+        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\python\\mandelbrot.py"
       ],
       "warmups": [
         {
-          "elapsed_ms": 53.8908,
+          "elapsed_ms": 20.8114,
+          "process_elapsed_ms": 58.0674,
           "exit_code": 0,
-          "stdout": "RESULT 129059\n",
+          "stdout": "RESULT 129059\nELAPSED_MS 20.8114\n",
           "stderr": "",
           "status": "ok",
           "result": "129059",
@@ -1526,45 +1628,50 @@
       ],
       "samples": [
         {
-          "elapsed_ms": 38.7318,
+          "elapsed_ms": 19.3726,
+          "process_elapsed_ms": 126.7011,
           "exit_code": 0,
-          "stdout": "RESULT 129059\n",
+          "stdout": "RESULT 129059\nELAPSED_MS 19.3726\n",
           "stderr": "",
           "status": "ok",
           "result": "129059",
           "round": 1
         },
         {
-          "elapsed_ms": 38.7579,
+          "elapsed_ms": 20.2886,
+          "process_elapsed_ms": 53.7273,
           "exit_code": 0,
-          "stdout": "RESULT 129059\n",
+          "stdout": "RESULT 129059\nELAPSED_MS 20.2886\n",
           "stderr": "",
           "status": "ok",
           "result": "129059",
           "round": 2
         },
         {
-          "elapsed_ms": 48.6457,
+          "elapsed_ms": 20.7554,
+          "process_elapsed_ms": 57.44,
           "exit_code": 0,
-          "stdout": "RESULT 129059\n",
+          "stdout": "RESULT 129059\nELAPSED_MS 20.7554\n",
           "stderr": "",
           "status": "ok",
           "result": "129059",
           "round": 3
         },
         {
-          "elapsed_ms": 39.6901,
+          "elapsed_ms": 20.2077,
+          "process_elapsed_ms": 63.8647,
           "exit_code": 0,
-          "stdout": "RESULT 129059\n",
+          "stdout": "RESULT 129059\nELAPSED_MS 20.2077\n",
           "stderr": "",
           "status": "ok",
           "result": "129059",
           "round": 4
         },
         {
-          "elapsed_ms": 42.8062,
+          "elapsed_ms": 19.6518,
+          "process_elapsed_ms": 62.2062,
           "exit_code": 0,
-          "stdout": "RESULT 129059\n",
+          "stdout": "RESULT 129059\nELAPSED_MS 19.6518\n",
           "stderr": "",
           "status": "ok",
           "result": "129059",
@@ -1573,12 +1680,12 @@
       ],
       "summary": {
         "status": "ok",
-        "median_ms": 39.6901,
-        "min_ms": 38.7318,
-        "max_ms": 48.6457,
-        "mean_ms": 41.72634,
-        "stdev_ms": 4.212149677183848,
-        "cv_percent": 10.094701996829455
+        "median_ms": 20.2077,
+        "min_ms": 19.3726,
+        "max_ms": 20.7554,
+        "mean_ms": 20.05522,
+        "stdev_ms": 0.5469657594402053,
+        "cv_percent": 2.727298725420142
       }
     },
     "mandelbrot/node": {
@@ -1586,17 +1693,18 @@
       "language": "node",
       "n": 80,
       "source": "benchmarks\\node\\mandelbrot.js",
-      "source_sha256": "87fc321294728dd791e09bea4a0893b0fe95d9f8a083114a7f3d09ae3f33a87e",
-      "staged_sha256": "e9754d83b651dd0a782cd91a2a9842f66b6194ee8ce3fe6d8a03f88e8feeb7f8",
+      "source_sha256": "27dd4935fbe4db67b7c6f9c4c32f1053656c0434b3b6eccc17886a23695ee6aa",
+      "staged_sha256": "27dd4935fbe4db67b7c6f9c4c32f1053656c0434b3b6eccc17886a23695ee6aa",
       "command": [
-        "C:\\Program Files\\nodejs\\node.exe",
-        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\node\\mandelbrot.js"
+        "C:\\Program Files\\nodejs\\node.EXE",
+        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\node\\mandelbrot.js"
       ],
       "warmups": [
         {
-          "elapsed_ms": 41.8856,
+          "elapsed_ms": 1.2527,
+          "process_elapsed_ms": 68.1804,
           "exit_code": 0,
-          "stdout": "RESULT 129059\n",
+          "stdout": "RESULT 129059\nELAPSED_MS 1.2527\n",
           "stderr": "",
           "status": "ok",
           "result": "129059",
@@ -1605,45 +1713,50 @@
       ],
       "samples": [
         {
-          "elapsed_ms": 39.8591,
+          "elapsed_ms": 1.0334,
+          "process_elapsed_ms": 59.5294,
           "exit_code": 0,
-          "stdout": "RESULT 129059\n",
+          "stdout": "RESULT 129059\nELAPSED_MS 1.0334\n",
           "stderr": "",
           "status": "ok",
           "result": "129059",
           "round": 1
         },
         {
-          "elapsed_ms": 41.6615,
+          "elapsed_ms": 1.0067,
+          "process_elapsed_ms": 53.5557,
           "exit_code": 0,
-          "stdout": "RESULT 129059\n",
+          "stdout": "RESULT 129059\nELAPSED_MS 1.0067\n",
           "stderr": "",
           "status": "ok",
           "result": "129059",
           "round": 2
         },
         {
-          "elapsed_ms": 52.0799,
+          "elapsed_ms": 1.1607,
+          "process_elapsed_ms": 66.0879,
           "exit_code": 0,
-          "stdout": "RESULT 129059\n",
+          "stdout": "RESULT 129059\nELAPSED_MS 1.1607\n",
           "stderr": "",
           "status": "ok",
           "result": "129059",
           "round": 3
         },
         {
-          "elapsed_ms": 47.6193,
+          "elapsed_ms": 1.0173,
+          "process_elapsed_ms": 56.7869,
           "exit_code": 0,
-          "stdout": "RESULT 129059\n",
+          "stdout": "RESULT 129059\nELAPSED_MS 1.0173\n",
           "stderr": "",
           "status": "ok",
           "result": "129059",
           "round": 4
         },
         {
-          "elapsed_ms": 40.5315,
+          "elapsed_ms": 1.2108,
+          "process_elapsed_ms": 67.3476,
           "exit_code": 0,
-          "stdout": "RESULT 129059\n",
+          "stdout": "RESULT 129059\nELAPSED_MS 1.2108\n",
           "stderr": "",
           "status": "ok",
           "result": "129059",
@@ -1652,12 +1765,12 @@
       ],
       "summary": {
         "status": "ok",
-        "median_ms": 41.6615,
-        "min_ms": 39.8591,
-        "max_ms": 52.0799,
-        "mean_ms": 44.35026,
-        "stdev_ms": 5.301340242617901,
-        "cv_percent": 11.953346480083546
+        "median_ms": 1.0334,
+        "min_ms": 1.0067,
+        "max_ms": 1.2108,
+        "mean_ms": 1.08578,
+        "stdev_ms": 0.09344761634199134,
+        "cv_percent": 8.606496375139654
       }
     },
     "nqueens/aquarius": {
@@ -1665,18 +1778,19 @@
       "language": "aquarius",
       "n": 8,
       "source": "benchmarks\\aquarius\\nqueens.aqua",
-      "source_sha256": "3f32b37efcee7b27857e27c633738497df90a757a2d71057080e313839fa440c",
-      "staged_sha256": "6b148f8295e18b2f606ff7935766426401de2190e41b8f1f010e95e149625b79",
+      "source_sha256": "58a704538048485fdc787cb95fb1b0fe36f9eede16998a6ad68d0d0ced313c1a",
+      "staged_sha256": "58a704538048485fdc787cb95fb1b0fe36f9eede16998a6ad68d0d0ced313c1a",
       "command": [
-        "C:\\OfficialProjects\\AquariusLangTW\\dist\\releases\\AquariusCompiler-win-x64-20261010-225517-73f3c2c9\\aqua\\aqua.exe",
+        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\elapsed-compiler\\bin\\AquariusCli\\release\\aqua.exe",
         "run",
-        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\aquarius\\nqueens.wasm"
+        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\aquarius\\nqueens.wasm"
       ],
       "warmups": [
         {
-          "elapsed_ms": 169.2561,
+          "elapsed_ms": 15.0488,
+          "process_elapsed_ms": 210.0861,
           "exit_code": 0,
-          "stdout": "RESULT 92\n",
+          "stdout": "RESULT 92\nELAPSED_MS 15.0488\n",
           "stderr": "",
           "status": "ok",
           "result": "92",
@@ -1685,45 +1799,50 @@
       ],
       "samples": [
         {
-          "elapsed_ms": 165.246,
+          "elapsed_ms": 15.516,
+          "process_elapsed_ms": 222.1841,
           "exit_code": 0,
-          "stdout": "RESULT 92\n",
+          "stdout": "RESULT 92\nELAPSED_MS 15.516\n",
           "stderr": "",
           "status": "ok",
           "result": "92",
           "round": 1
         },
         {
-          "elapsed_ms": 178.5838,
+          "elapsed_ms": 15.2568,
+          "process_elapsed_ms": 213.7438,
           "exit_code": 0,
-          "stdout": "RESULT 92\n",
+          "stdout": "RESULT 92\nELAPSED_MS 15.2568\n",
           "stderr": "",
           "status": "ok",
           "result": "92",
           "round": 2
         },
         {
-          "elapsed_ms": 194.5809,
+          "elapsed_ms": 15.8542,
+          "process_elapsed_ms": 226.6778,
           "exit_code": 0,
-          "stdout": "RESULT 92\n",
+          "stdout": "RESULT 92\nELAPSED_MS 15.8542\n",
           "stderr": "",
           "status": "ok",
           "result": "92",
           "round": 3
         },
         {
-          "elapsed_ms": 168.8997,
+          "elapsed_ms": 15.8681,
+          "process_elapsed_ms": 225.9992,
           "exit_code": 0,
-          "stdout": "RESULT 92\n",
+          "stdout": "RESULT 92\nELAPSED_MS 15.8681\n",
           "stderr": "",
           "status": "ok",
           "result": "92",
           "round": 4
         },
         {
-          "elapsed_ms": 178.8827,
+          "elapsed_ms": 15.5127,
+          "process_elapsed_ms": 204.5814,
           "exit_code": 0,
-          "stdout": "RESULT 92\n",
+          "stdout": "RESULT 92\nELAPSED_MS 15.5127\n",
           "stderr": "",
           "status": "ok",
           "result": "92",
@@ -1732,28 +1851,28 @@
       ],
       "build": {
         "command": [
-          "C:\\OfficialProjects\\AquariusLangTW\\dist\\releases\\AquariusCompiler-win-x64-20261010-225517-73f3c2c9\\aqua\\aqua.exe",
+          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\elapsed-compiler\\bin\\AquariusCli\\release\\aqua.exe",
           "build",
-          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\aquarius\\nqueens.aqua",
+          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\aquarius\\nqueens.aqua",
           "--root",
-          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\aquarius",
+          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\aquarius",
           "-o",
-          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\aquarius\\nqueens.wasm"
+          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\aquarius\\nqueens.wasm"
         ],
-        "elapsed_ms": 125.4508,
+        "elapsed_ms": 144.5761,
         "exit_code": 0,
-        "stdout": "Compiled 1 script(s) to C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\aquarius\\nqueens.wasm\n",
+        "stdout": "Compiled 1 script(s) to C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\aquarius\\nqueens.wasm\n",
         "stderr": ""
       },
-      "wasm_sha256": "9f497290e27f01a20a8a41919ff06e1528e19832a3f01d58a1e7167abd2e809a",
+      "wasm_sha256": "31b9abe1ca4098cd2c57d9f88de1d5515b8f688ddd4b5fc3bddea99877b248f0",
       "summary": {
         "status": "ok",
-        "median_ms": 178.5838,
-        "min_ms": 165.246,
-        "max_ms": 194.5809,
-        "mean_ms": 177.23862,
-        "stdev_ms": 11.386699533973841,
-        "cv_percent": 6.424502478056894
+        "median_ms": 15.516,
+        "min_ms": 15.2568,
+        "max_ms": 15.8681,
+        "mean_ms": 15.601560000000001,
+        "stdev_ms": 0.2593003143075612,
+        "cv_percent": 1.662015300441502
       }
     },
     "nqueens/python": {
@@ -1761,17 +1880,18 @@
       "language": "python",
       "n": 8,
       "source": "benchmarks\\python\\nqueens.py",
-      "source_sha256": "7f904c0055e18bc2f9fe8c86ec5fe27b325cb3d17cf5e4a2188617ac4c9fea5a",
-      "staged_sha256": "03909cad6be62f1f5e8181f8333279f77e9fe851dc12fa096c598a6027c9a823",
+      "source_sha256": "c63dba35650e0e8cddfec219d460befafc67a301ebb4cf40e22f142d015c3d49",
+      "staged_sha256": "c63dba35650e0e8cddfec219d460befafc67a301ebb4cf40e22f142d015c3d49",
       "command": [
         "C:\\Users\\templ\\.pyenv\\pyenv-win\\versions\\3.12.10\\python.exe",
-        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\python\\nqueens.py"
+        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\python\\nqueens.py"
       ],
       "warmups": [
         {
-          "elapsed_ms": 34.0876,
+          "elapsed_ms": 3.4728,
+          "process_elapsed_ms": 41.2843,
           "exit_code": 0,
-          "stdout": "RESULT 92\n",
+          "stdout": "RESULT 92\nELAPSED_MS 3.4728\n",
           "stderr": "",
           "status": "ok",
           "result": "92",
@@ -1780,45 +1900,50 @@
       ],
       "samples": [
         {
-          "elapsed_ms": 22.2232,
+          "elapsed_ms": 3.5715,
+          "process_elapsed_ms": 37.542,
           "exit_code": 0,
-          "stdout": "RESULT 92\n",
+          "stdout": "RESULT 92\nELAPSED_MS 3.5715\n",
           "stderr": "",
           "status": "ok",
           "result": "92",
           "round": 1
         },
         {
-          "elapsed_ms": 25.5605,
+          "elapsed_ms": 3.5951,
+          "process_elapsed_ms": 38.7882,
           "exit_code": 0,
-          "stdout": "RESULT 92\n",
+          "stdout": "RESULT 92\nELAPSED_MS 3.5951\n",
           "stderr": "",
           "status": "ok",
           "result": "92",
           "round": 2
         },
         {
-          "elapsed_ms": 24.9671,
+          "elapsed_ms": 3.6079,
+          "process_elapsed_ms": 33.0924,
           "exit_code": 0,
-          "stdout": "RESULT 92\n",
+          "stdout": "RESULT 92\nELAPSED_MS 3.6079\n",
           "stderr": "",
           "status": "ok",
           "result": "92",
           "round": 3
         },
         {
-          "elapsed_ms": 30.4836,
+          "elapsed_ms": 3.6013,
+          "process_elapsed_ms": 45.8025,
           "exit_code": 0,
-          "stdout": "RESULT 92\n",
+          "stdout": "RESULT 92\nELAPSED_MS 3.6013\n",
           "stderr": "",
           "status": "ok",
           "result": "92",
           "round": 4
         },
         {
-          "elapsed_ms": 23.6106,
+          "elapsed_ms": 3.5127,
+          "process_elapsed_ms": 38.7518,
           "exit_code": 0,
-          "stdout": "RESULT 92\n",
+          "stdout": "RESULT 92\nELAPSED_MS 3.5127\n",
           "stderr": "",
           "status": "ok",
           "result": "92",
@@ -1827,12 +1952,12 @@
       ],
       "summary": {
         "status": "ok",
-        "median_ms": 24.9671,
-        "min_ms": 22.2232,
-        "max_ms": 30.4836,
-        "mean_ms": 25.369,
-        "stdev_ms": 3.1362938805220404,
-        "cv_percent": 12.362702039978085
+        "median_ms": 3.5951,
+        "min_ms": 3.5127,
+        "max_ms": 3.6079,
+        "mean_ms": 3.5777,
+        "stdev_ms": 0.038843274836192626,
+        "cv_percent": 1.0857051970873082
       }
     },
     "nqueens/node": {
@@ -1840,17 +1965,18 @@
       "language": "node",
       "n": 8,
       "source": "benchmarks\\node\\nqueens.js",
-      "source_sha256": "964f06b3299a77ecb069a9d81f824f09234aebb4f17a9c60f97785d6ea7bc953",
-      "staged_sha256": "de34c85522cd6a648097a7d99b65daaf9ec880e002b517de27ded7881d7c023e",
+      "source_sha256": "31ddc944a63dd9404594ac58a53d5e0f33b2500d90b466a921a39b7d2dabf056",
+      "staged_sha256": "31ddc944a63dd9404594ac58a53d5e0f33b2500d90b466a921a39b7d2dabf056",
       "command": [
-        "C:\\Program Files\\nodejs\\node.exe",
-        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\node\\nqueens.js"
+        "C:\\Program Files\\nodejs\\node.EXE",
+        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\node\\nqueens.js"
       ],
       "warmups": [
         {
-          "elapsed_ms": 42.9259,
+          "elapsed_ms": 0.7634,
+          "process_elapsed_ms": 60.3226,
           "exit_code": 0,
-          "stdout": "RESULT 92\n",
+          "stdout": "RESULT 92\nELAPSED_MS 0.7634\n",
           "stderr": "",
           "status": "ok",
           "result": "92",
@@ -1859,45 +1985,50 @@
       ],
       "samples": [
         {
-          "elapsed_ms": 39.9758,
+          "elapsed_ms": 0.6762,
+          "process_elapsed_ms": 68.3947,
           "exit_code": 0,
-          "stdout": "RESULT 92\n",
+          "stdout": "RESULT 92\nELAPSED_MS 0.6762\n",
           "stderr": "",
           "status": "ok",
           "result": "92",
           "round": 1
         },
         {
-          "elapsed_ms": 44.3387,
+          "elapsed_ms": 0.6814,
+          "process_elapsed_ms": 56.7685,
           "exit_code": 0,
-          "stdout": "RESULT 92\n",
+          "stdout": "RESULT 92\nELAPSED_MS 0.6814\n",
           "stderr": "",
           "status": "ok",
           "result": "92",
           "round": 2
         },
         {
-          "elapsed_ms": 57.3478,
+          "elapsed_ms": 0.7465,
+          "process_elapsed_ms": 79.1251,
           "exit_code": 0,
-          "stdout": "RESULT 92\n",
+          "stdout": "RESULT 92\nELAPSED_MS 0.7465\n",
           "stderr": "",
           "status": "ok",
           "result": "92",
           "round": 3
         },
         {
-          "elapsed_ms": 45.388,
+          "elapsed_ms": 0.6551,
+          "process_elapsed_ms": 54.7015,
           "exit_code": 0,
-          "stdout": "RESULT 92\n",
+          "stdout": "RESULT 92\nELAPSED_MS 0.6551\n",
           "stderr": "",
           "status": "ok",
           "result": "92",
           "round": 4
         },
         {
-          "elapsed_ms": 37.3332,
+          "elapsed_ms": 0.729,
+          "process_elapsed_ms": 69.5948,
           "exit_code": 0,
-          "stdout": "RESULT 92\n",
+          "stdout": "RESULT 92\nELAPSED_MS 0.729\n",
           "stderr": "",
           "status": "ok",
           "result": "92",
@@ -1906,12 +2037,12 @@
       ],
       "summary": {
         "status": "ok",
-        "median_ms": 44.3387,
-        "min_ms": 37.3332,
-        "max_ms": 57.3478,
-        "mean_ms": 44.8767,
-        "stdev_ms": 7.697441457393489,
-        "cv_percent": 17.152423100168882
+        "median_ms": 0.6814,
+        "min_ms": 0.6551,
+        "max_ms": 0.7465,
+        "mean_ms": 0.69764,
+        "stdev_ms": 0.03841813373916021,
+        "cv_percent": 5.506870841574481
       }
     },
     "binary_trees/aquarius": {
@@ -1919,18 +2050,19 @@
       "language": "aquarius",
       "n": 12,
       "source": "benchmarks\\aquarius\\binary_trees.aqua",
-      "source_sha256": "a2b8052ec789fd4c1baf36a6c2c186f0a34278e7cb14ea92ccfc2d657813ca6a",
-      "staged_sha256": "d40ac96ef892c27b932ce850cfb34b33f0e52ea44a75b3fc3de648a60b60e6fb",
+      "source_sha256": "26e1d6dcf0281506ed3a0e748162d7ed840c8ec45d50ef6a781ca5d2bf726902",
+      "staged_sha256": "26e1d6dcf0281506ed3a0e748162d7ed840c8ec45d50ef6a781ca5d2bf726902",
       "command": [
-        "C:\\OfficialProjects\\AquariusLangTW\\dist\\releases\\AquariusCompiler-win-x64-20261010-225517-73f3c2c9\\aqua\\aqua.exe",
+        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\elapsed-compiler\\bin\\AquariusCli\\release\\aqua.exe",
         "run",
-        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\aquarius\\binary_trees.wasm"
+        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\aquarius\\binary_trees.wasm"
       ],
       "warmups": [
         {
-          "elapsed_ms": 227.3065,
+          "elapsed_ms": 71.77090000000001,
+          "process_elapsed_ms": 294.5032,
           "exit_code": 0,
-          "stdout": "RESULT 65528\n",
+          "stdout": "RESULT 65528\nELAPSED_MS 71.77090000000001\n",
           "stderr": "",
           "status": "ok",
           "result": "65528",
@@ -1939,45 +2071,50 @@
       ],
       "samples": [
         {
-          "elapsed_ms": 222.0063,
+          "elapsed_ms": 74.3276,
+          "process_elapsed_ms": 269.2803,
           "exit_code": 0,
-          "stdout": "RESULT 65528\n",
+          "stdout": "RESULT 65528\nELAPSED_MS 74.3276\n",
           "stderr": "",
           "status": "ok",
           "result": "65528",
           "round": 1
         },
         {
-          "elapsed_ms": 221.5515,
+          "elapsed_ms": 74.7236,
+          "process_elapsed_ms": 271.912,
           "exit_code": 0,
-          "stdout": "RESULT 65528\n",
+          "stdout": "RESULT 65528\nELAPSED_MS 74.7236\n",
           "stderr": "",
           "status": "ok",
           "result": "65528",
           "round": 2
         },
         {
-          "elapsed_ms": 227.6714,
+          "elapsed_ms": 71.8435,
+          "process_elapsed_ms": 277.0545,
           "exit_code": 0,
-          "stdout": "RESULT 65528\n",
+          "stdout": "RESULT 65528\nELAPSED_MS 71.8435\n",
           "stderr": "",
           "status": "ok",
           "result": "65528",
           "round": 3
         },
         {
-          "elapsed_ms": 235.5557,
+          "elapsed_ms": 71.6147,
+          "process_elapsed_ms": 271.8688,
           "exit_code": 0,
-          "stdout": "RESULT 65528\n",
+          "stdout": "RESULT 65528\nELAPSED_MS 71.6147\n",
           "stderr": "",
           "status": "ok",
           "result": "65528",
           "round": 4
         },
         {
-          "elapsed_ms": 230.5394,
+          "elapsed_ms": 71.9336,
+          "process_elapsed_ms": 267.4601,
           "exit_code": 0,
-          "stdout": "RESULT 65528\n",
+          "stdout": "RESULT 65528\nELAPSED_MS 71.9336\n",
           "stderr": "",
           "status": "ok",
           "result": "65528",
@@ -1986,28 +2123,28 @@
       ],
       "build": {
         "command": [
-          "C:\\OfficialProjects\\AquariusLangTW\\dist\\releases\\AquariusCompiler-win-x64-20261010-225517-73f3c2c9\\aqua\\aqua.exe",
+          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\elapsed-compiler\\bin\\AquariusCli\\release\\aqua.exe",
           "build",
-          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\aquarius\\binary_trees.aqua",
+          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\aquarius\\binary_trees.aqua",
           "--root",
-          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\aquarius",
+          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\aquarius",
           "-o",
-          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\aquarius\\binary_trees.wasm"
+          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\aquarius\\binary_trees.wasm"
         ],
-        "elapsed_ms": 121.9566,
+        "elapsed_ms": 140.7788,
         "exit_code": 0,
-        "stdout": "Compiled 1 script(s) to C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\aquarius\\binary_trees.wasm\n",
+        "stdout": "Compiled 1 script(s) to C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\aquarius\\binary_trees.wasm\n",
         "stderr": ""
       },
-      "wasm_sha256": "6f175a026fc6b7a38fde847ab08e0cf8e568dbb3c10e3a637fa2cc1ccdc05171",
+      "wasm_sha256": "a900aa062aaa9641e29caa8d5ca1dbb387385d49edefe0deb52225f59fdb12cb",
       "summary": {
         "status": "ok",
-        "median_ms": 227.6714,
-        "min_ms": 221.5515,
-        "max_ms": 235.5557,
-        "mean_ms": 227.46486000000002,
-        "stdev_ms": 5.9101787335917315,
-        "cv_percent": 2.5982820966683517
+        "median_ms": 71.9336,
+        "min_ms": 71.6147,
+        "max_ms": 74.7236,
+        "mean_ms": 72.8886,
+        "stdev_ms": 1.5054090988830928,
+        "cv_percent": 2.065356034939748
       }
     },
     "binary_trees/python": {
@@ -2015,17 +2152,18 @@
       "language": "python",
       "n": 12,
       "source": "benchmarks\\python\\binary_trees.py",
-      "source_sha256": "f514672dc7b7619f9d8dfa2900076ef0d8e4cdb10a17485b02f7a8fde4e34dc8",
-      "staged_sha256": "4e196c7e652ba0623cf3c454f514a00b13ae11b112163f3e7c7c55f513ea682a",
+      "source_sha256": "bc48241d34b35f041a44db06846fade56f1375bb491d2acd5b9285253ea65f17",
+      "staged_sha256": "bc48241d34b35f041a44db06846fade56f1375bb491d2acd5b9285253ea65f17",
       "command": [
         "C:\\Users\\templ\\.pyenv\\pyenv-win\\versions\\3.12.10\\python.exe",
-        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\python\\binary_trees.py"
+        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\python\\binary_trees.py"
       ],
       "warmups": [
         {
-          "elapsed_ms": 41.5814,
+          "elapsed_ms": 8.7955,
+          "process_elapsed_ms": 137.8037,
           "exit_code": 0,
-          "stdout": "RESULT 65528\n",
+          "stdout": "RESULT 65528\nELAPSED_MS 8.7955\n",
           "stderr": "",
           "status": "ok",
           "result": "65528",
@@ -2034,45 +2172,50 @@
       ],
       "samples": [
         {
-          "elapsed_ms": 27.4202,
+          "elapsed_ms": 11.3806,
+          "process_elapsed_ms": 114.7757,
           "exit_code": 0,
-          "stdout": "RESULT 65528\n",
+          "stdout": "RESULT 65528\nELAPSED_MS 11.3806\n",
           "stderr": "",
           "status": "ok",
           "result": "65528",
           "round": 1
         },
         {
-          "elapsed_ms": 29.7681,
+          "elapsed_ms": 7.7262,
+          "process_elapsed_ms": 64.0943,
           "exit_code": 0,
-          "stdout": "RESULT 65528\n",
+          "stdout": "RESULT 65528\nELAPSED_MS 7.7262\n",
           "stderr": "",
           "status": "ok",
           "result": "65528",
           "round": 2
         },
         {
-          "elapsed_ms": 30.059,
+          "elapsed_ms": 8.356,
+          "process_elapsed_ms": 38.7537,
           "exit_code": 0,
-          "stdout": "RESULT 65528\n",
+          "stdout": "RESULT 65528\nELAPSED_MS 8.356\n",
           "stderr": "",
           "status": "ok",
           "result": "65528",
           "round": 3
         },
         {
-          "elapsed_ms": 29.5321,
+          "elapsed_ms": 7.8176,
+          "process_elapsed_ms": 74.2794,
           "exit_code": 0,
-          "stdout": "RESULT 65528\n",
+          "stdout": "RESULT 65528\nELAPSED_MS 7.8176\n",
           "stderr": "",
           "status": "ok",
           "result": "65528",
           "round": 4
         },
         {
-          "elapsed_ms": 28.4979,
+          "elapsed_ms": 8.1217,
+          "process_elapsed_ms": 59.9293,
           "exit_code": 0,
-          "stdout": "RESULT 65528\n",
+          "stdout": "RESULT 65528\nELAPSED_MS 8.1217\n",
           "stderr": "",
           "status": "ok",
           "result": "65528",
@@ -2081,12 +2224,12 @@
       ],
       "summary": {
         "status": "ok",
-        "median_ms": 29.5321,
-        "min_ms": 27.4202,
-        "max_ms": 30.059,
-        "mean_ms": 29.05546,
-        "stdev_ms": 1.087092729715363,
-        "cv_percent": 3.741440437409571
+        "median_ms": 8.1217,
+        "min_ms": 7.7262,
+        "max_ms": 11.3806,
+        "mean_ms": 8.68042,
+        "stdev_ms": 1.5299822358445863,
+        "cv_percent": 17.62567059940171
       }
     },
     "binary_trees/node": {
@@ -2094,17 +2237,18 @@
       "language": "node",
       "n": 12,
       "source": "benchmarks\\node\\binary_trees.js",
-      "source_sha256": "57da88a6484a7a3adaa07caadf4f84250cc13b3ebd0fe30d11f6e2e769a588b8",
-      "staged_sha256": "1fea8dfc8e97f497dab53a942d126d610787c89c9ee7a36d89a17f9ccabbe3e8",
+      "source_sha256": "d3f76b25f1bf502c2fa4076ff11ac08f3ae29dbdce7583e9315ebc86470693b4",
+      "staged_sha256": "d3f76b25f1bf502c2fa4076ff11ac08f3ae29dbdce7583e9315ebc86470693b4",
       "command": [
-        "C:\\Program Files\\nodejs\\node.exe",
-        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\node\\binary_trees.js"
+        "C:\\Program Files\\nodejs\\node.EXE",
+        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\node\\binary_trees.js"
       ],
       "warmups": [
         {
-          "elapsed_ms": 42.8227,
+          "elapsed_ms": 3.3148,
+          "process_elapsed_ms": 75.4342,
           "exit_code": 0,
-          "stdout": "RESULT 65528\n",
+          "stdout": "RESULT 65528\nELAPSED_MS 3.3148\n",
           "stderr": "",
           "status": "ok",
           "result": "65528",
@@ -2113,45 +2257,50 @@
       ],
       "samples": [
         {
-          "elapsed_ms": 42.955,
+          "elapsed_ms": 3.6035,
+          "process_elapsed_ms": 60.5427,
           "exit_code": 0,
-          "stdout": "RESULT 65528\n",
+          "stdout": "RESULT 65528\nELAPSED_MS 3.6035\n",
           "stderr": "",
           "status": "ok",
           "result": "65528",
           "round": 1
         },
         {
-          "elapsed_ms": 43.3173,
+          "elapsed_ms": 2.4942,
+          "process_elapsed_ms": 53.7316,
           "exit_code": 0,
-          "stdout": "RESULT 65528\n",
+          "stdout": "RESULT 65528\nELAPSED_MS 2.4942\n",
           "stderr": "",
           "status": "ok",
           "result": "65528",
           "round": 2
         },
         {
-          "elapsed_ms": 45.7071,
+          "elapsed_ms": 2.6238,
+          "process_elapsed_ms": 49.0305,
           "exit_code": 0,
-          "stdout": "RESULT 65528\n",
+          "stdout": "RESULT 65528\nELAPSED_MS 2.6238\n",
           "stderr": "",
           "status": "ok",
           "result": "65528",
           "round": 3
         },
         {
-          "elapsed_ms": 98.5881,
+          "elapsed_ms": 2.7149,
+          "process_elapsed_ms": 58.5072,
           "exit_code": 0,
-          "stdout": "RESULT 65528\n",
+          "stdout": "RESULT 65528\nELAPSED_MS 2.7149\n",
           "stderr": "",
           "status": "ok",
           "result": "65528",
           "round": 4
         },
         {
-          "elapsed_ms": 42.6178,
+          "elapsed_ms": 2.5067,
+          "process_elapsed_ms": 57.4105,
           "exit_code": 0,
-          "stdout": "RESULT 65528\n",
+          "stdout": "RESULT 65528\nELAPSED_MS 2.5067\n",
           "stderr": "",
           "status": "ok",
           "result": "65528",
@@ -2160,12 +2309,12 @@
       ],
       "summary": {
         "status": "ok",
-        "median_ms": 43.3173,
-        "min_ms": 42.6178,
-        "max_ms": 98.5881,
-        "mean_ms": 54.63706,
-        "stdev_ms": 24.599330305579457,
-        "cv_percent": 45.023158833179274
+        "median_ms": 2.6238,
+        "min_ms": 2.4942,
+        "max_ms": 3.6035,
+        "mean_ms": 2.78862,
+        "stdev_ms": 0.4644329090406923,
+        "cv_percent": 16.65457857437343
       }
     },
     "spectral_norm/aquarius": {
@@ -2173,18 +2322,19 @@
       "language": "aquarius",
       "n": 60,
       "source": "benchmarks\\aquarius\\spectral_norm.aqua",
-      "source_sha256": "f710acd8c1bacb4e03bfa942d03504f39b1fee3e2440f499d8d5a5d48b62451e",
-      "staged_sha256": "2892cb02ac6d8c9b3762b5669145d15686a2b59063a3b4662c509653b122cfde",
+      "source_sha256": "5b709c7eefabbc7fb4cd13e389e8e59bca5b8bf4dbf7f1dfdb42efbd511e114d",
+      "staged_sha256": "5b709c7eefabbc7fb4cd13e389e8e59bca5b8bf4dbf7f1dfdb42efbd511e114d",
       "command": [
-        "C:\\OfficialProjects\\AquariusLangTW\\dist\\releases\\AquariusCompiler-win-x64-20261010-225517-73f3c2c9\\aqua\\aqua.exe",
+        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\elapsed-compiler\\bin\\AquariusCli\\release\\aqua.exe",
         "run",
-        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\aquarius\\spectral_norm.wasm"
+        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\aquarius\\spectral_norm.wasm"
       ],
       "warmups": [
         {
-          "elapsed_ms": 283.6427,
+          "elapsed_ms": 126.6474,
+          "process_elapsed_ms": 369.1256,
           "exit_code": 0,
-          "stdout": "RESULT 1.6236011690579908\n",
+          "stdout": "RESULT 1.6236011690579908\nELAPSED_MS 126.6474\n",
           "stderr": "",
           "status": "ok",
           "result": "1.6236011690579908",
@@ -2193,45 +2343,50 @@
       ],
       "samples": [
         {
-          "elapsed_ms": 288.7431,
+          "elapsed_ms": 126.1669,
+          "process_elapsed_ms": 344.1678,
           "exit_code": 0,
-          "stdout": "RESULT 1.6236011690579908\n",
+          "stdout": "RESULT 1.6236011690579908\nELAPSED_MS 126.1669\n",
           "stderr": "",
           "status": "ok",
           "result": "1.6236011690579908",
           "round": 1
         },
         {
-          "elapsed_ms": 298.5046,
+          "elapsed_ms": 125.7479,
+          "process_elapsed_ms": 334.1538,
           "exit_code": 0,
-          "stdout": "RESULT 1.6236011690579908\n",
+          "stdout": "RESULT 1.6236011690579908\nELAPSED_MS 125.7479\n",
           "stderr": "",
           "status": "ok",
           "result": "1.6236011690579908",
           "round": 2
         },
         {
-          "elapsed_ms": 311.5561,
+          "elapsed_ms": 127.7696,
+          "process_elapsed_ms": 336.8893,
           "exit_code": 0,
-          "stdout": "RESULT 1.6236011690579908\n",
+          "stdout": "RESULT 1.6236011690579908\nELAPSED_MS 127.7696\n",
           "stderr": "",
           "status": "ok",
           "result": "1.6236011690579908",
           "round": 3
         },
         {
-          "elapsed_ms": 292.9107,
+          "elapsed_ms": 126.1798,
+          "process_elapsed_ms": 357.1564,
           "exit_code": 0,
-          "stdout": "RESULT 1.6236011690579908\n",
+          "stdout": "RESULT 1.6236011690579908\nELAPSED_MS 126.1798\n",
           "stderr": "",
           "status": "ok",
           "result": "1.6236011690579908",
           "round": 4
         },
         {
-          "elapsed_ms": 286.9462,
+          "elapsed_ms": 125.6588,
+          "process_elapsed_ms": 369.5188,
           "exit_code": 0,
-          "stdout": "RESULT 1.6236011690579908\n",
+          "stdout": "RESULT 1.6236011690579908\nELAPSED_MS 125.6588\n",
           "stderr": "",
           "status": "ok",
           "result": "1.6236011690579908",
@@ -2240,28 +2395,28 @@
       ],
       "build": {
         "command": [
-          "C:\\OfficialProjects\\AquariusLangTW\\dist\\releases\\AquariusCompiler-win-x64-20261010-225517-73f3c2c9\\aqua\\aqua.exe",
+          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\elapsed-compiler\\bin\\AquariusCli\\release\\aqua.exe",
           "build",
-          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\aquarius\\spectral_norm.aqua",
+          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\aquarius\\spectral_norm.aqua",
           "--root",
-          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\aquarius",
+          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\aquarius",
           "-o",
-          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\aquarius\\spectral_norm.wasm"
+          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\aquarius\\spectral_norm.wasm"
         ],
-        "elapsed_ms": 129.7216,
+        "elapsed_ms": 155.2567,
         "exit_code": 0,
-        "stdout": "Compiled 1 script(s) to C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\aquarius\\spectral_norm.wasm\n",
+        "stdout": "Compiled 1 script(s) to C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\aquarius\\spectral_norm.wasm\n",
         "stderr": ""
       },
-      "wasm_sha256": "8d3dc7d38d5061ce1a333917e1a568b46f9e964d835dbe366650bb65c0b00680",
+      "wasm_sha256": "da0182c552e31025b7d59f837aa9477b6c55290c49a51b77a59d64b449ce5880",
       "summary": {
         "status": "ok",
-        "median_ms": 292.9107,
-        "min_ms": 286.9462,
-        "max_ms": 311.5561,
-        "mean_ms": 295.73214,
-        "stdev_ms": 9.90055793897496,
-        "cv_percent": 3.3478126317196906
+        "median_ms": 126.1669,
+        "min_ms": 125.6588,
+        "max_ms": 127.7696,
+        "mean_ms": 126.3046,
+        "stdev_ms": 0.8526039320810089,
+        "cv_percent": 0.67503791000566
       }
     },
     "spectral_norm/python": {
@@ -2269,17 +2424,18 @@
       "language": "python",
       "n": 60,
       "source": "benchmarks\\python\\spectral_norm.py",
-      "source_sha256": "21927ed8c636bf79a21d120a8af7440686d015ee11f07fd42b77ab26e13f5313",
-      "staged_sha256": "b8817e667ef998a631b026a93492b777d41c410d96d1cef4c2f8317d2dc163e2",
+      "source_sha256": "0cb69e46fb5f8e186bc47ee0959c048287e056cf193b35d3290c6b50745947f4",
+      "staged_sha256": "0cb69e46fb5f8e186bc47ee0959c048287e056cf193b35d3290c6b50745947f4",
       "command": [
         "C:\\Users\\templ\\.pyenv\\pyenv-win\\versions\\3.12.10\\python.exe",
-        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\python\\spectral_norm.py"
+        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\python\\spectral_norm.py"
       ],
       "warmups": [
         {
-          "elapsed_ms": 44.5526,
+          "elapsed_ms": 14.556,
+          "process_elapsed_ms": 50.3488,
           "exit_code": 0,
-          "stdout": "RESULT 1.6236011690579908\n",
+          "stdout": "RESULT 1.6236011690579908\nELAPSED_MS 14.556\n",
           "stderr": "",
           "status": "ok",
           "result": "1.6236011690579908",
@@ -2288,45 +2444,50 @@
       ],
       "samples": [
         {
-          "elapsed_ms": 34.3506,
+          "elapsed_ms": 17.6236,
+          "process_elapsed_ms": 180.6986,
           "exit_code": 0,
-          "stdout": "RESULT 1.6236011690579908\n",
+          "stdout": "RESULT 1.6236011690579908\nELAPSED_MS 17.6236\n",
           "stderr": "",
           "status": "ok",
           "result": "1.6236011690579908",
           "round": 1
         },
         {
-          "elapsed_ms": 35.2117,
+          "elapsed_ms": 14.4106,
+          "process_elapsed_ms": 45.328,
           "exit_code": 0,
-          "stdout": "RESULT 1.6236011690579908\n",
+          "stdout": "RESULT 1.6236011690579908\nELAPSED_MS 14.4106\n",
           "stderr": "",
           "status": "ok",
           "result": "1.6236011690579908",
           "round": 2
         },
         {
-          "elapsed_ms": 46.7903,
+          "elapsed_ms": 14.4816,
+          "process_elapsed_ms": 49.0437,
           "exit_code": 0,
-          "stdout": "RESULT 1.6236011690579908\n",
+          "stdout": "RESULT 1.6236011690579908\nELAPSED_MS 14.4816\n",
           "stderr": "",
           "status": "ok",
           "result": "1.6236011690579908",
           "round": 3
         },
         {
-          "elapsed_ms": 34.5347,
+          "elapsed_ms": 13.9565,
+          "process_elapsed_ms": 65.4484,
           "exit_code": 0,
-          "stdout": "RESULT 1.6236011690579908\n",
+          "stdout": "RESULT 1.6236011690579908\nELAPSED_MS 13.9565\n",
           "stderr": "",
           "status": "ok",
           "result": "1.6236011690579908",
           "round": 4
         },
         {
-          "elapsed_ms": 35.9166,
+          "elapsed_ms": 14.3205,
+          "process_elapsed_ms": 57.5047,
           "exit_code": 0,
-          "stdout": "RESULT 1.6236011690579908\n",
+          "stdout": "RESULT 1.6236011690579908\nELAPSED_MS 14.3205\n",
           "stderr": "",
           "status": "ok",
           "result": "1.6236011690579908",
@@ -2335,12 +2496,12 @@
       ],
       "summary": {
         "status": "ok",
-        "median_ms": 35.2117,
-        "min_ms": 34.3506,
-        "max_ms": 46.7903,
-        "mean_ms": 37.36078,
-        "stdev_ms": 5.307258236321275,
-        "cv_percent": 14.20542675051558
+        "median_ms": 14.4106,
+        "min_ms": 13.9565,
+        "max_ms": 17.6236,
+        "mean_ms": 14.95856,
+        "stdev_ms": 1.5034488694332107,
+        "cv_percent": 10.0507593607487
       }
     },
     "spectral_norm/node": {
@@ -2348,17 +2509,18 @@
       "language": "node",
       "n": 60,
       "source": "benchmarks\\node\\spectral_norm.js",
-      "source_sha256": "9237cfebe6220f11133ccc391766a0f86679a7dbbc41e3c9616144bd69430912",
-      "staged_sha256": "bb397f8aae1806503f3b428822832f6dfbed438ab098381a96ff6c0aaf84ddd7",
+      "source_sha256": "d2b0ddfa485fb5634d67cc48fca03d8f83b88e997693affe7e9595aa609c92ec",
+      "staged_sha256": "d2b0ddfa485fb5634d67cc48fca03d8f83b88e997693affe7e9595aa609c92ec",
       "command": [
-        "C:\\Program Files\\nodejs\\node.exe",
-        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\node\\spectral_norm.js"
+        "C:\\Program Files\\nodejs\\node.EXE",
+        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\node\\spectral_norm.js"
       ],
       "warmups": [
         {
-          "elapsed_ms": 40.7741,
+          "elapsed_ms": 1.7238,
+          "process_elapsed_ms": 73.0835,
           "exit_code": 0,
-          "stdout": "RESULT 1.6236011690579908\n",
+          "stdout": "RESULT 1.6236011690579908\nELAPSED_MS 1.7238\n",
           "stderr": "",
           "status": "ok",
           "result": "1.6236011690579908",
@@ -2367,45 +2529,50 @@
       ],
       "samples": [
         {
-          "elapsed_ms": 40.8189,
+          "elapsed_ms": 1.8442,
+          "process_elapsed_ms": 115.6946,
           "exit_code": 0,
-          "stdout": "RESULT 1.6236011690579908\n",
+          "stdout": "RESULT 1.6236011690579908\nELAPSED_MS 1.8442\n",
           "stderr": "",
           "status": "ok",
           "result": "1.6236011690579908",
           "round": 1
         },
         {
-          "elapsed_ms": 45.2862,
+          "elapsed_ms": 4.822,
+          "process_elapsed_ms": 70.5703,
           "exit_code": 0,
-          "stdout": "RESULT 1.6236011690579908\n",
+          "stdout": "RESULT 1.6236011690579908\nELAPSED_MS 4.822\n",
           "stderr": "",
           "status": "ok",
           "result": "1.6236011690579908",
           "round": 2
         },
         {
-          "elapsed_ms": 119.1885,
+          "elapsed_ms": 1.7687,
+          "process_elapsed_ms": 99.7451,
           "exit_code": 0,
-          "stdout": "RESULT 1.6236011690579908\n",
+          "stdout": "RESULT 1.6236011690579908\nELAPSED_MS 1.7687\n",
           "stderr": "",
           "status": "ok",
           "result": "1.6236011690579908",
           "round": 3
         },
         {
-          "elapsed_ms": 45.0325,
+          "elapsed_ms": 1.6916,
+          "process_elapsed_ms": 149.4267,
           "exit_code": 0,
-          "stdout": "RESULT 1.6236011690579908\n",
+          "stdout": "RESULT 1.6236011690579908\nELAPSED_MS 1.6916\n",
           "stderr": "",
           "status": "ok",
           "result": "1.6236011690579908",
           "round": 4
         },
         {
-          "elapsed_ms": 41.0218,
+          "elapsed_ms": 1.5585,
+          "process_elapsed_ms": 53.5713,
           "exit_code": 0,
-          "stdout": "RESULT 1.6236011690579908\n",
+          "stdout": "RESULT 1.6236011690579908\nELAPSED_MS 1.5585\n",
           "stderr": "",
           "status": "ok",
           "result": "1.6236011690579908",
@@ -2414,12 +2581,12 @@
       ],
       "summary": {
         "status": "ok",
-        "median_ms": 45.0325,
-        "min_ms": 40.8189,
-        "max_ms": 119.1885,
-        "mean_ms": 58.26958,
-        "stdev_ms": 34.120797926294166,
-        "cv_percent": 58.55679400176588
+        "median_ms": 1.7687,
+        "min_ms": 1.5585,
+        "max_ms": 4.822,
+        "mean_ms": 2.337,
+        "stdev_ms": 1.3931659215613912,
+        "cv_percent": 59.61343267271678
       }
     },
     "collatz/aquarius": {
@@ -2427,18 +2594,19 @@
       "language": "aquarius",
       "n": 10000,
       "source": "benchmarks\\aquarius\\collatz.aqua",
-      "source_sha256": "bc97e14e539802d28821fbbf53cf57f3d617521618078ee207dc0873671c4a3b",
-      "staged_sha256": "a0aa527cdc0c9cb06c0a4a217468d878761375275fc026b12aed807552a7386a",
+      "source_sha256": "3d26b87abd9c1d7765865c4ef103363c4108aff18ceb3457be7e34a4833c3c64",
+      "staged_sha256": "3d26b87abd9c1d7765865c4ef103363c4108aff18ceb3457be7e34a4833c3c64",
       "command": [
-        "C:\\OfficialProjects\\AquariusLangTW\\dist\\releases\\AquariusCompiler-win-x64-20261010-225517-73f3c2c9\\aqua\\aqua.exe",
+        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\elapsed-compiler\\bin\\AquariusCli\\release\\aqua.exe",
         "run",
-        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\aquarius\\collatz.wasm"
+        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\aquarius\\collatz.wasm"
       ],
       "warmups": [
         {
-          "elapsed_ms": 347.5938,
+          "elapsed_ms": 191.774,
+          "process_elapsed_ms": 483.5949,
           "exit_code": 0,
-          "stdout": "RESULT 849666\n",
+          "stdout": "RESULT 849666\nELAPSED_MS 191.774\n",
           "stderr": "",
           "status": "ok",
           "result": "849666",
@@ -2447,45 +2615,50 @@
       ],
       "samples": [
         {
-          "elapsed_ms": 344.927,
+          "elapsed_ms": 189.8901,
+          "process_elapsed_ms": 381.1085,
           "exit_code": 0,
-          "stdout": "RESULT 849666\n",
+          "stdout": "RESULT 849666\nELAPSED_MS 189.8901\n",
           "stderr": "",
           "status": "ok",
           "result": "849666",
           "round": 1
         },
         {
-          "elapsed_ms": 343.909,
+          "elapsed_ms": 190.62630000000001,
+          "process_elapsed_ms": 385.5119,
           "exit_code": 0,
-          "stdout": "RESULT 849666\n",
+          "stdout": "RESULT 849666\nELAPSED_MS 190.62630000000001\n",
           "stderr": "",
           "status": "ok",
           "result": "849666",
           "round": 2
         },
         {
-          "elapsed_ms": 401.2512,
+          "elapsed_ms": 194.0631,
+          "process_elapsed_ms": 407.4691,
           "exit_code": 0,
-          "stdout": "RESULT 849666\n",
+          "stdout": "RESULT 849666\nELAPSED_MS 194.0631\n",
           "stderr": "",
           "status": "ok",
           "result": "849666",
           "round": 3
         },
         {
-          "elapsed_ms": 374.9822,
+          "elapsed_ms": 190.4769,
+          "process_elapsed_ms": 378.755,
           "exit_code": 0,
-          "stdout": "RESULT 849666\n",
+          "stdout": "RESULT 849666\nELAPSED_MS 190.4769\n",
           "stderr": "",
           "status": "ok",
           "result": "849666",
           "round": 4
         },
         {
-          "elapsed_ms": 340.7478,
+          "elapsed_ms": 196.0226,
+          "process_elapsed_ms": 412.2679,
           "exit_code": 0,
-          "stdout": "RESULT 849666\n",
+          "stdout": "RESULT 849666\nELAPSED_MS 196.0226\n",
           "stderr": "",
           "status": "ok",
           "result": "849666",
@@ -2494,28 +2667,28 @@
       ],
       "build": {
         "command": [
-          "C:\\OfficialProjects\\AquariusLangTW\\dist\\releases\\AquariusCompiler-win-x64-20261010-225517-73f3c2c9\\aqua\\aqua.exe",
+          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\elapsed-compiler\\bin\\AquariusCli\\release\\aqua.exe",
           "build",
-          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\aquarius\\collatz.aqua",
+          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\aquarius\\collatz.aqua",
           "--root",
-          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\aquarius",
+          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\aquarius",
           "-o",
-          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\aquarius\\collatz.wasm"
+          "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\aquarius\\collatz.wasm"
         ],
-        "elapsed_ms": 121.3176,
+        "elapsed_ms": 148.0967,
         "exit_code": 0,
-        "stdout": "Compiled 1 script(s) to C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\aquarius\\collatz.wasm\n",
+        "stdout": "Compiled 1 script(s) to C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\aquarius\\collatz.wasm\n",
         "stderr": ""
       },
-      "wasm_sha256": "6593a336d3506986b70b25e985a91f141c5a4324cc72c24c77c46876be913902",
+      "wasm_sha256": "c5d1377cca8b0cd826a6fa2bc26b89c629389a591358470088c4c10749eb64ee",
       "summary": {
         "status": "ok",
-        "median_ms": 344.927,
-        "min_ms": 340.7478,
-        "max_ms": 401.2512,
-        "mean_ms": 361.16344,
-        "stdev_ms": 26.34446179917137,
-        "cv_percent": 7.294332393990757
+        "median_ms": 190.62630000000001,
+        "min_ms": 189.8901,
+        "max_ms": 196.0226,
+        "mean_ms": 192.2158,
+        "stdev_ms": 2.6862337705419486,
+        "cv_percent": 1.3975093465479675
       }
     },
     "collatz/python": {
@@ -2523,17 +2696,18 @@
       "language": "python",
       "n": 10000,
       "source": "benchmarks\\python\\collatz.py",
-      "source_sha256": "708043416da6d56321a8e59af03be55abd017e0fc3f5da7714b72508e81ffd58",
-      "staged_sha256": "07ff9847d2734724558b080184661e9ab86a5e9a9baa05fb1f91fead9540432e",
+      "source_sha256": "5296d40d38d68002f9590d62b072f88b4afaa2d79c714bc82030068883906237",
+      "staged_sha256": "5296d40d38d68002f9590d62b072f88b4afaa2d79c714bc82030068883906237",
       "command": [
         "C:\\Users\\templ\\.pyenv\\pyenv-win\\versions\\3.12.10\\python.exe",
-        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\python\\collatz.py"
+        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\python\\collatz.py"
       ],
       "warmups": [
         {
-          "elapsed_ms": 119.6766,
+          "elapsed_ms": 82.5788,
+          "process_elapsed_ms": 149.2571,
           "exit_code": 0,
-          "stdout": "RESULT 849666\n",
+          "stdout": "RESULT 849666\nELAPSED_MS 82.5788\n",
           "stderr": "",
           "status": "ok",
           "result": "849666",
@@ -2542,45 +2716,50 @@
       ],
       "samples": [
         {
-          "elapsed_ms": 104.7843,
+          "elapsed_ms": 79.7835,
+          "process_elapsed_ms": 120.1603,
           "exit_code": 0,
-          "stdout": "RESULT 849666\n",
+          "stdout": "RESULT 849666\nELAPSED_MS 79.7835\n",
           "stderr": "",
           "status": "ok",
           "result": "849666",
           "round": 1
         },
         {
-          "elapsed_ms": 118.4073,
+          "elapsed_ms": 84.6524,
+          "process_elapsed_ms": 111.6615,
           "exit_code": 0,
-          "stdout": "RESULT 849666\n",
+          "stdout": "RESULT 849666\nELAPSED_MS 84.6524\n",
           "stderr": "",
           "status": "ok",
           "result": "849666",
           "round": 2
         },
         {
-          "elapsed_ms": 106.9461,
+          "elapsed_ms": 77.0778,
+          "process_elapsed_ms": 144.8955,
           "exit_code": 0,
-          "stdout": "RESULT 849666\n",
+          "stdout": "RESULT 849666\nELAPSED_MS 77.0778\n",
           "stderr": "",
           "status": "ok",
           "result": "849666",
           "round": 3
         },
         {
-          "elapsed_ms": 130.2291,
+          "elapsed_ms": 80.9528,
+          "process_elapsed_ms": 112.1344,
           "exit_code": 0,
-          "stdout": "RESULT 849666\n",
+          "stdout": "RESULT 849666\nELAPSED_MS 80.9528\n",
           "stderr": "",
           "status": "ok",
           "result": "849666",
           "round": 4
         },
         {
-          "elapsed_ms": 105.4408,
+          "elapsed_ms": 82.9054,
+          "process_elapsed_ms": 137.0114,
           "exit_code": 0,
-          "stdout": "RESULT 849666\n",
+          "stdout": "RESULT 849666\nELAPSED_MS 82.9054\n",
           "stderr": "",
           "status": "ok",
           "result": "849666",
@@ -2589,12 +2768,12 @@
       ],
       "summary": {
         "status": "ok",
-        "median_ms": 106.9461,
-        "min_ms": 104.7843,
-        "max_ms": 130.2291,
-        "mean_ms": 113.16152,
-        "stdev_ms": 11.03674853487203,
-        "cv_percent": 9.753093220091097
+        "median_ms": 80.9528,
+        "min_ms": 77.0778,
+        "max_ms": 84.6524,
+        "mean_ms": 81.07438,
+        "stdev_ms": 2.9072609930998636,
+        "cv_percent": 3.585918255680603
       }
     },
     "collatz/node": {
@@ -2602,17 +2781,18 @@
       "language": "node",
       "n": 10000,
       "source": "benchmarks\\node\\collatz.js",
-      "source_sha256": "21ed6c36ada2af136e2b3dbe8fcc9d0f427030476d1f8ed37f4d50d497e916ad",
-      "staged_sha256": "336a0ead86dc486a352fe73504b0ea8db1344433497fa23dd71c2d0af14d21f9",
+      "source_sha256": "02bc977b42a3fdd3c0eace6eb350de4c37d90e500897244d1294783f0c769e5a",
+      "staged_sha256": "02bc977b42a3fdd3c0eace6eb350de4c37d90e500897244d1294783f0c769e5a",
       "command": [
-        "C:\\Program Files\\nodejs\\node.exe",
-        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-lty_9dfo\\node\\collatz.js"
+        "C:\\Program Files\\nodejs\\node.EXE",
+        "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\.benchmark-work\\run-dem5y6if\\node\\collatz.js"
       ],
       "warmups": [
         {
-          "elapsed_ms": 45.2183,
+          "elapsed_ms": 5.0406,
+          "process_elapsed_ms": 120.0855,
           "exit_code": 0,
-          "stdout": "RESULT 849666\n",
+          "stdout": "RESULT 849666\nELAPSED_MS 5.0406\n",
           "stderr": "",
           "status": "ok",
           "result": "849666",
@@ -2621,45 +2801,50 @@
       ],
       "samples": [
         {
-          "elapsed_ms": 41.6684,
+          "elapsed_ms": 4.8642,
+          "process_elapsed_ms": 64.6703,
           "exit_code": 0,
-          "stdout": "RESULT 849666\n",
+          "stdout": "RESULT 849666\nELAPSED_MS 4.8642\n",
           "stderr": "",
           "status": "ok",
           "result": "849666",
           "round": 1
         },
         {
-          "elapsed_ms": 45.1966,
+          "elapsed_ms": 4.7544,
+          "process_elapsed_ms": 51.0685,
           "exit_code": 0,
-          "stdout": "RESULT 849666\n",
+          "stdout": "RESULT 849666\nELAPSED_MS 4.7544\n",
           "stderr": "",
           "status": "ok",
           "result": "849666",
           "round": 2
         },
         {
-          "elapsed_ms": 43.5345,
+          "elapsed_ms": 4.7689,
+          "process_elapsed_ms": 86.9209,
           "exit_code": 0,
-          "stdout": "RESULT 849666\n",
+          "stdout": "RESULT 849666\nELAPSED_MS 4.7689\n",
           "stderr": "",
           "status": "ok",
           "result": "849666",
           "round": 3
         },
         {
-          "elapsed_ms": 70.1059,
+          "elapsed_ms": 4.7692,
+          "process_elapsed_ms": 53.4998,
           "exit_code": 0,
-          "stdout": "RESULT 849666\n",
+          "stdout": "RESULT 849666\nELAPSED_MS 4.7692\n",
           "stderr": "",
           "status": "ok",
           "result": "849666",
           "round": 4
         },
         {
-          "elapsed_ms": 45.2134,
+          "elapsed_ms": 4.9056,
+          "process_elapsed_ms": 61.7976,
           "exit_code": 0,
-          "stdout": "RESULT 849666\n",
+          "stdout": "RESULT 849666\nELAPSED_MS 4.9056\n",
           "stderr": "",
           "status": "ok",
           "result": "849666",
@@ -2668,12 +2853,12 @@
       ],
       "summary": {
         "status": "ok",
-        "median_ms": 45.1966,
-        "min_ms": 41.6684,
-        "max_ms": 70.1059,
-        "mean_ms": 49.14376,
-        "stdev_ms": 11.808724741181837,
-        "cv_percent": 24.02894027885094
+        "median_ms": 4.7692,
+        "min_ms": 4.7544,
+        "max_ms": 4.9056,
+        "mean_ms": 4.81246,
+        "stdev_ms": 0.06799255841634423,
+        "cv_percent": 1.4128441257972895
       }
     }
   },
@@ -3581,14 +3766,19 @@
   ],
   "source_sha256": {
     "benchmarks.json": "b6d83f3febad2f2af3b94a535d68478aae0027eb6acef14e04a886f1c98880b0",
-    "run_benchmarks.py": "3815e43b86465f92b8c5035565cc8bd7f3289c88b45f8e20cc7d371634940afe",
+    "run_benchmarks.py": "4b3010c4727dec58d808e668304ef85bbade3254befc3d0fdd4db2decb765ebe",
     "reference.py": "d5155303901c3230277d7a0d75d2a806103cb51838d7446dc6b9e417f467a463",
-    "readme_report.py": "887100026f00a508159a83e163d6691249d28d805a97d45ef82ac530422e1d4f"
+    "readme_report.py": "e835bd9e19432fbe31a86cce95b7ebebdb3d2b81aed23a356530106a9b018392"
   },
   "artifacts": {
-    "json": "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\results\\20261010-233931-239048\\results.json",
-    "summary_csv": "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\results\\20261010-233931-239048\\summary.csv",
-    "samples_csv": "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\results\\20261010-233931-239048\\samples.csv"
+    "json": "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\results\\20261012-150231-968894\\results.json",
+    "summary_csv": "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\results\\20261012-150231-968894\\summary.csv",
+    "samples_csv": "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\results\\20261012-150231-968894\\samples.csv"
   },
-  "finished_at": "2026-10-10T23:39:53.523298+08:00"
+  "finished_at": "2026-10-12T15:03:00.426043+08:00",
+  "scores": {
+    "aquarius": 4.742795014527214,
+    "python": 16.1624653995708,
+    "node": 100.0
+  }
 }

@@ -1,5 +1,6 @@
 "use strict";
 const benchmark_n = 80;
+const benchmark_start = process.hrtime.bigint();
 let checksum = 0;
 for (let y = 0; y < benchmark_n; y++) {
   const ci = 2.0 * y / benchmark_n - 1.0;
@@ -13,4 +14,7 @@ for (let y = 0; y < benchmark_n; y++) {
     checksum += count;
   }
 }
-console.log("RESULT", checksum);
+const benchmark_result = checksum;
+const benchmark_elapsed_ms = Number(process.hrtime.bigint() - benchmark_start) / 1e6;
+console.log("RESULT", benchmark_result);
+console.log("ELAPSED_MS", benchmark_elapsed_ms);

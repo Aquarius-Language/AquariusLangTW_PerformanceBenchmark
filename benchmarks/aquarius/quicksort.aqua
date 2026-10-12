@@ -1,11 +1,4 @@
 變數 benchmark_n = 2000;
-變數 values = [];
-變數 seed = 42;
-迴圈 (變數 i = 0; i < benchmark_n; i++) {
-    變數 raw = seed * 251 + 17;
-    seed = raw - (raw / 65536) * 65536;
-    values = 加入(values, seed);
-}
 變數 sort = 函式(a, lo, hi) {
     變數 i = lo; 變數 j = hi;
     變數 pivot = a[(lo + hi) / 2];
@@ -20,6 +13,15 @@
     如果 (lo < j) { sort(a, lo, j); }
     如果 (i < hi) { sort(a, i, hi); }
 };
+變數 benchmark_start = 目前時間();
+變數 values = [];
+變數 seed = 42;
+迴圈 (變數 i = 0; i < benchmark_n; i++) {
+    變數 raw = seed * 251 + 17;
+    seed = raw - (raw / 65536) * 65536;
+    values = 加入(values, seed);
+}
+
 sort(values, 0, benchmark_n - 1);
 變數 checksum = 0;
 變數 ordered = 真;
@@ -28,4 +30,5 @@ sort(values, 0, benchmark_n - 1);
     checksum += values[i] * (i + 1);
     checksum -= (checksum / 1000003) * 1000003;
 }
-如果 (ordered) { 印出("RESULT", checksum); } 否則 { 印出("ERROR Unsorted output"); }
+變數 benchmark_elapsed_ms = 目前時間() - benchmark_start;
+如果 (ordered) { 印出("RESULT", checksum); 印出("ELAPSED_MS", benchmark_elapsed_ms); } 否則 { 印出("ERROR Unsorted output"); }

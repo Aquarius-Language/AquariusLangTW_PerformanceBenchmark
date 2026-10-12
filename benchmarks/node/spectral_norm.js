@@ -14,6 +14,7 @@ function multiply(src, dst, transpose) {
     dst[i] = total;
   }
 }
+const benchmark_start = process.hrtime.bigint();
 let u = [], v = [], temp = [];
 for (let i = 0; i < benchmark_n; i++) {
   u = u.concat([1.0]); v = v.concat([0.0]); temp = temp.concat([0.0]);
@@ -24,4 +25,7 @@ for (let iteration = 0; iteration < 10; iteration++) {
 }
 let uv = 0.0, vv = 0.0;
 for (let i = 0; i < benchmark_n; i++) { uv += u[i] * v[i]; vv += v[i] * v[i]; }
-console.log("RESULT", uv / vv);
+const benchmark_result = uv / vv;
+const benchmark_elapsed_ms = Number(process.hrtime.bigint() - benchmark_start) / 1e6;
+console.log("RESULT", benchmark_result);
+console.log("ELAPSED_MS", benchmark_elapsed_ms);

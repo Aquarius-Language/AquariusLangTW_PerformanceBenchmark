@@ -18,7 +18,7 @@ STATUS = {"ok": "通過", "failed": "失敗", "incomplete": "未完成", "unavai
 
 
 def composite_scores(report):
-    """Python = 100；各演算法的相對速度等權重取幾何平均。"""
+    """各演算法的相對速度等權重取幾何平均，再將最快語言正規化為 100。"""
     if not report["benchmarks"]:
         return None
     for name in report["benchmarks"]:
@@ -27,13 +27,14 @@ def composite_scores(report):
             value = summary.get("median_ms", 0)
             if summary["status"] != "ok" or not math.isfinite(value) or value <= 0:
                 return None
-    scores = {}
+    log_speeds = {}
     for language in LANGUAGES:
-        ratios = [report["cases"][f"{name}/python"]["summary"]["median_ms"] /
-                  report["cases"][f"{name}/{language}"]["summary"]["median_ms"]
-                  for name in report["benchmarks"]]
-        scores[language] = 100 * math.exp(sum(math.log(ratio) for ratio in ratios) / len(ratios))
-    return scores
+        log_ratios = [math.log(report["cases"][f"{name}/python"]["summary"]["median_ms"]) -
+                      math.log(report["cases"][f"{name}/{language}"]["summary"]["median_ms"])
+                      for name in report["benchmarks"]]
+        log_speeds[language] = sum(log_ratios) / len(log_ratios)
+    fastest = max(log_speeds.values())
+    return {language: 100 * math.exp(speed - fastest) for language, speed in log_speeds.items()}
 
 
 def md(value):
@@ -43,7 +44,9 @@ def md(value):
 def generate_readme(report):
     config, env = report["config"], report["environment"]
     scores = composite_scores(report)
-    aquarius_timing = "程式啟動與預先編譯 Wasm 載入（Wasm 生成不計入耗時，引擎編譯仍計入）" if config.get("aquarius_mode") == "precompiled" else "程式啟動與原始碼載入／編譯"
+    internal_timing = config.get("timing") == "in-process"
+    timing_description = ("計時採用各語言程序內的單調計時器，涵蓋資料初始化與演算法／校驗值計算，排除程序啟動、原始碼／Wasm 載入與初始編譯、輸出。"
+                          if internal_timing else "此歷史報告採用程序外計時，包含程序啟動、載入與輸出；不能與程序內計時結果直接比較。")
     lines = ["# 星泉、Python、Node.js 桌面執行效能評比", ""]
     if scores:
         ranking = sorted(scores, key=scores.get, reverse=True)
@@ -52,21 +55,22 @@ def generate_readme(report):
         gaps = "、".join(f"{LANGUAGES[lang]} 分數低 {(1 - scores[lang] / scores[top]) * 100:.1f}%"
                          for lang in ranking[1:])
         lines += [f"**本次綜合效能：{score_text}（越高越快）。** 相較 {LANGUAGES[top]}，{gaps}。", "",
-                  f"以 Python 為 100 分，將本次 {len(report['benchmarks'])} 項演算法的相對速度等權重取幾何平均。"
-                  f"計時包含{aquarius_timing}，分數代表本機這組腳本的整體執行表現。", "",
-                  "| 排名 | 程式語言 | 綜合分數 | 相對 Python 的綜合速度 |",
+                  f"將本次 {len(report['benchmarks'])} 項演算法的相對速度等權重取幾何平均，再以最快語言為 100 分。"
+                  f"{timing_description}", "",
+                  "| 排名 | 程式語言 | 綜合分數 | 相對最快語言的綜合速度 |",
                   "| ---: | --- | ---: | ---: |"]
         for place, language in enumerate(ranking, 1):
             lines.append(f"| {place} | {LANGUAGES[language]} | {scores[language]:.2f} | {scores[language] / 100:.3f} 倍 |")
     else:
         lines += ["**本次資料不足以計算三種語言的綜合分數。** 至少一項測試失敗、未完成或執行環境無法使用；"
                   "各項測試狀態列於下方。", ""]
-    lines += ["", "綜合分數 = 100 × 幾何平均（各項 Python 耗時中位數 ÷ 該語言耗時中位數）。"
+    lines += ["", "相對速度 G = 幾何平均（各項 Python 耗時中位數 ÷ 該語言耗時中位數）；"
+              "綜合分數 = 100 × G ÷ 三種語言中最大的 G，因此最高分固定為 100。"
               "每項演算法權重相同；只有三種語言在所有選定測試都通過時，才計算綜合分數。"
               "不同測試組合與輸入規模的分數不可直接比較。", "",
               "本專案提供十種經典演算法、三十份可獨立執行的腳本，以及負責驗證結果、產生 README 與 JSON／CSV 報告的 Python 主控程式。", "",
               "## 執行方式", "",
-              "需求：Python 3.10 以上、Node.js，以及星泉 Wasm 編譯器（`aqua` 與隨附相依檔案）。"
+              "需求：Python 3.10 以上、Node.js，以及支援 `目前時間()`／`currentTime()` 的星泉 Wasm 編譯器（`aqua` 與隨附相依檔案）。"
               "不需要安裝 Python 套件或執行 npm install。星泉腳本使用星泉繁體中文版的繁體中文關鍵字與雙語內建函式，"
               "舊版僅支援英文的直譯器無法執行。", "",
               "```powershell", "python run_benchmarks.py", "# 使用較小輸入，快速檢查正確性：",
@@ -87,20 +91,27 @@ def generate_readme(report):
               "可使用 `--output-dir`、`--readme`、`--timeout`、`--seed`、`--repetitions`、`--warmups` 自訂測試。"
               "結束碼 1 表示至少一個執行環境無法使用或測試驗證失敗；報告仍會保留失敗資訊。", "",
               "## 測量方法", "",
-              "- 每筆樣本都啟動新的程序。Python 使用 `perf_counter_ns`，測量從啟動至程序結束並擷取輸出的實際經過時間。"
-              "計時包含執行環境啟動、引擎編譯、記憶體配置、垃圾回收、演算法與輸出。",
-              "- 星泉一律使用 `aqua build` 在計時前建立 Wasm，再計時 `aqua run`；Wasm 生成不計入樣本耗時。"
+              ("- 每筆樣本都啟動新的程序，但排名只採用腳本自行回報的 `ELAPSED_MS`。"
+               "星泉使用 `目前時間()`（毫秒）、Python 使用 `time.perf_counter_ns()`（奈秒差值 ÷ 1e6）、"
+               "Node.js 使用 `process.hrtime.bigint()`（奈秒差值 ÷ 1e6）。三者皆為單調計時器。"
+               if internal_timing else "- 此歷史報告的樣本以主控程式 `time.perf_counter_ns()` 測量完整程序經過時間，包含啟動、載入、編譯與輸出。"),
+              ("- 三種語言皆在函式定義完成後、資料初始化前開始計時，並在演算法與校驗值計算完成後、輸出前停止。"
+               "執行中的記憶體配置、垃圾回收及按需 JIT 仍計入。JSON／CSV 的 `elapsed_ms` 為程序內耗時；"
+               "`process_elapsed_ms` 另保留完整程序耗時供診斷，不參與統計與排名。"
+               if internal_timing else "- 歷史資料保留原始測量值，重新產生報告不會將程序外耗時轉換成程序內耗時。"),
+              "- 星泉一律使用 `aqua build` 在測量前建立 Wasm，再執行 `aqua run`；Wasm 生成不計入樣本耗時。"
               "Python 執行原始碼，Node.js 使用 V8；沒有 NumPy、原生演算法函式庫、工作執行緒或內建排序。",
               "- 暖身程序的樣本會捨棄，作用是預熱作業系統檔案快取；不同程序之間不保留 JIT 或 VM 狀態。"
               "每輪以記錄的隨機種子打亂所有演算法／語言組合，再依序執行。",
               "- 每筆暖身與正式樣本都必須符合未納入計時的 Python 參考答案。整數必須完全相同；"
               "譜範數平方的相對容許誤差為 1e-9，絕對容許誤差為 1e-12。"
-              "非零結束碼、逾時、缺少或多餘的標準輸出、非有限數值、校驗值不符，都會使該測試失敗。",
+              "非零結束碼、逾時、缺少或多餘的標準輸出、非有限數值、校驗值不符，都會使該測試失敗。"
+              + ("計時輸出必須為有限且大於零的毫秒值；缺少計時值時不會退回程序外計時。" if internal_timing else ""),
               "- 星泉的整數 `/` 會截斷小數，Python `//` 與 Node.js `Math.trunc` 使用相對應的運算。"
               "浮點測試採用雙精度（星泉使用 `d` 字面值）；標準輸入的整數中間值均在帶正負號的 32 位元範圍內。",
               "- 星泉的 `push`／`加入` 會複製陣列；Python 與 Node.js 對應的建構步驟也使用複製後追加。"
               "因此篩法、排序與矩陣初始化包含平方級的複製成本。這組測試比較相應的基準實作，未針對各語言做極限最佳化。",
-              "- 小型工作負載可能主要反映啟動成本。結果未單獨測量穩態演算法速度，也不代表所有程式的語言排名。"
+              "- 小型工作負載可能受計時器與函式呼叫成本影響；每筆樣本使用新程序，未測量持續暖身後的穩態速度，也不代表所有程式的語言排名。"
               "CPU 頻率、溫度、背景工作與排程雜訊未受控制。未測量程序記憶體用量與 CPU 時間；下方 RAM 為機器配備。", "",
               "## 測試日期與環境", "",
               f"- 開始時間：{md(report['started_at'])}", f"- 結束時間：{md(report['finished_at'])}",
@@ -114,7 +125,7 @@ def generate_readme(report):
               f"- 使用中的電源計畫：{md(env['power_plan'] or '無法取得')}",
               f"- Python 主控程式版本：{md(env['python_runner'])}",
               f"- 行程 CPU 親和性遮罩：`{env.get('process_affinity_mask', '未固定／未取得')}`",
-              f"- 計時器解析度：{env['timer_resolution_seconds']:.3g} 秒", "",
+              f"- 主控程式診斷計時器解析度：{env['timer_resolution_seconds']:.3g} 秒（非所有語言的計時器解析度）", "",
               "| 執行環境 | 版本／組建 | 執行檔 |", "| --- | --- | --- |"]
     for lang, title in LANGUAGES.items():
         runtime = report["runtimes"][lang]

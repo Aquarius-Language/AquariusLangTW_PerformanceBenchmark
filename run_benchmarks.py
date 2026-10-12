@@ -23,11 +23,14 @@ import time
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
 from reference import expected
-from readme_report import generate_readme
+from readme_report import composite_scores, generate_readme
 
 ROOT = Path(__file__).resolve().parent
 LANGUAGES = {"aquarius": ("AquariusLang", ".aqua"), "python": ("Python", ".py"),
              "node": ("Node.js", ".js")}
+TIMERS = {"aquarius": "目前時間() / currentTime() (monotonic milliseconds)",
+          "python": "time.perf_counter_ns() (nanoseconds / 1e6)",
+          "node": "process.hrtime.bigint() (nanoseconds / 1e6)"}
 
 
 def sha256(path):
@@ -77,7 +80,8 @@ def resolve_executable(override, names):
 def runtime_info(language, executable):
     if executable is None:
         return {"available": False, "error": "Executable not found; use the explicit runtime option."}
-    info = {"available": True, "executable": executable, "executable_sha256": sha256(executable)}
+    info = {"available": True, "executable": executable, "executable_sha256": sha256(executable),
+            "benchmark_timer": TIMERS[language]}
     if language == "aquarius":
         # Fingerprint the selected compiler, core, engine and native engine binary.
         info["version"] = "No version flag; see binary fingerprint and release directory"
@@ -150,26 +154,50 @@ def parse_result(stdout):
     return value
 
 
-def execute(command, expected_value, spec, timeout, cwd):
+def parse_sample(stdout):
+    """Require a checksum and an in-process duration; never fall back to startup time."""
+    lines = [line.strip() for line in stdout.splitlines() if line.strip()]
+    if len(lines) != 2 or not lines[1].startswith("ELAPSED_MS "):
+        raise ValueError("Expected exactly 'RESULT <number>' and 'ELAPSED_MS <milliseconds>' lines")
+    value = parse_result(lines[0])
+    try:
+        elapsed = float(lines[1][11:].strip())
+    except ValueError as error:
+        raise ValueError("Invalid elapsed time") from error
+    if not math.isfinite(elapsed) or elapsed <= 0:
+        raise ValueError("Elapsed time must be finite and positive")
+    return value, elapsed
+
+
+def execute(command, expected_value, spec, timeout, cwd, *, timing="in-process"):
+    # The historical VM diagnostic explicitly uses process timing because old
+    # Aquarius versions have no clock builtin. Published benchmarks always use
+    # the default in-process protocol and cannot fall back to process timing.
+    if timing not in {"in-process", "process"}:
+        raise ValueError(f"Unknown timing mode: {timing}")
     begin = time.perf_counter_ns()
     try:
         proc = subprocess.run(command, cwd=cwd, capture_output=True, text=True,
                               encoding="utf-8", errors="replace", timeout=timeout,
                               stdin=subprocess.DEVNULL)
-        elapsed = (time.perf_counter_ns() - begin) / 1e6
+        process_elapsed = (time.perf_counter_ns() - begin) / 1e6
     except subprocess.TimeoutExpired as error:
-        return {"status": "timeout", "elapsed_ms": (time.perf_counter_ns() - begin) / 1e6,
+        return {"status": "timeout", "elapsed_ms": None, "process_elapsed_ms": (time.perf_counter_ns() - begin) / 1e6,
                 "error": f"Exceeded {timeout:g} seconds", "stdout": decode(error.stdout),
                 "stderr": decode(error.stderr)}
     except OSError as error:
-        return {"status": "error", "elapsed_ms": (time.perf_counter_ns() - begin) / 1e6,
+        return {"status": "error", "elapsed_ms": None, "process_elapsed_ms": (time.perf_counter_ns() - begin) / 1e6,
                 "error": str(error), "stdout": "", "stderr": ""}
-    sample = {"elapsed_ms": elapsed, "exit_code": proc.returncode,
+    sample = {"elapsed_ms": None, "process_elapsed_ms": process_elapsed, "exit_code": proc.returncode,
               "stdout": proc.stdout, "stderr": proc.stderr}
     try:
         if proc.returncode != 0:
             raise ValueError(f"Exit code {proc.returncode}")
-        value = parse_result(proc.stdout)
+        if timing == "process":
+            value, elapsed = parse_result(proc.stdout), process_elapsed
+        else:
+            value, elapsed = parse_sample(proc.stdout)
+        sample["elapsed_ms"] = elapsed
         if "relative_tolerance" in spec:
             valid = math.isclose(float(value), float(expected_value),
                                  rel_tol=spec["relative_tolerance"], abs_tol=spec["absolute_tolerance"])
@@ -203,6 +231,7 @@ def summarize(record, repetitions):
 
 def write_artifacts(report, directory, readme):
     directory.mkdir(parents=True, exist_ok=True)
+    report["scores"] = composite_scores(report)
     json_path = directory / "results.json"
     json_path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     (directory.parent / "latest.json").write_text(json_path.read_text(encoding="utf-8"), encoding="utf-8")
@@ -214,12 +243,12 @@ def write_artifacts(report, directory, readme):
             writer.writerow({"benchmark": record["benchmark"], "language": record["language"], "n": record["n"], **record["summary"]})
     with (directory / "samples.csv").open("w", newline="", encoding="utf-8") as file:
         writer = csv.writer(file)
-        writer.writerow(["benchmark", "language", "phase", "round", "status", "elapsed_ms", "result", "error"])
+        writer.writerow(["benchmark", "language", "phase", "round", "status", "elapsed_ms", "process_elapsed_ms", "result", "error"])
         for record in report["cases"].values():
             for phase in ("warmups", "samples"):
                 for sample in record[phase]:
                     writer.writerow([record["benchmark"], record["language"], phase, sample["round"],
-                                     sample["status"], sample["elapsed_ms"], sample.get("result", ""), sample.get("error", "")])
+                                     sample["status"], sample["elapsed_ms"], sample["process_elapsed_ms"], sample.get("result", ""), sample.get("error", "")])
     readme.parent.mkdir(parents=True, exist_ok=True)
     readme.write_text(generate_readme(report), encoding="utf-8")
 
@@ -281,9 +310,11 @@ def main(argv=None):
     executables = {"aquarius": resolve_executable(args.aquarius, ["aqua.exe", "aqua"]),
                    "python": resolve_executable(args.python, []),
                    "node": resolve_executable(args.node, ["node"])}
-    report = {"schema_version": 1, "started_at": started.isoformat(),
+    report = {"schema_version": 2, "started_at": started.isoformat(),
               "config": {"profile": args.profile, "repetitions": args.repetitions, "warmups": args.warmups,
-                         "timeout_seconds": args.timeout, "seed": args.seed, "timezone": args.timezone, "aquarius_mode": "precompiled"},
+                         "timeout_seconds": args.timeout, "seed": args.seed, "timezone": args.timezone, "aquarius_mode": "precompiled",
+                         "timing": "in-process", "timing_boundary": "data initialization and computation; startup/compilation/output excluded",
+                         "score_normalization": "fastest language = 100; equal-weight geometric mean of relative speeds"},
               "environment": environment_info(),
               "runtimes": {lang: runtime_info(lang, exe) for lang, exe in executables.items()},
               "benchmarks": {}, "cases": {}, "execution_order": [],
@@ -339,7 +370,8 @@ def main(argv=None):
                     sample["round"] = round_number
                     record[phase].append(sample)
                     report["execution_order"].append({"case": key, "phase": phase, "round": round_number})
-                    print(f"{phase} {round_number}/{rounds} {key}: {sample['status']} {sample['elapsed_ms']:.3f} ms", flush=True)
+                    duration = f"{sample['elapsed_ms']:.6f} ms" if sample["elapsed_ms"] is not None else "no workload timing"
+                    print(f"{phase} {round_number}/{rounds} {key}: {sample['status']} {duration}", flush=True)
         for record in report["cases"].values():
             record["summary"] = summarize(record, args.repetitions)
     report["finished_at"] = datetime.now(tz).isoformat()

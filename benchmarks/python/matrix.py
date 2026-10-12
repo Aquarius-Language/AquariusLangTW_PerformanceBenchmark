@@ -1,4 +1,6 @@
+from time import perf_counter_ns
 benchmark_n = 45
+benchmark_start = perf_counter_ns()
 a, b = [], []
 for i in range(benchmark_n):
     for j in range(benchmark_n):
@@ -12,4 +14,7 @@ for i in range(benchmark_n):
         for k in range(benchmark_n):
             total += a[i * benchmark_n + k] * b[k * benchmark_n + j]
         checksum += total
-print("RESULT", checksum)
+benchmark_result = checksum
+benchmark_elapsed_ms = (perf_counter_ns() - benchmark_start) / 1e6
+print("RESULT", benchmark_result)
+print("ELAPSED_MS", benchmark_elapsed_ms)

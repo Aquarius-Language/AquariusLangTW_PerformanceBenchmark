@@ -20,7 +20,9 @@ class WasmRunnerTests(unittest.TestCase):
                 self.assertIn('unrecognized arguments: --aquarius-mode', errors.getvalue())
 
     def test_fingerprints_core_and_engine_instead_of_legacy_assemblies(self):
-        with tempfile.TemporaryDirectory() as directory:
+        work = ROOT / '.benchmark-work'
+        work.mkdir(exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=work) as directory:
             path = Path(directory)
             executable = path / 'aqua.exe'
             executable.write_bytes(b'compiler')
@@ -40,11 +42,19 @@ class WasmRunnerTests(unittest.TestCase):
             self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
             report = json.loads((path / 'results/latest.json').read_text(encoding='utf-8'))
             self.assertEqual(report['config']['aquarius_mode'], 'precompiled')
+            self.assertEqual(report['schema_version'], 2)
+            self.assertEqual(report['config']['timing'], 'in-process')
+            self.assertEqual(max(report['scores'].values()), 100)
             case = report['cases']['fibonacci/aquarius']
             self.assertEqual(case['build']['command'][1], 'build')
             self.assertEqual(case['build']['exit_code'], 0)
             self.assertEqual(case['command'][1], 'run')
             self.assertEqual(case['summary']['status'], 'ok')
+            sample = case['samples'][0]
+            self.assertGreater(sample['elapsed_ms'], 0)
+            self.assertGreater(sample['process_elapsed_ms'], sample['elapsed_ms'])
+            self.assertIn('ELAPSED_MS ', sample['stdout'])
+            self.assertIn('目前時間()', report['runtimes']['aquarius']['benchmark_timer'])
             self.assertEqual(len(case['wasm_sha256']), 64)
             self.assertEqual(report['runtimes']['aquarius']['backend'], 'compiled-wasm')
             self.assertIn('Wasm', (path / 'README.md').read_text(encoding='utf-8'))

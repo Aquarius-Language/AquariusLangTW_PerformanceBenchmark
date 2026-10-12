@@ -1,4 +1,5 @@
 變數 benchmark_n = 10000;
+變數 benchmark_start = 目前時間();
 變數 flags = [];
 迴圈 (變數 i = 0; i <= benchmark_n; i++) { flags = 加入(flags, 真); }
 flags[0] = 假;
@@ -10,4 +11,7 @@ flags[1] = 假;
 }
 變數 count = 0;
 迴圈 (變數 i = 2; i <= benchmark_n; i++) { 如果 (flags[i]) { count += 1; } }
-印出("RESULT", count);
+變數 benchmark_result = count;
+變數 benchmark_elapsed_ms = 目前時間() - benchmark_start;
+印出("RESULT", benchmark_result);
+印出("ELAPSED_MS", benchmark_elapsed_ms);

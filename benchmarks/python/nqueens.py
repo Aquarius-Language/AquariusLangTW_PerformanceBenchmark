@@ -1,8 +1,5 @@
+from time import perf_counter_ns
 benchmark_n = 8
-board = []
-for i in range(benchmark_n):
-    board = board + [0]
-
 def solve(row):
     if row == benchmark_n:
         return 1
@@ -19,4 +16,12 @@ def solve(row):
             count += solve(row + 1)
     return count
 
-print("RESULT", solve(0))
+benchmark_start = perf_counter_ns()
+board = []
+for i in range(benchmark_n):
+    board = board + [0]
+
+benchmark_result = solve(0)
+benchmark_elapsed_ms = (perf_counter_ns() - benchmark_start) / 1e6
+print("RESULT", benchmark_result)
+print("ELAPSED_MS", benchmark_elapsed_ms)
