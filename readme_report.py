@@ -1,5 +1,6 @@
 """繁體中文 README 與跨演算法綜合分數。只使用報告中的既有實測資料。"""
 import math
+from itertools import combinations
 
 LANGUAGES = {"aquarius": "星泉", "python": "Python", "node": "Node.js"}
 WORKLOADS = {
@@ -50,17 +51,22 @@ def generate_readme(report):
     lines = ["# 星泉、Python、Node.js 桌面執行效能評比", ""]
     if scores:
         ranking = sorted(scores, key=scores.get, reverse=True)
-        top = ranking[0]
         score_text = "、".join(f"{LANGUAGES[lang]} {scores[lang]:.2f} 分" for lang in ranking)
-        gaps = "、".join(f"{LANGUAGES[lang]} 分數低 {(1 - scores[lang] / scores[top]) * 100:.1f}%"
-                         for lang in ranking[1:])
-        lines += [f"**本次綜合效能：{score_text}（越高越快）。** 相較 {LANGUAGES[top]}，{gaps}。", "",
+        comparisons = "；".join(
+            f"{LANGUAGES[faster]} 的綜合速度是 {LANGUAGES[slower]} 的 {scores[faster] / scores[slower]:.2f} 倍"
+            for faster, slower in combinations(ranking, 2))
+        speed_columns = " | ".join(f"相對 {LANGUAGES[language]} 的速度" for language in ranking)
+        lines += [f"**本次綜合效能：{score_text}（越高越快）。**", "",
+                  f"綜合速度兩兩比較：{comparisons}。", "",
                   f"將本次 {len(report['benchmarks'])} 項演算法的相對速度等權重取幾何平均，再以最快語言為 100 分。"
                   f"{timing_description}", "",
-                  "| 排名 | 程式語言 | 綜合分數 | 相對最快語言的綜合速度 |",
-                  "| ---: | --- | ---: | ---: |"]
+                  "表中速度倍率 = 該列語言綜合分數 ÷ 欄位基準語言綜合分數，使用未四捨五入的分數計算；"
+                  "大於 1 表示比該基準語言快，小於 1 表示較慢。", "",
+                  f"| 排名 | 程式語言 | 綜合分數 | {speed_columns} |",
+                  "| ---: | --- | ---: | " + " | ".join("---:" for _ in ranking) + " |"]
         for place, language in enumerate(ranking, 1):
-            lines.append(f"| {place} | {LANGUAGES[language]} | {scores[language]:.2f} | {scores[language] / 100:.3f} 倍 |")
+            speeds = " | ".join(f"{scores[language] / scores[baseline]:.3f} 倍" for baseline in ranking)
+            lines.append(f"| {place} | {LANGUAGES[language]} | {scores[language]:.2f} | {speeds} |")
     else:
         lines += ["**本次資料不足以計算三種語言的綜合分數。** 至少一項測試失敗、未完成或執行環境無法使用；"
                   "各項測試狀態列於下方。", ""]
@@ -109,8 +115,9 @@ def generate_readme(report):
               + ("計時輸出必須為有限且大於零的毫秒值；缺少計時值時不會退回程序外計時。" if internal_timing else ""),
               "- 星泉的整數 `/` 會截斷小數，Python `//` 與 Node.js `Math.trunc` 使用相對應的運算。"
               "浮點測試採用雙精度（星泉使用 `d` 字面值）；標準輸入的整數中間值均在帶正負號的 32 位元範圍內。",
-              "- 星泉的 `push`／`加入` 會複製陣列；Python 與 Node.js 對應的建構步驟也使用複製後追加。"
-              "因此篩法、排序與矩陣初始化包含平方級的複製成本。這組測試比較相應的基準實作，未針對各語言做極限最佳化。",
+              "- 星泉的 `push`／`加入` 回傳新陣列並保留快照語意；目前 Wasm 執行階段可共用底層儲存，寫入時才視需要複製。"
+              "Python 與 Node.js 對應的建構步驟使用複製後追加，因此其初始化可能包含平方級的複製成本。"
+              "這組測試比較所列腳本的操作，不代表各語言慣用集合建構方式的最佳速度；慣用寫法另見診斷報告。",
               "- 小型工作負載可能受計時器與函式呼叫成本影響；每筆樣本使用新程序，未測量持續暖身後的穩態速度，也不代表所有程式的語言排名。"
               "CPU 頻率、溫度、背景工作與排程雜訊未受控制。未測量程序記憶體用量與 CPU 時間；下方 RAM 為機器配備。", "",
               "## 測試日期與環境", "",

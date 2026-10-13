@@ -1,0 +1,123 @@
+{
+  "paired_speedup": 2.0287111695967455,
+  "paired_speedup_bootstrap_95_percent": [
+    1.952797364130212,
+    2.0563404729841057
+  ],
+  "paired_before_over_python": 2.623812609975827,
+  "paired_after_over_python": 1.293339657856457,
+  "after_time_reduction_percent": 50.707620927686136,
+  "further_time_reduction_for_python_parity_percent": 22.680790469429326,
+  "cases": {
+    "fibonacci": {
+      "before": 167.5043,
+      "after": 96.9461,
+      "python": 25.2631,
+      "node": 2.1163,
+      "speedup": 1.7278085451606615,
+      "after_over_python": 3.8374585858425925
+    },
+    "ackermann": {
+      "before": 30.889999999999997,
+      "after": 17.956999999999997,
+      "python": 10.4767,
+      "node": 0.6329,
+      "speedup": 1.7202205268140558,
+      "after_over_python": 1.713993910296181
+    },
+    "sieve": {
+      "before": 11.1096,
+      "after": 3.4537,
+      "python": 35.0407,
+      "node": 25.2306,
+      "speedup": 3.2167240930017083,
+      "after_over_python": 0.09856252871660669
+    },
+    "quicksort": {
+      "before": 6.0657,
+      "after": 4.6887,
+      "python": 4.1414,
+      "node": 2.3585,
+      "speedup": 1.2936848166869281,
+      "after_over_python": 1.1321533780847057
+    },
+    "matrix": {
+      "before": 65.7692,
+      "after": 12.6877,
+      "python": 12.1806,
+      "node": 3.936,
+      "speedup": 5.183697596885172,
+      "after_over_python": 1.0416317751178101
+    },
+    "mandelbrot": {
+      "before": 28.7888,
+      "after": 26.513099999999998,
+      "python": 20.8253,
+      "node": 1.1291,
+      "speedup": 1.0858330410250028,
+      "after_over_python": 1.2731197149620894
+    },
+    "nqueens": {
+      "before": 11.9662,
+      "after": 9.0877,
+      "python": 3.3428,
+      "node": 0.7274,
+      "speedup": 1.3167468116245036,
+      "after_over_python": 2.718589206653105
+    },
+    "binary_trees": {
+      "before": 39.632000000000005,
+      "after": 20.0582,
+      "python": 7.523,
+      "node": 2.8193,
+      "speedup": 1.9758502756977199,
+      "after_over_python": 2.666250166157118
+    },
+    "spectral_norm": {
+      "before": 86.2489,
+      "after": 35.8642,
+      "python": 14.1742,
+      "node": 1.4052,
+      "speedup": 2.4048744988038213,
+      "after_over_python": 2.5302450931974994
+    },
+    "collatz": {
+      "before": 158.6393,
+      "after": 58.516999999999996,
+      "python": 79.7658,
+      "node": 4.6902,
+      "speedup": 2.71099509544235,
+      "after_over_python": 0.733610143695669
+    }
+  },
+  "tests": {
+    "before.trx": {
+      "total": 1315,
+      "executed": 1285,
+      "passed": 1285,
+      "failed": 0
+    },
+    "after-full.trx": {
+      "total": 1354,
+      "executed": 1354,
+      "passed": 1354,
+      "failed": 0
+    },
+    "performance-tests.trx": {
+      "total": 30,
+      "executed": 30,
+      "passed": 30,
+      "failed": 0
+    },
+    "desktop-examples.json": {
+      "passed": 154,
+      "failed": 0
+    },
+    "browser-smoke.json": {
+      "passed": 52,
+      "failed": 0
+    }
+  },
+  "warm_execute_geometric_speedup": 2.047243371363961,
+  "historical_diagnostic": "The earlier 3.395x Python slowdown used an older build and a separate run; it is not the baseline credited to this patch."
+}

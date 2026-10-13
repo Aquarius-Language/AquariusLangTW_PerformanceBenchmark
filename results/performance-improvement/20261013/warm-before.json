@@ -1,0 +1,513 @@
+{
+  "method": "Original standard sources; same reference checks; modules and sessions reused; five actual in-process warmups then seven measured samples. Compilation and output excluded from workload_ms. execute_ms also includes entry, captured output and cleanup. Counters measured in a separate fresh session. Guest heap is high-water, managed bytes are allocation traffic, and explicit collection counts exclude internal guest collections. Runs sequentially, no concurrent tests/benchmarks.",
+  "dotnet": "8.0.31",
+  "process_affinity_mask": "0xfffff",
+  "fingerprints": {
+    "AquariusCore.dll": "58c9a2cc92d5a24cef99374c2a3d492b439c7d19830d4b67884bc3cd0f6f5576",
+    "AquariusDesktop.dll": "5b12d1dea51f11d30f5503c11c9268e2bc402b690f31ac08122eca40b883b3b9",
+    "Wasmtime.Dotnet.dll": "ba2a630c87c6febfadbdf8670907ccbb024453e8197361d315fb1f7041c746f0",
+    "wasmtime.dll": "19b3880fbb92f1826c58ac9f5e2a472692b5fc3d012a1a7a41983ccf77544607"
+  },
+  "results": {
+    "fibonacci": {
+      "valid": true,
+      "source_sha256": "a704f88df229610a91b0a97c44be28b261ef6c5a529a7294d33203a035723ebb",
+      "wasm_sha256": "a9d79fd39f33c2b523e2d88454586d10f10916826235774013c20f651bbb7465",
+      "samples": [
+        {
+          "workload_ms": 168.0868999999999,
+          "execute_ms": 168.1583,
+          "managed_allocated_bytes": 58944
+        },
+        {
+          "workload_ms": 173.50470000000018,
+          "execute_ms": 173.5656,
+          "managed_allocated_bytes": 58952
+        },
+        {
+          "workload_ms": 172.11789999999996,
+          "execute_ms": 172.1825,
+          "managed_allocated_bytes": 58952
+        },
+        {
+          "workload_ms": 168.15260000000012,
+          "execute_ms": 168.253,
+          "managed_allocated_bytes": 58952
+        },
+        {
+          "workload_ms": 170.46450000000004,
+          "execute_ms": 170.5423,
+          "managed_allocated_bytes": 58952
+        },
+        {
+          "workload_ms": 171.82140000000004,
+          "execute_ms": 171.8758,
+          "managed_allocated_bytes": 58952
+        },
+        {
+          "workload_ms": 172.8451,
+          "execute_ms": 172.9033,
+          "managed_allocated_bytes": 58912
+        }
+      ],
+      "native_calls": 4,
+      "capability_lookups": 2,
+      "scheduler_entries": 126,
+      "explicit_host_collection_calls": 125,
+      "guest_collection_generation": null,
+      "budget": 32768,
+      "guest_heap_high_water_bytes": 21536,
+      "result": "RESULT 317811"
+    },
+    "ackermann": {
+      "valid": true,
+      "source_sha256": "f9d9b09e936d53adc0c2c533b42173ac637a62885e9140cd8521e529cb149b8b",
+      "wasm_sha256": "cadccf6637842151864f50cbd163bb250117678dc1be737d7bfc9bbbd2d4f9a1",
+      "samples": [
+        {
+          "workload_ms": 32.26989999999978,
+          "execute_ms": 32.3117,
+          "managed_allocated_bytes": 15560
+        },
+        {
+          "workload_ms": 31.28710000000001,
+          "execute_ms": 31.3195,
+          "managed_allocated_bytes": 15480
+        },
+        {
+          "workload_ms": 31.713000000000193,
+          "execute_ms": 31.7449,
+          "managed_allocated_bytes": 15488
+        },
+        {
+          "workload_ms": 31.950900000000274,
+          "execute_ms": 31.9843,
+          "managed_allocated_bytes": 15488
+        },
+        {
+          "workload_ms": 32.51949999999988,
+          "execute_ms": 32.5573,
+          "managed_allocated_bytes": 15480
+        },
+        {
+          "workload_ms": 32.25599999999986,
+          "execute_ms": 32.2856,
+          "managed_allocated_bytes": 15480
+        },
+        {
+          "workload_ms": 31.670399999999972,
+          "execute_ms": 31.7046,
+          "managed_allocated_bytes": 15488
+        }
+      ],
+      "native_calls": 4,
+      "capability_lookups": 2,
+      "scheduler_entries": 29,
+      "explicit_host_collection_calls": 28,
+      "guest_collection_generation": null,
+      "budget": 32768,
+      "guest_heap_high_water_bytes": 369296,
+      "result": "RESULT 509"
+    },
+    "sieve": {
+      "valid": true,
+      "source_sha256": "3aa8c837e05a01001182d5304f4f869a658b2ba19da92bc070b67117cdf1de49",
+      "wasm_sha256": "7c6f460e3b35f6135765ca5ac17614e32ce3dac629038e2e1b3820e726a3f19e",
+      "samples": [
+        {
+          "workload_ms": 6.512700000000223,
+          "execute_ms": 6.5587,
+          "managed_allocated_bytes": 4728
+        },
+        {
+          "workload_ms": 7.252999999999702,
+          "execute_ms": 7.2947,
+          "managed_allocated_bytes": 4728
+        },
+        {
+          "workload_ms": 6.573900000000322,
+          "execute_ms": 6.6104,
+          "managed_allocated_bytes": 4728
+        },
+        {
+          "workload_ms": 6.441499999999905,
+          "execute_ms": 6.4972,
+          "managed_allocated_bytes": 4728
+        },
+        {
+          "workload_ms": 6.061899999999696,
+          "execute_ms": 6.1276,
+          "managed_allocated_bytes": 4728
+        },
+        {
+          "workload_ms": 7.043299999999817,
+          "execute_ms": 7.1372,
+          "managed_allocated_bytes": 4728
+        },
+        {
+          "workload_ms": 7.261600000000271,
+          "execute_ms": 7.31,
+          "managed_allocated_bytes": 4728
+        }
+      ],
+      "native_calls": 4,
+      "capability_lookups": 3,
+      "scheduler_entries": 5,
+      "explicit_host_collection_calls": 4,
+      "guest_collection_generation": null,
+      "budget": 32768,
+      "guest_heap_high_water_bytes": 1181344,
+      "result": "RESULT 1229"
+    },
+    "quicksort": {
+      "valid": true,
+      "source_sha256": "ae62f2107fad89dd91a4d9e67812867c2ffa2c988b5fc822728cce4d4c1c0ace",
+      "wasm_sha256": "5656935c97c22aea12fea5846675c1d2e03edf0546fcf6629d15254ff139314a",
+      "samples": [
+        {
+          "workload_ms": 9.706900000000132,
+          "execute_ms": 9.7438,
+          "managed_allocated_bytes": 5632
+        },
+        {
+          "workload_ms": 9.971799999999803,
+          "execute_ms": 10.0083,
+          "managed_allocated_bytes": 5632
+        },
+        {
+          "workload_ms": 9.191899999999805,
+          "execute_ms": 9.2288,
+          "managed_allocated_bytes": 5632
+        },
+        {
+          "workload_ms": 9.419599999999718,
+          "execute_ms": 9.451,
+          "managed_allocated_bytes": 5632
+        },
+        {
+          "workload_ms": 5.399399999999787,
+          "execute_ms": 5.4154,
+          "managed_allocated_bytes": 5632
+        },
+        {
+          "workload_ms": 6.274200000000292,
+          "execute_ms": 6.2941,
+          "managed_allocated_bytes": 5632
+        },
+        {
+          "workload_ms": 5.353899999999612,
+          "execute_ms": 5.3696,
+          "managed_allocated_bytes": 5632
+        }
+      ],
+      "native_calls": 4,
+      "capability_lookups": 3,
+      "scheduler_entries": 7,
+      "explicit_host_collection_calls": 6,
+      "guest_collection_generation": null,
+      "budget": 32768,
+      "guest_heap_high_water_bytes": 221808,
+      "result": "RESULT 616973"
+    },
+    "matrix": {
+      "valid": true,
+      "source_sha256": "c0627d4c438b5ce327eb83855f9ae977d19c17a42d8326a00723660aa4f16d35",
+      "wasm_sha256": "9ed45601b40b08124a5c45803d749e8dfb06750c43fa83eb29b3485af4c07f4a",
+      "samples": [
+        {
+          "workload_ms": 65.04460000000017,
+          "execute_ms": 65.0704,
+          "managed_allocated_bytes": 6976
+        },
+        {
+          "workload_ms": 65.30099999999993,
+          "execute_ms": 65.3254,
+          "managed_allocated_bytes": 6976
+        },
+        {
+          "workload_ms": 65.45119999999997,
+          "execute_ms": 65.4823,
+          "managed_allocated_bytes": 6976
+        },
+        {
+          "workload_ms": 66.48929999999973,
+          "execute_ms": 66.5307,
+          "managed_allocated_bytes": 6976
+        },
+        {
+          "workload_ms": 65.52040000000034,
+          "execute_ms": 65.5544,
+          "managed_allocated_bytes": 6976
+        },
+        {
+          "workload_ms": 65.1241,
+          "execute_ms": 65.1502,
+          "managed_allocated_bytes": 6944
+        },
+        {
+          "workload_ms": 65.57009999999991,
+          "execute_ms": 65.5948,
+          "managed_allocated_bytes": 6976
+        }
+      ],
+      "native_calls": 4,
+      "capability_lookups": 3,
+      "scheduler_entries": 10,
+      "explicit_host_collection_calls": 9,
+      "guest_collection_generation": null,
+      "budget": 32768,
+      "guest_heap_high_water_bytes": 328288,
+      "result": "RESULT 545940"
+    },
+    "mandelbrot": {
+      "valid": true,
+      "source_sha256": "74b87bc6b6e111aa5f695faf89587b787fde12aecaebcee3865232333198bdd8",
+      "wasm_sha256": "837472d6e333ce4f32564e11bd41a6cb7cacbb235ceaf3f3d2ed4d40aaaf0975",
+      "samples": [
+        {
+          "workload_ms": 28.064200000000255,
+          "execute_ms": 28.0851,
+          "managed_allocated_bytes": 14152
+        },
+        {
+          "workload_ms": 27.697499999999764,
+          "execute_ms": 27.7175,
+          "managed_allocated_bytes": 14152
+        },
+        {
+          "workload_ms": 27.46810000000005,
+          "execute_ms": 27.4885,
+          "managed_allocated_bytes": 14144
+        },
+        {
+          "workload_ms": 26.777799999999843,
+          "execute_ms": 26.7929,
+          "managed_allocated_bytes": 14152
+        },
+        {
+          "workload_ms": 27.014700000000175,
+          "execute_ms": 27.0267,
+          "managed_allocated_bytes": 14152
+        },
+        {
+          "workload_ms": 26.896499999999833,
+          "execute_ms": 26.9128,
+          "managed_allocated_bytes": 14152
+        },
+        {
+          "workload_ms": 27.624900000000707,
+          "execute_ms": 27.6551,
+          "managed_allocated_bytes": 14152
+        }
+      ],
+      "native_calls": 4,
+      "capability_lookups": 2,
+      "scheduler_entries": 26,
+      "explicit_host_collection_calls": 25,
+      "guest_collection_generation": null,
+      "budget": 32768,
+      "guest_heap_high_water_bytes": 2368,
+      "result": "RESULT 129059"
+    },
+    "nqueens": {
+      "valid": true,
+      "source_sha256": "58a704538048485fdc787cb95fb1b0fe36f9eede16998a6ad68d0d0ced313c1a",
+      "wasm_sha256": "a59928269bff04a46777b5773a041d9eeb2ec19a4dc757895d3d862ac89893fb",
+      "samples": [
+        {
+          "workload_ms": 11.10359999999946,
+          "execute_ms": 11.1165,
+          "managed_allocated_bytes": 8272
+        },
+        {
+          "workload_ms": 11.219500000000153,
+          "execute_ms": 11.239,
+          "managed_allocated_bytes": 8280
+        },
+        {
+          "workload_ms": 11.405499999999847,
+          "execute_ms": 11.4214,
+          "managed_allocated_bytes": 8280
+        },
+        {
+          "workload_ms": 11.368000000000393,
+          "execute_ms": 11.3794,
+          "managed_allocated_bytes": 8280
+        },
+        {
+          "workload_ms": 11.159200000000055,
+          "execute_ms": 11.1697,
+          "managed_allocated_bytes": 8280
+        },
+        {
+          "workload_ms": 11.602300000000469,
+          "execute_ms": 11.614,
+          "managed_allocated_bytes": 8280
+        },
+        {
+          "workload_ms": 11.635299999999916,
+          "execute_ms": 11.6569,
+          "managed_allocated_bytes": 8280
+        }
+      ],
+      "native_calls": 4,
+      "capability_lookups": 3,
+      "scheduler_entries": 13,
+      "explicit_host_collection_calls": 12,
+      "guest_collection_generation": null,
+      "budget": 32768,
+      "guest_heap_high_water_bytes": 13024,
+      "result": "RESULT 92"
+    },
+    "binary_trees": {
+      "valid": true,
+      "source_sha256": "26e1d6dcf0281506ed3a0e748162d7ed840c8ec45d50ef6a781ca5d2bf726902",
+      "wasm_sha256": "57a7a00db6cde4531b82f82a8ca32b4e55fbed58019b0d34d25a311ce67d07d5",
+      "samples": [
+        {
+          "workload_ms": 42.67529999999988,
+          "execute_ms": 42.7124,
+          "managed_allocated_bytes": 9656
+        },
+        {
+          "workload_ms": 42.84109999999964,
+          "execute_ms": 42.867,
+          "managed_allocated_bytes": 9656
+        },
+        {
+          "workload_ms": 42.89850000000024,
+          "execute_ms": 42.9263,
+          "managed_allocated_bytes": 9656
+        },
+        {
+          "workload_ms": 41.87720000000081,
+          "execute_ms": 41.9058,
+          "managed_allocated_bytes": 9656
+        },
+        {
+          "workload_ms": 41.852499999999964,
+          "execute_ms": 41.8792,
+          "managed_allocated_bytes": 9664
+        },
+        {
+          "workload_ms": 41.4412999999995,
+          "execute_ms": 41.4637,
+          "managed_allocated_bytes": 9656
+        },
+        {
+          "workload_ms": 41.589200000000346,
+          "execute_ms": 41.6174,
+          "managed_allocated_bytes": 9664
+        }
+      ],
+      "native_calls": 4,
+      "capability_lookups": 2,
+      "scheduler_entries": 16,
+      "explicit_host_collection_calls": 15,
+      "guest_collection_generation": null,
+      "budget": 32768,
+      "guest_heap_high_water_bytes": 1059536,
+      "result": "RESULT 65528"
+    },
+    "spectral_norm": {
+      "valid": true,
+      "source_sha256": "5b709c7eefabbc7fb4cd13e389e8e59bca5b8bf4dbf7f1dfdb42efbd511e114d",
+      "wasm_sha256": "8fb01637ce7b057df78ae65f63e6630d0b8c68830199482cc3fac901056f4a91",
+      "samples": [
+        {
+          "workload_ms": 85.91150000000016,
+          "execute_ms": 85.9373,
+          "managed_allocated_bytes": 24496
+        },
+        {
+          "workload_ms": 85.72209999999995,
+          "execute_ms": 85.7514,
+          "managed_allocated_bytes": 24496
+        },
+        {
+          "workload_ms": 87.02279999999973,
+          "execute_ms": 87.0513,
+          "managed_allocated_bytes": 24496
+        },
+        {
+          "workload_ms": 84.62069999999949,
+          "execute_ms": 84.6516,
+          "managed_allocated_bytes": 24496
+        },
+        {
+          "workload_ms": 84.70340000000033,
+          "execute_ms": 84.734,
+          "managed_allocated_bytes": 24496
+        },
+        {
+          "workload_ms": 86.57290000000012,
+          "execute_ms": 86.6041,
+          "managed_allocated_bytes": 24496
+        },
+        {
+          "workload_ms": 87.44419999999991,
+          "execute_ms": 87.4701,
+          "managed_allocated_bytes": 24496
+        }
+      ],
+      "native_calls": 4,
+      "capability_lookups": 3,
+      "scheduler_entries": 49,
+      "explicit_host_collection_calls": 48,
+      "guest_collection_generation": null,
+      "budget": 32768,
+      "guest_heap_high_water_bytes": 20272,
+      "result": "RESULT 1.6236011690579908"
+    },
+    "collatz": {
+      "valid": true,
+      "source_sha256": "3d26b87abd9c1d7765865c4ef103363c4108aff18ceb3457be7e34a4833c3c64",
+      "wasm_sha256": "97156ba999bf119eda92d0da7269a337d2c6ce1f0d36bd8b9edf45b3cbd57921",
+      "samples": [
+        {
+          "workload_ms": 159.01329999999962,
+          "execute_ms": 159.0467,
+          "managed_allocated_bytes": 73288
+        },
+        {
+          "workload_ms": 158.48420000000078,
+          "execute_ms": 158.5183,
+          "managed_allocated_bytes": 73288
+        },
+        {
+          "workload_ms": 157.47329999999965,
+          "execute_ms": 157.5041,
+          "managed_allocated_bytes": 73288
+        },
+        {
+          "workload_ms": 159.83020000000033,
+          "execute_ms": 159.8635,
+          "managed_allocated_bytes": 73288
+        },
+        {
+          "workload_ms": 160.77899999999954,
+          "execute_ms": 160.8136,
+          "managed_allocated_bytes": 73288
+        },
+        {
+          "workload_ms": 158.79300000000057,
+          "execute_ms": 158.8252,
+          "managed_allocated_bytes": 73288
+        },
+        {
+          "workload_ms": 158.1302999999998,
+          "execute_ms": 158.1691,
+          "managed_allocated_bytes": 73280
+        }
+      ],
+      "native_calls": 4,
+      "capability_lookups": 2,
+      "scheduler_entries": 158,
+      "explicit_host_collection_calls": 157,
+      "guest_collection_generation": null,
+      "budget": 32768,
+      "guest_heap_high_water_bytes": 2032,
+      "result": "RESULT 849666"
+    }
+  }
+}

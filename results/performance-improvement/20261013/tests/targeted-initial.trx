@@ -1,0 +1,517 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="575e5b0f-18e9-49ef-ac07-cbc3fb1a9363" name="templ@MSI 2026-10-13 09:30:13" runUser="MSI\templ" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-13T09:30:13.1310459+08:00" queuing="2026-10-13T09:30:13.1310460+08:00" start="2026-10-13T09:30:09.6093375+08:00" finish="2026-10-13T09:30:16.4454082+08:00" />
+  <TestSettings name="default" id="afc11fe7-b9b8-4192-869b-3daa2cf1dc97">
+    <Deployment runDeploymentRoot="templ_MSI_2026-10-13_09_30_13" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="c869a8be-5921-4bde-8afd-70955f207947" testId="d2c6a1cb-b1a0-8b3d-1aa2-77157357f005" testName="AquariusTests.Wasm.WasmArtifactTest.MalformedMetadataIsRejectedBeforeInstantiation(damage: &quot;literal&quot;)" computerName="MSI" duration="00:00:00.0014998" startTime="2026-10-13T09:30:13.1164137+08:00" endTime="2026-10-13T09:30:13.1164137+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c869a8be-5921-4bde-8afd-70955f207947" />
+    <UnitTestResult executionId="93501a3e-0c89-4ff6-9cec-8158d46b9ef1" testId="d295fe20-c68a-8d43-f305-c204c6765ae9" testName="AquariusTests.Wasm.WasmArtifactTest.ModulesAndAssetsArePortableAndIndependentAcrossRuns" computerName="MSI" duration="00:00:00.1632066" startTime="2026-10-13T09:30:13.4607561+08:00" endTime="2026-10-13T09:30:13.4607565+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="93501a3e-0c89-4ff6-9cec-8158d46b9ef1" />
+    <UnitTestResult executionId="34b1bc6b-77a1-4878-8202-13e35ca723f0" testId="4312a5c2-727c-b13a-70d6-e033b3e68589" testName="AquariusTests.Compiler.CompiledEvaluatorTest.TestExceptionForIncorrectScript" computerName="MSI" duration="00:00:00.0188625" startTime="2026-10-13T09:30:15.0710937+08:00" endTime="2026-10-13T09:30:15.0710941+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="34b1bc6b-77a1-4878-8202-13e35ca723f0" />
+    <UnitTestResult executionId="2e9dea1d-f4bf-42a1-bb56-3043731d34e9" testId="a1e888ef-2780-6bea-b4ff-651af8c243cf" testName="AquariusTests.Wasm.WasmOwnedRuntimeTest.TypedNaNHashKeysAndSignedZeroRemainLookupable" computerName="MSI" duration="00:00:00.0292606" startTime="2026-10-13T09:30:13.4761726+08:00" endTime="2026-10-13T09:30:13.4761728+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2e9dea1d-f4bf-42a1-bb56-3043731d34e9" />
+    <UnitTestResult executionId="dcf1f9eb-1c40-4ebf-af2e-8fada332c665" testId="205ce0b7-8772-9a48-a808-9910a7b56a20" testName="AquariusTests.Compiler.TimeBuiltinTest.ExtraArgumentsFailBeforeLaterSideEffects(name: &quot;currentTime&quot;)" computerName="MSI" duration="00:00:00.0384195" startTime="2026-10-13T09:30:13.2392037+08:00" endTime="2026-10-13T09:30:13.2392038+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="dcf1f9eb-1c40-4ebf-af2e-8fada332c665" />
+    <UnitTestResult executionId="21c1e561-76a5-401e-a059-7d7fed107734" testId="883c7984-ada0-cb27-c6f6-728c3d83882a" testName="AquariusTests.Wasm.WasmArtifactTest.MalformedMetadataIsRejectedBeforeInstantiation(damage: &quot;abi&quot;)" computerName="MSI" duration="00:00:00.0005567" startTime="2026-10-13T09:30:13.1165443+08:00" endTime="2026-10-13T09:30:13.1165444+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="21c1e561-76a5-401e-a059-7d7fed107734" />
+    <UnitTestResult executionId="7494e48a-1b35-41b1-8ce9-dd506d4bfe7d" testId="44138171-cf88-5b97-3bda-308fec38028b" testName="AquariusTests.Wasm.WasmOwnedRuntimeTest.AnonymousRunsReuseHeapWithoutDependingOnManagedCollection" computerName="MSI" duration="00:00:00.0402648" startTime="2026-10-13T09:30:13.2241928+08:00" endTime="2026-10-13T09:30:13.2241931+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7494e48a-1b35-41b1-8ce9-dd506d4bfe7d" />
+    <UnitTestResult executionId="733f95b3-354e-4fbf-abb1-471a68fc880d" testId="abf29a28-a285-986a-13fe-653a0f98f5f1" testName="AquariusTests.Compiler.CompiledEvaluatorTest.TestArrayLiterals" computerName="MSI" duration="00:00:00.0178948" startTime="2026-10-13T09:30:15.8399436+08:00" endTime="2026-10-13T09:30:15.8399442+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="733f95b3-354e-4fbf-abb1-471a68fc880d" />
+    <UnitTestResult executionId="848e0c57-756b-4ea1-80d7-19dcbeb43102" testId="dbed2131-55d1-be0e-13fd-e10140dc01b9" testName="AquariusTests.Wasm.WasmArtifactTest.MalformedMetadataIsRejectedBeforeInstantiation(damage: &quot;entry&quot;)" computerName="MSI" duration="00:00:00.0380834" startTime="2026-10-13T09:30:13.1033831+08:00" endTime="2026-10-13T09:30:13.1033834+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="848e0c57-756b-4ea1-80d7-19dcbeb43102" />
+    <UnitTestResult executionId="6f427631-9170-455e-b7ac-405dffec990b" testId="f2956b37-e774-a447-4e2e-21b5e6fe99b1" testName="AquariusTests.Compiler.CompiledEvaluatorTest.TestReturnStatements" computerName="MSI" duration="00:00:00.1951907" startTime="2026-10-13T09:30:15.5525348+08:00" endTime="2026-10-13T09:30:15.5525351+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6f427631-9170-455e-b7ac-405dffec990b" />
+    <UnitTestResult executionId="0a5cb084-4446-4c91-a915-369b6af80af9" testId="dd4803fc-52cd-b641-2dac-824ca0a88f83" testName="AquariusTests.Compiler.CompiledEvaluatorTest.TestLetStatements" computerName="MSI" duration="00:00:00.1630893" startTime="2026-10-13T09:30:13.3649498+08:00" endTime="2026-10-13T09:30:13.3649501+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0a5cb084-4446-4c91-a915-369b6af80af9" />
+    <UnitTestResult executionId="3de87124-5a88-423b-82ba-bb29f3a99308" testId="3936fddc-b501-2029-dd5b-3b260b83a4e3" testName="AquariusTests.Compiler.TimeBuiltinTest.CompiledSubtractionMeasuresMillisecondsWithEitherHost(desktop: False)" computerName="MSI" duration="00:00:00.0446764" startTime="2026-10-13T09:30:13.4418886+08:00" endTime="2026-10-13T09:30:13.4418891+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3de87124-5a88-423b-82ba-bb29f3a99308" />
+    <UnitTestResult executionId="14289ca0-78c6-4c2f-ab48-2225ff69ddfc" testId="e73a3165-b8a4-9938-9fcd-4ebc3f5fba73" testName="AquariusTests.Wasm.WasmArtifactTest.FailedCompilationPreservesExistingOutput" computerName="MSI" duration="00:00:00.0972345" startTime="2026-10-13T09:30:13.0657342+08:00" endTime="2026-10-13T09:30:13.0657345+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="14289ca0-78c6-4c2f-ab48-2225ff69ddfc" />
+    <UnitTestResult executionId="85526e39-b4b5-4c3a-a6d9-4c5d4c095f59" testId="81264f7f-eb4e-21ba-db8a-7695c86a2870" testName="AquariusTests.Wasm.WasmOwnedRuntimeTest.PixelBuffersAreTransferredToTheirOwnerInsteadOfEveryScalarCapability" computerName="MSI" duration="00:00:00.0606711" startTime="2026-10-13T09:30:13.1838282+08:00" endTime="2026-10-13T09:30:13.1838283+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="85526e39-b4b5-4c3a-a6d9-4c5d4c095f59" />
+    <UnitTestResult executionId="1e83d9a2-f680-4a15-9441-fc11e576ad99" testId="7202aa89-c219-9564-d9d5-8531ea36d8db" testName="AquariusTests.Compiler.CompiledEvaluatorTest.TestVarReassignments" computerName="MSI" duration="00:00:00.0786201" startTime="2026-10-13T09:30:13.2015412+08:00" endTime="2026-10-13T09:30:13.2015414+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1e83d9a2-f680-4a15-9441-fc11e576ad99" />
+    <UnitTestResult executionId="629abace-93a5-4795-ba9f-01d78d2ba353" testId="d3db296e-523c-a28b-3975-a38fcf256f17" testName="AquariusTests.Compiler.CompiledEvaluatorTest.TestVariableReassignment" computerName="MSI" duration="00:00:00.0330335" startTime="2026-10-13T09:30:16.2408420+08:00" endTime="2026-10-13T09:30:16.2408422+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="629abace-93a5-4795-ba9f-01d78d2ba353" />
+    <UnitTestResult executionId="41452f1b-de57-480b-bcf4-29d22b1f3700" testId="3713fd5e-b4f0-2ee7-cc72-a6eb5ff5849d" testName="AquariusTests.Compiler.CompiledEvaluatorTest.TestEvalForLoop" computerName="MSI" duration="00:00:00.0529793" startTime="2026-10-13T09:30:15.6055416+08:00" endTime="2026-10-13T09:30:15.6055420+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="41452f1b-de57-480b-bcf4-29d22b1f3700" />
+    <UnitTestResult executionId="273b50e8-692a-4c92-b81f-8734c6676e43" testId="97ef2fca-84c9-9c56-ebb1-d00c8ef44da6" testName="AquariusTests.Wasm.WasmOwnedRuntimeTest.HostRetainedArraysObserveGuestEditsWithoutBeingPassedAgain" computerName="MSI" duration="00:00:00.0225986" startTime="2026-10-13T09:30:13.6785463+08:00" endTime="2026-10-13T09:30:13.6785467+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="273b50e8-692a-4c92-b81f-8734c6676e43" />
+    <UnitTestResult executionId="7426daca-2ccf-46fc-b446-6858142edb5e" testId="e1a665a9-6cba-014b-d20f-7c05e6286d28" testName="AquariusTests.Wasm.WasmOwnedRuntimeTest.整數批次搬運保留極值與別名且替換原生函式後仍可修改引數" computerName="MSI" duration="00:00:00.0696204" startTime="2026-10-13T09:30:13.6338465+08:00" endTime="2026-10-13T09:30:13.6338468+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7426daca-2ccf-46fc-b446-6858142edb5e" />
+    <UnitTestResult executionId="bd11cf70-691e-4412-a817-a0c87c3154e2" testId="6577053b-44a0-dc24-acc0-ee1e27f8234d" testName="AquariusTests.Compiler.TimeBuiltinTest.ClockFunctionsCanBeStoredAndShadowed" computerName="MSI" duration="00:00:00.1970927" startTime="2026-10-13T09:30:13.1652252+08:00" endTime="2026-10-13T09:30:13.1652255+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="bd11cf70-691e-4412-a817-a0c87c3154e2" />
+    <UnitTestResult executionId="0a3c9884-b020-4765-98d1-420083dac04f" testId="17b4b2ba-cf3a-0465-dcd6-19085df276bb" testName="AquariusTests.Wasm.WasmOwnedRuntimeTest.NumericLoopsClosuresCollectionsAndPortableBuiltinsExecuteWithoutNativeCalls" computerName="MSI" duration="00:00:00.0485094" startTime="2026-10-13T09:30:13.2728679+08:00" endTime="2026-10-13T09:30:13.2728682+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0a3c9884-b020-4765-98d1-420083dac04f" />
+    <UnitTestResult executionId="cebe29c7-eab2-4621-bb84-20fd74a35bda" testId="de631292-b7f4-f37a-ea88-ee0045aed789" testName="AquariusTests.Wasm.WasmOwnedRuntimeTest.SharedArrayStoragePreservesSnapshotsAliasesAndHostWrites" computerName="MSI" duration="00:00:00.0307161" startTime="2026-10-13T09:30:13.3037036+08:00" endTime="2026-10-13T09:30:13.3037041+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="cebe29c7-eab2-4621-bb84-20fd74a35bda" />
+    <UnitTestResult executionId="3b6edb06-994c-43cb-9767-fbcfe79b094c" testId="b5e71dd7-b533-1a56-c759-c7f278468c08" testName="AquariusTests.Compiler.CallConventionTest.BorrowedNativeArgumentsSurviveCallbackReentryAndNestedCalls" computerName="MSI" duration="00:00:00.1529074" startTime="2026-10-13T09:30:13.1245337+08:00" endTime="2026-10-13T09:30:13.1245337+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3b6edb06-994c-43cb-9767-fbcfe79b094c" />
+    <UnitTestResult executionId="e49b7077-e28e-4600-8796-52740a04828f" testId="8e301b30-213c-94e5-a4c3-7c8ffcdf2f43" testName="AquariusTests.Compiler.CompiledEvaluatorTest.TestVariableScopeAndOwnership" computerName="MSI" duration="00:00:00.0671578" startTime="2026-10-13T09:30:15.8052313+08:00" endTime="2026-10-13T09:30:15.8052319+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e49b7077-e28e-4600-8796-52740a04828f" />
+    <UnitTestResult executionId="f65ba7a1-dbee-48d7-ba45-6b409568cc50" testId="008e3b2d-d94f-772d-0f6e-6ad206b0d360" testName="AquariusTests.Compiler.CompiledEvaluatorTest.TestBuiltinFunctions" computerName="MSI" duration="00:00:00.1697074" startTime="2026-10-13T09:30:13.5627472+08:00" endTime="2026-10-13T09:30:13.5627474+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f65ba7a1-dbee-48d7-ba45-6b409568cc50" />
+    <UnitTestResult executionId="b8dd0c20-0e5e-43b0-99fa-82d4c2ba7617" testId="9bb991f3-8a3c-518c-0dc4-00593e05f5e2" testName="AquariusTests.Wasm.WasmOwnedRuntimeTest.CyclicArraysCrossTheCapabilityBoundaryWithoutRecursingOnTheHostStack" computerName="MSI" duration="00:00:00.0259964" startTime="2026-10-13T09:30:13.5357853+08:00" endTime="2026-10-13T09:30:13.5357856+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b8dd0c20-0e5e-43b0-99fa-82d4c2ba7617" />
+    <UnitTestResult executionId="862e141e-9c0c-40a6-b965-da8d82ffe80b" testId="deac4e17-8708-0328-5845-a8a90d12a79c" testName="AquariusTests.Compiler.CompiledEvaluatorTest.TestEvalBooleanExpression" computerName="MSI" duration="00:00:00.8621194" startTime="2026-10-13T09:30:14.9447834+08:00" endTime="2026-10-13T09:30:14.9447838+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="862e141e-9c0c-40a6-b965-da8d82ffe80b" />
+    <UnitTestResult executionId="a6be1cf4-3f26-4853-8868-63eb1e2cc274" testId="ea294f3a-12aa-a5f4-478d-3fe5d9e39d64" testName="AquariusTests.Wasm.WasmOwnedRuntimeTest.HashProjectionPreservesOriginalKeysRatherThanClrHashCodes" computerName="MSI" duration="00:00:00.0334457" startTime="2026-10-13T09:30:13.5096276+08:00" endTime="2026-10-13T09:30:13.5096278+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a6be1cf4-3f26-4853-8868-63eb1e2cc274" />
+    <UnitTestResult executionId="3fa07437-df85-4038-b585-c036dfb26443" testId="db603e6f-357e-be6f-861d-750cbd3eed56" testName="AquariusTests.Compiler.CallConventionTest.ReplacingFnDisablesTheBorrowedEntryForBothAliases" computerName="MSI" duration="00:00:00.0456418" startTime="2026-10-13T09:30:13.2840314+08:00" endTime="2026-10-13T09:30:13.2840319+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3fa07437-df85-4038-b585-c036dfb26443" />
+    <UnitTestResult executionId="0529e5d2-0c98-489c-925b-6182049d2889" testId="7af074e7-1b76-9b30-ec7e-775c794e307c" testName="AquariusTests.Compiler.CompiledEvaluatorTest.TestHashLiterals" computerName="MSI" duration="00:00:00.0192492" startTime="2026-10-13T09:30:15.8593078+08:00" endTime="2026-10-13T09:30:15.8593082+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0529e5d2-0c98-489c-925b-6182049d2889" />
+    <UnitTestResult executionId="2515c327-510f-4372-9fca-534e80d86313" testId="9efe3d54-e41e-139b-30f7-70376b7b8647" testName="AquariusTests.Compiler.CompiledEvaluatorTest.TestHashIndexExpressions" computerName="MSI" duration="00:00:00.1225863" startTime="2026-10-13T09:30:15.3572586+08:00" endTime="2026-10-13T09:30:15.3572590+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2515c327-510f-4372-9fca-534e80d86313">
+      <Output>
+        <StdOut>input: {"foo": 5}["foo"], expected: 5&#xD;
+input: {"foo": 5}["bar"], expected: &#xD;
+input: 變數 key = "foo"; {"foo": 5}[key], expected: 5&#xD;
+input: {}["foo"], expected: &#xD;
+input: {5: 5}[5], expected: 5&#xD;
+input: {真: 5}[真], expected: 5&#xD;
+input: {假: 5}[假], expected: 5</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="fcd7ff27-b7ed-498d-b2ae-369fbdc2e6a7" testId="3576bb11-e83e-f051-60b7-3762548f6e51" testName="AquariusTests.Compiler.CompiledEvaluatorTest.TestFunctionObject" computerName="MSI" duration="00:00:00.0184587" startTime="2026-10-13T09:30:16.3871138+08:00" endTime="2026-10-13T09:30:16.3871140+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="fcd7ff27-b7ed-498d-b2ae-369fbdc2e6a7" />
+    <UnitTestResult executionId="82082997-a941-4035-a4b6-0858d2411a49" testId="34bf38a1-50d8-c215-2a83-72d80940597c" testName="AquariusTests.Compiler.TimeBuiltinTest.目前日期採主機本地西元日期且拒絕參數" computerName="MSI" duration="00:00:00.0666229" startTime="2026-10-13T09:30:13.5086501+08:00" endTime="2026-10-13T09:30:13.5086503+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="82082997-a941-4035-a4b6-0858d2411a49" />
+    <UnitTestResult executionId="7c3112ad-416b-4787-b8ab-577bf621193b" testId="2f99099d-9098-3eaa-8f6f-a0d8d9f48886" testName="AquariusTests.Wasm.WasmArtifactTest.StandardWasmRoundTripExecutesWithoutSourceOrInstructionSerialization(source: &quot;變數 n=0;迴圈(變數 i=0;i&lt;100;i++){n+=i;}n;&quot;, expected: &quot;4950&quot;)" computerName="MSI" duration="00:00:00.0472258" startTime="2026-10-13T09:30:13.2922682+08:00" endTime="2026-10-13T09:30:13.2922688+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7c3112ad-416b-4787-b8ab-577bf621193b" />
+    <UnitTestResult executionId="f9724cc1-5280-4c49-9c1b-2f8fcbdbd53b" testId="1fa30f02-ba82-0e06-b8e0-c8f93ba80bc6" testName="AquariusTests.Compiler.TimeBuiltinTest.ExtraArgumentsFailBeforeLaterSideEffects(name: &quot;目前時間&quot;)" computerName="MSI" duration="00:00:00.0346889" startTime="2026-10-13T09:30:13.2000219+08:00" endTime="2026-10-13T09:30:13.2000221+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f9724cc1-5280-4c49-9c1b-2f8fcbdbd53b" />
+    <UnitTestResult executionId="df1c960a-d0fa-47a2-b968-2c4ae654400c" testId="213f3ca4-c407-03e4-08e0-57d30c24f1bb" testName="AquariusTests.Compiler.CompiledEvaluatorTest.TestBangOperator" computerName="MSI" duration="00:00:00.1276439" startTime="2026-10-13T09:30:16.3686343+08:00" endTime="2026-10-13T09:30:16.3686347+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="df1c960a-d0fa-47a2-b968-2c4ae654400c" />
+    <UnitTestResult executionId="a11e8e72-0086-45ea-8a5c-dea392abc890" testId="1bb09236-b178-df82-fdc8-956f01969500" testName="AquariusTests.Wasm.WasmOwnedRuntimeTest.NativeArrayResizeAndHashMutationPreserveGuestAliases" computerName="MSI" duration="00:00:00.0216404" startTime="2026-10-13T09:30:15.7088801+08:00" endTime="2026-10-13T09:30:15.7088806+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a11e8e72-0086-45ea-8a5c-dea392abc890" />
+    <UnitTestResult executionId="c4648948-7300-409e-b670-daca0ec80934" testId="59d752db-5b83-5a00-a607-69f4f0f7df53" testName="AquariusTests.Compiler.CallConventionTest.NativeErrorsStopBeforeSubsequentSideEffects" computerName="MSI" duration="00:00:00.0323621" startTime="2026-10-13T09:30:13.3164747+08:00" endTime="2026-10-13T09:30:13.3164748+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c4648948-7300-409e-b670-daca0ec80934" />
+    <UnitTestResult executionId="d1507873-7271-4d82-9405-567b956c36ba" testId="392df3dd-f7cc-bf3e-39df-03d74861b217" testName="AquariusTests.Compiler.CompiledEvaluatorTest.TestStringConcatenation" computerName="MSI" duration="00:00:00.0166002" startTime="2026-10-13T09:30:15.8219336+08:00" endTime="2026-10-13T09:30:15.8219339+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d1507873-7271-4d82-9405-567b956c36ba" />
+    <UnitTestResult executionId="f7197576-67da-423c-86bc-239d94beec41" testId="7062eef2-5962-9622-04ef-b97828c32983" testName="AquariusTests.Compiler.CompiledEvaluatorTest.TestIfElifElseExpressions" computerName="MSI" duration="00:00:00.1632232" startTime="2026-10-13T09:30:15.2346908+08:00" endTime="2026-10-13T09:30:15.2346913+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f7197576-67da-423c-86bc-239d94beec41">
+      <Output>
+        <StdOut>如果 (真) { 10 }&#xD;
+如果 (假) { 10 }&#xD;
+如果 (1) { 10 }&#xD;
+如果 (1 &lt; 2) { 10 }&#xD;
+如果 (1 &gt; 2) { 10 }&#xD;
+如果 (1 &gt; 2) { 10 } 否則 { 20.12f }&#xD;
+如果 (1 &lt; 2) { 10 } 否則 { 20 }&#xD;
+&#xD;
+                        變數 a = 假;&#xD;
+                        變數 b = 真;&#xD;
+&#xD;
+                        變數 result = 函式() {&#xD;
+                            如果 (a) {&#xD;
+                                回傳 12;&#xD;
+                            } 否則如果 (10 &gt; 12) {&#xD;
+                                回傳 真;&#xD;
+                            } 否則如果 (b) {&#xD;
+                                回傳 "YES!";&#xD;
+                            } 否則 {&#xD;
+                                回傳 "Wow!";&#xD;
+                            }&#xD;
+                        }();&#xD;
+&#xD;
+                        result;</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="f642e268-2bb2-4938-b3ab-d856de2bf41f" testId="75a58f06-b47e-c70e-246a-898e3fa640c4" testName="AquariusTests.Wasm.WasmOwnedRuntimeTest.雜湊表寫入保留別名型別與主機同步" computerName="MSI" duration="00:00:00.0285184" startTime="2026-10-13T09:30:13.7072321+08:00" endTime="2026-10-13T09:30:13.7072324+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f642e268-2bb2-4938-b3ab-d856de2bf41f" />
+    <UnitTestResult executionId="2ac52fea-1556-40a0-9e6f-949c5ac47419" testId="0b5d8426-26d1-828a-0fe5-3a5283999e93" testName="AquariusTests.Wasm.WasmArtifactTest.MalformedMetadataIsRejectedBeforeInstantiation(damage: &quot;frame&quot;)" computerName="MSI" duration="00:00:00.0005267" startTime="2026-10-13T09:30:13.1163688+08:00" endTime="2026-10-13T09:30:13.1163688+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2ac52fea-1556-40a0-9e6f-949c5ac47419" />
+    <UnitTestResult executionId="1958597d-8086-4901-b78c-2bc429ca3f35" testId="45f7b65d-8889-9c30-2e26-291f5c21c820" testName="AquariusTests.Wasm.WasmArtifactTest.MalformedMetadataIsRejectedBeforeInstantiation(damage: &quot;cacheBindings&quot;)" computerName="MSI" duration="00:00:00.0029336" startTime="2026-10-13T09:30:13.1162176+08:00" endTime="2026-10-13T09:30:13.1162177+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1958597d-8086-4901-b78c-2bc429ca3f35" />
+    <UnitTestResult executionId="10327615-5a05-406a-86e2-0cd37d84c8a0" testId="55f98992-a0a3-2cde-12c6-4cd3854cd788" testName="AquariusTests.Compiler.TimeBuiltinTest.ReadingsShareAnOriginAcrossBuiltinsAndExecutions" computerName="MSI" duration="00:00:00.0776138" startTime="2026-10-13T09:30:13.3162428+08:00" endTime="2026-10-13T09:30:13.3162430+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="10327615-5a05-406a-86e2-0cd37d84c8a0" />
+    <UnitTestResult executionId="fa476b7e-d6c4-4615-b570-fb43e9b77fc4" testId="2f80ca22-345b-1080-3a57-ca5c1138c4bf" testName="AquariusTests.Wasm.WasmArtifactTest.StandardWasmRoundTripExecutesWithoutSourceOrInstructionSerialization(source: &quot;變數 f=函式(x){函式(y){x+y;};}; f(2)(40);&quot;, expected: &quot;42&quot;)" computerName="MSI" duration="00:00:00.0532629" startTime="2026-10-13T09:30:13.2435998+08:00" endTime="2026-10-13T09:30:13.2436003+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="fa476b7e-d6c4-4615-b570-fb43e9b77fc4" />
+    <UnitTestResult executionId="3b1dc117-f1fb-4598-abfb-072c4f56167a" testId="f609f756-b230-de05-ef57-22758813ffa1" testName="AquariusTests.Wasm.WasmOwnedRuntimeTest.IndexedScopesPreserveBindingsAfterGrowthAndIterationReset" computerName="MSI" duration="00:00:00.0544437" startTime="2026-10-13T09:30:13.4503297+08:00" endTime="2026-10-13T09:30:13.4503299+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3b1dc117-f1fb-4598-abfb-072c4f56167a" />
+    <UnitTestResult executionId="cf5cf664-c102-4986-b9a2-698efdbc5390" testId="021b8e5d-f7f0-d74c-6aa8-03e4627eb28c" testName="AquariusTests.Wasm.WasmOwnedRuntimeTest.NativeCallbackHandlesDoNotKeepUnownedSessionsAlive" computerName="MSI" duration="00:00:00.0207489" startTime="2026-10-13T09:30:13.7716827+08:00" endTime="2026-10-13T09:30:13.7716830+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="cf5cf664-c102-4986-b9a2-698efdbc5390" />
+    <UnitTestResult executionId="539db9dd-c910-4fb4-b319-f988f5f7bcf4" testId="597a952c-166d-abb5-fb19-5173eb18dc9b" testName="AquariusTests.Compiler.CallConventionTest.BorrowedNativeCallHandlesLargeArgumentWindowsAndResultAliasing" computerName="MSI" duration="00:00:00.0562331" startTime="2026-10-13T09:30:13.2382893+08:00" endTime="2026-10-13T09:30:13.2382896+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="539db9dd-c910-4fb4-b319-f988f5f7bcf4" />
+    <UnitTestResult executionId="e7bbdaf5-05ba-4575-9f78-087a8be6e6cd" testId="99f6c9c1-50bf-b4df-7c71-b0848ba2f6b4" testName="AquariusTests.Wasm.WasmArtifactTest.StandardWasmRoundTripExecutesWithoutSourceOrInstructionSerialization(source: &quot;42;&quot;, expected: &quot;42&quot;)" computerName="MSI" duration="00:00:00.0469850" startTime="2026-10-13T09:30:13.1899855+08:00" endTime="2026-10-13T09:30:13.1899859+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e7bbdaf5-05ba-4575-9f78-087a8be6e6cd" />
+    <UnitTestResult executionId="53c0202e-a748-4bdc-836e-072a591f4662" testId="5ca73cfc-6167-56fd-1f07-7f00e8cfa53d" testName="AquariusTests.Compiler.CompiledEvaluatorTest.TestEvalNumberExpression" computerName="MSI" duration="00:00:00.3482042" startTime="2026-10-13T09:30:16.2076245+08:00" endTime="2026-10-13T09:30:16.2076248+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="53c0202e-a748-4bdc-836e-072a591f4662" />
+    <UnitTestResult executionId="d2ffea78-bef1-4414-bd07-a9652c5910ec" testId="51203f1c-95c5-1a27-6c0b-ca320ed133bc" testName="AquariusTests.Wasm.WasmArtifactTest.InvalidAndTruncatedArtifactsAreRejected" computerName="MSI" duration="00:00:01.3430036" startTime="2026-10-13T09:30:14.7974333+08:00" endTime="2026-10-13T09:30:14.7974336+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d2ffea78-bef1-4414-bd07-a9652c5910ec" />
+    <UnitTestResult executionId="d5b195aa-f240-4d95-bb25-ad332f1e28aa" testId="e4aae814-8288-6eeb-b3d5-f661234d96ab" testName="AquariusTests.Wasm.WasmArtifactTest.MalformedMetadataIsRejectedBeforeInstantiation(damage: &quot;reference&quot;)" computerName="MSI" duration="00:00:00.0015191" startTime="2026-10-13T09:30:13.1067395+08:00" endTime="2026-10-13T09:30:13.1067396+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d5b195aa-f240-4d95-bb25-ad332f1e28aa" />
+    <UnitTestResult executionId="f6480d3f-2da4-4bab-a935-4ad2cfce09c7" testId="3619e3d6-b94e-5d6a-bb69-a4b4e7cedeaa" testName="AquariusTests.Compiler.CompiledEvaluatorTest.TestNumberPlusMinusMultDivEquals" computerName="MSI" duration="00:00:00.1321927" startTime="2026-10-13T09:30:15.7379459+08:00" endTime="2026-10-13T09:30:15.7379460+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f6480d3f-2da4-4bab-a935-4ad2cfce09c7" />
+    <UnitTestResult executionId="95e910a2-5542-4a5d-8eed-ab0ea1002200" testId="c1304a0d-ee49-56d3-bd06-cf1152f3eb63" testName="AquariusTests.Compiler.CompiledEvaluatorTest.TestEnclosingEnvironment" computerName="MSI" duration="00:00:00.1548846" startTime="2026-10-13T09:30:13.1228903+08:00" endTime="2026-10-13T09:30:13.1228905+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="95e910a2-5542-4a5d-8eed-ab0ea1002200" />
+    <UnitTestResult executionId="e45f2d1e-3b05-4166-a521-d408d0fa973b" testId="05986f6d-44c2-0689-9f03-2597ed987982" testName="AquariusTests.Wasm.WasmOwnedRuntimeTest.ComputedNativeMembersRetainTheirProjectedModuleScopeAcrossCalls" computerName="MSI" duration="00:00:00.1552410" startTime="2026-10-13T09:30:13.1244897+08:00" endTime="2026-10-13T09:30:13.1244897+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e45f2d1e-3b05-4166-a521-d408d0fa973b" />
+    <UnitTestResult executionId="0a081027-2461-4616-a750-4520d5dce444" testId="77adac1f-1c82-e3f7-0bd9-f7dbce6b25aa" testName="AquariusTests.Wasm.WasmOwnedRuntimeTest.雜湊表無效鍵先拒絕且成長循環可回收" computerName="MSI" duration="00:00:00.0883785" startTime="2026-10-13T09:30:13.3921806+08:00" endTime="2026-10-13T09:30:13.3921810+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0a081027-2461-4616-a750-4520d5dce444" />
+    <UnitTestResult executionId="a73bea63-08fc-492f-a155-3c57b5c259ea" testId="76d4b74c-be11-597a-029c-4d433b5a83cf" testName="AquariusTests.Compiler.CompiledEvaluatorTest.TestStringLiteral" computerName="MSI" duration="00:00:00.0280305" startTime="2026-10-13T09:30:13.3929375+08:00" endTime="2026-10-13T09:30:13.3929378+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="a73bea63-08fc-492f-a155-3c57b5c259ea" />
+    <UnitTestResult executionId="f83e53c8-97fb-4798-95f4-ed1a6b9a8ad2" testId="74f7e9ee-00d0-c3a0-9e4f-991d9726d792" testName="AquariusTests.Wasm.WasmArtifactTest.MalformedMetadataIsRejectedBeforeInstantiation(damage: &quot;valueAbi&quot;)" computerName="MSI" duration="00:00:00.0010657" startTime="2026-10-13T09:30:13.1051680+08:00" endTime="2026-10-13T09:30:13.1051681+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f83e53c8-97fb-4798-95f4-ed1a6b9a8ad2" />
+    <UnitTestResult executionId="0917e93b-6bb3-4390-bc20-3ed1a3ad6f7e" testId="71549a93-961d-d7cc-a4fc-13b460b1b64a" testName="AquariusTests.Wasm.WasmOwnedRuntimeTest.修改雜湊欄位不重複傳輸未變更的子陣列" computerName="MSI" duration="00:00:00.0435177" startTime="2026-10-13T09:30:13.7508540+08:00" endTime="2026-10-13T09:30:13.7508541+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0917e93b-6bb3-4390-bc20-3ed1a3ad6f7e" />
+    <UnitTestResult executionId="c74652a6-f6a8-4e0a-8df2-533aaa778d6e" testId="9228cafc-cc2b-24c5-c177-abcfa1bf1670" testName="AquariusTests.Compiler.CompiledEvaluatorTest.TestFunctionApplication" computerName="MSI" duration="00:00:00.1071555" startTime="2026-10-13T09:30:15.0521344+08:00" endTime="2026-10-13T09:30:15.0521350+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c74652a6-f6a8-4e0a-8df2-533aaa778d6e" />
+    <UnitTestResult executionId="76243455-3cd6-47c0-9180-8dec5d0b7b54" testId="01e95560-05a7-ba44-b6da-aee6a6e9c149" testName="AquariusTests.Compiler.CompiledEvaluatorTest.TestErrorHandling" computerName="MSI" duration="00:00:00.2747388" startTime="2026-10-13T09:30:14.0825152+08:00" endTime="2026-10-13T09:30:14.0825155+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="76243455-3cd6-47c0-9180-8dec5d0b7b54" />
+    <UnitTestResult executionId="2746af21-ea69-48aa-9bdd-2636d3211501" testId="8c9e216b-4781-ccdb-fbc0-d2d322e73a68" testName="AquariusTests.Compiler.CompiledEvaluatorTest.TestArrayIndexExpressions" computerName="MSI" duration="00:00:00.2447598" startTime="2026-10-13T09:30:13.8076080+08:00" endTime="2026-10-13T09:30:13.8076084+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2746af21-ea69-48aa-9bdd-2636d3211501" />
+    <UnitTestResult executionId="783d2bae-9cfe-4cb4-93bd-065e5bc74fde" testId="f7fb4bd7-3cff-1125-66fd-5d9a3271508e" testName="AquariusTests.Wasm.WasmOwnedRuntimeTest.FramesAreSizedByLiveOperandsAcrossLoopsAndCalls" computerName="MSI" duration="00:00:01.9152495" startTime="2026-10-13T09:30:15.6870921+08:00" endTime="2026-10-13T09:30:15.6870928+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="783d2bae-9cfe-4cb4-93bd-065e5bc74fde" />
+    <UnitTestResult executionId="ffc22d1a-0c1f-4195-b133-45ff907ea3dc" testId="5aa4a467-6730-0b47-df8a-4d0f0d5ca82a" testName="AquariusTests.Wasm.WasmOwnedRuntimeTest.BindingCachesInvalidateForShadowingGrowthAndCallbackReentry" computerName="MSI" duration="00:00:00.0281910" startTime="2026-10-13T09:30:13.5640561+08:00" endTime="2026-10-13T09:30:13.5640563+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ffc22d1a-0c1f-4195-b133-45ff907ea3dc" />
+    <UnitTestResult executionId="3aba3a68-cf0b-4c30-9dab-a2f56e051718" testId="0c63499f-49b8-be04-27ea-716345e29622" testName="AquariusTests.Wasm.WasmArtifactTest.MalformedMetadataIsRejectedBeforeInstantiation(damage: &quot;functions&quot;)" computerName="MSI" duration="00:00:00.0006129" startTime="2026-10-13T09:30:13.1040533+08:00" endTime="2026-10-13T09:30:13.1040534+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3aba3a68-cf0b-4c30-9dab-a2f56e051718" />
+    <UnitTestResult executionId="90c6c1fd-9411-45ef-8891-6ae8b82ee61d" testId="fe0a7f30-9dc3-2570-3b0d-f2c40107e389" testName="AquariusTests.Compiler.CallConventionTest.OwnedNativeArgumentsRemainIndependentAndMayBeRetained" computerName="MSI" duration="00:00:00.0526958" startTime="2026-10-13T09:30:13.3790941+08:00" endTime="2026-10-13T09:30:13.3790945+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="90c6c1fd-9411-45ef-8891-6ae8b82ee61d" />
+    <UnitTestResult executionId="91743fd6-aa1c-420f-91dc-28bb9b731930" testId="217a4412-28ee-dceb-5b72-edf3b37a79b0" testName="AquariusTests.Compiler.CallConventionTest.CallsPreserveArgumentEvaluationOrderAndSerializedPrograms" computerName="MSI" duration="00:00:00.0578358" startTime="2026-10-13T09:30:13.1819898+08:00" endTime="2026-10-13T09:30:13.1819902+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="91743fd6-aa1c-420f-91dc-28bb9b731930" />
+    <UnitTestResult executionId="b98957ac-f727-4ea0-a96b-9ebc26da9e7e" testId="b3c01d69-98f5-77c1-e9ae-92a0f333dba3" testName="AquariusTests.Wasm.WasmArtifactTest.MalformedMetadataIsRejectedBeforeInstantiation(damage: &quot;modules&quot;)" computerName="MSI" duration="00:00:00.0005700" startTime="2026-10-13T09:30:13.1163485+08:00" endTime="2026-10-13T09:30:13.1163486+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b98957ac-f727-4ea0-a96b-9ebc26da9e7e" />
+    <UnitTestResult executionId="3ae8107e-c04c-42c9-ab45-aef3bc970b21" testId="ea773eb8-6618-b0b8-e461-90f474f98543" testName="AquariusTests.Compiler.TimeBuiltinTest.CompiledSubtractionMeasuresMillisecondsWithEitherHost(desktop: True)" computerName="MSI" duration="00:00:00.0807729" startTime="2026-10-13T09:30:13.4100594+08:00" endTime="2026-10-13T09:30:13.4100599+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3ae8107e-c04c-42c9-ab45-aef3bc970b21" />
+    <UnitTestResult executionId="c476c948-eb1e-4612-94b5-bef3311e37c1" testId="b1b686e1-0aca-32e8-bc87-ded1d3a3ba1e" testName="AquariusTests.Wasm.WasmArtifactTest.MalformedMetadataIsRejectedBeforeInstantiation(damage: &quot;heapStart&quot;)" computerName="MSI" duration="00:00:00.0003608" startTime="2026-10-13T09:30:13.1169504+08:00" endTime="2026-10-13T09:30:13.1169505+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c476c948-eb1e-4612-94b5-bef3311e37c1" />
+    <UnitTestResult executionId="f6dab8be-3a65-4583-997b-146183cc69ce" testId="fea28ce8-8f50-ddff-c6f1-094948b85b5d" testName="AquariusTests.Wasm.WasmOwnedRuntimeTest.DisposalReleasesOwnedInstancesAndRejectsRetainedCallbacks" computerName="MSI" duration="00:00:00.0219156" startTime="2026-10-13T09:30:13.6558522+08:00" endTime="2026-10-13T09:30:13.6558526+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f6dab8be-3a65-4583-997b-146183cc69ce" />
+    <UnitTestResult executionId="8f0175dc-29d5-4f9e-963e-91db2b4dad64" testId="da5687e7-814d-5ec5-cf9d-400b3827ea3a" testName="AquariusTests.Compiler.CallConventionTest.BorrowedCallBenchmark" computerName="MSI" duration="00:00:00.0018837" startTime="2026-10-13T09:30:12.9727104+08:00" endTime="2026-10-13T09:30:12.9727195+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8f0175dc-29d5-4f9e-963e-91db2b4dad64" />
+    <UnitTestResult executionId="2d081d1e-7da4-4287-ac8e-a6cc1a3f2b53" testId="14bec933-2078-246d-b384-e90bcc6892d0" testName="AquariusTests.Wasm.WasmArtifactTest.MalformedMetadataIsRejectedBeforeInstantiation(damage: &quot;asset&quot;)" computerName="MSI" duration="00:00:00.0014823" startTime="2026-10-13T09:30:13.1163834+08:00" endTime="2026-10-13T09:30:13.1163835+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2d081d1e-7da4-4287-ac8e-a6cc1a3f2b53" />
+    <UnitTestResult executionId="e594fd96-edcf-49ed-b47c-a3c5a7bc7f3b" testId="4a9d87f5-5f69-89d1-341c-f1be0b6c9358" testName="AquariusTests.Wasm.WasmArtifactTest.MalformedMetadataIsRejectedBeforeInstantiation(damage: &quot;programAddress&quot;)" computerName="MSI" duration="00:00:00.0019370" startTime="2026-10-13T09:30:13.1163977+08:00" endTime="2026-10-13T09:30:13.1163977+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e594fd96-edcf-49ed-b47c-a3c5a7bc7f3b" />
+    <UnitTestResult executionId="0c584049-9f5f-44c8-9af0-f2ffadf29e27" testId="f997f023-383f-9de3-d44e-164f5e46cf8b" testName="AquariusTests.Wasm.WasmArtifactTest.CompilationIsDeterministicAndHasNoExecutionSideEffects" computerName="MSI" duration="00:00:00.0257335" startTime="2026-10-13T09:30:13.1427689+08:00" endTime="2026-10-13T09:30:13.1427694+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0c584049-9f5f-44c8-9af0-f2ffadf29e27" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="AquariusTests.Compiler.CompiledEvaluatorTest.TestBangOperator" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="213f3ca4-c407-03e4-08e0-57d30c24f1bb">
+      <Execution id="df1c960a-d0fa-47a2-b968-2c4ae654400c" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Compiler.CompiledEvaluatorTest" name="TestBangOperator" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Compiler.CompiledEvaluatorTest.TestFunctionApplication" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="9228cafc-cc2b-24c5-c177-abcfa1bf1670">
+      <Execution id="c74652a6-f6a8-4e0a-8df2-533aaa778d6e" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Compiler.CompiledEvaluatorTest" name="TestFunctionApplication" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Wasm.WasmArtifactTest.MalformedMetadataIsRejectedBeforeInstantiation(damage: &quot;functions&quot;)" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="0c63499f-49b8-be04-27ea-716345e29622">
+      <Execution id="3aba3a68-cf0b-4c30-9dab-a2f56e051718" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Wasm.WasmArtifactTest" name="MalformedMetadataIsRejectedBeforeInstantiation" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Wasm.WasmArtifactTest.MalformedMetadataIsRejectedBeforeInstantiation(damage: &quot;heapStart&quot;)" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="b1b686e1-0aca-32e8-bc87-ded1d3a3ba1e">
+      <Execution id="c476c948-eb1e-4612-94b5-bef3311e37c1" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Wasm.WasmArtifactTest" name="MalformedMetadataIsRejectedBeforeInstantiation" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Compiler.CompiledEvaluatorTest.TestStringConcatenation" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="392df3dd-f7cc-bf3e-39df-03d74861b217">
+      <Execution id="d1507873-7271-4d82-9405-567b956c36ba" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Compiler.CompiledEvaluatorTest" name="TestStringConcatenation" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Compiler.CallConventionTest.NativeErrorsStopBeforeSubsequentSideEffects" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="59d752db-5b83-5a00-a607-69f4f0f7df53">
+      <Execution id="c4648948-7300-409e-b670-daca0ec80934" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Compiler.CallConventionTest" name="NativeErrorsStopBeforeSubsequentSideEffects" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Wasm.WasmOwnedRuntimeTest.AnonymousRunsReuseHeapWithoutDependingOnManagedCollection" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="44138171-cf88-5b97-3bda-308fec38028b">
+      <Execution id="7494e48a-1b35-41b1-8ce9-dd506d4bfe7d" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Wasm.WasmOwnedRuntimeTest" name="AnonymousRunsReuseHeapWithoutDependingOnManagedCollection" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Compiler.CallConventionTest.BorrowedNativeArgumentsSurviveCallbackReentryAndNestedCalls" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="b5e71dd7-b533-1a56-c759-c7f278468c08">
+      <Execution id="3b6edb06-994c-43cb-9767-fbcfe79b094c" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Compiler.CallConventionTest" name="BorrowedNativeArgumentsSurviveCallbackReentryAndNestedCalls" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Wasm.WasmOwnedRuntimeTest.整數批次搬運保留極值與別名且替換原生函式後仍可修改引數" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="e1a665a9-6cba-014b-d20f-7c05e6286d28">
+      <Execution id="7426daca-2ccf-46fc-b446-6858142edb5e" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Wasm.WasmOwnedRuntimeTest" name="整數批次搬運保留極值與別名且替換原生函式後仍可修改引數" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Wasm.WasmOwnedRuntimeTest.NativeCallbackHandlesDoNotKeepUnownedSessionsAlive" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="021b8e5d-f7f0-d74c-6aa8-03e4627eb28c">
+      <Execution id="cf5cf664-c102-4986-b9a2-698efdbc5390" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Wasm.WasmOwnedRuntimeTest" name="NativeCallbackHandlesDoNotKeepUnownedSessionsAlive" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Wasm.WasmOwnedRuntimeTest.SharedArrayStoragePreservesSnapshotsAliasesAndHostWrites" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="de631292-b7f4-f37a-ea88-ee0045aed789">
+      <Execution id="cebe29c7-eab2-4621-bb84-20fd74a35bda" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Wasm.WasmOwnedRuntimeTest" name="SharedArrayStoragePreservesSnapshotsAliasesAndHostWrites" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Compiler.TimeBuiltinTest.CompiledSubtractionMeasuresMillisecondsWithEitherHost(desktop: True)" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="ea773eb8-6618-b0b8-e461-90f474f98543">
+      <Execution id="3ae8107e-c04c-42c9-ab45-aef3bc970b21" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Compiler.TimeBuiltinTest" name="CompiledSubtractionMeasuresMillisecondsWithEitherHost" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Compiler.CallConventionTest.OwnedNativeArgumentsRemainIndependentAndMayBeRetained" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="fe0a7f30-9dc3-2570-3b0d-f2c40107e389">
+      <Execution id="90c6c1fd-9411-45ef-8891-6ae8b82ee61d" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Compiler.CallConventionTest" name="OwnedNativeArgumentsRemainIndependentAndMayBeRetained" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Wasm.WasmOwnedRuntimeTest.ComputedNativeMembersRetainTheirProjectedModuleScopeAcrossCalls" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="05986f6d-44c2-0689-9f03-2597ed987982">
+      <Execution id="e45f2d1e-3b05-4166-a521-d408d0fa973b" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Wasm.WasmOwnedRuntimeTest" name="ComputedNativeMembersRetainTheirProjectedModuleScopeAcrossCalls" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Compiler.CompiledEvaluatorTest.TestNumberPlusMinusMultDivEquals" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="3619e3d6-b94e-5d6a-bb69-a4b4e7cedeaa">
+      <Execution id="f6480d3f-2da4-4bab-a935-4ad2cfce09c7" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Compiler.CompiledEvaluatorTest" name="TestNumberPlusMinusMultDivEquals" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Wasm.WasmOwnedRuntimeTest.FramesAreSizedByLiveOperandsAcrossLoopsAndCalls" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="f7fb4bd7-3cff-1125-66fd-5d9a3271508e">
+      <Execution id="783d2bae-9cfe-4cb4-93bd-065e5bc74fde" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Wasm.WasmOwnedRuntimeTest" name="FramesAreSizedByLiveOperandsAcrossLoopsAndCalls" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Wasm.WasmArtifactTest.MalformedMetadataIsRejectedBeforeInstantiation(damage: &quot;abi&quot;)" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="883c7984-ada0-cb27-c6f6-728c3d83882a">
+      <Execution id="21c1e561-76a5-401e-a059-7d7fed107734" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Wasm.WasmArtifactTest" name="MalformedMetadataIsRejectedBeforeInstantiation" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Wasm.WasmArtifactTest.MalformedMetadataIsRejectedBeforeInstantiation(damage: &quot;entry&quot;)" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="dbed2131-55d1-be0e-13fd-e10140dc01b9">
+      <Execution id="848e0c57-756b-4ea1-80d7-19dcbeb43102" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Wasm.WasmArtifactTest" name="MalformedMetadataIsRejectedBeforeInstantiation" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Wasm.WasmArtifactTest.MalformedMetadataIsRejectedBeforeInstantiation(damage: &quot;modules&quot;)" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="b3c01d69-98f5-77c1-e9ae-92a0f333dba3">
+      <Execution id="b98957ac-f727-4ea0-a96b-9ebc26da9e7e" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Wasm.WasmArtifactTest" name="MalformedMetadataIsRejectedBeforeInstantiation" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Compiler.CompiledEvaluatorTest.TestIfElifElseExpressions" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="7062eef2-5962-9622-04ef-b97828c32983">
+      <Execution id="f7197576-67da-423c-86bc-239d94beec41" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Compiler.CompiledEvaluatorTest" name="TestIfElifElseExpressions" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Compiler.TimeBuiltinTest.CompiledSubtractionMeasuresMillisecondsWithEitherHost(desktop: False)" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="3936fddc-b501-2029-dd5b-3b260b83a4e3">
+      <Execution id="3de87124-5a88-423b-82ba-bb29f3a99308" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Compiler.TimeBuiltinTest" name="CompiledSubtractionMeasuresMillisecondsWithEitherHost" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Wasm.WasmArtifactTest.MalformedMetadataIsRejectedBeforeInstantiation(damage: &quot;valueAbi&quot;)" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="74f7e9ee-00d0-c3a0-9e4f-991d9726d792">
+      <Execution id="f83e53c8-97fb-4798-95f4-ed1a6b9a8ad2" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Wasm.WasmArtifactTest" name="MalformedMetadataIsRejectedBeforeInstantiation" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Wasm.WasmArtifactTest.StandardWasmRoundTripExecutesWithoutSourceOrInstructionSerialization(source: &quot;變數 n=0;迴圈(變數 i=0;i&lt;100;i++){n+=i;}n;&quot;, expected: &quot;4950&quot;)" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="2f99099d-9098-3eaa-8f6f-a0d8d9f48886">
+      <Execution id="7c3112ad-416b-4787-b8ab-577bf621193b" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Wasm.WasmArtifactTest" name="StandardWasmRoundTripExecutesWithoutSourceOrInstructionSerialization" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Wasm.WasmOwnedRuntimeTest.雜湊表無效鍵先拒絕且成長循環可回收" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="77adac1f-1c82-e3f7-0bd9-f7dbce6b25aa">
+      <Execution id="0a081027-2461-4616-a750-4520d5dce444" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Wasm.WasmOwnedRuntimeTest" name="雜湊表無效鍵先拒絕且成長循環可回收" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Wasm.WasmOwnedRuntimeTest.HashProjectionPreservesOriginalKeysRatherThanClrHashCodes" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="ea294f3a-12aa-a5f4-478d-3fe5d9e39d64">
+      <Execution id="a6be1cf4-3f26-4853-8868-63eb1e2cc274" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Wasm.WasmOwnedRuntimeTest" name="HashProjectionPreservesOriginalKeysRatherThanClrHashCodes" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Wasm.WasmOwnedRuntimeTest.NumericLoopsClosuresCollectionsAndPortableBuiltinsExecuteWithoutNativeCalls" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="17b4b2ba-cf3a-0465-dcd6-19085df276bb">
+      <Execution id="0a3c9884-b020-4765-98d1-420083dac04f" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Wasm.WasmOwnedRuntimeTest" name="NumericLoopsClosuresCollectionsAndPortableBuiltinsExecuteWithoutNativeCalls" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Compiler.CompiledEvaluatorTest.TestEvalNumberExpression" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="5ca73cfc-6167-56fd-1f07-7f00e8cfa53d">
+      <Execution id="53c0202e-a748-4bdc-836e-072a591f4662" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Compiler.CompiledEvaluatorTest" name="TestEvalNumberExpression" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Wasm.WasmOwnedRuntimeTest.PixelBuffersAreTransferredToTheirOwnerInsteadOfEveryScalarCapability" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="81264f7f-eb4e-21ba-db8a-7695c86a2870">
+      <Execution id="85526e39-b4b5-4c3a-a6d9-4c5d4c095f59" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Wasm.WasmOwnedRuntimeTest" name="PixelBuffersAreTransferredToTheirOwnerInsteadOfEveryScalarCapability" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Wasm.WasmOwnedRuntimeTest.雜湊表寫入保留別名型別與主機同步" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="75a58f06-b47e-c70e-246a-898e3fa640c4">
+      <Execution id="f642e268-2bb2-4938-b3ab-d856de2bf41f" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Wasm.WasmOwnedRuntimeTest" name="雜湊表寫入保留別名型別與主機同步" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Compiler.CompiledEvaluatorTest.TestErrorHandling" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="01e95560-05a7-ba44-b6da-aee6a6e9c149">
+      <Execution id="76243455-3cd6-47c0-9180-8dec5d0b7b54" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Compiler.CompiledEvaluatorTest" name="TestErrorHandling" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Wasm.WasmArtifactTest.ModulesAndAssetsArePortableAndIndependentAcrossRuns" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="d295fe20-c68a-8d43-f305-c204c6765ae9">
+      <Execution id="93501a3e-0c89-4ff6-9cec-8158d46b9ef1" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Wasm.WasmArtifactTest" name="ModulesAndAssetsArePortableAndIndependentAcrossRuns" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Compiler.CompiledEvaluatorTest.TestVariableReassignment" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="d3db296e-523c-a28b-3975-a38fcf256f17">
+      <Execution id="629abace-93a5-4795-ba9f-01d78d2ba353" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Compiler.CompiledEvaluatorTest" name="TestVariableReassignment" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Compiler.CompiledEvaluatorTest.TestArrayIndexExpressions" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="8c9e216b-4781-ccdb-fbc0-d2d322e73a68">
+      <Execution id="2746af21-ea69-48aa-9bdd-2636d3211501" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Compiler.CompiledEvaluatorTest" name="TestArrayIndexExpressions" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Compiler.CallConventionTest.BorrowedNativeCallHandlesLargeArgumentWindowsAndResultAliasing" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="597a952c-166d-abb5-fb19-5173eb18dc9b">
+      <Execution id="539db9dd-c910-4fb4-b319-f988f5f7bcf4" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Compiler.CallConventionTest" name="BorrowedNativeCallHandlesLargeArgumentWindowsAndResultAliasing" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Compiler.CallConventionTest.BorrowedCallBenchmark" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="da5687e7-814d-5ec5-cf9d-400b3827ea3a">
+      <Execution id="8f0175dc-29d5-4f9e-963e-91db2b4dad64" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Compiler.CallConventionTest" name="BorrowedCallBenchmark" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Wasm.WasmOwnedRuntimeTest.CyclicArraysCrossTheCapabilityBoundaryWithoutRecursingOnTheHostStack" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="9bb991f3-8a3c-518c-0dc4-00593e05f5e2">
+      <Execution id="b8dd0c20-0e5e-43b0-99fa-82d4c2ba7617" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Wasm.WasmOwnedRuntimeTest" name="CyclicArraysCrossTheCapabilityBoundaryWithoutRecursingOnTheHostStack" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Wasm.WasmArtifactTest.CompilationIsDeterministicAndHasNoExecutionSideEffects" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="f997f023-383f-9de3-d44e-164f5e46cf8b">
+      <Execution id="0c584049-9f5f-44c8-9af0-f2ffadf29e27" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Wasm.WasmArtifactTest" name="CompilationIsDeterministicAndHasNoExecutionSideEffects" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Compiler.CompiledEvaluatorTest.TestReturnStatements" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="f2956b37-e774-a447-4e2e-21b5e6fe99b1">
+      <Execution id="6f427631-9170-455e-b7ac-405dffec990b" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Compiler.CompiledEvaluatorTest" name="TestReturnStatements" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Wasm.WasmArtifactTest.StandardWasmRoundTripExecutesWithoutSourceOrInstructionSerialization(source: &quot;變數 f=函式(x){函式(y){x+y;};}; f(2)(40);&quot;, expected: &quot;42&quot;)" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="2f80ca22-345b-1080-3a57-ca5c1138c4bf">
+      <Execution id="fa476b7e-d6c4-4615-b570-fb43e9b77fc4" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Wasm.WasmArtifactTest" name="StandardWasmRoundTripExecutesWithoutSourceOrInstructionSerialization" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Compiler.CompiledEvaluatorTest.TestEvalBooleanExpression" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="deac4e17-8708-0328-5845-a8a90d12a79c">
+      <Execution id="862e141e-9c0c-40a6-b965-da8d82ffe80b" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Compiler.CompiledEvaluatorTest" name="TestEvalBooleanExpression" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Compiler.CompiledEvaluatorTest.TestLetStatements" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="dd4803fc-52cd-b641-2dac-824ca0a88f83">
+      <Execution id="0a5cb084-4446-4c91-a915-369b6af80af9" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Compiler.CompiledEvaluatorTest" name="TestLetStatements" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Compiler.CompiledEvaluatorTest.TestEnclosingEnvironment" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="c1304a0d-ee49-56d3-bd06-cf1152f3eb63">
+      <Execution id="95e910a2-5542-4a5d-8eed-ab0ea1002200" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Compiler.CompiledEvaluatorTest" name="TestEnclosingEnvironment" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Wasm.WasmArtifactTest.MalformedMetadataIsRejectedBeforeInstantiation(damage: &quot;frame&quot;)" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="0b5d8426-26d1-828a-0fe5-3a5283999e93">
+      <Execution id="2ac52fea-1556-40a0-9e6f-949c5ac47419" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Wasm.WasmArtifactTest" name="MalformedMetadataIsRejectedBeforeInstantiation" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Wasm.WasmOwnedRuntimeTest.TypedNaNHashKeysAndSignedZeroRemainLookupable" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="a1e888ef-2780-6bea-b4ff-651af8c243cf">
+      <Execution id="2e9dea1d-f4bf-42a1-bb56-3043731d34e9" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Wasm.WasmOwnedRuntimeTest" name="TypedNaNHashKeysAndSignedZeroRemainLookupable" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Compiler.CompiledEvaluatorTest.TestEvalForLoop" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="3713fd5e-b4f0-2ee7-cc72-a6eb5ff5849d">
+      <Execution id="41452f1b-de57-480b-bcf4-29d22b1f3700" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Compiler.CompiledEvaluatorTest" name="TestEvalForLoop" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Wasm.WasmArtifactTest.MalformedMetadataIsRejectedBeforeInstantiation(damage: &quot;asset&quot;)" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="14bec933-2078-246d-b384-e90bcc6892d0">
+      <Execution id="2d081d1e-7da4-4287-ac8e-a6cc1a3f2b53" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Wasm.WasmArtifactTest" name="MalformedMetadataIsRejectedBeforeInstantiation" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Wasm.WasmArtifactTest.MalformedMetadataIsRejectedBeforeInstantiation(damage: &quot;literal&quot;)" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="d2c6a1cb-b1a0-8b3d-1aa2-77157357f005">
+      <Execution id="c869a8be-5921-4bde-8afd-70955f207947" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Wasm.WasmArtifactTest" name="MalformedMetadataIsRejectedBeforeInstantiation" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Compiler.CompiledEvaluatorTest.TestArrayLiterals" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="abf29a28-a285-986a-13fe-653a0f98f5f1">
+      <Execution id="733f95b3-354e-4fbf-abb1-471a68fc880d" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Compiler.CompiledEvaluatorTest" name="TestArrayLiterals" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Wasm.WasmOwnedRuntimeTest.修改雜湊欄位不重複傳輸未變更的子陣列" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="71549a93-961d-d7cc-a4fc-13b460b1b64a">
+      <Execution id="0917e93b-6bb3-4390-bc20-3ed1a3ad6f7e" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Wasm.WasmOwnedRuntimeTest" name="修改雜湊欄位不重複傳輸未變更的子陣列" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Compiler.TimeBuiltinTest.ExtraArgumentsFailBeforeLaterSideEffects(name: &quot;currentTime&quot;)" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="205ce0b7-8772-9a48-a808-9910a7b56a20">
+      <Execution id="dcf1f9eb-1c40-4ebf-af2e-8fada332c665" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Compiler.TimeBuiltinTest" name="ExtraArgumentsFailBeforeLaterSideEffects" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Compiler.TimeBuiltinTest.ExtraArgumentsFailBeforeLaterSideEffects(name: &quot;目前時間&quot;)" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="1fa30f02-ba82-0e06-b8e0-c8f93ba80bc6">
+      <Execution id="f9724cc1-5280-4c49-9c1b-2f8fcbdbd53b" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Compiler.TimeBuiltinTest" name="ExtraArgumentsFailBeforeLaterSideEffects" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Compiler.CompiledEvaluatorTest.TestVariableScopeAndOwnership" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="8e301b30-213c-94e5-a4c3-7c8ffcdf2f43">
+      <Execution id="e49b7077-e28e-4600-8796-52740a04828f" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Compiler.CompiledEvaluatorTest" name="TestVariableScopeAndOwnership" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Wasm.WasmOwnedRuntimeTest.IndexedScopesPreserveBindingsAfterGrowthAndIterationReset" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="f609f756-b230-de05-ef57-22758813ffa1">
+      <Execution id="3b1dc117-f1fb-4598-abfb-072c4f56167a" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Wasm.WasmOwnedRuntimeTest" name="IndexedScopesPreserveBindingsAfterGrowthAndIterationReset" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Compiler.CallConventionTest.CallsPreserveArgumentEvaluationOrderAndSerializedPrograms" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="217a4412-28ee-dceb-5b72-edf3b37a79b0">
+      <Execution id="91743fd6-aa1c-420f-91dc-28bb9b731930" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Compiler.CallConventionTest" name="CallsPreserveArgumentEvaluationOrderAndSerializedPrograms" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Wasm.WasmArtifactTest.InvalidAndTruncatedArtifactsAreRejected" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="51203f1c-95c5-1a27-6c0b-ca320ed133bc">
+      <Execution id="d2ffea78-bef1-4414-bd07-a9652c5910ec" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Wasm.WasmArtifactTest" name="InvalidAndTruncatedArtifactsAreRejected" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Wasm.WasmArtifactTest.MalformedMetadataIsRejectedBeforeInstantiation(damage: &quot;programAddress&quot;)" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="4a9d87f5-5f69-89d1-341c-f1be0b6c9358">
+      <Execution id="e594fd96-edcf-49ed-b47c-a3c5a7bc7f3b" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Wasm.WasmArtifactTest" name="MalformedMetadataIsRejectedBeforeInstantiation" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Wasm.WasmArtifactTest.StandardWasmRoundTripExecutesWithoutSourceOrInstructionSerialization(source: &quot;42;&quot;, expected: &quot;42&quot;)" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="99f6c9c1-50bf-b4df-7c71-b0848ba2f6b4">
+      <Execution id="e7bbdaf5-05ba-4575-9f78-087a8be6e6cd" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Wasm.WasmArtifactTest" name="StandardWasmRoundTripExecutesWithoutSourceOrInstructionSerialization" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Compiler.CompiledEvaluatorTest.TestStringLiteral" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="76d4b74c-be11-597a-029c-4d433b5a83cf">
+      <Execution id="a73bea63-08fc-492f-a155-3c57b5c259ea" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Compiler.CompiledEvaluatorTest" name="TestStringLiteral" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Compiler.CompiledEvaluatorTest.TestFunctionObject" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="3576bb11-e83e-f051-60b7-3762548f6e51">
+      <Execution id="fcd7ff27-b7ed-498d-b2ae-369fbdc2e6a7" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Compiler.CompiledEvaluatorTest" name="TestFunctionObject" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Wasm.WasmOwnedRuntimeTest.HostRetainedArraysObserveGuestEditsWithoutBeingPassedAgain" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="97ef2fca-84c9-9c56-ebb1-d00c8ef44da6">
+      <Execution id="273b50e8-692a-4c92-b81f-8734c6676e43" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Wasm.WasmOwnedRuntimeTest" name="HostRetainedArraysObserveGuestEditsWithoutBeingPassedAgain" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Compiler.TimeBuiltinTest.ReadingsShareAnOriginAcrossBuiltinsAndExecutions" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="55f98992-a0a3-2cde-12c6-4cd3854cd788">
+      <Execution id="10327615-5a05-406a-86e2-0cd37d84c8a0" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Compiler.TimeBuiltinTest" name="ReadingsShareAnOriginAcrossBuiltinsAndExecutions" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Wasm.WasmArtifactTest.FailedCompilationPreservesExistingOutput" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="e73a3165-b8a4-9938-9fcd-4ebc3f5fba73">
+      <Execution id="14289ca0-78c6-4c2f-ab48-2225ff69ddfc" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Wasm.WasmArtifactTest" name="FailedCompilationPreservesExistingOutput" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Wasm.WasmArtifactTest.MalformedMetadataIsRejectedBeforeInstantiation(damage: &quot;reference&quot;)" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="e4aae814-8288-6eeb-b3d5-f661234d96ab">
+      <Execution id="d5b195aa-f240-4d95-bb25-ad332f1e28aa" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Wasm.WasmArtifactTest" name="MalformedMetadataIsRejectedBeforeInstantiation" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Compiler.CompiledEvaluatorTest.TestExceptionForIncorrectScript" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="4312a5c2-727c-b13a-70d6-e033b3e68589">
+      <Execution id="34b1bc6b-77a1-4878-8202-13e35ca723f0" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Compiler.CompiledEvaluatorTest" name="TestExceptionForIncorrectScript" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Compiler.CompiledEvaluatorTest.TestHashLiterals" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="7af074e7-1b76-9b30-ec7e-775c794e307c">
+      <Execution id="0529e5d2-0c98-489c-925b-6182049d2889" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Compiler.CompiledEvaluatorTest" name="TestHashLiterals" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Wasm.WasmOwnedRuntimeTest.DisposalReleasesOwnedInstancesAndRejectsRetainedCallbacks" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="fea28ce8-8f50-ddff-c6f1-094948b85b5d">
+      <Execution id="f6dab8be-3a65-4583-997b-146183cc69ce" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Wasm.WasmOwnedRuntimeTest" name="DisposalReleasesOwnedInstancesAndRejectsRetainedCallbacks" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Wasm.WasmOwnedRuntimeTest.BindingCachesInvalidateForShadowingGrowthAndCallbackReentry" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="5aa4a467-6730-0b47-df8a-4d0f0d5ca82a">
+      <Execution id="ffc22d1a-0c1f-4195-b133-45ff907ea3dc" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Wasm.WasmOwnedRuntimeTest" name="BindingCachesInvalidateForShadowingGrowthAndCallbackReentry" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Compiler.TimeBuiltinTest.目前日期採主機本地西元日期且拒絕參數" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="34bf38a1-50d8-c215-2a83-72d80940597c">
+      <Execution id="82082997-a941-4035-a4b6-0858d2411a49" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Compiler.TimeBuiltinTest" name="目前日期採主機本地西元日期且拒絕參數" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Compiler.CompiledEvaluatorTest.TestHashIndexExpressions" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="9efe3d54-e41e-139b-30f7-70376b7b8647">
+      <Execution id="2515c327-510f-4372-9fca-534e80d86313" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Compiler.CompiledEvaluatorTest" name="TestHashIndexExpressions" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Compiler.TimeBuiltinTest.ClockFunctionsCanBeStoredAndShadowed" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="6577053b-44a0-dc24-acc0-ee1e27f8234d">
+      <Execution id="bd11cf70-691e-4412-a817-a0c87c3154e2" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Compiler.TimeBuiltinTest" name="ClockFunctionsCanBeStoredAndShadowed" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Compiler.CompiledEvaluatorTest.TestVarReassignments" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="7202aa89-c219-9564-d9d5-8531ea36d8db">
+      <Execution id="1e83d9a2-f680-4a15-9441-fc11e576ad99" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Compiler.CompiledEvaluatorTest" name="TestVarReassignments" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Compiler.CompiledEvaluatorTest.TestBuiltinFunctions" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="008e3b2d-d94f-772d-0f6e-6ad206b0d360">
+      <Execution id="f65ba7a1-dbee-48d7-ba45-6b409568cc50" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Compiler.CompiledEvaluatorTest" name="TestBuiltinFunctions" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Compiler.CallConventionTest.ReplacingFnDisablesTheBorrowedEntryForBothAliases" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="db603e6f-357e-be6f-861d-750cbd3eed56">
+      <Execution id="3fa07437-df85-4038-b585-c036dfb26443" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Compiler.CallConventionTest" name="ReplacingFnDisablesTheBorrowedEntryForBothAliases" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Wasm.WasmArtifactTest.MalformedMetadataIsRejectedBeforeInstantiation(damage: &quot;cacheBindings&quot;)" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="45f7b65d-8889-9c30-2e26-291f5c21c820">
+      <Execution id="1958597d-8086-4901-b78c-2bc429ca3f35" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Wasm.WasmArtifactTest" name="MalformedMetadataIsRejectedBeforeInstantiation" />
+    </UnitTest>
+    <UnitTest name="AquariusTests.Wasm.WasmOwnedRuntimeTest.NativeArrayResizeAndHashMutationPreserveGuestAliases" storage="c:\officialprojects\aquariuslangtw\aquariustests\bin\release\net8.0\aquariustests.dll" id="1bb09236-b178-df82-fdc8-956f01969500">
+      <Execution id="a11e8e72-0086-45ea-8a5c-dea392abc890" />
+      <TestMethod codeBase="C:\OfficialProjects\AquariusLangTW\AquariusTests\bin\Release\net8.0\AquariusTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="AquariusTests.Wasm.WasmOwnedRuntimeTest" name="NativeArrayResizeAndHashMutationPreserveGuestAliases" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="d2c6a1cb-b1a0-8b3d-1aa2-77157357f005" executionId="c869a8be-5921-4bde-8afd-70955f207947" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d295fe20-c68a-8d43-f305-c204c6765ae9" executionId="93501a3e-0c89-4ff6-9cec-8158d46b9ef1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4312a5c2-727c-b13a-70d6-e033b3e68589" executionId="34b1bc6b-77a1-4878-8202-13e35ca723f0" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a1e888ef-2780-6bea-b4ff-651af8c243cf" executionId="2e9dea1d-f4bf-42a1-bb56-3043731d34e9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="205ce0b7-8772-9a48-a808-9910a7b56a20" executionId="dcf1f9eb-1c40-4ebf-af2e-8fada332c665" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="883c7984-ada0-cb27-c6f6-728c3d83882a" executionId="21c1e561-76a5-401e-a059-7d7fed107734" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="44138171-cf88-5b97-3bda-308fec38028b" executionId="7494e48a-1b35-41b1-8ce9-dd506d4bfe7d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="abf29a28-a285-986a-13fe-653a0f98f5f1" executionId="733f95b3-354e-4fbf-abb1-471a68fc880d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="dbed2131-55d1-be0e-13fd-e10140dc01b9" executionId="848e0c57-756b-4ea1-80d7-19dcbeb43102" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f2956b37-e774-a447-4e2e-21b5e6fe99b1" executionId="6f427631-9170-455e-b7ac-405dffec990b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="dd4803fc-52cd-b641-2dac-824ca0a88f83" executionId="0a5cb084-4446-4c91-a915-369b6af80af9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3936fddc-b501-2029-dd5b-3b260b83a4e3" executionId="3de87124-5a88-423b-82ba-bb29f3a99308" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e73a3165-b8a4-9938-9fcd-4ebc3f5fba73" executionId="14289ca0-78c6-4c2f-ab48-2225ff69ddfc" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="81264f7f-eb4e-21ba-db8a-7695c86a2870" executionId="85526e39-b4b5-4c3a-a6d9-4c5d4c095f59" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="7202aa89-c219-9564-d9d5-8531ea36d8db" executionId="1e83d9a2-f680-4a15-9441-fc11e576ad99" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d3db296e-523c-a28b-3975-a38fcf256f17" executionId="629abace-93a5-4795-ba9f-01d78d2ba353" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3713fd5e-b4f0-2ee7-cc72-a6eb5ff5849d" executionId="41452f1b-de57-480b-bcf4-29d22b1f3700" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="97ef2fca-84c9-9c56-ebb1-d00c8ef44da6" executionId="273b50e8-692a-4c92-b81f-8734c6676e43" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e1a665a9-6cba-014b-d20f-7c05e6286d28" executionId="7426daca-2ccf-46fc-b446-6858142edb5e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6577053b-44a0-dc24-acc0-ee1e27f8234d" executionId="bd11cf70-691e-4412-a817-a0c87c3154e2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="17b4b2ba-cf3a-0465-dcd6-19085df276bb" executionId="0a3c9884-b020-4765-98d1-420083dac04f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="de631292-b7f4-f37a-ea88-ee0045aed789" executionId="cebe29c7-eab2-4621-bb84-20fd74a35bda" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b5e71dd7-b533-1a56-c759-c7f278468c08" executionId="3b6edb06-994c-43cb-9767-fbcfe79b094c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8e301b30-213c-94e5-a4c3-7c8ffcdf2f43" executionId="e49b7077-e28e-4600-8796-52740a04828f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="008e3b2d-d94f-772d-0f6e-6ad206b0d360" executionId="f65ba7a1-dbee-48d7-ba45-6b409568cc50" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9bb991f3-8a3c-518c-0dc4-00593e05f5e2" executionId="b8dd0c20-0e5e-43b0-99fa-82d4c2ba7617" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="deac4e17-8708-0328-5845-a8a90d12a79c" executionId="862e141e-9c0c-40a6-b965-da8d82ffe80b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ea294f3a-12aa-a5f4-478d-3fe5d9e39d64" executionId="a6be1cf4-3f26-4853-8868-63eb1e2cc274" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="db603e6f-357e-be6f-861d-750cbd3eed56" executionId="3fa07437-df85-4038-b585-c036dfb26443" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="7af074e7-1b76-9b30-ec7e-775c794e307c" executionId="0529e5d2-0c98-489c-925b-6182049d2889" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9efe3d54-e41e-139b-30f7-70376b7b8647" executionId="2515c327-510f-4372-9fca-534e80d86313" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3576bb11-e83e-f051-60b7-3762548f6e51" executionId="fcd7ff27-b7ed-498d-b2ae-369fbdc2e6a7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="34bf38a1-50d8-c215-2a83-72d80940597c" executionId="82082997-a941-4035-a4b6-0858d2411a49" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="2f99099d-9098-3eaa-8f6f-a0d8d9f48886" executionId="7c3112ad-416b-4787-b8ab-577bf621193b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1fa30f02-ba82-0e06-b8e0-c8f93ba80bc6" executionId="f9724cc1-5280-4c49-9c1b-2f8fcbdbd53b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="213f3ca4-c407-03e4-08e0-57d30c24f1bb" executionId="df1c960a-d0fa-47a2-b968-2c4ae654400c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1bb09236-b178-df82-fdc8-956f01969500" executionId="a11e8e72-0086-45ea-8a5c-dea392abc890" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="59d752db-5b83-5a00-a607-69f4f0f7df53" executionId="c4648948-7300-409e-b670-daca0ec80934" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="392df3dd-f7cc-bf3e-39df-03d74861b217" executionId="d1507873-7271-4d82-9405-567b956c36ba" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="7062eef2-5962-9622-04ef-b97828c32983" executionId="f7197576-67da-423c-86bc-239d94beec41" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="75a58f06-b47e-c70e-246a-898e3fa640c4" executionId="f642e268-2bb2-4938-b3ab-d856de2bf41f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="0b5d8426-26d1-828a-0fe5-3a5283999e93" executionId="2ac52fea-1556-40a0-9e6f-949c5ac47419" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="45f7b65d-8889-9c30-2e26-291f5c21c820" executionId="1958597d-8086-4901-b78c-2bc429ca3f35" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="55f98992-a0a3-2cde-12c6-4cd3854cd788" executionId="10327615-5a05-406a-86e2-0cd37d84c8a0" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="2f80ca22-345b-1080-3a57-ca5c1138c4bf" executionId="fa476b7e-d6c4-4615-b570-fb43e9b77fc4" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f609f756-b230-de05-ef57-22758813ffa1" executionId="3b1dc117-f1fb-4598-abfb-072c4f56167a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="021b8e5d-f7f0-d74c-6aa8-03e4627eb28c" executionId="cf5cf664-c102-4986-b9a2-698efdbc5390" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="597a952c-166d-abb5-fb19-5173eb18dc9b" executionId="539db9dd-c910-4fb4-b319-f988f5f7bcf4" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="99f6c9c1-50bf-b4df-7c71-b0848ba2f6b4" executionId="e7bbdaf5-05ba-4575-9f78-087a8be6e6cd" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="5ca73cfc-6167-56fd-1f07-7f00e8cfa53d" executionId="53c0202e-a748-4bdc-836e-072a591f4662" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="51203f1c-95c5-1a27-6c0b-ca320ed133bc" executionId="d2ffea78-bef1-4414-bd07-a9652c5910ec" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e4aae814-8288-6eeb-b3d5-f661234d96ab" executionId="d5b195aa-f240-4d95-bb25-ad332f1e28aa" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3619e3d6-b94e-5d6a-bb69-a4b4e7cedeaa" executionId="f6480d3f-2da4-4bab-a935-4ad2cfce09c7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c1304a0d-ee49-56d3-bd06-cf1152f3eb63" executionId="95e910a2-5542-4a5d-8eed-ab0ea1002200" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="05986f6d-44c2-0689-9f03-2597ed987982" executionId="e45f2d1e-3b05-4166-a521-d408d0fa973b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="77adac1f-1c82-e3f7-0bd9-f7dbce6b25aa" executionId="0a081027-2461-4616-a750-4520d5dce444" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="76d4b74c-be11-597a-029c-4d433b5a83cf" executionId="a73bea63-08fc-492f-a155-3c57b5c259ea" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="74f7e9ee-00d0-c3a0-9e4f-991d9726d792" executionId="f83e53c8-97fb-4798-95f4-ed1a6b9a8ad2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="71549a93-961d-d7cc-a4fc-13b460b1b64a" executionId="0917e93b-6bb3-4390-bc20-3ed1a3ad6f7e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9228cafc-cc2b-24c5-c177-abcfa1bf1670" executionId="c74652a6-f6a8-4e0a-8df2-533aaa778d6e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="01e95560-05a7-ba44-b6da-aee6a6e9c149" executionId="76243455-3cd6-47c0-9180-8dec5d0b7b54" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8c9e216b-4781-ccdb-fbc0-d2d322e73a68" executionId="2746af21-ea69-48aa-9bdd-2636d3211501" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f7fb4bd7-3cff-1125-66fd-5d9a3271508e" executionId="783d2bae-9cfe-4cb4-93bd-065e5bc74fde" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="5aa4a467-6730-0b47-df8a-4d0f0d5ca82a" executionId="ffc22d1a-0c1f-4195-b133-45ff907ea3dc" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="0c63499f-49b8-be04-27ea-716345e29622" executionId="3aba3a68-cf0b-4c30-9dab-a2f56e051718" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="fe0a7f30-9dc3-2570-3b0d-f2c40107e389" executionId="90c6c1fd-9411-45ef-8891-6ae8b82ee61d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="217a4412-28ee-dceb-5b72-edf3b37a79b0" executionId="91743fd6-aa1c-420f-91dc-28bb9b731930" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b3c01d69-98f5-77c1-e9ae-92a0f333dba3" executionId="b98957ac-f727-4ea0-a96b-9ebc26da9e7e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ea773eb8-6618-b0b8-e461-90f474f98543" executionId="3ae8107e-c04c-42c9-ab45-aef3bc970b21" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b1b686e1-0aca-32e8-bc87-ded1d3a3ba1e" executionId="c476c948-eb1e-4612-94b5-bef3311e37c1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="fea28ce8-8f50-ddff-c6f1-094948b85b5d" executionId="f6dab8be-3a65-4583-997b-146183cc69ce" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="da5687e7-814d-5ec5-cf9d-400b3827ea3a" executionId="8f0175dc-29d5-4f9e-963e-91db2b4dad64" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="14bec933-2078-246d-b384-e90bcc6892d0" executionId="2d081d1e-7da4-4287-ac8e-a6cc1a3f2b53" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4a9d87f5-5f69-89d1-341c-f1be0b6c9358" executionId="e594fd96-edcf-49ed-b47c-a3c5a7bc7f3b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f997f023-383f-9de3-d44e-164f5e46cf8b" executionId="0c584049-9f5f-44c8-9af0-f2ffadf29e27" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="75" executed="75" passed="75" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.4.3+1b45f5407b (64-bit .NET 8.0.31)&#xD;
+[xUnit.net 00:00:02.97]   Discovering: AquariusTests&#xD;
+[xUnit.net 00:00:03.09]   Discovered:  AquariusTests&#xD;
+[xUnit.net 00:00:03.09]   Starting:    AquariusTests&#xD;
+42&#xD;
+42&#xD;
+[xUnit.net 00:00:06.53]   Finished:    AquariusTests&#xD;
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>

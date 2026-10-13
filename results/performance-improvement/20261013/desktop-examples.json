@@ -1,0 +1,1388 @@
+[
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "application_libraries/main.aqua",
+    "passed": true,
+    "output": "繁體中文 😀 2 1 137 é👨‍👩‍👧‍👦字\r\n真\r\n"
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "bilingual_library/main.aqua",
+    "passed": true,
+    "output": "BILINGUAL_LIBRARY_OK\r\n真\r\n"
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "bilingual_library/tools.aqua",
+    "passed": true,
+    "output": ""
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "check_os_platform.aqua",
+    "passed": true,
+    "output": "[真, 假, 假]\r\n"
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "color_mapping/main.aqua",
+    "passed": true,
+    "output": "Color mapping | 1-4 palette | D field | R reverse | B bands | 0 reset | S PNG | Esc exit\r\n真\r\n"
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "comments.aqua",
+    "passed": true,
+    "output": "7\r\n假\r\n"
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "conditions.aqua",
+    "passed": true,
+    "output": "YES!YES!YES!\r\n"
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "dir_paths/main.aqua",
+    "passed": true,
+    "output": "[C:\\OfficialProjects\\AquariusLangTW\\.web-build\\example-inputs-ee56161929f449cda42977456d92a461\\dir_paths, C:\\OfficialProjects\\AquariusLangTW\\.web-build\\example-inputs-ee56161929f449cda42977456d92a461\\dir_paths]\r\n"
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "dir_paths/others/anotherfile.aqua",
+    "passed": true,
+    "output": ""
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "elapsed_time.aqua",
+    "passed": true,
+    "output": "總和： 49995000\r\n耗時（毫秒）： 0.49029999999999996\r\n耗時（秒）： 0.0004902999999999999\r\n"
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "execute_file.aqua",
+    "passed": true,
+    "output": "真\r\n真\r\n"
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "for_loop.aqua",
+    "passed": true,
+    "output": "XD!XD!XD!Wow!\r\n-20\r\n-20\r\n"
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": true,
+    "project": "examples",
+    "entry": "generate_errors/for_loop_use_undeclared_array.aqua",
+    "passed": true,
+    "output": "ERROR: Identifier not found: array\r\n"
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "increment_and_plus_equal.aqua",
+    "passed": true,
+    "output": "PASS postfix result\r\nPASS postfix mutation\r\nPASS prefix result\r\nPASS prefix mutation\r\nPASS standalone ++\r\nPASS ++ in arithmetic\r\nPASS arithmetic mutation\r\nPASS postfix argument\r\nPASS prefix argument\r\nPASS argument mutation\r\nPASS integer +=\r\nPASS integer += double truncates\r\nPASS float postfix result\r\nPASS float prefix result\r\nPASS float += double\r\nPASS double postfix result\r\nPASS double prefix result\r\nPASS double += float\r\nPASS string += content\r\nPASS string += length\r\nPASS += postfix operand\r\nPASS += operand mutation\r\nPASS += prefix operand\r\nPASS postfix loop update\r\nPASS prefix loop update\r\nPASS += loop update and ++ body\r\nPASS function updates outer variable\r\nPASS outer mutation persists\r\nPassed: 28 Failed: 0\r\n真\r\n"
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "increment.aqua",
+    "passed": true,
+    "output": "0 2 2\r\n0\r\n1\r\n2\r\n3\r\n4\r\n7\r\n"
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "jolt_physics/main.aqua",
+    "passed": true,
+    "output": "JOLT_SMOKE_OK\r\n真\r\n"
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "multilingual_input/main.aqua",
+    "passed": true,
+    "output": "真\r\n"
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "nested_func.aqua",
+    "passed": true,
+    "output": "Result 1: 49\r\nResult 2: 59\r\n59\r\n"
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "num_operations_casting.aqua",
+    "passed": true,
+    "output": "\r\nSince variable 'b' is declared as int, 迴圈 infix mathematical operations,\r\nvalues on the right will all cast to int before assigning the new value to the variable.\r\n\r\nb: -20\r\n\r\nVariable 'c' is declared as float type, so each right operands values that are double gets\r\ncasted into float before assigning new value to variable 'c'.\r\n\r\nc: 20.38\r\n[-20, 20.38]\r\n"
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "opengl_cube/main.aqua",
+    "passed": true,
+    "output": "OpenGL: 3.3.0 - Build 31.0.101.4502\r\nRenderer: Intel(R) Iris(R) Xe Graphics\r\n旋轉材質立方體：Esc 離開，空白鍵暫停旋轉。\r\n已繪製畫格: 2 OpenGL error: 0\r\n真\r\n"
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "pbr_models/gpu-smoke.aqua",
+    "passed": true,
+    "output": "PBR GPU 驗證通過 172 55 4279371780 4287390537\r\n真\r\n"
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "pbr_models/main.aqua",
+    "passed": true,
+    "output": "PBR 模型匯入成功： 960 triangles / 2 material groups\r\nnull\r\n"
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "pbr_models/smoke.aqua",
+    "passed": true,
+    "output": "PBR 與模型整合驗證通過：960 triangles、2 materials\r\n真\r\n"
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "processing_showcase/main.aqua",
+    "passed": true,
+    "output": "Space 暫停 | 滑鼠吸引粒子 | S 儲存 PNG | Esc 離開\r\nProcessing showcase finished.\r\n真\r\n"
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "processing_wgpu/main.aqua",
+    "passed": true,
+    "output": "真\r\n"
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "starship_expedition/航行工具.aqua",
+    "passed": true,
+    "output": ""
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "starship_expedition/main.aqua",
+    "passed": true,
+    "output": "水瓶號星艦遠征：尋找質數星球\r\n質數航點 [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]\r\n航點總和 129\r\n費氏航線 [0, 1, 1, 2, 3, 5, 8, 13]\r\n平方航線 [0, 1, 1, 4, 9, 25, 64, 169]\r\n最後航點 13 其餘航線 [1, 1, 2, 3, 5, 8, 13]\r\n探訪 1 號星球 2 剩餘能量 18 充足\r\n探訪 2 號星球 3 剩餘能量 15 充足\r\n探訪 3 號星球 5 剩餘能量 10 穩定\r\n探訪 4 號星球 7 剩餘能量 3 返航\r\n船艙編號 1 3 3\r\n儀表讀數 8 2 1.5 溫度偏移 -3\r\n首顆星球 2 紀錄筆數 4\r\n讀數對照 船艙 單精度 倍精度 安全 警戒\r\n帶著星圖平安返航 字數 8\r\n[[2, 3, 5, 7, 11, 13, 17, 19, 23, 29], [0, 1, 1, 2, 3, 5, 8, 13], [0, 1, 1, 4, 9, 25, 64, 169], [18, 15, 10, 3], 3, 8, 2, 1.5, 1, 3, 真]\r\n"
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "using_modules/main.aqua",
+    "passed": true,
+    "output": "[8, 7]\r\n[8, 7]\r\n"
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "using_modules/module_folder/module.aqua",
+    "passed": true,
+    "output": ""
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "var_scope.aqua",
+    "passed": true,
+    "output": "60\r\nHello World!\r\n10\r\n真\r\n"
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "webcam/冒煙測試.aqua",
+    "passed": true,
+    "output": "攝影機模組載入成功\r\n目前環境支援攝影機： 真\r\n攝影機冒煙測試通過\r\n"
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "webcam/裝置清單.aqua",
+    "passed": true,
+    "output": "攝影機數量： 2\r\n裝置名稱： FHD Camera\r\n裝置識別碼： video=@device_pnp_\\\\?\\usb#vid_5986&pid_213a&mi_00#6&244ad426&0&0000#{65e8773d-8f56-11d0-a3b9-00a0c9223196}\\global\r\n裝置名稱： Camera (NVIDIA Broadcast)\r\n裝置識別碼： video=@device_sw_{860BB310-5D01-11D0-BD3B-00A0C911CE86}\\{A3FCE0F5-3493-419F-958A-ABA1250EC20B}\r\n"
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "wgpu_compute/main.aqua",
+    "passed": true,
+    "output": "wgpu compute: Vulkan [2, 4, 6, 8]\r\n真\r\n"
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "wgpu_triangle/main.aqua",
+    "passed": true,
+    "output": "wgpu triangle: Vulkan 4287851660\r\n真\r\n"
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "application_libraries/main.aqua",
+    "passed": true,
+    "output": "繁體中文 😀 2 1 137 é👨‍👩‍👧‍👦字\r\n真\r\n"
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "bilingual_library/main.aqua",
+    "passed": true,
+    "output": "BILINGUAL_LIBRARY_OK\r\n真\r\n"
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "bilingual_library/tools.aqua",
+    "passed": true,
+    "output": ""
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "check_os_platform.aqua",
+    "passed": true,
+    "output": "[真, 假, 假]\r\n"
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "color_mapping/main.aqua",
+    "passed": true,
+    "output": "Color mapping | 1-4 palette | D field | R reverse | B bands | 0 reset | S PNG | Esc exit\r\n真\r\n"
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "comments.aqua",
+    "passed": true,
+    "output": "7\r\n假\r\n"
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "conditions.aqua",
+    "passed": true,
+    "output": "YES!YES!YES!\r\n"
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "dir_paths/main.aqua",
+    "passed": true,
+    "output": "[C:\\OfficialProjects\\AquariusLangTW\\.web-build\\dir_paths, C:\\OfficialProjects\\AquariusLangTW\\.web-build\\dir_paths\\others]\r\n"
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "dir_paths/others/anotherfile.aqua",
+    "passed": true,
+    "output": ""
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "elapsed_time.aqua",
+    "passed": true,
+    "output": "總和： 49995000\r\n耗時（毫秒）： 0.5259\r\n耗時（秒）： 0.0005259\r\n"
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "execute_file.aqua",
+    "passed": true,
+    "output": "真\r\n真\r\n"
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "for_loop.aqua",
+    "passed": true,
+    "output": "XD!XD!XD!Wow!\r\n-20\r\n-20\r\n"
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": true,
+    "project": "examples",
+    "entry": "generate_errors/for_loop_use_undeclared_array.aqua",
+    "passed": true,
+    "output": "ERROR: Identifier not found: array\r\n"
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "increment_and_plus_equal.aqua",
+    "passed": true,
+    "output": "PASS postfix result\r\nPASS postfix mutation\r\nPASS prefix result\r\nPASS prefix mutation\r\nPASS standalone ++\r\nPASS ++ in arithmetic\r\nPASS arithmetic mutation\r\nPASS postfix argument\r\nPASS prefix argument\r\nPASS argument mutation\r\nPASS integer +=\r\nPASS integer += double truncates\r\nPASS float postfix result\r\nPASS float prefix result\r\nPASS float += double\r\nPASS double postfix result\r\nPASS double prefix result\r\nPASS double += float\r\nPASS string += content\r\nPASS string += length\r\nPASS += postfix operand\r\nPASS += operand mutation\r\nPASS += prefix operand\r\nPASS postfix loop update\r\nPASS prefix loop update\r\nPASS += loop update and ++ body\r\nPASS function updates outer variable\r\nPASS outer mutation persists\r\nPassed: 28 Failed: 0\r\n真\r\n"
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "increment.aqua",
+    "passed": true,
+    "output": "0 2 2\r\n0\r\n1\r\n2\r\n3\r\n4\r\n7\r\n"
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "jolt_physics/main.aqua",
+    "passed": true,
+    "output": "JOLT_SMOKE_OK\r\n真\r\n"
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "multilingual_input/main.aqua",
+    "passed": true,
+    "output": "真\r\n"
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "nested_func.aqua",
+    "passed": true,
+    "output": "Result 1: 49\r\nResult 2: 59\r\n59\r\n"
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "num_operations_casting.aqua",
+    "passed": true,
+    "output": "\r\nSince variable 'b' is declared as int, 迴圈 infix mathematical operations,\r\nvalues on the right will all cast to int before assigning the new value to the variable.\r\n\r\nb: -20\r\n\r\nVariable 'c' is declared as float type, so each right operands values that are double gets\r\ncasted into float before assigning new value to variable 'c'.\r\n\r\nc: 20.38\r\n[-20, 20.38]\r\n"
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "opengl_cube/main.aqua",
+    "passed": true,
+    "output": "OpenGL: 3.3.0 - Build 31.0.101.4502\r\nRenderer: Intel(R) Iris(R) Xe Graphics\r\n旋轉材質立方體：Esc 離開，空白鍵暫停旋轉。\r\n已繪製畫格: 2 OpenGL error: 0\r\n真\r\n"
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "pbr_models/gpu-smoke.aqua",
+    "passed": true,
+    "output": "PBR GPU 驗證通過 172 55 4279371780 4287390537\r\n真\r\n"
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "pbr_models/main.aqua",
+    "passed": true,
+    "output": "PBR 模型匯入成功： 960 triangles / 2 material groups\r\nnull\r\n"
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "pbr_models/smoke.aqua",
+    "passed": true,
+    "output": "PBR 與模型整合驗證通過：960 triangles、2 materials\r\n真\r\n"
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "processing_showcase/main.aqua",
+    "passed": true,
+    "output": "Space 暫停 | 滑鼠吸引粒子 | S 儲存 PNG | Esc 離開\r\nProcessing showcase finished.\r\n真\r\n"
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "processing_wgpu/main.aqua",
+    "passed": true,
+    "output": "真\r\n"
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "starship_expedition/航行工具.aqua",
+    "passed": true,
+    "output": ""
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "starship_expedition/main.aqua",
+    "passed": true,
+    "output": "水瓶號星艦遠征：尋找質數星球\r\n質數航點 [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]\r\n航點總和 129\r\n費氏航線 [0, 1, 1, 2, 3, 5, 8, 13]\r\n平方航線 [0, 1, 1, 4, 9, 25, 64, 169]\r\n最後航點 13 其餘航線 [1, 1, 2, 3, 5, 8, 13]\r\n探訪 1 號星球 2 剩餘能量 18 充足\r\n探訪 2 號星球 3 剩餘能量 15 充足\r\n探訪 3 號星球 5 剩餘能量 10 穩定\r\n探訪 4 號星球 7 剩餘能量 3 返航\r\n船艙編號 1 3 3\r\n儀表讀數 8 2 1.5 溫度偏移 -3\r\n首顆星球 2 紀錄筆數 4\r\n讀數對照 船艙 單精度 倍精度 安全 警戒\r\n帶著星圖平安返航 字數 8\r\n[[2, 3, 5, 7, 11, 13, 17, 19, 23, 29], [0, 1, 1, 2, 3, 5, 8, 13], [0, 1, 1, 4, 9, 25, 64, 169], [18, 15, 10, 3], 3, 8, 2, 1.5, 1, 3, 真]\r\n"
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "using_modules/main.aqua",
+    "passed": true,
+    "output": "[8, 7]\r\n[8, 7]\r\n"
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "using_modules/module_folder/module.aqua",
+    "passed": true,
+    "output": ""
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "var_scope.aqua",
+    "passed": true,
+    "output": "60\r\nHello World!\r\n10\r\n真\r\n"
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "webcam/冒煙測試.aqua",
+    "passed": true,
+    "output": "攝影機模組載入成功\r\n目前環境支援攝影機： 真\r\n攝影機冒煙測試通過\r\n"
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "webcam/裝置清單.aqua",
+    "passed": true,
+    "output": "攝影機數量： 2\r\n裝置名稱： FHD Camera\r\n裝置識別碼： video=@device_pnp_\\\\?\\usb#vid_5986&pid_213a&mi_00#6&244ad426&0&0000#{65e8773d-8f56-11d0-a3b9-00a0c9223196}\\global\r\n裝置名稱： Camera (NVIDIA Broadcast)\r\n裝置識別碼： video=@device_sw_{860BB310-5D01-11D0-BD3B-00A0C911CE86}\\{A3FCE0F5-3493-419F-958A-ABA1250EC20B}\r\n"
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "wgpu_compute/main.aqua",
+    "passed": true,
+    "output": "wgpu compute: Vulkan [2, 4, 6, 8]\r\n真\r\n"
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "examples",
+    "entry": "wgpu_triangle/main.aqua",
+    "passed": true,
+    "output": "wgpu triangle: Vulkan 4287851660\r\n真\r\n"
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "desktop-examples",
+    "entry": "bilingual_library/main.aqua",
+    "passed": true,
+    "output": "BILINGUAL_LIBRARY_OK\r\n真\r\n"
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "desktop-examples",
+    "entry": "bilingual_library/tools.aqua",
+    "passed": true,
+    "output": ""
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "desktop-examples",
+    "entry": "check_os_platform.aqua",
+    "passed": true,
+    "output": "[真, 假, 假]\r\n"
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "desktop-examples",
+    "entry": "color_mapping/main.aqua",
+    "passed": true,
+    "output": "Color mapping | 1-4 palette | D field | R reverse | B bands | 0 reset | S PNG | Esc exit\r\n真\r\n"
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "desktop-examples",
+    "entry": "comments.aqua",
+    "passed": true,
+    "output": "7\r\n假\r\n"
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "desktop-examples",
+    "entry": "conditions.aqua",
+    "passed": true,
+    "output": "YES!YES!YES!\r\n"
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "desktop-examples",
+    "entry": "dir_paths/main.aqua",
+    "passed": true,
+    "output": "[C:\\OfficialProjects\\AquariusLangTW\\.web-build\\example-inputs-0b22f0469f9240cbb04e2a9707169d9a\\dir_paths, C:\\OfficialProjects\\AquariusLangTW\\.web-build\\example-inputs-0b22f0469f9240cbb04e2a9707169d9a\\dir_paths]\r\n"
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "desktop-examples",
+    "entry": "dir_paths/others/anotherfile.aqua",
+    "passed": true,
+    "output": ""
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "desktop-examples",
+    "entry": "execute_file.aqua",
+    "passed": true,
+    "output": "真\r\n真\r\n"
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "desktop-examples",
+    "entry": "for_loop.aqua",
+    "passed": true,
+    "output": "XD!XD!XD!Wow!\r\n-20\r\n-20\r\n"
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": true,
+    "project": "desktop-examples",
+    "entry": "generate_errors/for_loop_use_undeclared_array.aqua",
+    "passed": true,
+    "output": "ERROR: Identifier not found: array\r\n"
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "desktop-examples",
+    "entry": "increment_and_plus_equal.aqua",
+    "passed": true,
+    "output": "PASS postfix result\r\nPASS postfix mutation\r\nPASS prefix result\r\nPASS prefix mutation\r\nPASS standalone ++\r\nPASS ++ in arithmetic\r\nPASS arithmetic mutation\r\nPASS postfix argument\r\nPASS prefix argument\r\nPASS argument mutation\r\nPASS integer +=\r\nPASS integer += double truncates\r\nPASS float postfix result\r\nPASS float prefix result\r\nPASS float += double\r\nPASS double postfix result\r\nPASS double prefix result\r\nPASS double += float\r\nPASS string += content\r\nPASS string += length\r\nPASS += postfix operand\r\nPASS += operand mutation\r\nPASS += prefix operand\r\nPASS postfix loop update\r\nPASS prefix loop update\r\nPASS += loop update and ++ body\r\nPASS function updates outer variable\r\nPASS outer mutation persists\r\nPassed: 28 Failed: 0\r\n真\r\n"
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "desktop-examples",
+    "entry": "increment.aqua",
+    "passed": true,
+    "output": "0 2 2\r\n0\r\n1\r\n2\r\n3\r\n4\r\n7\r\n"
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "desktop-examples",
+    "entry": "jolt_physics/main.aqua",
+    "passed": true,
+    "output": "JOLT_SMOKE_OK\r\n真\r\n"
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "desktop-examples",
+    "entry": "multilingual_input/main.aqua",
+    "passed": true,
+    "output": "真\r\n"
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "desktop-examples",
+    "entry": "nested_func.aqua",
+    "passed": true,
+    "output": "Result 1: 49\r\nResult 2: 59\r\n59\r\n"
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "desktop-examples",
+    "entry": "num_operations_casting.aqua",
+    "passed": true,
+    "output": "\r\nSince variable 'b' is declared as int, 迴圈 infix mathematical operations,\r\nvalues on the right will all cast to int before assigning the new value to the variable.\r\n\r\nb: -20\r\n\r\nVariable 'c' is declared as float type, so each right operands values that are double gets\r\ncasted into float before assigning new value to variable 'c'.\r\n\r\nc: 20.38\r\n[-20, 20.38]\r\n"
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "desktop-examples",
+    "entry": "opengl_cube/main.aqua",
+    "passed": true,
+    "output": "OpenGL: 3.3.0 - Build 31.0.101.4502\r\nRenderer: Intel(R) Iris(R) Xe Graphics\r\n旋轉材質立方體：Esc 離開，空白鍵暫停旋轉。\r\n已繪製畫格: 2 OpenGL error: 0\r\n真\r\n"
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "desktop-examples",
+    "entry": "pbr_models/gpu-smoke.aqua",
+    "passed": true,
+    "output": "PBR GPU 驗證通過 172 55 4279371780 4287390537\r\n真\r\n"
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "desktop-examples",
+    "entry": "pbr_models/main.aqua",
+    "passed": true,
+    "output": "PBR 模型匯入成功： 960 triangles / 2 material groups\r\nnull\r\n"
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "desktop-examples",
+    "entry": "pbr_models/smoke.aqua",
+    "passed": true,
+    "output": "PBR 與模型整合驗證通過：960 triangles、2 materials\r\n真\r\n"
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "desktop-examples",
+    "entry": "processing_showcase/main.aqua",
+    "passed": true,
+    "output": "Space 暫停 | 滑鼠吸引粒子 | S 儲存 PNG | Esc 離開\r\nProcessing showcase finished.\r\n真\r\n"
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "desktop-examples",
+    "entry": "processing_wgpu/main.aqua",
+    "passed": true,
+    "output": "真\r\n"
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "desktop-examples",
+    "entry": "starship_expedition/航行工具.aqua",
+    "passed": true,
+    "output": ""
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "desktop-examples",
+    "entry": "starship_expedition/main.aqua",
+    "passed": true,
+    "output": "水瓶號星艦遠征：尋找質數星球\r\n質數航點 [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]\r\n航點總和 129\r\n費氏航線 [0, 1, 1, 2, 3, 5, 8, 13]\r\n平方航線 [0, 1, 1, 4, 9, 25, 64, 169]\r\n最後航點 13 其餘航線 [1, 1, 2, 3, 5, 8, 13]\r\n探訪 1 號星球 2 剩餘能量 18 充足\r\n探訪 2 號星球 3 剩餘能量 15 充足\r\n探訪 3 號星球 5 剩餘能量 10 穩定\r\n探訪 4 號星球 7 剩餘能量 3 返航\r\n船艙編號 1 3 3\r\n儀表讀數 8 2 1.5 溫度偏移 -3\r\n首顆星球 2 紀錄筆數 4\r\n讀數對照 船艙 單精度 倍精度 安全 警戒\r\n帶著星圖平安返航 字數 8\r\n[[2, 3, 5, 7, 11, 13, 17, 19, 23, 29], [0, 1, 1, 2, 3, 5, 8, 13], [0, 1, 1, 4, 9, 25, 64, 169], [18, 15, 10, 3], 3, 8, 2, 1.5, 1, 3, 真]\r\n"
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "desktop-examples",
+    "entry": "using_modules/main.aqua",
+    "passed": true,
+    "output": "[8, 7]\r\n[8, 7]\r\n"
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "desktop-examples",
+    "entry": "using_modules/module_folder/module.aqua",
+    "passed": true,
+    "output": ""
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "desktop-examples",
+    "entry": "var_scope.aqua",
+    "passed": true,
+    "output": "60\r\nHello World!\r\n10\r\n真\r\n"
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "desktop-examples",
+    "entry": "wgpu_compute/main.aqua",
+    "passed": true,
+    "output": "wgpu compute: Vulkan [2, 4, 6, 8]\r\n真\r\n"
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "desktop-examples",
+    "entry": "wgpu_triangle/main.aqua",
+    "passed": true,
+    "output": "wgpu triangle: Vulkan 4287851660\r\n真\r\n"
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "desktop-examples",
+    "entry": "bilingual_library/main.aqua",
+    "passed": true,
+    "output": "BILINGUAL_LIBRARY_OK\r\n真\r\n"
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "desktop-examples",
+    "entry": "bilingual_library/tools.aqua",
+    "passed": true,
+    "output": ""
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "desktop-examples",
+    "entry": "check_os_platform.aqua",
+    "passed": true,
+    "output": "[真, 假, 假]\r\n"
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "desktop-examples",
+    "entry": "color_mapping/main.aqua",
+    "passed": true,
+    "output": "Color mapping | 1-4 palette | D field | R reverse | B bands | 0 reset | S PNG | Esc exit\r\n真\r\n"
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "desktop-examples",
+    "entry": "comments.aqua",
+    "passed": true,
+    "output": "7\r\n假\r\n"
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "desktop-examples",
+    "entry": "conditions.aqua",
+    "passed": true,
+    "output": "YES!YES!YES!\r\n"
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "desktop-examples",
+    "entry": "dir_paths/main.aqua",
+    "passed": true,
+    "output": "[C:\\OfficialProjects\\AquariusLangTW\\.web-build\\dir_paths, C:\\OfficialProjects\\AquariusLangTW\\.web-build\\dir_paths\\others]\r\n"
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "desktop-examples",
+    "entry": "dir_paths/others/anotherfile.aqua",
+    "passed": true,
+    "output": ""
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "desktop-examples",
+    "entry": "execute_file.aqua",
+    "passed": true,
+    "output": "真\r\n真\r\n"
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "desktop-examples",
+    "entry": "for_loop.aqua",
+    "passed": true,
+    "output": "XD!XD!XD!Wow!\r\n-20\r\n-20\r\n"
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": true,
+    "project": "desktop-examples",
+    "entry": "generate_errors/for_loop_use_undeclared_array.aqua",
+    "passed": true,
+    "output": "ERROR: Identifier not found: array\r\n"
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "desktop-examples",
+    "entry": "increment_and_plus_equal.aqua",
+    "passed": true,
+    "output": "PASS postfix result\r\nPASS postfix mutation\r\nPASS prefix result\r\nPASS prefix mutation\r\nPASS standalone ++\r\nPASS ++ in arithmetic\r\nPASS arithmetic mutation\r\nPASS postfix argument\r\nPASS prefix argument\r\nPASS argument mutation\r\nPASS integer +=\r\nPASS integer += double truncates\r\nPASS float postfix result\r\nPASS float prefix result\r\nPASS float += double\r\nPASS double postfix result\r\nPASS double prefix result\r\nPASS double += float\r\nPASS string += content\r\nPASS string += length\r\nPASS += postfix operand\r\nPASS += operand mutation\r\nPASS += prefix operand\r\nPASS postfix loop update\r\nPASS prefix loop update\r\nPASS += loop update and ++ body\r\nPASS function updates outer variable\r\nPASS outer mutation persists\r\nPassed: 28 Failed: 0\r\n真\r\n"
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "desktop-examples",
+    "entry": "increment.aqua",
+    "passed": true,
+    "output": "0 2 2\r\n0\r\n1\r\n2\r\n3\r\n4\r\n7\r\n"
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "desktop-examples",
+    "entry": "jolt_physics/main.aqua",
+    "passed": true,
+    "output": "JOLT_SMOKE_OK\r\n真\r\n"
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "desktop-examples",
+    "entry": "multilingual_input/main.aqua",
+    "passed": true,
+    "output": "真\r\n"
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "desktop-examples",
+    "entry": "nested_func.aqua",
+    "passed": true,
+    "output": "Result 1: 49\r\nResult 2: 59\r\n59\r\n"
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "desktop-examples",
+    "entry": "num_operations_casting.aqua",
+    "passed": true,
+    "output": "\r\nSince variable 'b' is declared as int, 迴圈 infix mathematical operations,\r\nvalues on the right will all cast to int before assigning the new value to the variable.\r\n\r\nb: -20\r\n\r\nVariable 'c' is declared as float type, so each right operands values that are double gets\r\ncasted into float before assigning new value to variable 'c'.\r\n\r\nc: 20.38\r\n[-20, 20.38]\r\n"
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "desktop-examples",
+    "entry": "opengl_cube/main.aqua",
+    "passed": true,
+    "output": "OpenGL: 3.3.0 - Build 31.0.101.4502\r\nRenderer: Intel(R) Iris(R) Xe Graphics\r\n旋轉材質立方體：Esc 離開，空白鍵暫停旋轉。\r\n已繪製畫格: 2 OpenGL error: 0\r\n真\r\n"
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "desktop-examples",
+    "entry": "pbr_models/gpu-smoke.aqua",
+    "passed": true,
+    "output": "PBR GPU 驗證通過 172 55 4279371780 4287390537\r\n真\r\n"
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "desktop-examples",
+    "entry": "pbr_models/main.aqua",
+    "passed": true,
+    "output": "PBR 模型匯入成功： 960 triangles / 2 material groups\r\nnull\r\n"
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "desktop-examples",
+    "entry": "pbr_models/smoke.aqua",
+    "passed": true,
+    "output": "PBR 與模型整合驗證通過：960 triangles、2 materials\r\n真\r\n"
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "desktop-examples",
+    "entry": "processing_showcase/main.aqua",
+    "passed": true,
+    "output": "Space 暫停 | 滑鼠吸引粒子 | S 儲存 PNG | Esc 離開\r\nProcessing showcase finished.\r\n真\r\n"
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "desktop-examples",
+    "entry": "processing_wgpu/main.aqua",
+    "passed": true,
+    "output": "真\r\n"
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "desktop-examples",
+    "entry": "starship_expedition/航行工具.aqua",
+    "passed": true,
+    "output": ""
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "desktop-examples",
+    "entry": "starship_expedition/main.aqua",
+    "passed": true,
+    "output": "水瓶號星艦遠征：尋找質數星球\r\n質數航點 [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]\r\n航點總和 129\r\n費氏航線 [0, 1, 1, 2, 3, 5, 8, 13]\r\n平方航線 [0, 1, 1, 4, 9, 25, 64, 169]\r\n最後航點 13 其餘航線 [1, 1, 2, 3, 5, 8, 13]\r\n探訪 1 號星球 2 剩餘能量 18 充足\r\n探訪 2 號星球 3 剩餘能量 15 充足\r\n探訪 3 號星球 5 剩餘能量 10 穩定\r\n探訪 4 號星球 7 剩餘能量 3 返航\r\n船艙編號 1 3 3\r\n儀表讀數 8 2 1.5 溫度偏移 -3\r\n首顆星球 2 紀錄筆數 4\r\n讀數對照 船艙 單精度 倍精度 安全 警戒\r\n帶著星圖平安返航 字數 8\r\n[[2, 3, 5, 7, 11, 13, 17, 19, 23, 29], [0, 1, 1, 2, 3, 5, 8, 13], [0, 1, 1, 4, 9, 25, 64, 169], [18, 15, 10, 3], 3, 8, 2, 1.5, 1, 3, 真]\r\n"
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "desktop-examples",
+    "entry": "using_modules/main.aqua",
+    "passed": true,
+    "output": "[8, 7]\r\n[8, 7]\r\n"
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "desktop-examples",
+    "entry": "using_modules/module_folder/module.aqua",
+    "passed": true,
+    "output": ""
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "desktop-examples",
+    "entry": "var_scope.aqua",
+    "passed": true,
+    "output": "60\r\nHello World!\r\n10\r\n真\r\n"
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "desktop-examples",
+    "entry": "wgpu_compute/main.aqua",
+    "passed": true,
+    "output": "wgpu compute: Vulkan [2, 4, 6, 8]\r\n真\r\n"
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "desktop-examples",
+    "entry": "wgpu_triangle/main.aqua",
+    "passed": true,
+    "output": "wgpu triangle: Vulkan 4287851660\r\n真\r\n"
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "marble",
+    "entry": "camera.aqua",
+    "passed": true,
+    "output": ""
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "marble",
+    "entry": "config.aqua",
+    "passed": true,
+    "output": ""
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "marble",
+    "entry": "hud.aqua",
+    "passed": true,
+    "output": ""
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "marble",
+    "entry": "input.aqua",
+    "passed": true,
+    "output": ""
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "marble",
+    "entry": "main.aqua",
+    "passed": true,
+    "output": "彈珠競速繪圖後端： wgpu-native ／Processing wgpu\r\n轉向：WASD／方向鍵｜煞車：空白鍵｜跳躍：J｜重生：R｜重新開始：Enter\r\n真\r\n"
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "marble",
+    "entry": "math3d.aqua",
+    "passed": true,
+    "output": ""
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "marble",
+    "entry": "physics.aqua",
+    "passed": true,
+    "output": ""
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "marble",
+    "entry": "renderer.aqua",
+    "passed": true,
+    "output": ""
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "marble",
+    "entry": "shaders.aqua",
+    "passed": true,
+    "output": ""
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "marble",
+    "entry": "smoke.aqua",
+    "passed": true,
+    "output": "彈珠競速繪圖後端： wgpu-native ／Processing wgpu\r\n整合驗證通過\r\n真\r\n"
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "marble",
+    "entry": "track.aqua",
+    "passed": true,
+    "output": ""
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "marble",
+    "entry": "camera.aqua",
+    "passed": true,
+    "output": ""
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "marble",
+    "entry": "config.aqua",
+    "passed": true,
+    "output": ""
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "marble",
+    "entry": "hud.aqua",
+    "passed": true,
+    "output": ""
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "marble",
+    "entry": "input.aqua",
+    "passed": true,
+    "output": ""
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "marble",
+    "entry": "main.aqua",
+    "passed": true,
+    "output": "彈珠競速繪圖後端： wgpu-native ／Processing wgpu\r\n轉向：WASD／方向鍵｜煞車：空白鍵｜跳躍：J｜重生：R｜重新開始：Enter\r\n真\r\n"
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "marble",
+    "entry": "math3d.aqua",
+    "passed": true,
+    "output": ""
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "marble",
+    "entry": "physics.aqua",
+    "passed": true,
+    "output": ""
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "marble",
+    "entry": "renderer.aqua",
+    "passed": true,
+    "output": ""
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "marble",
+    "entry": "shaders.aqua",
+    "passed": true,
+    "output": ""
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "marble",
+    "entry": "smoke.aqua",
+    "passed": true,
+    "output": "彈珠競速繪圖後端： wgpu-native ／Processing wgpu\r\n整合驗證通過\r\n真\r\n"
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "marble",
+    "entry": "track.aqua",
+    "passed": true,
+    "output": ""
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "portable",
+    "entry": "lib/工具.aqua",
+    "passed": true,
+    "output": ""
+  },
+  {
+    "mode": "source",
+    "error": "",
+    "expectedFailure": false,
+    "project": "portable",
+    "entry": "main.aqua",
+    "passed": true,
+    "output": "[40, 42, 封裝成功\n]\r\n"
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "portable",
+    "entry": "lib/工具.aqua",
+    "passed": true,
+    "output": ""
+  },
+  {
+    "mode": "wasm",
+    "error": "",
+    "expectedFailure": false,
+    "project": "portable",
+    "entry": "main.aqua",
+    "passed": true,
+    "output": "[40, 42, 封裝成功\n]\r\n"
+  }
+]

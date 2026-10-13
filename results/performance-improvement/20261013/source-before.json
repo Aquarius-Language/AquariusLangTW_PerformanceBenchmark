@@ -1,0 +1,22 @@
+[
+  {
+    "path": "AquariusCore/wasm/runtime/runtime.c",
+    "sha256": "e1f419953e17266a39cfa17ab11974aae87f5ecbd5839e90cc150e9ab1092d8d"
+  },
+  {
+    "path": "AquariusCore/wasm/runtime/runtime.wasm",
+    "sha256": "6b72a268f28820fa48795ccc473af88fe50fb75bbe6f0b05008d3cfc03ce8c62"
+  },
+  {
+    "path": "AquariusCore/wasm/WasmAbi.cs",
+    "sha256": "b1d0fb34f9df14487af3e6220c00e57abda1a9844d036f7aa8e3084ea19f8ceb"
+  },
+  {
+    "path": "AquariusCore/wasm/WasmHostRuntime.cs",
+    "sha256": "32fc7d852c619e3af9af1065853d9fdd25c06ae5b687718fd0617e761e6c3163"
+  },
+  {
+    "path": "AquariusCore/wasm/WasmCompiler.cs",
+    "sha256": "b6b1a770b1ef6db5fab37ee298d1a4ae6fdb9d503d6d26026f3afe311ae182a8"
+  }
+]

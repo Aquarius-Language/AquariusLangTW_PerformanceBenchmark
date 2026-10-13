@@ -1,0 +1,14 @@
+  AquariusCore -> C:\OfficialProjects\AquariusLangTW\AquariusCore\bin\Release\net8.0\AquariusCore.dll
+  AquariusPackaging -> C:\OfficialProjects\AquariusLangTW\AquariusPackaging\bin\Release\net8.0\AquariusPackaging.dll
+  AquariusBuild -> C:\OfficialProjects\AquariusLangTW\AquariusBuild\bin\Release\net8.0\AquariusBuild.dll
+  AquariusWebCompiler -> C:\OfficialProjects\AquariusLangTW\AquariusWebCompiler\bin\Release\net8.0\win-x64\AquariusWebCompiler.dll
+C:\OfficialProjects\AquariusLangTW\AquariusDesktop\DesktopBuiltins.cs(98,28): warning CS8603: Possible null reference return. [C:\OfficialProjects\AquariusLangTW\AquariusDesktop\AquariusDesktop.csproj]
+C:\OfficialProjects\AquariusLangTW\AquariusDesktop\DesktopBuiltins.cs(196,33): warning CS8604: Possible null reference argument for parameter 'value' in 'StringObj.StringObj(string value)'. [C:\OfficialProjects\AquariusLangTW\AquariusDesktop\AquariusDesktop.csproj]
+C:\OfficialProjects\AquariusLangTW\AquariusDesktop\DesktopBuiltins.cs(197,33): warning CS8604: Possible null reference argument for parameter 'value' in 'StringObj.StringObj(string value)'. [C:\OfficialProjects\AquariusLangTW\AquariusDesktop\AquariusDesktop.csproj]
+C:\OfficialProjects\AquariusLangTW\AquariusDesktop\DesktopBuiltins.cs(208,16): warning CS8603: Possible null reference return. [C:\OfficialProjects\AquariusLangTW\AquariusDesktop\AquariusDesktop.csproj]
+C:\OfficialProjects\AquariusLangTW\AquariusDesktop\runtime\ScriptRunner.cs(71,16): warning CS8603: Possible null reference return. [C:\OfficialProjects\AquariusLangTW\AquariusDesktop\AquariusDesktop.csproj]
+C:\OfficialProjects\AquariusLangTW\AquariusDesktop\runtime\ScriptRunner.cs(93,16): warning CS8603: Possible null reference return. [C:\OfficialProjects\AquariusLangTW\AquariusDesktop\AquariusDesktop.csproj]
+C:\OfficialProjects\AquariusLangTW\AquariusDesktop\graphics\ProcessingModule.cs(180,85): warning CS8602: Dereference of a possibly null reference. [C:\OfficialProjects\AquariusLangTW\AquariusDesktop\AquariusDesktop.csproj]
+  AquariusDesktop -> C:\OfficialProjects\AquariusLangTW\AquariusDesktop\bin\Release\net8.0\win-x64\AquariusDesktop.dll
+  AquariusCli -> C:\OfficialProjects\AquariusLangTW\AquariusCli\bin\Release\net8.0\win-x64\aqua.dll
+  AquariusCli -> C:\OfficialProjects\AquariusLang_PerformanceBenchmark\.benchmark-work\performance-after\

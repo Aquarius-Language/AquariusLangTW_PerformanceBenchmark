@@ -1,0 +1,20 @@
+test_composite_score_uses_equal_weight_geometric_mean (test_harness.HarnessTests.test_composite_score_uses_equal_weight_geometric_mean) ... ok
+test_correctness_exit_and_timeout (test_harness.HarnessTests.test_correctness_exit_and_timeout) ... ok
+test_failed_warmup_invalidates_case (test_harness.HarnessTests.test_failed_warmup_invalidates_case) ... ok
+test_fastest_language_is_always_normalized_to_100 (test_harness.HarnessTests.test_fastest_language_is_always_normalized_to_100) ... ok
+test_float_tolerance (test_harness.HarnessTests.test_float_tolerance) ... ok
+test_historical_diagnostic_requires_explicit_process_timing (test_harness.HarnessTests.test_historical_diagnostic_requires_explicit_process_timing) ... ok
+test_missing_runtime_is_reported (test_harness.HarnessTests.test_missing_runtime_is_reported) ... ok
+test_rejects_invalid_output (test_harness.HarnessTests.test_rejects_invalid_output) ... ok
+test_requires_valid_in_process_timing (test_harness.HarnessTests.test_requires_valid_in_process_timing) ... ok
+test_statistics_use_reported_duration_excluding_process_overhead (test_harness.HarnessTests.test_statistics_use_reported_duration_excluding_process_overhead) ... ok
+test_known_answers (test_harness.ReferenceTests.test_known_answers) ... ok
+test_python_scripts_match_oracles (test_harness.ReferenceTests.test_python_scripts_match_oracles) ... ok
+test_default_builds_before_timing_and_validates_real_wasm_result (test_wasm_runner.WasmRunnerTests.test_default_builds_before_timing_and_validates_real_wasm_result) ... ok
+test_execution_mode_option_is_removed (test_wasm_runner.WasmRunnerTests.test_execution_mode_option_is_removed) ... ok
+test_fingerprints_core_and_engine_instead_of_legacy_assemblies (test_wasm_runner.WasmRunnerTests.test_fingerprints_core_and_engine_instead_of_legacy_assemblies) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 11.929s
+
+OK

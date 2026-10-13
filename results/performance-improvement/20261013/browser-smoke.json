@@ -1,0 +1,311 @@
+[
+  {
+    "project": "examples-wasm",
+    "entry": "application_libraries/main.aqua",
+    "passed": true,
+    "ms": 148
+  },
+  {
+    "project": "examples-wasm",
+    "entry": "bilingual_library/main.aqua",
+    "passed": true,
+    "ms": 16
+  },
+  {
+    "project": "examples-wasm",
+    "entry": "bilingual_library/tools.aqua",
+    "passed": true,
+    "ms": 12
+  },
+  {
+    "project": "examples-wasm",
+    "entry": "check_os_platform.aqua",
+    "passed": true,
+    "ms": 12
+  },
+  {
+    "project": "examples-wasm",
+    "entry": "color_mapping/main.aqua",
+    "passed": true,
+    "ms": 1688
+  },
+  {
+    "project": "examples-wasm",
+    "entry": "comments.aqua",
+    "passed": true,
+    "ms": 16
+  },
+  {
+    "project": "examples-wasm",
+    "entry": "conditions.aqua",
+    "passed": true,
+    "ms": 12
+  },
+  {
+    "project": "examples-wasm",
+    "entry": "dir_paths/main.aqua",
+    "passed": true,
+    "ms": 14
+  },
+  {
+    "project": "examples-wasm",
+    "entry": "dir_paths/others/anotherfile.aqua",
+    "passed": true,
+    "ms": 10
+  },
+  {
+    "project": "examples-wasm",
+    "entry": "elapsed_time.aqua",
+    "passed": true,
+    "ms": 10
+  },
+  {
+    "project": "examples-wasm",
+    "entry": "execute_file.aqua",
+    "passed": true,
+    "ms": 12
+  },
+  {
+    "project": "examples-wasm",
+    "entry": "for_loop.aqua",
+    "passed": true,
+    "ms": 9
+  },
+  {
+    "project": "examples-wasm",
+    "entry": "generate_errors/for_loop_use_undeclared_array.aqua",
+    "passed": true,
+    "expectedFailure": true
+  },
+  {
+    "project": "examples-wasm",
+    "entry": "increment_and_plus_equal.aqua",
+    "passed": true,
+    "ms": 19
+  },
+  {
+    "project": "examples-wasm",
+    "entry": "increment.aqua",
+    "passed": true,
+    "ms": 11
+  },
+  {
+    "project": "examples-wasm",
+    "entry": "jolt_physics/main.aqua",
+    "passed": true,
+    "ms": 50
+  },
+  {
+    "project": "examples-wasm",
+    "entry": "multilingual_input/main.aqua",
+    "passed": true,
+    "ms": 93
+  },
+  {
+    "project": "examples-wasm",
+    "entry": "nested_func.aqua",
+    "passed": true,
+    "ms": 13
+  },
+  {
+    "project": "examples-wasm",
+    "entry": "num_operations_casting.aqua",
+    "passed": true,
+    "ms": 10
+  },
+  {
+    "project": "examples-wasm",
+    "entry": "opengl_cube/main.aqua",
+    "passed": true,
+    "ms": 70
+  },
+  {
+    "project": "examples-wasm",
+    "entry": "pbr_models/gpu-smoke.aqua",
+    "passed": true,
+    "ms": 97
+  },
+  {
+    "project": "examples-wasm",
+    "entry": "pbr_models/main.aqua",
+    "passed": true,
+    "ms": 1066
+  },
+  {
+    "project": "examples-wasm",
+    "entry": "pbr_models/smoke.aqua",
+    "passed": true,
+    "ms": 1057
+  },
+  {
+    "project": "examples-wasm",
+    "entry": "processing_showcase/main.aqua",
+    "passed": true,
+    "ms": 315
+  },
+  {
+    "project": "examples-wasm",
+    "entry": "processing_wgpu/main.aqua",
+    "passed": true,
+    "ms": 129
+  },
+  {
+    "project": "examples-wasm",
+    "entry": "starship_expedition/航行工具.aqua",
+    "passed": true,
+    "ms": 9
+  },
+  {
+    "project": "examples-wasm",
+    "entry": "starship_expedition/main.aqua",
+    "passed": true,
+    "ms": 12
+  },
+  {
+    "project": "examples-wasm",
+    "entry": "using_modules/main.aqua",
+    "passed": true,
+    "ms": 27
+  },
+  {
+    "project": "examples-wasm",
+    "entry": "using_modules/module_folder/module.aqua",
+    "passed": true,
+    "ms": 9
+  },
+  {
+    "project": "examples-wasm",
+    "entry": "var_scope.aqua",
+    "passed": true,
+    "ms": 11
+  },
+  {
+    "project": "examples-wasm",
+    "entry": "webcam/冒煙測試.aqua",
+    "passed": true,
+    "ms": 9
+  },
+  {
+    "project": "examples-wasm",
+    "entry": "webcam/裝置清單.aqua",
+    "passed": true,
+    "ms": 880
+  },
+  {
+    "project": "examples-wasm",
+    "entry": "wgpu_compute/main.aqua",
+    "passed": true,
+    "ms": 31
+  },
+  {
+    "project": "examples-wasm",
+    "entry": "wgpu_triangle/main.aqua",
+    "passed": true,
+    "ms": 55
+  },
+  {
+    "project": "examples-wasm",
+    "entry": ".aquarius/PBR.aqua",
+    "passed": true,
+    "ms": 10
+  },
+  {
+    "project": "examples-wasm",
+    "entry": ".aquarius/Models.aqua",
+    "passed": true,
+    "ms": 10
+  },
+  {
+    "project": "examples-wasm",
+    "entry": "DOM multilingual input and grapheme backspace",
+    "passed": true
+  },
+  {
+    "project": "marble-wasm",
+    "entry": "camera.aqua",
+    "passed": true,
+    "ms": 9
+  },
+  {
+    "project": "marble-wasm",
+    "entry": "config.aqua",
+    "passed": true,
+    "ms": 7
+  },
+  {
+    "project": "marble-wasm",
+    "entry": "hud.aqua",
+    "passed": true,
+    "ms": 5
+  },
+  {
+    "project": "marble-wasm",
+    "entry": "input.aqua",
+    "passed": true,
+    "ms": 5
+  },
+  {
+    "project": "marble-wasm",
+    "entry": "main.aqua",
+    "passed": true,
+    "ms": 401
+  },
+  {
+    "project": "marble-wasm",
+    "entry": "math3d.aqua",
+    "passed": true,
+    "ms": 5
+  },
+  {
+    "project": "marble-wasm",
+    "entry": "physics.aqua",
+    "passed": true,
+    "ms": 3
+  },
+  {
+    "project": "marble-wasm",
+    "entry": "renderer.aqua",
+    "passed": true,
+    "ms": 4
+  },
+  {
+    "project": "marble-wasm",
+    "entry": "shaders.aqua",
+    "passed": true,
+    "ms": 3
+  },
+  {
+    "project": "marble-wasm",
+    "entry": "smoke.aqua",
+    "passed": true,
+    "ms": 553
+  },
+  {
+    "project": "marble-wasm",
+    "entry": "track.aqua",
+    "passed": true,
+    "ms": 4
+  },
+  {
+    "project": "marble-wasm",
+    "entry": "DOM gameplay pause, movement, and Stop",
+    "passed": true
+  },
+  {
+    "project": "portable-wasm",
+    "entry": "lib/工具.aqua",
+    "passed": true,
+    "ms": 7
+  },
+  {
+    "project": "portable-wasm",
+    "entry": "main.aqua",
+    "passed": true,
+    "ms": 6
+  },
+  {
+    "project": "portable-wasm",
+    "entry": "packaged shader loading and Unicode assets",
+    "passed": true
+  }
+]

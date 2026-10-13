@@ -1,0 +1,16 @@
+{
+  "base_commit": "4cd365b",
+  "files": {
+    "AquariusCore/wasm/WasmAbi.cs": "eebaba2df70f689693e999b62ab82a7a48bf640f76fa32fddc1acd02a279e69a",
+    "AquariusCore/wasm/WasmBindingSlots.cs": "c1c09738e29bc01b0b556972db8ac9ca7fcfc2b9dea979c1e944be60641cd5c8",
+    "AquariusCore/wasm/WasmCompiler.cs": "000ee373c2d63206ec03f1256bf4684f177325ff238c20c0e3cefa092f75cc51",
+    "AquariusCore/wasm/WasmHostRuntime.cs": "71042904a136275ef1901cd2561609c0bdfd98ea21b9adfb6a33d5fadee6ad0d",
+    "AquariusCore/wasm/runtime/runtime.c": "dcab5c670d80edac5b5e461dcc0d41efa1eab94b5046d725502fee54127f485c",
+    "AquariusCore/wasm/runtime/runtime.wasm": "0015eb8e133239dc0e881d22e3e43649d4c26b3ab55348901228a800fefd6edf",
+    "AquariusTests/AquariusTests.csproj": "2e4ac94119fcc906315645301c984ceda8911f4e49db8a8d8aa3055c8e48d6d7",
+    "AquariusTests/compiler/WasmPerformanceTest.cs": "9569dcfcb2b59ca5a05b472813576cc13d3575e9f6f5a5ca740361a5fd50db6e",
+    "AquariusTests/compiler/fixtures/legacy-performance-v2.wasm": "882404406aba4ab3affe75829c36799dcb3651624fc68419890db103293f6025",
+    "AquariusWebCompiler/tests/performance.test.mjs": "e9482ac055157b3f44083d2cbc7b4a8e6c4168bd4eea733d4b3fecb1e147126a",
+    "docs/performance-fast-paths.md": "fc00c398a00bfd223148ada31e7c2232b0d872d5163faa0bec57823326a5c7b7"
+  }
+}
