@@ -14,12 +14,12 @@
     如果 (i < hi) { sort(a, i, hi); }
 };
 變數 benchmark_start = 目前時間();
-變數 values = [];
+變數 values = 陣列.建立(0, 0, benchmark_n);
 變數 seed = 42;
 迴圈 (變數 i = 0; i < benchmark_n; i++) {
     變數 raw = seed * 251 + 17;
     seed = raw - (raw / 65536) * 65536;
-    values = 加入(values, seed);
+    陣列.追加(values, seed);
 }
 
 sort(values, 0, benchmark_n - 1);

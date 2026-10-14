@@ -1,0 +1,3 @@
+變數 start=目前時間();
+變數 result=0;迴圈(變數 round=0;round<10;round++){變數 a=陣列.建立(0,0,25000);迴圈(變數 i=0;i<25000;i++){陣列.追加(a,i);}result+=陣列.長度(a);}
+印出("RESULT",result);印出("ELAPSED_MS",目前時間()-start);

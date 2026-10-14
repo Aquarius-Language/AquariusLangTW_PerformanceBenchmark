@@ -15,10 +15,9 @@
     }
 };
 變數 benchmark_start = 目前時間();
-變數 u = []; 變數 v = []; 變數 temp = [];
-迴圈 (變數 i = 0; i < benchmark_n; i++) {
-    u = 加入(u, 1.0d); v = 加入(v, 0.0d); temp = 加入(temp, 0.0d);
-}
+變數 u = 陣列.建立(benchmark_n, 1.0d);
+變數 v = 陣列.建立(benchmark_n, 0.0d);
+變數 temp = 陣列.建立(benchmark_n, 0.0d);
 迴圈 (變數 iteration = 0; iteration < 10; iteration++) {
     multiply(u, temp, 假); multiply(temp, v, 真);
     multiply(v, temp, 假); multiply(temp, u, 真);
