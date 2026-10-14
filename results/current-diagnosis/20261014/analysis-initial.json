@@ -1,0 +1,293 @@
+{
+  "published": {
+    "fibonacci": {
+      "aquarius_ms": 105.3026,
+      "python_ms": 26.1841,
+      "time_ratio": 4.021623809869348
+    },
+    "ackermann": {
+      "aquarius_ms": 20.1499,
+      "python_ms": 10.6658,
+      "time_ratio": 1.8892066230381215
+    },
+    "sieve": {
+      "aquarius_ms": 1.8904,
+      "python_ms": 36.8172,
+      "time_ratio": 0.05134556674597743
+    },
+    "quicksort": {
+      "aquarius_ms": 5.7514,
+      "python_ms": 4.261,
+      "time_ratio": 1.3497770476413988
+    },
+    "matrix": {
+      "aquarius_ms": 13.281,
+      "python_ms": 12.69,
+      "time_ratio": 1.0465721040189127
+    },
+    "mandelbrot": {
+      "aquarius_ms": 28.2567,
+      "python_ms": 20.454,
+      "time_ratio": 1.3814755060134936
+    },
+    "nqueens": {
+      "aquarius_ms": 9.84,
+      "python_ms": 3.5047,
+      "time_ratio": 2.807658287442577
+    },
+    "binary_trees": {
+      "aquarius_ms": 21.276500000000002,
+      "python_ms": 8.2255,
+      "time_ratio": 2.5866512674001583
+    },
+    "spectral_norm": {
+      "aquarius_ms": 39.3113,
+      "python_ms": 14.8322,
+      "time_ratio": 2.650402502663125
+    },
+    "collatz": {
+      "aquarius_ms": 63.708,
+      "python_ms": 83.4057,
+      "time_ratio": 0.7638326876940066
+    }
+  },
+  "idiomatic_comparison": {
+    "fibonacci": {
+      "aquarius_ms": 103.916,
+      "python_ms": 26.5397,
+      "time_ratio": 3.9154926393290053
+    },
+    "ackermann": {
+      "aquarius_ms": 19.3583,
+      "python_ms": 11.1325,
+      "time_ratio": 1.7388996182348977
+    },
+    "sieve": {
+      "aquarius_ms": 1.9127,
+      "python_ms": 1.1773,
+      "time_ratio": 1.6246496220164783
+    },
+    "quicksort": {
+      "aquarius_ms": 5.1244,
+      "python_ms": 1.5524,
+      "time_ratio": 3.3009533625354286
+    },
+    "matrix": {
+      "aquarius_ms": 12.8401,
+      "python_ms": 9.1091,
+      "time_ratio": 1.4095904095904095
+    },
+    "mandelbrot": {
+      "aquarius_ms": 27.8391,
+      "python_ms": 19.5877,
+      "time_ratio": 1.4212541543928074
+    },
+    "nqueens": {
+      "aquarius_ms": 9.4819,
+      "python_ms": 3.4938,
+      "time_ratio": 2.713921804339115
+    },
+    "binary_trees": {
+      "aquarius_ms": 20.6889,
+      "python_ms": 7.9225,
+      "time_ratio": 2.611410539602398
+    },
+    "spectral_norm": {
+      "aquarius_ms": 38.2541,
+      "python_ms": 14.2496,
+      "time_ratio": 2.684573602066023
+    },
+    "collatz": {
+      "aquarius_ms": 62.361,
+      "python_ms": 77.2393,
+      "time_ratio": 0.8073739663616837
+    }
+  },
+  "construction_probes": {
+    "sieve": {
+      "original_python_ms": 36.3616,
+      "idiomatic_python_ms": 1.1773,
+      "python_speedup": 30.885585662108216
+    },
+    "quicksort": {
+      "original_python_ms": 4.3421,
+      "idiomatic_python_ms": 1.5524,
+      "python_speedup": 2.797023962896161
+    },
+    "matrix": {
+      "original_python_ms": 12.3184,
+      "idiomatic_python_ms": 9.1091,
+      "python_speedup": 1.352318011658671
+    }
+  },
+  "warm_counters": {
+    "fibonacci": {
+      "native_calls": 4,
+      "capability_lookups": 2,
+      "scheduler_entries": 63,
+      "explicit_host_collection_calls": 1,
+      "guest_collection_generation": 83,
+      "budget": 65536,
+      "guest_heap_high_water_bytes": 21536,
+      "managed_allocation_traffic_median_bytes": 16232,
+      "workload_ms_min_max": [
+        217.39280000000008,
+        410.38369999999986
+      ]
+    },
+    "ackermann": {
+      "native_calls": 4,
+      "capability_lookups": 2,
+      "scheduler_entries": 15,
+      "explicit_host_collection_calls": 1,
+      "guest_collection_generation": 14,
+      "budget": 65536,
+      "guest_heap_high_water_bytes": 369296,
+      "managed_allocation_traffic_median_bytes": 6232,
+      "workload_ms_min_max": [
+        41.025400000000445,
+        68.25580000000082
+      ]
+    },
+    "sieve": {
+      "native_calls": 4,
+      "capability_lookups": 2,
+      "scheduler_entries": 2,
+      "explicit_host_collection_calls": 1,
+      "guest_collection_generation": 1,
+      "budget": 65536,
+      "guest_heap_high_water_bytes": 267104,
+      "managed_allocation_traffic_median_bytes": 3528,
+      "workload_ms_min_max": [
+        3.95890000000054,
+        7.5942000000004555
+      ]
+    },
+    "quicksort": {
+      "native_calls": 4,
+      "capability_lookups": 2,
+      "scheduler_entries": 4,
+      "explicit_host_collection_calls": 1,
+      "guest_collection_generation": 1,
+      "budget": 65536,
+      "guest_heap_high_water_bytes": 63744,
+      "managed_allocation_traffic_median_bytes": 3960,
+      "workload_ms_min_max": [
+        13.048200000000179,
+        19.383699999999408
+      ]
+    },
+    "matrix": {
+      "native_calls": 4,
+      "capability_lookups": 2,
+      "scheduler_entries": 5,
+      "explicit_host_collection_calls": 1,
+      "guest_collection_generation": 1,
+      "budget": 65536,
+      "guest_heap_high_water_bytes": 70896,
+      "managed_allocation_traffic_median_bytes": 4160,
+      "workload_ms_min_max": [
+        50.35750000000007,
+        63.76690000000053
+      ]
+    },
+    "mandelbrot": {
+      "native_calls": 4,
+      "capability_lookups": 2,
+      "scheduler_entries": 13,
+      "explicit_host_collection_calls": 1,
+      "guest_collection_generation": 1,
+      "budget": 65536,
+      "guest_heap_high_water_bytes": 2368,
+      "managed_allocation_traffic_median_bytes": 5824,
+      "workload_ms_min_max": [
+        81.79489999999987,
+        131.84670000000006
+      ]
+    },
+    "nqueens": {
+      "native_calls": 4,
+      "capability_lookups": 2,
+      "scheduler_entries": 7,
+      "explicit_host_collection_calls": 1,
+      "guest_collection_generation": 1,
+      "budget": 65536,
+      "guest_heap_high_water_bytes": 14480,
+      "managed_allocation_traffic_median_bytes": 4528,
+      "workload_ms_min_max": [
+        36.460000000000036,
+        91.48030000000017
+      ]
+    },
+    "binary_trees": {
+      "native_calls": 4,
+      "capability_lookups": 2,
+      "scheduler_entries": 8,
+      "explicit_host_collection_calls": 1,
+      "guest_collection_generation": 12,
+      "budget": 65536,
+      "guest_heap_high_water_bytes": 2107984,
+      "managed_allocation_traffic_median_bytes": 4776,
+      "workload_ms_min_max": [
+        43.93870000000061,
+        71.39580000000024
+      ]
+    },
+    "spectral_norm": {
+      "native_calls": 4,
+      "capability_lookups": 2,
+      "scheduler_entries": 25,
+      "explicit_host_collection_calls": 1,
+      "guest_collection_generation": 12,
+      "budget": 65536,
+      "guest_heap_high_water_bytes": 9616,
+      "managed_allocation_traffic_median_bytes": 8376,
+      "workload_ms_min_max": [
+        98.59829999999965,
+        233.1223000000009
+      ]
+    },
+    "collatz": {
+      "native_calls": 4,
+      "capability_lookups": 2,
+      "scheduler_entries": 79,
+      "explicit_host_collection_calls": 1,
+      "guest_collection_generation": 1,
+      "budget": 65536,
+      "guest_heap_high_water_bytes": 2032,
+      "managed_allocation_traffic_median_bytes": 19552,
+      "workload_ms_min_max": [
+        216.6366999999991,
+        376.8593000000001
+      ]
+    }
+  },
+  "published_geometric_time_ratio": 1.2731953508634457,
+  "published_uniform_time_reduction_to_parity": 0.21457457465437035,
+  "idiomatic_comparison_geometric_time_ratio": 2.018667192742746,
+  "idiomatic_comparison_uniform_time_reduction_to_parity": 0.5046236429684536,
+  "inlining_probe": {
+    "original_ms": 38.2541,
+    "inlined_ms": 25.7806,
+    "speedup": 1.4838328045119198,
+    "time_reduction": 0.32606962390959404,
+    "element_calls_removed": 144000,
+    "note": "Changes call handling and binding locality together; not an isolated CPU-time attribution."
+  },
+  "validation": {
+    "variant_executions": 192,
+    "warm_profile_executions": 130,
+    "all_variant_checks_passed": true,
+    "runtime_fingerprints_match": true,
+    "warm_source_fingerprints_match_published": true
+  },
+  "warm_timing_limit": "API warm timings were variable and substantially slower than fresh CLI samples despite identical binaries; used for deterministic counters, not ranking or a warm/cold speedup claim.",
+  "inspected_source_sha256": {
+    "AquariusCore/wasm/WasmCompiler.cs": "000ee373c2d63206ec03f1256bf4684f177325ff238c20c0e3cefa092f75cc51",
+    "AquariusCore/wasm/WasmBindingSlots.cs": "c1c09738e29bc01b0b556972db8ac9ca7fcfc2b9dea979c1e944be60641cd5c8",
+    "AquariusCore/wasm/WasmStackAnalysis.cs": "da110e2c0927308690766f0ac4c79caa3ec2a8ba28c8fba3897911cfe3bda92e",
+    "AquariusCore/wasm/runtime/runtime.c": "909d7f7858200d6a7b2f5391a1f0c122784cb71adcf1456d9fad194c473ca1f9",
+    "docs/performance-fast-paths.md": "fc00c398a00bfd223148ada31e7c2232b0d872d5163faa0bec57823326a5c7b7"
+  },
+  "measured_harness_sha256_matches": true
+}
