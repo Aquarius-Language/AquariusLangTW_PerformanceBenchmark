@@ -248,6 +248,9 @@ frequency, background load, scheduling and temperature were not controlled.
 Heap high-water values are not allocation traffic or peak process memory.
 The production compiler/runtime and the published benchmark sources were not edited.
 
+The subsequent [performance architecture proposal](PERFORMANCE_ARCHITECTURE.md)
+develops a larger compiler/execution redesign for drastic improvements.
+
 Reproduce the complete CLI experiment into a new output file:
 
 ```powershell

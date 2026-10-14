@@ -1,0 +1,29 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  ArchitectureProfile -> C:\OfficialProjects\AquariusLang_PerformanceBenchmark\.benchmark-work\architecture-profile\ArchitectureProfile.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:00.90
+ackermann/before: validated counters
+binary_trees/before: validated counters
+collatz/before: validated counters
+fibonacci/before: validated counters
+mandelbrot/before: validated counters
+matrix/before: validated counters
+nqueens/before: validated counters
+quicksort/before: validated counters
+sieve/before: validated counters
+spectral_norm/before: validated counters
+ackermann/after: validated counters
+binary_trees/after: validated counters
+collatz/after: validated counters
+fibonacci/after: validated counters
+mandelbrot/after: validated counters
+matrix/after: validated counters
+nqueens/after: validated counters
+quicksort/after: validated counters
+sieve/after: validated counters
+spectral_norm/after: validated counters

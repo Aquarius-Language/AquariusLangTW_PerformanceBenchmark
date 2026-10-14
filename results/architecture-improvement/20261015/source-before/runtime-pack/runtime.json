@@ -1,0 +1,8 @@
+﻿{
+    "format":  "aquarius-runtime-pack",
+    "version":  1,
+    "runtimeIdentifier":  "win-x64",
+    "bundleVersion":  2,
+    "wasmAbiVersion":  2,
+    "templateSha256":  "1c8f6b7cf84cc428c036e141516ff67fb09a5eb4eb20b23e9ff04586e56e5554"
+}

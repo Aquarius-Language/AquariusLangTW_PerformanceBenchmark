@@ -1,0 +1,34 @@
+變數 benchmark_n = 2000;
+變數 sort = 函式(a, lo, hi) {
+    變數 i = lo; 變數 j = hi;
+    變數 pivot = a[(lo + hi) / 2];
+    # Aquarius requires a declaration and an update expression in every loop.
+    迴圈 (變數 partition_guard = 0; i <= j; 0) {
+        迴圈 (變數 left_guard = 0; a[i] < pivot; i++) { }
+        迴圈 (變數 right_guard = 0; a[j] > pivot; j -= 1) { }
+        如果 (i <= j) {
+            變數 tmp = a[i]; a[i] = a[j]; a[j] = tmp; i++; j -= 1;
+        }
+    }
+    如果 (lo < j) { sort(a, lo, j); }
+    如果 (i < hi) { sort(a, i, hi); }
+};
+變數 benchmark_start = 目前時間();
+變數 values = 陣列.建立(0, 0, benchmark_n);
+變數 seed = 42;
+迴圈 (變數 i = 0; i < benchmark_n; i++) {
+    變數 raw = seed * 251 + 17;
+    seed = raw - (raw / 65536) * 65536;
+    陣列.追加(values, seed);
+}
+
+sort(values, 0, benchmark_n - 1);
+變數 checksum = 0;
+變數 ordered = 真;
+迴圈 (變數 i = 0; i < benchmark_n; i++) {
+    如果 (i > 0) { 如果 (values[i] < values[i - 1]) { ordered = 假; } }
+    checksum += values[i] * (i + 1);
+    checksum -= (checksum / 1000003) * 1000003;
+}
+變數 benchmark_elapsed_ms = 目前時間() - benchmark_start;
+如果 (ordered) { 印出("RESULT", checksum); 印出("ELAPSED_MS", benchmark_elapsed_ms); } 否則 { 印出("ERROR Unsorted output"); }

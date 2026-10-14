@@ -1,0 +1,84 @@
+{
+  "files": [
+    {
+      "path": "ARCHITECTURE.md",
+      "before_sha256": "f42e5722f8bb2be628907fede8d24f420c5d9225d0f4f030ea28f490c03ae65b",
+      "after_sha256": "3026d5d0c1b178613edfa3d0a0e65bf3dcd6f91edd47dd93a3426e5ef1f53c57"
+    },
+    {
+      "path": "AquariusCore/LANGUAGE.md",
+      "before_sha256": "597998bab91a1c8c308f13f7ac0ae99432e5c2e592a6999a13307d6a1f881ca3",
+      "after_sha256": "866548c12c1858f299709febf075b2f9c7acf4760d26aab2025c49d5e1b71f57"
+    },
+    {
+      "path": "AquariusCore/hosting/wasm-manifest.mjs",
+      "before_sha256": "3e53a13c76cb27625e99691eeba11eaa96da0b393ca818a348979dcb3b1f7061",
+      "after_sha256": "c8007104a8e8668d1fe1bfe29c7059b8146d743e2b51e273b9f69d74b2ad0b30"
+    },
+    {
+      "path": "AquariusCore/wasm/WasmBindingSlots.cs",
+      "before_sha256": "c1c09738e29bc01b0b556972db8ac9ca7fcfc2b9dea979c1e944be60641cd5c8",
+      "after_sha256": "26f06ac3a2931659af0d11156e0500fa294802f791d62029356bbbcac6a7ba97"
+    },
+    {
+      "path": "AquariusCore/wasm/WasmCompiler.cs",
+      "before_sha256": "000ee373c2d63206ec03f1256bf4684f177325ff238c20c0e3cefa092f75cc51",
+      "after_sha256": "bd1966eff1f6b784ef9ba175735432f04f92b2af530e8e23a462d417b33c8d5c"
+    },
+    {
+      "path": "AquariusCore/wasm/WasmNumericFunction.cs",
+      "before_sha256": null,
+      "after_sha256": "154058dbaca67ecee98befe18e98e9cecd0e2cf0b5406c54fdc05f43547e475a"
+    },
+    {
+      "path": "AquariusCore/wasm/WasmProgram.cs",
+      "before_sha256": "7c98642d7015ccbf417f6ece55e50eeaf5f75f9977579d1202b85f80ad3cdeda",
+      "after_sha256": "9b07b1416d181f75daf0cd8025931c3c6e66d8ae40117bd1dce582e07f7f06da"
+    },
+    {
+      "path": "AquariusCore/wasm/WasmRuntimeImage.cs",
+      "before_sha256": "7af4619738f28e918ca82c858f20f5a98145445db3bf92563ee25cfa42f3783f",
+      "after_sha256": "5711e38bf88211c94340a55e8de157938a8c806e0ee7730a6759831ac16e1356"
+    },
+    {
+      "path": "AquariusCore/wasm/runtime/runtime.c",
+      "before_sha256": "909d7f7858200d6a7b2f5391a1f0c122784cb71adcf1456d9fad194c473ca1f9",
+      "after_sha256": "46d246d7a0aec08daadf46b090c25541524bc716537e63121095fdf069f2172f"
+    },
+    {
+      "path": "AquariusCore/wasm/runtime/runtime.wasm",
+      "before_sha256": "6f30ac9c262e91e9f8829b867bc90898ac4b6bb39e1588f92cfb0a7303627674",
+      "after_sha256": "2c997daf8e6e42acc6580f0873c2e610d9832c98a9b1567ea37b400e102ffcc8"
+    },
+    {
+      "path": "AquariusTests/compiler/WasmNumericFunctionTest.cs",
+      "before_sha256": null,
+      "after_sha256": "75a8342493d32f1a8a03000e6e941eaf36bc68ca6b0aa3a9d763bc67f1bcb427"
+    },
+    {
+      "path": "AquariusWebCompiler/browser/wasm-manifest.mjs",
+      "before_sha256": "3ddf91acf370f1300321f970f567cc7c2fdb18ddec49c5345dfdcff3c0d4e507",
+      "after_sha256": "c8007104a8e8668d1fe1bfe29c7059b8146d743e2b51e273b9f69d74b2ad0b30"
+    },
+    {
+      "path": "AquariusWebCompiler/tests/numeric-functions.test.mjs",
+      "before_sha256": null,
+      "after_sha256": "7f0dbb7a0c46a7bd43c0223d501262b332712921ae7f5a906f578d7994a3cfc5"
+    },
+    {
+      "path": "AquariusWebCompiler/tests/wasm-manifest.test.mjs",
+      "before_sha256": "e810997f4476dc0ce1f64f752e8f3faeff7ae080884f22c283f9dec87648d7ff",
+      "after_sha256": "25a828422be949e313fd504bd103b71fa3a5be8bb19979d964a621d32026b48f"
+    },
+    {
+      "path": "docs/portable-numeric-architecture.md",
+      "before_sha256": null,
+      "after_sha256": "76dd6714542da10c6bf39c529833277b7a2833d12682757851d95690381d4120"
+    },
+    {
+      "path": "AquariusCore/wasm/WasmIntegerFunction.cs",
+      "before_sha256": null,
+      "after_sha256": "c908de28264ed97f2a2179cfe0ffc99c10228e8e374cac117ededf7b41c5df91"
+    }
+  ]
+}

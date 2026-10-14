@@ -1,0 +1,38 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  AquariusCore -> C:\OfficialProjects\AquariusLang_PerformanceBenchmark\.benchmark-work\portable-architecture-source\AquariusCore\bin\Release\net8.0\AquariusCore.dll
+  AquariusPackaging -> C:\OfficialProjects\AquariusLang_PerformanceBenchmark\.benchmark-work\portable-architecture-source\AquariusPackaging\bin\Release\net8.0\AquariusPackaging.dll
+  AquariusDesktop -> C:\OfficialProjects\AquariusLang_PerformanceBenchmark\.benchmark-work\portable-architecture-source\AquariusDesktop\bin\Release\net8.0\AquariusDesktop.dll
+  AquariusWebCompiler -> C:\OfficialProjects\AquariusLang_PerformanceBenchmark\.benchmark-work\portable-architecture-source\AquariusWebCompiler\bin\Release\net8.0\AquariusWebCompiler.dll
+  AquariusBuild -> C:\OfficialProjects\AquariusLang_PerformanceBenchmark\.benchmark-work\portable-architecture-source\AquariusBuild\bin\Release\net8.0\AquariusBuild.dll
+  AquariusAndroid -> C:\OfficialProjects\AquariusLang_PerformanceBenchmark\.benchmark-work\portable-architecture-source\AquariusAndroid\bin\Release\net8.0\AquariusAndroid.dll
+  AquariusCli -> C:\OfficialProjects\AquariusLang_PerformanceBenchmark\.benchmark-work\portable-architecture-source\AquariusCli\bin\Release\net8.0\aqua.dll
+  AquariusTests -> C:\OfficialProjects\AquariusLang_PerformanceBenchmark\.benchmark-work\portable-architecture-source\AquariusTests\bin\Release\net8.0\AquariusTests.dll
+Test run for C:\OfficialProjects\AquariusLang_PerformanceBenchmark\.benchmark-work\portable-architecture-source\AquariusTests\bin\Release\net8.0\AquariusTests.dll (.NETCoreApp,Version=v8.0)
+VSTest version 17.11.1 (x64)
+
+Starting test execution, please wait...
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:02.53]     AquariusLang.Desktop.Graphics.ProcessingTest.EventErrorHandlerRecoversAnOffscreenDrawAndContinuesRendering [FAIL]
+  Failed AquariusLang.Desktop.Graphics.ProcessingTest.EventErrorHandlerRecoversAnOffscreenDrawAndContinuesRendering [1 s]
+  Error Message:
+   ERROR: Processing.run: Processing.size: CreateWindow: Win32: Failed to create window: The handle is invalid. 
+Expected: False
+Actual:   True
+  Stack Trace:
+     at AquariusLang.Desktop.Graphics.ProcessingTest.EventErrorHandlerRecoversAnOffscreenDrawAndContinuesRendering() in C:\OfficialProjects\AquariusLang_PerformanceBenchmark\.benchmark-work\portable-architecture-source\AquariusTests\desktop\graphics\ProcessingTest.cs:line 23
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+[xUnit.net 00:00:07.38]     AquariusTests.Wasm.WasmNumericFunctionTest.IntegerRepresentationPreservesBoundaryArithmeticWithoutWrapping [FAIL]
+  Failed AquariusTests.Wasm.WasmNumericFunctionTest.IntegerRepresentationPreservesBoundaryArithmeticWithoutWrapping [24 ms]
+  Error Message:
+   Assert.Equal() Failure
+Expected: 1
+Actual:   2
+  Stack Trace:
+     at AquariusTests.Wasm.WasmNumericFunctionTest.IntegerRepresentationPreservesBoundaryArithmeticWithoutWrapping() in C:\OfficialProjects\AquariusLang_PerformanceBenchmark\.benchmark-work\portable-architecture-source\AquariusTests\compiler\WasmNumericFunctionTest.cs:line 123
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+Results File: C:\OfficialProjects\AquariusLang_PerformanceBenchmark\.benchmark-work\architecture-tests\all-tests-final.trx
+
+Failed!  - Failed:     2, Passed:  1625, Skipped:     0, Total:  1627, Duration: 2 m 50 s - AquariusTests.dll (net8.0)

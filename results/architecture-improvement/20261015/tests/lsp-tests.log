@@ -1,0 +1,26 @@
+✔ built-in array modules offer both languages and respect lexical shadowing (731.1846ms)
+✔ LSP lifecycle, unsupported requests, malformed JSON, and fragmented UTF-8 frames (212.6597ms)
+✔ Chinese completion, hover, definition, and outline use real source ranges (224.6457ms)
+✔ core time aliases provide completion and explain milliseconds in hover (201.0238ms)
+✔ functions and loop scopes resolve shadowed identifiers and hide locals outside their scope (217.2575ms)
+✔ incremental edits, multiple changes, full replacement, and stale versions (202.838ms)
+✔ UTF-16 offsets survive astral characters, combining marks, and CRLF (171.9832ms)
+✔ comments and strings suppress completion; module members do not resolve to locals (235.8116ms)
+✔ incomplete input reports errors and never hangs or crashes the server (280.1168ms)
+✔ closing a document clears errors and invalid feature positions return errors (327.7264ms)
+✔ all repository examples parse through the LSP server without executing them (621.5757ms)
+✔ bilingual declarations complete, hover, resolve definitions, and expose both symbols (264.0194ms)
+✔ bilingual aliases respect shadowing and malformed declarations produce diagnostics (234.3745ms)
+✔ all native library catalog functions offer both member names without loading native libraries (707.2628ms)
+✔ Chinese prefixes and incomplete member calls complete native aliases and respect receiver shadowing (267.7039ms)
+✔ native returned objects and chained calls infer bilingual method names (644.0442ms)
+✔ 攝影機提供繁體中文補全且不重複列出單一名稱 (172.4941ms)
+✔ script-library aliases resolve from disk and unsaved buffers without executing the library (357.0118ms)
+ℹ tests 18
+ℹ suites 0
+ℹ pass 18
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 6170.4754

@@ -1,0 +1,13 @@
+  Determining projects to restore...
+  Restored C:\OfficialProjects\AquariusLangTW\AquariusCore\AquariusCore.csproj (in 76 ms).
+  Restored C:\OfficialProjects\AquariusLangTW\AquariusPackaging\AquariusPackaging.csproj (in 78 ms).
+  Restored C:\OfficialProjects\AquariusLangTW\AquariusDesktop\AquariusDesktop.csproj (in 137 ms).
+  4 of 7 projects are up-to-date for restore.
+  AquariusCore -> C:\OfficialProjects\AquariusLangTW\AquariusCore\bin\Release\net8.0\AquariusCore.dll
+  AquariusPackaging -> C:\OfficialProjects\AquariusLangTW\AquariusPackaging\bin\Release\net8.0\AquariusPackaging.dll
+  AquariusBuild -> C:\OfficialProjects\AquariusLangTW\AquariusBuild\bin\Release\net8.0\AquariusBuild.dll
+  AquariusAndroid -> C:\OfficialProjects\AquariusLangTW\AquariusAndroid\bin\Release\net8.0\AquariusAndroid.dll
+  AquariusDesktop -> C:\OfficialProjects\AquariusLangTW\AquariusDesktop\bin\Release\net8.0\win-x64\AquariusDesktop.dll
+  AquariusWebCompiler -> C:\OfficialProjects\AquariusLangTW\AquariusWebCompiler\bin\Release\net8.0\win-x64\AquariusWebCompiler.dll
+  AquariusCli -> C:\OfficialProjects\AquariusLangTW\AquariusCli\bin\Release\net8.0\win-x64\aqua.dll
+  AquariusCli -> C:\OfficialProjects\AquariusLangTW\dist\releases\AquariusCompiler-win-x64-20261015-portable-architecture-final\aqua\

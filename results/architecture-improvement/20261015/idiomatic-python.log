@@ -1,0 +1,21 @@
+warmups round 1/1 complete
+samples round 1/9 complete
+samples round 2/9 complete
+samples round 3/9 complete
+samples round 4/9 complete
+samples round 5/9 complete
+samples round 6/9 complete
+samples round 7/9 complete
+samples round 8/9 complete
+samples round 9/9 complete
+fibonacci: Aquarius 7.1387 ms, idiomatic Python 26.2430 ms, ratio 0.272
+ackermann: Aquarius 19.9531 ms, idiomatic Python 11.2286 ms, ratio 1.777
+sieve: Aquarius 1.5346 ms, idiomatic Python 1.2040 ms, ratio 1.275
+quicksort: Aquarius 3.2856 ms, idiomatic Python 1.5234 ms, ratio 2.157
+matrix: Aquarius 6.7176 ms, idiomatic Python 9.5430 ms, ratio 0.704
+mandelbrot: Aquarius 14.4129 ms, idiomatic Python 20.3413 ms, ratio 0.709
+nqueens: Aquarius 8.4719 ms, idiomatic Python 3.6064 ms, ratio 2.349
+binary_trees: Aquarius 21.4864 ms, idiomatic Python 8.0297 ms, ratio 2.676
+spectral_norm: Aquarius 21.2895 ms, idiomatic Python 14.3480 ms, ratio 1.484
+collatz: Aquarius 55.5301 ms, idiomatic Python 82.2437 ms, ratio 0.675
+Geometric mean Aquarius/idiomatic Python: 1.1536

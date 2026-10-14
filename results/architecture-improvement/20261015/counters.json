@@ -1,0 +1,275 @@
+{
+  "method": "One fresh execution per preserved/new artifact on the final host. Minimal builtins preserve array-copy behavior. Counters run separately from all production timing samples; heap bytes are guest heap high-water, not cumulative allocation.",
+  "rows": {
+    "ackermann/before": {
+      "result": "509",
+      "valid": true,
+      "counters": {
+        "aqua_heap_bytes": 369296
+      },
+      "run_entries": 15,
+      "host_imports": {
+        "service": 6
+      },
+      "numeric_adapters": 0
+    },
+    "binary_trees/before": {
+      "result": "65528",
+      "valid": true,
+      "counters": {
+        "aqua_heap_bytes": 2107984
+      },
+      "run_entries": 8,
+      "host_imports": {
+        "service": 6
+      },
+      "numeric_adapters": 0
+    },
+    "collatz/before": {
+      "result": "849666",
+      "valid": true,
+      "counters": {
+        "aqua_heap_bytes": 2032
+      },
+      "run_entries": 79,
+      "host_imports": {
+        "service": 6
+      },
+      "numeric_adapters": 0
+    },
+    "fibonacci/before": {
+      "result": "317811",
+      "valid": true,
+      "counters": {
+        "aqua_heap_bytes": 21536
+      },
+      "run_entries": 63,
+      "host_imports": {
+        "service": 6
+      },
+      "numeric_adapters": 0
+    },
+    "mandelbrot/before": {
+      "result": "129059",
+      "valid": true,
+      "counters": {
+        "aqua_heap_bytes": 2368
+      },
+      "run_entries": 13,
+      "host_imports": {
+        "service": 6
+      },
+      "numeric_adapters": 0
+    },
+    "matrix/before": {
+      "result": "545940",
+      "valid": true,
+      "counters": {
+        "aqua_heap_bytes": 70896
+      },
+      "run_entries": 5,
+      "host_imports": {
+        "service": 6
+      },
+      "numeric_adapters": 0
+    },
+    "nqueens/before": {
+      "result": "92",
+      "valid": true,
+      "counters": {
+        "aqua_heap_bytes": 14480
+      },
+      "run_entries": 7,
+      "host_imports": {
+        "service": 6
+      },
+      "numeric_adapters": 0
+    },
+    "quicksort/before": {
+      "result": "616973",
+      "valid": true,
+      "counters": {
+        "aqua_heap_bytes": 63744
+      },
+      "run_entries": 4,
+      "host_imports": {
+        "service": 6
+      },
+      "numeric_adapters": 0
+    },
+    "sieve/before": {
+      "result": "1229",
+      "valid": true,
+      "counters": {
+        "aqua_heap_bytes": 267104
+      },
+      "run_entries": 2,
+      "host_imports": {
+        "service": 6
+      },
+      "numeric_adapters": 0
+    },
+    "spectral_norm/before": {
+      "result": "1.6236011690579908",
+      "valid": true,
+      "counters": {
+        "aqua_heap_bytes": 9616
+      },
+      "run_entries": 25,
+      "host_imports": {
+        "service": 6
+      },
+      "numeric_adapters": 0
+    },
+    "ackermann/after": {
+      "result": "509",
+      "valid": true,
+      "counters": {
+        "aqua_heap_bytes": 369328,
+        "aqua_numeric_fast_calls": 0,
+        "aqua_numeric_fallback_calls": 1,
+        "aqua_numeric_depth_fallbacks": 1
+      },
+      "run_entries": 15,
+      "host_imports": {
+        "service": 6
+      },
+      "numeric_adapters": 1
+    },
+    "binary_trees/after": {
+      "result": "65528",
+      "valid": true,
+      "counters": {
+        "aqua_heap_bytes": 2108016,
+        "aqua_numeric_fast_calls": 0,
+        "aqua_numeric_fallback_calls": 0,
+        "aqua_numeric_depth_fallbacks": 0
+      },
+      "run_entries": 8,
+      "host_imports": {
+        "service": 6
+      },
+      "numeric_adapters": 0
+    },
+    "collatz/after": {
+      "result": "849666",
+      "valid": true,
+      "counters": {
+        "aqua_heap_bytes": 2064,
+        "aqua_numeric_fast_calls": 0,
+        "aqua_numeric_fallback_calls": 0,
+        "aqua_numeric_depth_fallbacks": 0
+      },
+      "run_entries": 79,
+      "host_imports": {
+        "service": 6
+      },
+      "numeric_adapters": 0
+    },
+    "fibonacci/after": {
+      "result": "317811",
+      "valid": true,
+      "counters": {
+        "aqua_heap_bytes": 19408,
+        "aqua_numeric_fast_calls": 725,
+        "aqua_numeric_fallback_calls": 740,
+        "aqua_numeric_depth_fallbacks": 0
+      },
+      "run_entries": 55,
+      "host_imports": {
+        "service": 6
+      },
+      "numeric_adapters": 1
+    },
+    "mandelbrot/after": {
+      "result": "129059",
+      "valid": true,
+      "counters": {
+        "aqua_heap_bytes": 2400,
+        "aqua_numeric_fast_calls": 0,
+        "aqua_numeric_fallback_calls": 0,
+        "aqua_numeric_depth_fallbacks": 0
+      },
+      "run_entries": 13,
+      "host_imports": {
+        "service": 6
+      },
+      "numeric_adapters": 0
+    },
+    "matrix/after": {
+      "result": "545940",
+      "valid": true,
+      "counters": {
+        "aqua_heap_bytes": 70928,
+        "aqua_numeric_fast_calls": 0,
+        "aqua_numeric_fallback_calls": 0,
+        "aqua_numeric_depth_fallbacks": 0
+      },
+      "run_entries": 5,
+      "host_imports": {
+        "service": 6
+      },
+      "numeric_adapters": 0
+    },
+    "nqueens/after": {
+      "result": "92",
+      "valid": true,
+      "counters": {
+        "aqua_heap_bytes": 14512,
+        "aqua_numeric_fast_calls": 0,
+        "aqua_numeric_fallback_calls": 0,
+        "aqua_numeric_depth_fallbacks": 0
+      },
+      "run_entries": 7,
+      "host_imports": {
+        "service": 6
+      },
+      "numeric_adapters": 0
+    },
+    "quicksort/after": {
+      "result": "616973",
+      "valid": true,
+      "counters": {
+        "aqua_heap_bytes": 63776,
+        "aqua_numeric_fast_calls": 0,
+        "aqua_numeric_fallback_calls": 0,
+        "aqua_numeric_depth_fallbacks": 0
+      },
+      "run_entries": 4,
+      "host_imports": {
+        "service": 6
+      },
+      "numeric_adapters": 0
+    },
+    "sieve/after": {
+      "result": "1229",
+      "valid": true,
+      "counters": {
+        "aqua_heap_bytes": 267136,
+        "aqua_numeric_fast_calls": 0,
+        "aqua_numeric_fallback_calls": 0,
+        "aqua_numeric_depth_fallbacks": 0
+      },
+      "run_entries": 2,
+      "host_imports": {
+        "service": 6
+      },
+      "numeric_adapters": 0
+    },
+    "spectral_norm/after": {
+      "result": "1.6236011690579908",
+      "valid": true,
+      "counters": {
+        "aqua_heap_bytes": 8928,
+        "aqua_numeric_fast_calls": 144000,
+        "aqua_numeric_fallback_calls": 0,
+        "aqua_numeric_depth_fallbacks": 0
+      },
+      "run_entries": 23,
+      "host_imports": {
+        "service": 6
+      },
+      "numeric_adapters": 1
+    }
+  }
+}

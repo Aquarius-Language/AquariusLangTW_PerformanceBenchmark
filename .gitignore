@@ -1,4 +1,5 @@
 __pycache__/
 *.pyc
 .benchmark-work/
+results/architecture-improvement/**/source-before/runtime-pack/host.exe
 

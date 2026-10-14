@@ -1,0 +1,21 @@
+{
+  "original_started_at": "2026-10-14T16:47:08.330679+08:00",
+  "original_runtime": {
+    "available": true,
+    "executable": "C:\\OfficialProjects\\AquariusLangTW\\dist\\releases\\AquariusCompiler-win-x64-20261014-164034-81083bd1\\aqua\\aqua.exe",
+    "executable_sha256": "376df02e58e999333cafa8acd9cedf0bbd323032d27aee5b6bc2e6aeb55476a1",
+    "benchmark_timer": "目前時間() / currentTime() (monotonic milliseconds)",
+    "version": "No version flag; see binary fingerprint and release directory",
+    "release_directory": "C:\\OfficialProjects\\AquariusLangTW\\dist\\releases\\AquariusCompiler-win-x64-20261014-164034-81083bd1\\aqua",
+    "backend": "compiled-wasm",
+    "assemblies_sha256": {
+      "AquariusCore.dll": "18504d10e2d0af0407419c673867a39942a2fe913bbcda5106756c6fe05838da",
+      "AquariusDesktop.dll": "7c91c86de63a43897bfe3b5cad684b91a0fa9cd9f18118095f13299b31e390c7",
+      "Wasmtime.Dotnet.dll": "ba2a630c87c6febfadbdf8670907ccbb024453e8197361d315fb1f7041c746f0",
+      "wasmtime.dll": "19b3880fbb92f1826c58ac9f5e2a472692b5fc3d012a1a7a41983ccf77544607"
+    }
+  },
+  "original_result_directory": "C:\\OfficialProjects\\AquariusLang_PerformanceBenchmark\\results\\20261014-164708-330679",
+  "readme_sha256": "3a99db81e1fdc3e40128c40ded5f57f3269f7d882bde3ebc680d35c02e981fb8",
+  "latest_sha256": "b288e125a66495fb7296ed01adcca5112a9518c6ea4f3389b2b07b1f8df4afa3"
+}

@@ -1,0 +1,22 @@
+{
+  "paired_speedup": 1.7553630372246376,
+  "published_speedup": 1.770551325796606,
+  "paired_time_reduction_percent": 43.03172740944369,
+  "paired_after_over_python_time": 0.7210523141387493,
+  "idiomatic_after_over_python_time": 1.1535948064454635,
+  "test_pass_counts": {
+    "Complete language suite (all native/graphics flags enabled; serialized collections)": 1627,
+    "Browser/WebAssembly suite": 309,
+    "Language server suite": 18,
+    "Final application host and scalar subset (additional rerun)": 52,
+    "Benchmark harness with real compiler integration": 15
+  },
+  "validated_executions": {
+    "standard": 300,
+    "paired": 400,
+    "idiomatic_diagnosis": 250,
+    "counter_profile": 20
+  },
+  "source_manifest_verified": true,
+  "original_backup_verified": true
+}
