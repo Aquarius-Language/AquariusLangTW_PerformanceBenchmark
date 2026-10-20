@@ -109,12 +109,14 @@ class HarnessTests(unittest.TestCase):
                                    "--profile", "smoke", "--benchmarks", "fibonacci", "--warmups", "0",
                                    "--repetitions", "1", "--aquarius", str(path / "missing-runtime.exe"),
                                    "--node", str(path / "missing-node.exe"),
+                                   "--dotnet", str(path / "missing-dotnet.exe"),
                                    "--output-dir", str(path / "results"), "--readme", str(path / "README.md")],
                                   capture_output=True, text=True, timeout=30)
             self.assertEqual(proc.returncode, 1, proc.stderr)
             report = json.loads((path / "results/latest.json").read_text(encoding="utf-8"))
             self.assertEqual(report["cases"]["fibonacci/aquarius"]["summary"]["status"], "unavailable")
             self.assertEqual(report["cases"]["fibonacci/python"]["summary"]["status"], "ok")
+            self.assertEqual(report["cases"]["fibonacci/csharp"]["summary"]["status"], "unavailable")
             self.assertIn("無法使用", generate_readme(report))
             self.assertIsNone(composite_scores(report))
             self.assertIsNone(report["scores"])
@@ -123,6 +125,13 @@ class HarnessTests(unittest.TestCase):
                             str(path / "results/latest.json"), "--readme", str(path / "README.md")],
                            check=True, capture_output=True, timeout=30)
             self.assertEqual((path / "README.md").read_bytes(), before)
+            # Saved reports from before C# was added still render and score only
+            # the languages that were actually measured.
+            del report["runtimes"]["csharp"]
+            del report["cases"]["fibonacci/csharp"]
+            legacy_readme = generate_readme(report)
+            self.assertTrue(legacy_readme.startswith("# 星泉、Python、Node.js 桌面執行效能評比"))
+            self.assertNotIn("C#", legacy_readme)
 
     def test_composite_score_uses_equal_weight_geometric_mean(self):
         report = {"benchmarks": {"first": {}, "second": {}}, "cases": {}}
@@ -139,9 +148,9 @@ class HarnessTests(unittest.TestCase):
         self.assertIsNone(composite_scores(report))
 
     def test_fastest_language_is_always_normalized_to_100(self):
-        for fastest in ["node", "aquarius", "python"]:
+        for fastest in ["node", "aquarius", "python", "csharp"]:
             with self.subTest(fastest=fastest):
-                times = {"python": 10, "node": 20, "aquarius": 40}
+                times = {"python": 10, "node": 20, "aquarius": 40, "csharp": 30}
                 times[fastest] = 5
                 report = {"benchmarks": {"first": {}}, "cases": {
                     f"first/{language}": {"summary": {"status": "ok", "median_ms": duration}}
@@ -151,6 +160,22 @@ class HarnessTests(unittest.TestCase):
                 self.assertEqual(scores[fastest], 100)
                 for language, duration in times.items():
                     self.assertAlmostEqual(scores[language], 100 * 5 / duration)
+
+    def test_four_language_scores_require_every_csharp_case(self):
+        report = {"benchmarks": {"first": {}, "second": {}},
+                  "runtimes": {language: {} for language in ["aquarius", "python", "node", "csharp"]},
+                  "cases": {}}
+        for name, factor in [("first", 1), ("second", 100)]:
+            for language, duration in {"python": 10, "node": 5, "aquarius": 40, "csharp": 20}.items():
+                report["cases"][f"{name}/{language}"] = {
+                    "summary": {"status": "ok", "median_ms": duration * factor}}
+        scores = composite_scores(report)
+        self.assertAlmostEqual(scores["csharp"], 25)
+        self.assertEqual(set(scores), set(report["runtimes"]))
+        report["cases"]["second/csharp"]["summary"]["status"] = "failed"
+        self.assertIsNone(composite_scores(report))
+        del report["cases"]["second/csharp"]
+        self.assertIsNone(composite_scores(report))
 
 
 if __name__ == "__main__":

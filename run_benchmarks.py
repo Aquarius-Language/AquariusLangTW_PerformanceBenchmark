@@ -27,10 +27,11 @@ from readme_report import composite_scores, generate_readme
 
 ROOT = Path(__file__).resolve().parent
 LANGUAGES = {"aquarius": ("AquariusLang", ".aqua"), "python": ("Python", ".py"),
-             "node": ("Node.js", ".js")}
+             "node": ("Node.js", ".js"), "csharp": ("C#", ".cs")}
 TIMERS = {"aquarius": "目前時間() / currentTime() (monotonic milliseconds)",
           "python": "time.perf_counter_ns() (nanoseconds / 1e6)",
-          "node": "process.hrtime.bigint() (nanoseconds / 1e6)"}
+          "node": "process.hrtime.bigint() (nanoseconds / 1e6)",
+          "csharp": "System.Diagnostics.Stopwatch.GetTimestamp() (ticks * 1000 / Frequency)"}
 
 
 def sha256(path):
@@ -77,6 +78,23 @@ def resolve_executable(override, names):
     return None
 
 
+def resolve_dotnet(override=None):
+    """Prefer a host with an SDK, including the standard per-user installation."""
+    host = "dotnet.exe" if os.name == "nt" else "dotnet"
+    candidates = [override] if override else ["dotnet", str(Path.home() / ".dotnet" / host)]
+    if not override and os.environ.get("DOTNET_ROOT"):
+        candidates.insert(1, str(Path(os.environ["DOTNET_ROOT"]) / host))
+    fallback = None
+    for candidate in candidates:
+        executable = resolve_executable(candidate, [])
+        if executable:
+            fallback = fallback or executable
+            sdks = command_output([executable, "--list-sdks"]) or ""
+            if any(int(major) >= 8 for major in re.findall(r"^(\d+)\.", sdks, re.M)):
+                return executable
+    return fallback
+
+
 def runtime_info(language, executable):
     if executable is None:
         return {"available": False, "error": "Executable not found; use the explicit runtime option."}
@@ -91,6 +109,13 @@ def runtime_info(language, executable):
             path = Path(executable).with_name(filename)
             if path.is_file():
                 info.setdefault("assemblies_sha256", {})[filename] = sha256(path)
+    elif language == "csharp":
+        info["sdks"] = command_output([executable, "--list-sdks"]) or ""
+        info["runtimes"] = command_output([executable, "--list-runtimes"]) or ""
+        info.update(backend="dotnet-jit", target_framework="net8.0", build_configuration="Release")
+        if not any(int(major) >= 8 for major in re.findall(r"^(\d+)\.", info["sdks"], re.M)):
+            info.update(available=False, error="A .NET 8+ SDK is required; use --dotnet with an SDK installation.")
+        info["version"] = "SDKs: " + (info["sdks"] or "Unavailable") + "\nRuntimes: " + (info["runtimes"] or "Unavailable")
     else:
         info["version"] = command_output([executable, "--version"]) or "Unavailable"
     return info
@@ -218,6 +243,8 @@ def decode(data):
 def summarize(record, repetitions):
     if record.get("unavailable"):
         return {"status": "unavailable"}
+    if record.get("build", {}).get("error"):
+        return {"status": "failed"}
     if any(sample["status"] != "ok" for sample in record["warmups"] + record["samples"]):
         return {"status": "failed"}
     if len(record["samples"]) != repetitions:
@@ -274,6 +301,35 @@ def timeout_value(value):
     return parsed
 
 
+def build_csharp(executable, source, stage, timeout):
+    """Compile one workload outside sample timing, retaining build diagnostics."""
+    project = source.parent / "Benchmark.csproj"
+    for filename in ("Benchmark.csproj", "NuGet.Config"):
+        shutil.copyfile(ROOT / "benchmarks" / "csharp" / filename, source.parent / filename)
+    output = source.parent / "out"
+    command = [executable, "build", str(project), "--configuration", "Release",
+               "--output", str(output), "--nologo", "--verbosity", "quiet",
+               f"-p:BenchmarkSource={source.name}", "-p:UseSharedCompilation=false"]
+    env = {**os.environ, "DOTNET_CLI_HOME": str(stage / "dotnet-home"),
+           "DOTNET_CLI_TELEMETRY_OPTOUT": "1", "DOTNET_SKIP_FIRST_TIME_EXPERIENCE": "1",
+           "DOTNET_NOLOGO": "1", "DOTNET_CLI_WORKLOAD_UPDATE_NOTIFY_DISABLE": "true"}
+    begin = time.perf_counter_ns()
+    build = {"command": command, "configuration": "Release", "target_framework": "net8.0"}
+    assembly = output / "Benchmark.dll"
+    try:
+        proc = subprocess.run(command, cwd=stage, env=env, capture_output=True, text=True,
+                              encoding="utf-8", errors="replace", timeout=timeout, stdin=subprocess.DEVNULL)
+        build.update(exit_code=proc.returncode, stdout=proc.stdout, stderr=proc.stderr)
+        if proc.returncode != 0 or not assembly.is_file():
+            build["error"] = "C# Release build failed; see build stdout/stderr."
+    except subprocess.TimeoutExpired as error:
+        build.update(error=f"C# build exceeded {timeout:g} seconds", stdout=decode(error.stdout), stderr=decode(error.stderr))
+    except OSError as error:
+        build.update(error=str(error), stdout="", stderr="")
+    build["elapsed_ms"] = (time.perf_counter_ns() - begin) / 1e6
+    return build, assembly
+
+
 def main(argv=None):
     manifest_path = ROOT / "benchmarks.json"
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
@@ -288,6 +344,7 @@ def main(argv=None):
     parser.add_argument("--aquarius", help="aqua compiler executable (defaults to searching PATH); builds Wasm before timing")
     parser.add_argument("--python", default=sys.executable, help="Python executable (defaults to this interpreter)")
     parser.add_argument("--node", help="Node.js executable")
+    parser.add_argument("--dotnet", help=".NET SDK host executable for C# (net8.0, Release)")
     parser.add_argument("--output-dir", type=Path, default=ROOT / "results")
     parser.add_argument("--readme", type=Path, default=ROOT / "README.md")
     parser.add_argument("--report-only", type=Path, help="Generate README from a saved JSON report, without executing scripts")
@@ -309,7 +366,8 @@ def main(argv=None):
     directory = args.output_dir.resolve() / started.strftime("%Y%m%d-%H%M%S-%f")
     executables = {"aquarius": resolve_executable(args.aquarius, ["aqua.exe", "aqua"]),
                    "python": resolve_executable(args.python, []),
-                   "node": resolve_executable(args.node, ["node"])}
+                   "node": resolve_executable(args.node, ["node"]),
+                   "csharp": resolve_dotnet(args.dotnet)}
     report = {"schema_version": 2, "started_at": started.isoformat(),
               "config": {"profile": args.profile, "repetitions": args.repetitions, "warmups": args.warmups,
                          "timeout_seconds": args.timeout, "seed": args.seed, "timezone": args.timezone, "aquarius_mode": "precompiled",
@@ -321,6 +379,8 @@ def main(argv=None):
               "source_sha256": {p.name: sha256(p) for p in (manifest_path, Path(__file__), ROOT / "reference.py", ROOT / "readme_report.py")},
               "artifacts": {"json": str(directory / "results.json"),
                             "summary_csv": str(directory / "summary.csv"), "samples_csv": str(directory / "samples.csv")}}
+    report["source_sha256"].update({f"benchmarks/csharp/{name}": sha256(ROOT / "benchmarks" / "csharp" / name)
+                                    for name in ("Benchmark.csproj", "NuGet.Config")})
     rng = random.Random(args.seed)
     work_root = ROOT / ".benchmark-work"
     if not work_root.resolve().is_relative_to(ROOT):
@@ -339,6 +399,8 @@ def main(argv=None):
                 if count != 1:
                     raise ValueError(f"Expected one benchmark_n declaration in {source}")
                 target = stage / lang / source.name
+                if lang == "csharp":
+                    target = stage / lang / name / source.name
                 target.parent.mkdir(parents=True, exist_ok=True)
                 target.write_text(text, encoding="utf-8")
                 exe = executables[lang]
@@ -356,12 +418,19 @@ def main(argv=None):
                         raise RuntimeError(f"Wasm build failed for {name}: {build.stderr}")
                     record["wasm_sha256"] = sha256(wasm)
                     record["command"] = [exe, "run", str(wasm)]
-                if not exe:
+                if not report["runtimes"][lang]["available"]:
                     record["unavailable"] = report["runtimes"][lang]["error"]
+                    record["command"] = None
+                elif lang == "csharp":
+                    record["build"], assembly = build_csharp(exe, target, stage, args.timeout)
+                    record["command"] = None
+                    if not record["build"].get("error"):
+                        record["assembly_sha256"] = sha256(assembly)
+                        record["command"] = [exe, str(assembly)]
                 report["cases"][f"{name}/{lang}"] = record
         for phase, rounds in [("warmups", args.warmups), ("samples", args.repetitions)]:
             for round_number in range(1, rounds + 1):
-                keys = [key for key, record in report["cases"].items() if not record.get("unavailable")]
+                keys = [key for key, record in report["cases"].items() if record["command"]]
                 rng.shuffle(keys)
                 for key in keys:
                     record = report["cases"][key]

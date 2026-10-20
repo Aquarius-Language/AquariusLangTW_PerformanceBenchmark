@@ -1,5 +1,7 @@
 __pycache__/
 *.pyc
 .benchmark-work/
+benchmarks/csharp/bin/
+benchmarks/csharp/obj/
 results/architecture-improvement/**/source-before/runtime-pack/host.exe
 

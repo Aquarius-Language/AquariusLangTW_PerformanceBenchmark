@@ -2,7 +2,7 @@
 import math
 from itertools import combinations
 
-LANGUAGES = {"aquarius": "星泉", "python": "Python", "node": "Node.js"}
+LANGUAGES = {"aquarius": "星泉", "python": "Python", "node": "Node.js", "csharp": "C#"}
 WORKLOADS = {
     "fibonacci": ("遞迴費波那契", "使用樸素遞迴，不使用記憶化。"),
     "ackermann": ("阿克曼函數", "計算 A(3, n)，測試巢狀遞迴呼叫。"),
@@ -18,18 +18,27 @@ WORKLOADS = {
 STATUS = {"ok": "通過", "failed": "失敗", "incomplete": "未完成", "unavailable": "無法使用"}
 
 
+def report_languages(report):
+    """Keep old reports usable without inventing C# measurements for them."""
+    present = report.get("runtimes")
+    if present is None:
+        present = {key.rsplit("/", 1)[-1] for key in report["cases"]}
+    return {language: title for language, title in LANGUAGES.items() if language in present}
+
+
 def composite_scores(report):
     """各演算法的相對速度等權重取幾何平均，再將最快語言正規化為 100。"""
-    if not report["benchmarks"]:
+    languages = report_languages(report)
+    if not report["benchmarks"] or "python" not in languages:
         return None
     for name in report["benchmarks"]:
-        for language in LANGUAGES:
-            summary = report["cases"][f"{name}/{language}"]["summary"]
+        for language in languages:
+            summary = report["cases"].get(f"{name}/{language}", {}).get("summary", {})
             value = summary.get("median_ms", 0)
-            if summary["status"] != "ok" or not math.isfinite(value) or value <= 0:
+            if summary.get("status") != "ok" or not math.isfinite(value) or value <= 0:
                 return None
     log_speeds = {}
-    for language in LANGUAGES:
+    for language in languages:
         log_ratios = [math.log(report["cases"][f"{name}/python"]["summary"]["median_ms"]) -
                       math.log(report["cases"][f"{name}/{language}"]["summary"]["median_ms"])
                       for name in report["benchmarks"]]
@@ -44,18 +53,21 @@ def md(value):
 
 def generate_readme(report):
     config, env = report["config"], report["environment"]
+    languages = report_languages(report)
+    has_csharp = "csharp" in languages
+    language_count = f"{len(languages)} 種語言"
     scores = composite_scores(report)
     internal_timing = config.get("timing") == "in-process"
     timing_description = ("計時採用各語言程序內的單調計時器，涵蓋資料初始化與演算法／校驗值計算，排除程序啟動、原始碼／Wasm 載入與初始編譯、輸出。"
                           if internal_timing else "此歷史報告採用程序外計時，包含程序啟動、載入與輸出；不能與程序內計時結果直接比較。")
-    lines = ["# 星泉、Python、Node.js 桌面執行效能評比", ""]
+    lines = ["# " + "、".join(languages.values()) + " 桌面執行效能評比", ""]
     if scores:
         ranking = sorted(scores, key=scores.get, reverse=True)
-        score_text = "、".join(f"{LANGUAGES[lang]} {scores[lang]:.2f} 分" for lang in ranking)
+        score_text = "、".join(f"{languages[lang]} {scores[lang]:.2f} 分" for lang in ranking)
         comparisons = "；".join(
-            f"{LANGUAGES[faster]} 的綜合速度是 {LANGUAGES[slower]} 的 {scores[faster] / scores[slower]:.2f} 倍"
+            f"{languages[faster]} 的綜合速度是 {languages[slower]} 的 {scores[faster] / scores[slower]:.2f} 倍"
             for faster, slower in combinations(ranking, 2))
-        speed_columns = " | ".join(f"相對 {LANGUAGES[language]} 的速度" for language in ranking)
+        speed_columns = " | ".join(f"相對 {languages[language]} 的速度" for language in ranking)
         lines += [f"**本次綜合效能：{score_text}（越高越快）。**", "",
                   f"綜合速度兩兩比較：{comparisons}。", "",
                   f"將本次 {len(report['benchmarks'])} 項演算法的相對速度等權重取幾何平均，再以最快語言為 100 分。"
@@ -66,23 +78,25 @@ def generate_readme(report):
                   "| ---: | --- | ---: | " + " | ".join("---:" for _ in ranking) + " |"]
         for place, language in enumerate(ranking, 1):
             speeds = " | ".join(f"{scores[language] / scores[baseline]:.3f} 倍" for baseline in ranking)
-            lines.append(f"| {place} | {LANGUAGES[language]} | {scores[language]:.2f} | {speeds} |")
+            lines.append(f"| {place} | {languages[language]} | {scores[language]:.2f} | {speeds} |")
     else:
-        lines += ["**本次資料不足以計算三種語言的綜合分數。** 至少一項測試失敗、未完成或執行環境無法使用；"
+        lines += [f"**本次資料不足以計算{language_count}的綜合分數。** 至少一項測試失敗、未完成或執行環境無法使用；"
                   "各項測試狀態列於下方。", ""]
     lines += ["", "相對速度 G = 幾何平均（各項 Python 耗時中位數 ÷ 該語言耗時中位數）；"
-              "綜合分數 = 100 × G ÷ 三種語言中最大的 G，因此最高分固定為 100。"
-              "每項演算法權重相同；只有三種語言在所有選定測試都通過時，才計算綜合分數。"
+              f"綜合分數 = 100 × G ÷ {language_count}中最大的 G，因此最高分固定為 100。"
+              f"每項演算法權重相同；只有{language_count}在所有選定測試都通過時，才計算綜合分數。"
               "不同測試組合與輸入規模的分數不可直接比較。", "",
-              "本專案提供十種經典演算法、三十份可獨立執行的腳本，以及負責驗證結果、產生 README 與 JSON／CSV 報告的 Python 主控程式。", "",
+              f"本專案提供十種經典演算法、{len(WORKLOADS) * len(languages)} 份可獨立執行的測試程式，以及負責驗證結果、產生 README 與 JSON／CSV 報告的 Python 主控程式。", "",
               "## 執行方式", "",
-              "需求：Python 3.10 以上、Node.js，以及支援 `目前時間()`／`currentTime()` 的星泉 Wasm 編譯器（`aqua` 與隨附相依檔案）。"
+              "需求：Python 3.10 以上、Node.js、" + (".NET 8 SDK（含 net8.0 目標套件與執行階段）、" if has_csharp else "") +
+              "以及支援 `目前時間()`／`currentTime()` 的星泉 Wasm 編譯器（`aqua` 與隨附相依檔案）。"
               "不需要安裝 Python 套件或執行 npm install。星泉腳本使用星泉繁體中文版的繁體中文關鍵字與雙語內建函式，"
               "舊版僅支援英文的直譯器無法執行。", "",
               "```powershell", "python run_benchmarks.py", "# 使用較小輸入，快速檢查正確性：",
               "python run_benchmarks.py --profile smoke --repetitions 1 --warmups 0",
               "# 必要時指定執行檔路徑：",
-              'python run_benchmarks.py --aquarius "C:\\Aquarius\\aqua.exe" --node "C:\\Program Files\\nodejs\\node.exe"',
+              'python run_benchmarks.py --aquarius "C:\\Aquarius\\aqua.exe" --node "C:\\Program Files\\nodejs\\node.exe"' +
+              (' --dotnet "C:\\Program Files\\dotnet\\dotnet.exe"' if has_csharp else ''),
               "# 僅執行指定演算法：", "python run_benchmarks.py --benchmarks fibonacci sieve matrix",
               "# 使用既有資料重新產生 README，不重新測量：",
               "python run_benchmarks.py --report-only results/latest.json",
@@ -90,7 +104,11 @@ def generate_readme(report):
               "若 `python` 是尚未設定版本的 pyenv 代理程式，請直接呼叫已安裝的 `python.exe`。"
               "主控程式預設使用自身的 Python 直譯器執行測試，也可用 `--python PATH` 指定其他版本。"
               "它會搜尋目前程序的 PATH；在 Windows 上也會搜尋使用者與系統的最新 PATH，"
-              "因此舊終端工作階段也能找到新加入的星泉路徑。執行環境參數只接受單一執行檔路徑。", "",
+              "因此舊終端工作階段也能找到新加入的星泉路徑。執行環境參數只接受單一執行檔路徑。" +
+              ("C# 會優先選用具有 SDK 的 dotnet，也會搜尋 DOTNET_ROOT 與使用者的 `.dotnet` 目錄；可用 `--dotnet PATH` 指定。" if has_csharp else ""), "",
+              *((["單獨執行 C# 測試（例如篩法）：", "", "```powershell",
+                   "dotnet run --project benchmarks/csharp/Benchmark.csproj --configuration Release -p:BenchmarkSource=sieve.cs",
+                   "```", ""] if has_csharp else [])),
               "主控程式會在暫存目錄建立原始碼副本，只將 `benchmark_n` 的宣告替換為所選輸入規模。"
               "直接執行原始腳本時，採用標準規模。每次測量會建立帶有日期的 `results/` 子目錄，"
               "並重新產生 `results/latest.json` 與 `README.md`。"
@@ -99,14 +117,18 @@ def generate_readme(report):
               "## 測量方法", "",
               ("- 每筆樣本都啟動新的程序，但排名只採用腳本自行回報的 `ELAPSED_MS`。"
                "星泉使用 `目前時間()`（毫秒）、Python 使用 `time.perf_counter_ns()`（奈秒差值 ÷ 1e6）、"
-               "Node.js 使用 `process.hrtime.bigint()`（奈秒差值 ÷ 1e6）。三者皆為單調計時器。"
+               "Node.js 使用 `process.hrtime.bigint()`（奈秒差值 ÷ 1e6）。" +
+               ("C# 使用 `Stopwatch.GetTimestamp()`（刻度差值 × 1000 ÷ Frequency）。" if has_csharp else "") + "所有計時器皆為單調計時器。"
                if internal_timing else "- 此歷史報告的樣本以主控程式 `time.perf_counter_ns()` 測量完整程序經過時間，包含啟動、載入、編譯與輸出。"),
-              ("- 三種語言皆在函式定義完成後、資料初始化前開始計時，並在演算法與校驗值計算完成後、輸出前停止。"
+              (f"- {language_count}皆在函式定義完成後、資料初始化前開始計時，並在演算法與校驗值計算完成後、輸出前停止。"
                "執行中的記憶體配置、垃圾回收及按需 JIT 仍計入。JSON／CSV 的 `elapsed_ms` 為程序內耗時；"
                "`process_elapsed_ms` 另保留完整程序耗時供診斷，不參與統計與排名。"
                if internal_timing else "- 歷史資料保留原始測量值，重新產生報告不會將程序外耗時轉換成程序內耗時。"),
               "- 星泉一律使用 `aqua build` 在測量前建立 Wasm，再執行 `aqua run`；Wasm 生成不計入樣本耗時。"
-              "Python 執行原始碼，Node.js 使用 V8；沒有 NumPy、原生演算法函式庫、工作執行緒或內建排序。",
+              "Python 執行原始碼，Node.js 使用 V8。" +
+              ("C# 以 `dotnet build --configuration Release` 預先編譯為 net8.0 組件，再直接以 `dotnet Benchmark.dll` 執行；"
+               "建置與還原不計時，不使用外部 NuGet 套件。進入 Main 前的初始 JIT 不計時，計時區間內的按需 JIT 仍計入。" if has_csharp else "") +
+              "沒有 NumPy、原生演算法函式庫、工作執行緒或內建排序。",
               "- 暖身程序的樣本會捨棄，作用是預熱作業系統檔案快取；不同程序之間不保留 JIT 或 VM 狀態。"
               "每輪以記錄的隨機種子打亂所有演算法／語言組合，再依序執行。",
               "- 每筆暖身與正式樣本都必須符合未納入計時的 Python 參考答案。整數必須完全相同；"
@@ -116,7 +138,8 @@ def generate_readme(report):
               "- 星泉的整數 `/` 會截斷小數，Python `//` 與 Node.js `Math.trunc` 使用相對應的運算。"
               "浮點測試採用雙精度（星泉使用 `d` 字面值）；標準輸入的整數中間值均在帶正負號的 32 位元範圍內。",
               "- 星泉的 `push`／`加入` 回傳新陣列並保留快照語意；目前 Wasm 執行階段可共用底層儲存，寫入時才視需要複製。"
-              "Python 與 Node.js 對應的建構步驟使用複製後追加，因此其初始化可能包含平方級的複製成本。"
+              "Python、Node.js" + (" 與 C#（`Array.Resize`）" if has_csharp else "") +
+              " 對應的建構步驟使用複製後追加，因此其初始化可能包含平方級的複製成本。"
               "這組測試比較所列腳本的操作，不代表各語言慣用集合建構方式的最佳速度；慣用寫法另見診斷報告。",
               "- 小型工作負載可能受計時器與函式呼叫成本影響；每筆樣本使用新程序，未測量持續暖身後的穩態速度，也不代表所有程式的語言排名。"
               "CPU 頻率、溫度、背景工作與排程雜訊未受控制。未測量程序記憶體用量與 CPU 時間；下方 RAM 為機器配備。", "",
@@ -134,9 +157,11 @@ def generate_readme(report):
               f"- 行程 CPU 親和性遮罩：`{env.get('process_affinity_mask', '未固定／未取得')}`",
               f"- 主控程式診斷計時器解析度：{env['timer_resolution_seconds']:.3g} 秒（非所有語言的計時器解析度）", "",
               "| 執行環境 | 版本／組建 | 執行檔 |", "| --- | --- | --- |"]
-    for lang, title in LANGUAGES.items():
+    for lang, title in languages.items():
         runtime = report["runtimes"][lang]
         version = runtime.get("version", "無法使用：找不到執行檔")
+        if not runtime.get("available"):
+            version = "無法使用：" + runtime.get("error", "找不到執行檔")
         if lang == "aquarius" and runtime.get("available"):
             version = "未提供版本參數；以發行目錄與二進位檔雜湊識別"
         lines.append(f"| {title} | {md(version)} | {md(runtime.get('executable', '無法取得'))} |")
@@ -149,16 +174,17 @@ def generate_readme(report):
     lines += ["", "## 各項效能結果", "",
               "耗時單位為毫秒（ms），越低越快。耗時倍率 = 該語言耗時中位數 ÷ Python 耗時中位數；"
               "小於 1 表示該項測試比 Python 快。此耗時倍率與開頭的速度分數方向相反。", "",
-              "| 演算法 | n | 星泉中位數 | Python 中位數 | Node.js 中位數 | 星泉／Python 耗時倍率 | Node.js／Python 耗時倍率 |",
-              "| --- | ---: | ---: | ---: | ---: | ---: | ---: |"]
+              "| 演算法 | n | " + " | ".join(f"{title} 中位數" for title in languages.values()) + " | " +
+              " | ".join(f"{title}／Python 耗時倍率" for lang, title in languages.items() if lang != "python") + " |",
+              "| --- | ---: | " + " | ".join("---:" for _ in range(2 * len(languages) - 1)) + " |"]
     for name, spec in report["benchmarks"].items():
-        summaries = {lang: report["cases"][f"{name}/{lang}"]["summary"] for lang in LANGUAGES}
+        summaries = {lang: report["cases"][f"{name}/{lang}"]["summary"] for lang in languages}
         cells = [f"{s['median_ms']:.3f}" if s["status"] == "ok" else STATUS.get(s["status"], s["status"]) for s in summaries.values()]
         def ratio(lang):
             s, py = summaries[lang], summaries["python"]
             return f"{s['median_ms'] / py['median_ms']:.2f} 倍" if s["status"] == py["status"] == "ok" else "—"
         lines.append(f"| {WORKLOADS[name][0]} | {spec['n']} | " + " | ".join(cells) +
-                     f" | {ratio('aquarius')} | {ratio('node')} |")
+                     " | " + " | ".join(ratio(lang) for lang in languages if lang != "python") + " |")
     lines += ["", "### 耗時波動", "", "變異係數（CV）= 樣本標準差 ÷ 平均值。"
               "只有一筆樣本時，無法估計波動，以破折號表示。", "",
               "| 演算法 | 語言 | 最小值 ms | 最大值 ms | 標準差 ms | 變異係數 | 有效樣本 |",
@@ -171,12 +197,14 @@ def generate_readme(report):
             values = [f"{summary['min_ms']:.3f}", f"{summary['max_ms']:.3f}",
                       f"{summary['stdev_ms']:.3f}" if config["repetitions"] > 1 else "—",
                       f"{summary['cv_percent']:.1f}%" if config["repetitions"] > 1 else "—"]
-        lines.append(f"| {WORKLOADS[record['benchmark']][0]} | {LANGUAGES[record['language']]} | " +
+        lines.append(f"| {WORKLOADS[record['benchmark']][0]} | {languages[record['language']]} | " +
                      " | ".join(values) + f" | {valid}/{config['repetitions']} |")
     failures = []
     for key, record in report["cases"].items():
         if record.get("unavailable"):
-            failures.append(f"- `{key}`：找不到執行檔，請指定執行環境路徑。")
+            failures.append(f"- `{key}`：{md(record['unavailable'])}")
+        if record.get("build", {}).get("error"):
+            failures.append(f"- `{key}`：{md(record['build']['error'])}")
         for phase in ("warmups", "samples"):
             for index, sample in enumerate(record[phase]):
                 if sample["status"] != "ok":
@@ -191,7 +219,7 @@ def generate_readme(report):
               f"- 原始樣本、輸出、指令、執行順序、環境資訊與執行檔／原始碼雜湊：`{report['artifacts']['json']}`",
               f"- 統計摘要與逐筆樣本 CSV：`{report['artifacts']['summary_csv']}`、`{report['artifacts']['samples_csv']}`",
               "- `benchmarks.json`：標準／快速檢查的輸入規模與工作負載定義。",
-              "- `benchmarks/aquarius/`、`benchmarks/python/`、`benchmarks/node/`：可獨立執行的測試腳本。",
+              "- " + "、".join(f"`benchmarks/{lang}/`" for lang in languages) + "：可獨立執行的測試程式。",
               "- `reference.py`：未納入計時的參考答案；`tests/`：主控程式與參考答案的回歸測試。", "",
               "本 README 由 `run_benchmarks.py` 產生，下次執行時會覆寫。JSON 保留測量當時的原始與暫存腳本、"
               "測試清單、主控程式及參考答案雜湊。指令中的暫存路徑對應當次執行的檔案，測試後會移除。"
