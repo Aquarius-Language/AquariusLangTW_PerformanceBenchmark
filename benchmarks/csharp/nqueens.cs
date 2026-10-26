@@ -27,8 +27,7 @@ static class Benchmark
     static void Main()
     {
         long benchmark_start = Stopwatch.GetTimestamp();
-        int[] board = Array.Empty<int>();
-        for (int i = 0; i < benchmark_n; i++) Array.Resize(ref board, i + 1);
+        int[] board = new int[benchmark_n];
         int benchmark_result = Solve(board, 0);
         double benchmark_elapsed_ms = (Stopwatch.GetTimestamp() - benchmark_start) * 1000.0 / Stopwatch.Frequency;
         Console.WriteLine("RESULT " + benchmark_result.ToString(CultureInfo.InvariantCulture));

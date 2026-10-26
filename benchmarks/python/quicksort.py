@@ -25,7 +25,7 @@ seed = 42
 for i in range(benchmark_n):
     raw = seed * 251 + 17
     seed = raw - (raw // 65536) * 65536
-    values = values + [seed]
+    values.append(seed)
 
 sort(values, 0, benchmark_n - 1)
 checksum = 0

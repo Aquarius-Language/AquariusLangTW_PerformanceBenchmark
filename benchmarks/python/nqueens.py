@@ -17,9 +17,7 @@ def solve(row):
     return count
 
 benchmark_start = perf_counter_ns()
-board = []
-for i in range(benchmark_n):
-    board = board + [0]
+board = [0] * benchmark_n
 
 benchmark_result = solve(0)
 benchmark_elapsed_ms = (perf_counter_ns() - benchmark_start) / 1e6

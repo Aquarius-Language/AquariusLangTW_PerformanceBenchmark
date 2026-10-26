@@ -1,12 +1,13 @@
 "use strict";
 const benchmark_n = 45;
 const benchmark_start = process.hrtime.bigint();
-let a = [], b = [];
+const a = [], b = [];
+for (let i = 0; i < benchmark_n * benchmark_n; i++) { a.push(0); b.push(0); }
 for (let i = 0; i < benchmark_n; i++) {
   for (let j = 0; j < benchmark_n; j++) {
     const x = i + j, y = i * 2 + j;
-    a = a.concat([x - Math.trunc(x / 7) * 7]);
-    b = b.concat([y - Math.trunc(y / 5) * 5]);
+    a[i * benchmark_n + j] = x - Math.trunc(x / 7) * 7;
+    b[i * benchmark_n + j] = y - Math.trunc(y / 5) * 5;
   }
 }
 let checksum = 0;

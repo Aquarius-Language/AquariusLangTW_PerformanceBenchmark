@@ -15,10 +15,8 @@ function multiply(src, dst, transpose) {
   }
 }
 const benchmark_start = process.hrtime.bigint();
-let u = [], v = [], temp = [];
-for (let i = 0; i < benchmark_n; i++) {
-  u = u.concat([1.0]); v = v.concat([0.0]); temp = temp.concat([0.0]);
-}
+const u = [], v = [], temp = [];
+for (let i = 0; i < benchmark_n; i++) { u.push(1.0); v.push(0.0); temp.push(0.0); }
 for (let iteration = 0; iteration < 10; iteration++) {
   multiply(u, temp, false); multiply(temp, v, true);
   multiply(v, temp, false); multiply(temp, u, true);

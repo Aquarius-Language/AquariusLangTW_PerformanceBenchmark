@@ -1,10 +1,7 @@
 from time import perf_counter_ns
 benchmark_n = 10000
 benchmark_start = perf_counter_ns()
-flags = []
-# Copy-and-append matches Aquarius push's allocation semantics.
-for i in range(benchmark_n + 1):
-    flags = flags + [True]
+flags = [True] * (benchmark_n + 1)
 flags[0] = False
 flags[1] = False
 p = 2

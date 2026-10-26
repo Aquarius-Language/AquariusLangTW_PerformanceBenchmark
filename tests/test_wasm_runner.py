@@ -42,7 +42,7 @@ class WasmRunnerTests(unittest.TestCase):
             self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
             report = json.loads((path / 'results/latest.json').read_text(encoding='utf-8'))
             self.assertEqual(report['config']['aquarius_mode'], 'precompiled')
-            self.assertEqual(report['schema_version'], 2)
+            self.assertEqual(report['schema_version'], 3)
             self.assertEqual(report['config']['timing'], 'in-process')
             self.assertEqual(max(report['scores'].values()), 100)
             case = report['cases']['fibonacci/aquarius']

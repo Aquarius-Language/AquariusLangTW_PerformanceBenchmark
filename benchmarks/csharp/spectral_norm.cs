@@ -29,13 +29,8 @@ static class Benchmark
     static void Main()
     {
         long benchmark_start = Stopwatch.GetTimestamp();
-        double[] u = Array.Empty<double>(), v = Array.Empty<double>(), temp = Array.Empty<double>();
-        for (int i = 0; i < benchmark_n; i++)
-        {
-            Array.Resize(ref u, i + 1); u[i] = 1.0;
-            Array.Resize(ref v, i + 1);
-            Array.Resize(ref temp, i + 1);
-        }
+        double[] u = new double[benchmark_n], v = new double[benchmark_n], temp = new double[benchmark_n];
+        Array.Fill(u, 1.0);
         for (int iteration = 0; iteration < 10; iteration++)
         {
             Multiply(u, temp, false); Multiply(temp, v, true);

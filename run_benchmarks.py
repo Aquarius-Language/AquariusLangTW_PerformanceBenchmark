@@ -334,7 +334,7 @@ def main(argv=None):
     manifest_path = ROOT / "benchmarks.json"
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--profile", choices=["standard", "smoke"], default="standard")
+    parser.add_argument("--profile", choices=["standard", "smoke", "large"], default="standard")
     parser.add_argument("--benchmarks", choices=list(manifest), nargs="+", default=list(manifest))
     parser.add_argument("--repetitions", type=positive, default=5)
     parser.add_argument("--warmups", type=nonnegative, default=1)
@@ -368,7 +368,7 @@ def main(argv=None):
                    "python": resolve_executable(args.python, []),
                    "node": resolve_executable(args.node, ["node"]),
                    "csharp": resolve_dotnet(args.dotnet)}
-    report = {"schema_version": 2, "started_at": started.isoformat(),
+    report = {"schema_version": 3, "started_at": started.isoformat(),
               "config": {"profile": args.profile, "repetitions": args.repetitions, "warmups": args.warmups,
                          "timeout_seconds": args.timeout, "seed": args.seed, "timezone": args.timezone, "aquarius_mode": "precompiled",
                          "timing": "in-process", "timing_boundary": "data initialization and computation; startup/compilation/output excluded",

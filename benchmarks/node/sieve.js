@@ -1,9 +1,8 @@
 "use strict";
 const benchmark_n = 10000;
 const benchmark_start = process.hrtime.bigint();
-let flags = [];
-// Copy-and-append matches Aquarius push's allocation semantics.
-for (let i = 0; i <= benchmark_n; i++) flags = flags.concat([true]);
+const flags = [];
+for (let i = 0; i <= benchmark_n; i++) flags.push(true);
 flags[0] = false;
 flags[1] = false;
 let p = 2;

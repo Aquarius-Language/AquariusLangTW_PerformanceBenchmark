@@ -14,8 +14,8 @@ function solve(row) {
   return count;
 }
 const benchmark_start = process.hrtime.bigint();
-let board = [];
-for (let i = 0; i < benchmark_n; i++) board = board.concat([0]);
+const board = [];
+for (let i = 0; i < benchmark_n; i++) board.push(0);
 
 const benchmark_result = solve(0);
 const benchmark_elapsed_ms = Number(process.hrtime.bigint() - benchmark_start) / 1e6;

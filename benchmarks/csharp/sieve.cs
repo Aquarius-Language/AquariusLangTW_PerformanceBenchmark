@@ -9,13 +9,8 @@ static class Benchmark
     static void Main()
     {
         long benchmark_start = Stopwatch.GetTimestamp();
-        bool[] flags = Array.Empty<bool>();
-        // Resize copies the old array, matching the other scripts' copy-and-append.
-        for (int i = 0; i <= benchmark_n; i++)
-        {
-            Array.Resize(ref flags, i + 1);
-            flags[i] = true;
-        }
+        bool[] flags = new bool[benchmark_n + 1];
+        Array.Fill(flags, true);
         flags[0] = false;
         flags[1] = false;
         int p = 2;

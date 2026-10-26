@@ -5,10 +5,11 @@ using System.Globalization;
 static class Benchmark
 {
     static readonly int benchmark_n = 12;
+    static readonly object Zero = 0;
 
     static object[] Build(int depth)
     {
-        if (depth == 0) return new object[] { 0, 0 };
+        if (depth == 0) return new object[] { Zero, Zero };
         return new object[] { Build(depth - 1), Build(depth - 1) };
     }
 

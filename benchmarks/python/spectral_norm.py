@@ -14,11 +14,9 @@ def multiply(src, dst, transpose):
         dst[i] = total
 
 benchmark_start = perf_counter_ns()
-u, v, temp = [], [], []
-for i in range(benchmark_n):
-    u = u + [1.0]
-    v = v + [0.0]
-    temp = temp + [0.0]
+u = [1.0] * benchmark_n
+v = [0.0] * benchmark_n
+temp = [0.0] * benchmark_n
 for iteration in range(10):
     multiply(u, temp, False)
     multiply(temp, v, True)

@@ -1,12 +1,12 @@
 {
-  "fibonacci": {"title": "Recursive Fibonacci", "description": "Naive recursive Fibonacci; no memoization.", "standard": 28, "smoke": 12},
-  "ackermann": {"title": "Ackermann", "description": "Recursive A(3, n), stressing nested function calls.", "standard": 6, "smoke": 3},
-  "sieve": {"title": "Sieve of Eratosthenes", "description": "Count primes up to and including n using a boolean sieve.", "standard": 10000, "smoke": 100},
-  "quicksort": {"title": "Quicksort", "description": "In-place middle-pivot quicksort of a deterministic LCG sequence; validate order and a weighted checksum.", "standard": 2000, "smoke": 50},
-  "matrix": {"title": "Matrix multiplication", "description": "Flat row-major matrices; explicit i/j/k cubic multiplication and sum of all result entries.", "standard": 45, "smoke": 5},
-  "mandelbrot": {"title": "Mandelbrot", "description": "n by n grid on [-2, 1) by [-1, 1), capped at 60 iterations; sum escape iteration counts.", "standard": 80, "smoke": 8},
-  "nqueens": {"title": "N-Queens", "description": "Backtracking with explicit column and diagonal checks; count all solutions.", "standard": 8, "smoke": 5},
-  "binary_trees": {"title": "Binary trees", "description": "Build and recursively count eight complete binary trees of depth n.", "standard": 12, "smoke": 5},
-  "spectral_norm": {"title": "Spectral norm", "description": "Ten power iterations of the implicit benchmark matrix; return squared spectral norm to avoid a library square root.", "standard": 60, "smoke": 8, "relative_tolerance": 1e-9, "absolute_tolerance": 1e-12},
-  "collatz": {"title": "Collatz", "description": "Sum steps to reach 1 for starting integers 1 through n; no memoization.", "standard": 10000, "smoke": 100}
+  "fibonacci": {"title": "Recursive Fibonacci", "description": "Naive recursive Fibonacci; no memoization.", "standard": 28, "smoke": 12, "large": 32},
+  "ackermann": {"title": "Ackermann", "description": "Recursive A(3, n), stressing nested function calls.", "standard": 6, "smoke": 3, "large": 8},
+  "sieve": {"title": "Sieve of Eratosthenes", "description": "Count primes up to and including n using a boolean sieve.", "standard": 10000, "smoke": 100, "large": 200000},
+  "quicksort": {"title": "Quicksort", "description": "In-place middle-pivot quicksort of a deterministic LCG sequence; validate order and a weighted checksum.", "standard": 2000, "smoke": 50, "large": 30000},
+  "matrix": {"title": "Matrix multiplication", "description": "Flat row-major matrices; explicit i/j/k cubic multiplication and sum of all result entries.", "standard": 45, "smoke": 5, "large": 150},
+  "mandelbrot": {"title": "Mandelbrot", "description": "n by n grid on [-2, 1) by [-1, 1), capped at 60 iterations; sum escape iteration counts.", "standard": 80, "smoke": 8, "large": 300},
+  "nqueens": {"title": "N-Queens", "description": "Backtracking with explicit column and diagonal checks; count all solutions.", "standard": 8, "smoke": 5, "large": 10},
+  "binary_trees": {"title": "Binary trees", "description": "Build and recursively count eight complete binary trees of depth n.", "standard": 12, "smoke": 5, "large": 16},
+  "spectral_norm": {"title": "Spectral norm", "description": "Ten power iterations of the implicit benchmark matrix; return squared spectral norm to avoid a library square root.", "standard": 60, "smoke": 8, "large": 250, "relative_tolerance": 1e-9, "absolute_tolerance": 1e-12},
+  "collatz": {"title": "Collatz", "description": "Sum steps to reach 1 for starting integers 1 through n; no memoization.", "standard": 10000, "smoke": 100, "large": 100000}
 }

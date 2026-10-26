@@ -94,6 +94,7 @@ def generate_readme(report):
               "舊版僅支援英文的直譯器無法執行。", "",
               "```powershell", "python run_benchmarks.py", "# 使用較小輸入，快速檢查正確性：",
               "python run_benchmarks.py --profile smoke --repetitions 1 --warmups 0",
+              "# 使用較大輸入，降低 JIT 暖機的影響：", "python run_benchmarks.py --profile large --timeout 300",
               "# 必要時指定執行檔路徑：",
               'python run_benchmarks.py --aquarius "C:\\Aquarius\\aqua.exe" --node "C:\\Program Files\\nodejs\\node.exe"' +
               (' --dotnet "C:\\Program Files\\dotnet\\dotnet.exe"' if has_csharp else ''),
@@ -137,16 +138,22 @@ def generate_readme(report):
               + ("計時輸出必須為有限且大於零的毫秒值；缺少計時值時不會退回程序外計時。" if internal_timing else ""),
               "- 星泉的整數 `/` 會截斷小數，Python `//` 與 Node.js `Math.trunc` 使用相對應的運算。"
               "浮點測試採用雙精度（星泉使用 `d` 字面值）；標準輸入的整數中間值均在帶正負號的 32 位元範圍內。",
-              "- 星泉的 `push`／`加入` 回傳新陣列並保留快照語意；目前 Wasm 執行階段可共用底層儲存，寫入時才視需要複製。"
-              "Python、Node.js" + (" 與 C#（`Array.Resize`）" if has_csharp else "") +
-              " 對應的建構步驟使用複製後追加，因此其初始化可能包含平方級的複製成本。"
-              "這組測試比較所列腳本的操作，不代表各語言慣用集合建構方式的最佳速度；慣用寫法另見診斷報告。",
+              ("- 陣列建構在各語言採用相同的線性成本：星泉使用 `陣列.建立` 預先配置（快速排序以預留容量的 `陣列.追加`），"
+               "Python 使用 `[值] * n`／`append`，Node.js 使用 `push`" + ("，C# 使用 `new T[n]`（必要時 `Array.Fill`）" if has_csharp else "") +
+               "；不使用每次複製整個陣列的追加方式。"
+               if report.get("schema_version", 0) >= 3 else
+               "- 此歷史報告中，Python、Node.js" + (" 與 C#" if has_csharp else "") +
+               " 的陣列建構使用每次複製整個陣列的追加方式（平方級成本），星泉則可能已改用預先配置；"
+               "篩法、快速排序、矩陣、譜範數與 N 皇后的比較因此偏向星泉。"),
+              "- 編譯時機不對稱：星泉的 Wasm 在計時開始前已由 Wasmtime 完整編譯為機器碼；" +
+              ("C#（分層編譯）與 " if has_csharp else "") + "Node.js（V8）的 JIT 編譯與最佳化發生在計時區間內。"
+              "標準規模每項只需數毫秒，這部分成本偏向星泉；`--profile large` 以較大輸入降低此影響，兩種規模的分數不可混用。",
               "- 小型工作負載可能受計時器與函式呼叫成本影響；每筆樣本使用新程序，未測量持續暖身後的穩態速度，也不代表所有程式的語言排名。"
               "CPU 頻率、溫度、背景工作與排程雜訊未受控制。未測量程序記憶體用量與 CPU 時間；下方 RAM 為機器配備。", "",
               "## 測試日期與環境", "",
               f"- 開始時間：{md(report['started_at'])}", f"- 結束時間：{md(report['finished_at'])}",
               f"- 時區：{md(config['timezone'])}",
-              f"- 輸入規模：{'標準' if config['profile'] == 'standard' else '快速檢查'}（`{config['profile']}`）；"
+              f"- 輸入規模：{ {'standard': '標準', 'smoke': '快速檢查', 'large': '大型'}.get(config['profile'], config['profile']) }（`{config['profile']}`）；"
               f"每組 {config['repetitions']} 筆正式樣本、{config['warmups']} 筆捨棄的暖身樣本",
               f"- 排序隨機種子：{config['seed']}；每個程序逾時上限：{config['timeout_seconds']:g} 秒",
               f"- 作業系統：{md(env['os'])}", f"- 架構：{md(env['architecture'])}",

@@ -9,15 +9,13 @@ static class Benchmark
     static void Main()
     {
         long benchmark_start = Stopwatch.GetTimestamp();
-        int[] a = Array.Empty<int>(), b = Array.Empty<int>();
+        int[] a = new int[benchmark_n * benchmark_n], b = new int[benchmark_n * benchmark_n];
         for (int i = 0; i < benchmark_n; i++)
         {
             for (int j = 0; j < benchmark_n; j++)
             {
                 int x = i + j, y = i * 2 + j;
                 int index = i * benchmark_n + j;
-                Array.Resize(ref a, index + 1);
-                Array.Resize(ref b, index + 1);
                 a[index] = x - x / 7 * 7;
                 b[index] = y - y / 5 * 5;
             }

@@ -26,13 +26,12 @@ static class Benchmark
     static void Main()
     {
         long benchmark_start = Stopwatch.GetTimestamp();
-        int[] values = Array.Empty<int>();
+        int[] values = new int[benchmark_n];
         int seed = 42;
         for (int i = 0; i < benchmark_n; i++)
         {
             int raw = seed * 251 + 17;
             seed = raw - raw / 65536 * 65536;
-            Array.Resize(ref values, i + 1);
             values[i] = seed;
         }
         Sort(values, 0, benchmark_n - 1);

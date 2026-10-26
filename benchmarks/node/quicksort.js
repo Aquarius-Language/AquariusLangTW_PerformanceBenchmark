@@ -14,11 +14,12 @@ function sort(a, lo, hi) {
   if (i < hi) sort(a, i, hi);
 }
 const benchmark_start = process.hrtime.bigint();
-let values = [], seed = 42;
+const values = [];
+let seed = 42;
 for (let i = 0; i < benchmark_n; i++) {
   const raw = seed * 251 + 17;
   seed = raw - Math.trunc(raw / 65536) * 65536;
-  values = values.concat([seed]);
+  values.push(seed);
 }
 
 sort(values, 0, benchmark_n - 1);
