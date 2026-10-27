@@ -1,12 +1,12 @@
 變數 benchmark_n: 整數 = 12;
 變數 benchmark_warmups: 整數 = 0;
 變數 benchmark_timed_runs: 整數 = 1;
-# Trees are arrays of arrays, which annotations cannot describe, so the tree functions stay untyped.
-變數 build = 函式(depth) {
+# Trees are arrays of arrays: 陣列 annotates an array whose elements may be any values.
+變數 build = 函式(depth: 整數): 陣列 {
     如果 (depth == 0) { 回傳 [0, 0]; }
     回傳 [build(depth - 1), build(depth - 1)];
 };
-變數 check = 函式(tree, depth) {
+變數 check = 函式(tree: 陣列, depth: 整數): 整數 {
     如果 (depth == 0) { 回傳 1; }
     回傳 1 + check(tree[0], depth - 1) + check(tree[1], depth - 1);
 };
