@@ -23,9 +23,8 @@ static class Benchmark
         if (i < hi) Sort(a, i, hi);
     }
 
-    static void Main()
+    static int BenchmarkRun()
     {
-        long benchmark_start = Stopwatch.GetTimestamp();
         int[] values = new int[benchmark_n];
         int seed = 42;
         for (int i = 0; i < benchmark_n; i++)
@@ -42,6 +41,15 @@ static class Benchmark
             benchmark_result += values[i] * (i + 1);
             benchmark_result -= benchmark_result / 1000003 * 1000003;
         }
+        return benchmark_result;
+    }
+
+    static void Main()
+    {
+        // Untimed warm-up runs, identical in every language.
+        for (int benchmark_warmup = 0; benchmark_warmup < 3; benchmark_warmup++) BenchmarkRun();
+        long benchmark_start = Stopwatch.GetTimestamp();
+        int benchmark_result = BenchmarkRun();
         double benchmark_elapsed_ms = (Stopwatch.GetTimestamp() - benchmark_start) * 1000.0 / Stopwatch.Frequency;
         Console.WriteLine("RESULT " + benchmark_result.ToString(CultureInfo.InvariantCulture));
         Console.WriteLine("ELAPSED_MS " + benchmark_elapsed_ms.ToString("R", CultureInfo.InvariantCulture));

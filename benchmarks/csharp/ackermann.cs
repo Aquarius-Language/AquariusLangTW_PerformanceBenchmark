@@ -13,10 +13,17 @@ static class Benchmark
         return Ack(m - 1, Ack(m, n - 1));
     }
 
+    static int BenchmarkRun()
+    {
+        return Ack(3, benchmark_n);
+    }
+
     static void Main()
     {
+        // Untimed warm-up runs, identical in every language.
+        for (int benchmark_warmup = 0; benchmark_warmup < 3; benchmark_warmup++) BenchmarkRun();
         long benchmark_start = Stopwatch.GetTimestamp();
-        int benchmark_result = Ack(3, benchmark_n);
+        int benchmark_result = BenchmarkRun();
         double benchmark_elapsed_ms = (Stopwatch.GetTimestamp() - benchmark_start) * 1000.0 / Stopwatch.Frequency;
         Console.WriteLine("RESULT " + benchmark_result.ToString(CultureInfo.InvariantCulture));
         Console.WriteLine("ELAPSED_MS " + benchmark_elapsed_ms.ToString("R", CultureInfo.InvariantCulture));

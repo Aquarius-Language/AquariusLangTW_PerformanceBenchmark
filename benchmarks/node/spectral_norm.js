@@ -14,16 +14,21 @@ function multiply(src, dst, transpose) {
     dst[i] = total;
   }
 }
-const benchmark_start = process.hrtime.bigint();
-const u = [], v = [], temp = [];
-for (let i = 0; i < benchmark_n; i++) { u.push(1.0); v.push(0.0); temp.push(0.0); }
-for (let iteration = 0; iteration < 10; iteration++) {
-  multiply(u, temp, false); multiply(temp, v, true);
-  multiply(v, temp, false); multiply(temp, u, true);
+function benchmark_run() {
+  const u = [], v = [], temp = [];
+  for (let i = 0; i < benchmark_n; i++) { u.push(1.0); v.push(0.0); temp.push(0.0); }
+  for (let iteration = 0; iteration < 10; iteration++) {
+    multiply(u, temp, false); multiply(temp, v, true);
+    multiply(v, temp, false); multiply(temp, u, true);
+  }
+  let uv = 0.0, vv = 0.0;
+  for (let i = 0; i < benchmark_n; i++) { uv += u[i] * v[i]; vv += v[i] * v[i]; }
+  return uv / vv;
 }
-let uv = 0.0, vv = 0.0;
-for (let i = 0; i < benchmark_n; i++) { uv += u[i] * v[i]; vv += v[i] * v[i]; }
-const benchmark_result = uv / vv;
+// Untimed warm-up runs, identical in every language.
+for (let benchmark_warmup = 0; benchmark_warmup < 3; benchmark_warmup++) benchmark_run();
+const benchmark_start = process.hrtime.bigint();
+const benchmark_result = benchmark_run();
 const benchmark_elapsed_ms = Number(process.hrtime.bigint() - benchmark_start) / 1e6;
 console.log("RESULT", benchmark_result);
 console.log("ELAPSED_MS", benchmark_elapsed_ms);

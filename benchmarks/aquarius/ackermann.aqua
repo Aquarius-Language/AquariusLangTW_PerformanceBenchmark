@@ -4,8 +4,13 @@
     如果 (n == 0) { 回傳 ack(m - 1, 1); }
     回傳 ack(m - 1, ack(m, n - 1));
 };
+變數 benchmark_run = 函式() {
+    回傳 ack(3, benchmark_n);
+};
+# Untimed warm-up runs, identical in every language.
+迴圈 (變數 benchmark_warmup = 0; benchmark_warmup < 3; benchmark_warmup++) { benchmark_run(); }
 變數 benchmark_start = 目前時間();
-變數 benchmark_result = ack(3, benchmark_n);
+變數 benchmark_result = benchmark_run();
 變數 benchmark_elapsed_ms = 目前時間() - benchmark_start;
 印出("RESULT", benchmark_result);
 印出("ELAPSED_MS", benchmark_elapsed_ms);

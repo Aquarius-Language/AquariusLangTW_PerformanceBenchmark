@@ -13,20 +13,26 @@ def multiply(src, dst, transpose):
             total += coefficient * src[j]
         dst[i] = total
 
+def benchmark_run():
+    u = [1.0] * benchmark_n
+    v = [0.0] * benchmark_n
+    temp = [0.0] * benchmark_n
+    for iteration in range(10):
+        multiply(u, temp, False)
+        multiply(temp, v, True)
+        multiply(v, temp, False)
+        multiply(temp, u, True)
+    uv, vv = 0.0, 0.0
+    for i in range(benchmark_n):
+        uv += u[i] * v[i]
+        vv += v[i] * v[i]
+    return uv / vv
+
+# Untimed warm-up runs, identical in every language.
+for benchmark_warmup in range(3):
+    benchmark_run()
 benchmark_start = perf_counter_ns()
-u = [1.0] * benchmark_n
-v = [0.0] * benchmark_n
-temp = [0.0] * benchmark_n
-for iteration in range(10):
-    multiply(u, temp, False)
-    multiply(temp, v, True)
-    multiply(v, temp, False)
-    multiply(temp, u, True)
-uv, vv = 0.0, 0.0
-for i in range(benchmark_n):
-    uv += u[i] * v[i]
-    vv += v[i] * v[i]
-benchmark_result = uv / vv
+benchmark_result = benchmark_run()
 benchmark_elapsed_ms = (perf_counter_ns() - benchmark_start) / 1e6
 print("RESULT", benchmark_result)
 print("ELAPSED_MS", benchmark_elapsed_ms)

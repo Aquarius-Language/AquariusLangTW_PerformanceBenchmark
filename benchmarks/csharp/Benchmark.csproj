@@ -6,6 +6,8 @@
     <BenchmarkSource Condition="'$(BenchmarkSource)' == ''">fibonacci.cs</BenchmarkSource>
     <UseAppHost>false</UseAppHost>
     <Optimize>true</Optimize>
+    <!-- Optimize every method at its first call, as Wasmtime compiles 星泉 before the timer starts. -->
+    <TieredCompilation>false</TieredCompilation>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(BenchmarkSource)" />

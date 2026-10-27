@@ -24,11 +24,18 @@ static class Benchmark
         return count;
     }
 
+    static int BenchmarkRun()
+    {
+        int[] board = new int[benchmark_n];
+        return Solve(board, 0);
+    }
+
     static void Main()
     {
+        // Untimed warm-up runs, identical in every language.
+        for (int benchmark_warmup = 0; benchmark_warmup < 3; benchmark_warmup++) BenchmarkRun();
         long benchmark_start = Stopwatch.GetTimestamp();
-        int[] board = new int[benchmark_n];
-        int benchmark_result = Solve(board, 0);
+        int benchmark_result = BenchmarkRun();
         double benchmark_elapsed_ms = (Stopwatch.GetTimestamp() - benchmark_start) * 1000.0 / Stopwatch.Frequency;
         Console.WriteLine("RESULT " + benchmark_result.ToString(CultureInfo.InvariantCulture));
         Console.WriteLine("ELAPSED_MS " + benchmark_elapsed_ms.ToString("R", CultureInfo.InvariantCulture));

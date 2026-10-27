@@ -58,6 +58,9 @@ def generate_readme(report):
     language_count = f"{len(languages)} 種語言"
     scores = composite_scores(report)
     internal_timing = config.get("timing") == "in-process"
+    # Reports before the fairness fix ran C# with tiered compilation (unoptimized code first).
+    csharp_optimized = config.get("csharp_tiered_compilation") is False
+    warm_runs = config.get("in_process_warmups", 0)
     timing_description = ("計時採用各語言程序內的單調計時器，涵蓋資料初始化與演算法／校驗值計算，排除程序啟動、原始碼／Wasm 載入與初始編譯、輸出。"
                           if internal_timing else "此歷史報告採用程序外計時，包含程序啟動、載入與輸出；不能與程序內計時結果直接比較。")
     lines = ["# " + "、".join(languages.values()) + " 桌面執行效能評比", ""]
@@ -68,6 +71,12 @@ def generate_readme(report):
             f"{languages[faster]} 的綜合速度是 {languages[slower]} 的 {scores[faster] / scores[slower]:.2f} 倍"
             for faster, slower in combinations(ranking, 2))
         speed_columns = " | ".join(f"相對 {languages[language]} 的速度" for language in ranking)
+        if config["profile"] == "standard":
+            lines += ["> **注意：標準規模多數項目只需約 1 毫秒，結果主要反映短程式的啟動後延遲（JIT 暖機、記憶體初始配置），"
+                      "不代表持續執行的速度。比較語言速度請參考 `--profile large`。**", ""]
+        if warm_runs:
+            lines += [f"每個程序先在同一程序內不計時執行同一工作 {warm_runs} 次，讓 JIT 完成最佳化，再計時第 {warm_runs + 1} 次；"
+                      "各語言規則相同。", ""]
         lines += [f"**本次綜合效能：{score_text}（越高越快）。**", "",
                   f"綜合速度兩兩比較：{comparisons}。", "",
                   f"將本次 {len(report['benchmarks'])} 項演算法的相對速度等權重取幾何平均，再以最快語言為 100 分。"
@@ -131,8 +140,12 @@ def generate_readme(report):
               "二元樹的樹狀陣列無法標註，只標註計數變數。"
               "Python 執行原始碼，Node.js 使用 V8。" +
               ("C# 以 `dotnet build --configuration Release` 預先編譯為 net8.0 組件，再直接以 `dotnet Benchmark.dll` 執行；"
-               "建置與還原不計時，不使用外部 NuGet 套件。進入 Main 前的初始 JIT 不計時，計時區間內的按需 JIT 仍計入。" if has_csharp else "") +
+               "建置與還原不計時，不使用外部 NuGet 套件。進入 Main 前的初始 JIT 不計時，計時區間內的按需 JIT 仍計入。" +
+               ("組件關閉分層編譯（`TieredCompilation=false`），每個方法第一次呼叫就以最佳化 JIT 編譯，"
+                "對應星泉在計時前完成的 Wasmtime 最佳化編譯。" if csharp_optimized else "") if has_csharp else "") +
               "沒有 NumPy、原生演算法函式庫、工作執行緒或內建排序。",
+              (f"- 程序內暖身：每支腳本把計時工作包成函式，先不計時呼叫 {warm_runs} 次，再計時一次；" +
+               ("C# 與 " if has_csharp else "") + "Node.js 的 JIT 因此能在計時前完成最佳化，星泉與 Python 也執行相同次數。\n" if warm_runs else "") +
               "- 暖身程序的樣本會捨棄，作用是預熱作業系統檔案快取；不同程序之間不保留 JIT 或 VM 狀態。"
               "每輪以記錄的隨機種子打亂所有演算法／語言組合，再依序執行。",
               "- 每筆暖身與正式樣本都必須符合未納入計時的 Python 參考答案。整數必須完全相同；"
@@ -148,10 +161,22 @@ def generate_readme(report):
                "- 此歷史報告中，Python、Node.js" + (" 與 C#" if has_csharp else "") +
                " 的陣列建構使用每次複製整個陣列的追加方式（平方級成本），星泉則可能已改用預先配置；"
                "篩法、快速排序、矩陣、譜範數與 N 皇后的比較因此偏向星泉。"),
-              "- 編譯時機不對稱：星泉的 Wasm 在計時開始前已由 Wasmtime 完整編譯為機器碼；" +
-              ("C#（分層編譯）與 " if has_csharp else "") + "Node.js（V8）的 JIT 編譯與最佳化發生在計時區間內。"
-              "標準規模每項只需數毫秒，這部分成本偏向星泉；`--profile large` 以較大輸入降低此影響，兩種規模的分數不可混用。",
-              "- 小型工作負載可能受計時器與函式呼叫成本影響；每筆樣本使用新程序，未測量持續暖身後的穩態速度，也不代表所有程式的語言排名。"
+              ("- 編譯時機：星泉的 Wasm 在計時開始前已由 Wasmtime 完整編譯為機器碼。" +
+               ("C# 關閉分層編譯，方法在第一次呼叫時即以最佳化 JIT 編譯；" if has_csharp else "") +
+               "Node.js（V8）無法預先最佳化，靠程序內暖身讓熱點函式在計時前完成最佳化。"
+               "暖身後仍可能有少量 JIT 或垃圾回收落在計時區間內。"
+               if warm_runs else
+               "- 編譯時機：星泉的 Wasm 在計時開始前已由 Wasmtime 完整編譯為機器碼。" +
+               ("C# 關閉分層編譯，方法在第一次呼叫時直接產生最佳化機器碼，但這次 JIT 仍在計時區間內；" if has_csharp else "") +
+               "Node.js（V8）無法預先最佳化，先以直譯器與基準編譯器執行，熱點函式的最佳化發生在計時區間內，因此仍偏向星泉。"
+               if csharp_optimized or not has_csharp else
+               "- 編譯時機不對稱：星泉的 Wasm 在計時開始前已由 Wasmtime 完整編譯為機器碼；" +
+               "C#（分層編譯）與 Node.js（V8）的 JIT 編譯與最佳化發生在計時區間內，C# 在約 100 毫秒內幾乎只執行未最佳化程式碼。") +
+              ("標準規模每項只需約 1 毫秒，計時器與記憶體配置雜訊比例較高；" if warm_runs else "標準規模每項只需數毫秒，這部分成本偏向星泉；") +
+              "`--profile large` 以較大輸入降低此影響，兩種規模的分數不可混用。",
+              ("- 小型工作負載可能受計時器與函式呼叫成本影響；只暖身數次，不等於長時間執行的穩態速度，也不代表所有程式的語言排名。"
+               if warm_runs else
+               "- 小型工作負載可能受計時器與函式呼叫成本影響；每筆樣本使用新程序，未測量持續暖身後的穩態速度，也不代表所有程式的語言排名。") +
               "CPU 頻率、溫度、背景工作與排程雜訊未受控制。未測量程序記憶體用量與 CPU 時間；下方 RAM 為機器配備。", "",
               "## 測試日期與環境", "",
               f"- 開始時間：{md(report['started_at'])}", f"- 結束時間：{md(report['finished_at'])}",

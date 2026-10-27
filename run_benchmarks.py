@@ -115,7 +115,7 @@ def runtime_info(language, executable):
     elif language == "csharp":
         info["sdks"] = command_output([executable, "--list-sdks"]) or ""
         info["runtimes"] = command_output([executable, "--list-runtimes"]) or ""
-        info.update(backend="dotnet-jit", target_framework="net8.0", build_configuration="Release")
+        info.update(backend="dotnet-jit", target_framework="net8.0", build_configuration="Release", tiered_compilation=False)
         if not any(int(major) >= 8 for major in re.findall(r"^(\d+)\.", info["sdks"], re.M)):
             info.update(available=False, error="A .NET 8+ SDK is required; use --dotnet with an SDK installation.")
         info["version"] = "SDKs: " + (info["sdks"] or "Unavailable") + "\nRuntimes: " + (info["runtimes"] or "Unavailable")
@@ -375,6 +375,7 @@ def main(argv=None):
     report = {"schema_version": 3, "started_at": started.isoformat(),
               "config": {"profile": args.profile, "repetitions": args.repetitions, "warmups": args.warmups,
                          "timeout_seconds": args.timeout, "seed": args.seed, "timezone": args.timezone, "aquarius_mode": "precompiled",
+                         "csharp_tiered_compilation": False, "in_process_warmups": 3,
                          "timing": "in-process", "timing_boundary": "data initialization and computation; startup/compilation/output excluded",
                          "score_normalization": "fastest language = 100; equal-weight geometric mean of relative speeds"},
               "environment": environment_info(),

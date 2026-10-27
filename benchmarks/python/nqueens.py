@@ -16,10 +16,15 @@ def solve(row):
             count += solve(row + 1)
     return count
 
-benchmark_start = perf_counter_ns()
 board = [0] * benchmark_n
+def benchmark_run():
+    return solve(0)
 
-benchmark_result = solve(0)
+# Untimed warm-up runs, identical in every language.
+for benchmark_warmup in range(3):
+    benchmark_run()
+benchmark_start = perf_counter_ns()
+benchmark_result = benchmark_run()
 benchmark_elapsed_ms = (perf_counter_ns() - benchmark_start) / 1e6
 print("RESULT", benchmark_result)
 print("ELAPSED_MS", benchmark_elapsed_ms)

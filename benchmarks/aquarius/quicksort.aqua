@@ -13,22 +13,30 @@
     如果 (lo < j) { sort(a, lo, j); }
     如果 (i < hi) { sort(a, i, hi); }
 };
-變數 benchmark_start = 目前時間();
-變數 values = 陣列.建立(0, 0, benchmark_n);
-變數 seed = 42;
-迴圈 (變數 i = 0; i < benchmark_n; i++) {
-    變數 raw = seed * 251 + 17;
-    seed = raw - (raw / 65536) * 65536;
-    陣列.追加(values, seed);
-}
+變數 benchmark_run = 函式() {
+    變數 values = 陣列.建立(0, 0, benchmark_n);
+    變數 seed = 42;
+    迴圈 (變數 i = 0; i < benchmark_n; i++) {
+        變數 raw = seed * 251 + 17;
+        seed = raw - (raw / 65536) * 65536;
+        陣列.追加(values, seed);
+    }
 
-sort(values, 0, benchmark_n - 1);
-變數 checksum = 0;
-變數 ordered = 真;
-迴圈 (變數 i = 0; i < benchmark_n; i++) {
-    如果 (i > 0) { 如果 (values[i] < values[i - 1]) { ordered = 假; } }
-    checksum += values[i] * (i + 1);
-    checksum -= (checksum / 1000003) * 1000003;
-}
+    sort(values, 0, benchmark_n - 1);
+    變數 checksum = 0;
+    變數 ordered = 真;
+    迴圈 (變數 i = 0; i < benchmark_n; i++) {
+        如果 (i > 0) { 如果 (values[i] < values[i - 1]) { ordered = 假; } }
+        checksum += values[i] * (i + 1);
+        checksum -= (checksum / 1000003) * 1000003;
+    }
+    如果 (ordered) { 回傳 checksum; }
+    回傳 -1;
+};
+# Untimed warm-up runs, identical in every language.
+迴圈 (變數 benchmark_warmup = 0; benchmark_warmup < 3; benchmark_warmup++) { benchmark_run(); }
+變數 benchmark_start = 目前時間();
+變數 benchmark_result = benchmark_run();
 變數 benchmark_elapsed_ms = 目前時間() - benchmark_start;
-如果 (ordered) { 印出("RESULT", checksum); 印出("ELAPSED_MS", benchmark_elapsed_ms); } 否則 { 印出("ERROR Unsorted output"); }
+印出("RESULT", benchmark_result);
+印出("ELAPSED_MS", benchmark_elapsed_ms);

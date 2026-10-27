@@ -26,9 +26,8 @@ static class Benchmark
         }
     }
 
-    static void Main()
+    static double BenchmarkRun()
     {
-        long benchmark_start = Stopwatch.GetTimestamp();
         double[] u = new double[benchmark_n], v = new double[benchmark_n], temp = new double[benchmark_n];
         Array.Fill(u, 1.0);
         for (int iteration = 0; iteration < 10; iteration++)
@@ -38,7 +37,15 @@ static class Benchmark
         }
         double uv = 0.0, vv = 0.0;
         for (int i = 0; i < benchmark_n; i++) { uv += u[i] * v[i]; vv += v[i] * v[i]; }
-        double benchmark_result = uv / vv;
+        return uv / vv;
+    }
+
+    static void Main()
+    {
+        // Untimed warm-up runs, identical in every language.
+        for (int benchmark_warmup = 0; benchmark_warmup < 3; benchmark_warmup++) BenchmarkRun();
+        long benchmark_start = Stopwatch.GetTimestamp();
+        double benchmark_result = BenchmarkRun();
         double benchmark_elapsed_ms = (Stopwatch.GetTimestamp() - benchmark_start) * 1000.0 / Stopwatch.Frequency;
         Console.WriteLine("RESULT " + benchmark_result.ToString(CultureInfo.InvariantCulture));
         Console.WriteLine("ELAPSED_MS " + benchmark_elapsed_ms.ToString("R", CultureInfo.InvariantCulture));

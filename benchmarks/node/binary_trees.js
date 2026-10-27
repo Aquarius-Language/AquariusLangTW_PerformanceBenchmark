@@ -8,13 +8,18 @@ function check(tree, depth) {
   if (depth === 0) return 1;
   return 1 + check(tree[0], depth - 1) + check(tree[1], depth - 1);
 }
-const benchmark_start = process.hrtime.bigint();
-let checksum = 0;
-for (let i = 0; i < 8; i++) {
-  const tree = build(benchmark_n);
-  checksum += check(tree, benchmark_n);
+function benchmark_run() {
+  let checksum = 0;
+  for (let i = 0; i < 8; i++) {
+    const tree = build(benchmark_n);
+    checksum += check(tree, benchmark_n);
+  }
+  return checksum;
 }
-const benchmark_result = checksum;
+// Untimed warm-up runs, identical in every language.
+for (let benchmark_warmup = 0; benchmark_warmup < 3; benchmark_warmup++) benchmark_run();
+const benchmark_start = process.hrtime.bigint();
+const benchmark_result = benchmark_run();
 const benchmark_elapsed_ms = Number(process.hrtime.bigint() - benchmark_start) / 1e6;
 console.log("RESULT", benchmark_result);
 console.log("ELAPSED_MS", benchmark_elapsed_ms);
