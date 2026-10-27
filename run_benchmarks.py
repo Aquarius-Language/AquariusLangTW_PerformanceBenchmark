@@ -7,6 +7,7 @@ import ctypes
 from datetime import datetime, timedelta, timezone
 from decimal import Decimal, InvalidOperation
 import hashlib
+import itertools
 import json
 import math
 import os
@@ -23,13 +24,15 @@ import time
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
 from reference import expected
-from readme_report import composite_scores, generate_readme
+from readme_report import composite_scores, generate_readme, mode_views
 
 ROOT = Path(__file__).resolve().parent
 # aquarius_typed: the same AquariusLang algorithms with optional type annotations, run by the same aqua compiler.
 LANGUAGES = {"aquarius": ("AquariusLang", ".aqua"), "aquarius_typed": ("AquariusLang (optional types)", ".aqua"),
              "python": ("Python", ".py"), "node": ("Node.js", ".js"), "csharp": ("C#", ".cs")}
 AQUARIUS = {"aquarius", "aquarius_typed"}
+# standard: one cold timed run per process; warmed: untimed in-process runs first, then the median of several timed runs.
+MODES = ("standard", "warmed")
 TIMERS = {"aquarius": "目前時間() / currentTime() (monotonic milliseconds)",
           "aquarius_typed": "目前時間() / currentTime() (monotonic milliseconds)",
           "python": "time.perf_counter_ns() (nanoseconds / 1e6)",
@@ -182,27 +185,35 @@ def parse_result(stdout):
     return value
 
 
-def parse_sample(stdout):
-    """Require a checksum and an in-process duration; never fall back to startup time."""
+def parse_sample(stdout, runs=1):
+    """Require a checksum and an in-process duration for every timed run; never fall back to startup time.
+
+    Returns one (result, elapsed_ms) pair per timed run, in order.
+    """
     lines = [line.strip() for line in stdout.splitlines() if line.strip()]
-    if len(lines) != 2 or not lines[1].startswith("ELAPSED_MS "):
-        raise ValueError("Expected exactly 'RESULT <number>' and 'ELAPSED_MS <milliseconds>' lines")
-    value = parse_result(lines[0])
-    try:
-        elapsed = float(lines[1][11:].strip())
-    except ValueError as error:
-        raise ValueError("Invalid elapsed time") from error
-    if not math.isfinite(elapsed) or elapsed <= 0:
-        raise ValueError("Elapsed time must be finite and positive")
-    return value, elapsed
+    if len(lines) != 2 * runs or not all(line.startswith("ELAPSED_MS ") for line in lines[1::2]):
+        raise ValueError(f"Expected exactly {runs} pair(s) of 'RESULT <number>' and 'ELAPSED_MS <milliseconds>' lines")
+    pairs = []
+    for result_line, elapsed_line in zip(lines[0::2], lines[1::2]):
+        value = parse_result(result_line)
+        try:
+            elapsed = float(elapsed_line[11:].strip())
+        except ValueError as error:
+            raise ValueError("Invalid elapsed time") from error
+        if not math.isfinite(elapsed) or elapsed <= 0:
+            raise ValueError("Elapsed time must be finite and positive")
+        pairs.append((value, elapsed))
+    return pairs
 
 
-def execute(command, expected_value, spec, timeout, cwd, *, timing="in-process"):
+def execute(command, expected_value, spec, timeout, cwd, *, timing="in-process", runs=1):
     # The historical VM diagnostic explicitly uses process timing because old
     # Aquarius versions have no clock builtin. Published benchmarks always use
     # the default in-process protocol and cannot fall back to process timing.
     if timing not in {"in-process", "process"}:
         raise ValueError(f"Unknown timing mode: {timing}")
+    if timing == "process" and runs != 1:
+        raise ValueError("Process timing measures exactly one run per process")
     begin = time.perf_counter_ns()
     try:
         proc = subprocess.run(command, cwd=cwd, capture_output=True, text=True,
@@ -222,18 +233,21 @@ def execute(command, expected_value, spec, timeout, cwd, *, timing="in-process")
         if proc.returncode != 0:
             raise ValueError(f"Exit code {proc.returncode}")
         if timing == "process":
-            value, elapsed = parse_result(proc.stdout), process_elapsed
+            pairs = [(parse_result(proc.stdout), process_elapsed)]
         else:
-            value, elapsed = parse_sample(proc.stdout)
-        sample["elapsed_ms"] = elapsed
-        if "relative_tolerance" in spec:
-            valid = math.isclose(float(value), float(expected_value),
-                                 rel_tol=spec["relative_tolerance"], abs_tol=spec["absolute_tolerance"])
-        else:
-            valid = value == Decimal(expected_value)
-        if not valid:
-            raise ValueError(f"Incorrect output: {value}; expected {expected_value}")
-        sample.update(status="ok", result=str(value))
+            pairs = parse_sample(proc.stdout, runs)
+        # A process's value is the median of its timed runs (the single run in standard mode).
+        sample["run_elapsed_ms"] = [elapsed for _, elapsed in pairs]
+        sample["elapsed_ms"] = statistics.median(sample["run_elapsed_ms"])
+        for value, _ in pairs:  # Every timed run must reproduce the reference answer.
+            if "relative_tolerance" in spec:
+                valid = math.isclose(float(value), float(expected_value),
+                                     rel_tol=spec["relative_tolerance"], abs_tol=spec["absolute_tolerance"])
+            else:
+                valid = value == Decimal(expected_value)
+            if not valid:
+                raise ValueError(f"Incorrect output: {value}; expected {expected_value}")
+        sample.update(status="ok", result=str(pairs[0][0]))
     except ValueError as error:
         sample.update(status="invalid", error=str(error))
     return sample
@@ -261,24 +275,28 @@ def summarize(record, repetitions):
 
 def write_artifacts(report, directory, readme):
     directory.mkdir(parents=True, exist_ok=True)
-    report["scores"] = composite_scores(report)
+    report["scores"] = {mode: composite_scores(view) for mode, _, view in mode_views(report)}
     json_path = directory / "results.json"
     json_path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     (directory.parent / "latest.json").write_text(json_path.read_text(encoding="utf-8"), encoding="utf-8")
     with (directory / "summary.csv").open("w", newline="", encoding="utf-8") as file:
-        fields = ["benchmark", "language", "n", "status", "median_ms", "min_ms", "max_ms", "mean_ms", "stdev_ms", "cv_percent"]
+        fields = ["benchmark", "language", "mode", "n", "status", "median_ms", "min_ms", "max_ms", "mean_ms", "stdev_ms", "cv_percent"]
         writer = csv.DictWriter(file, fieldnames=fields)
         writer.writeheader()
         for record in report["cases"].values():
-            writer.writerow({"benchmark": record["benchmark"], "language": record["language"], "n": record["n"], **record["summary"]})
+            writer.writerow({"benchmark": record["benchmark"], "language": record["language"], "mode": record["mode"],
+                             "n": record["n"], **record["summary"]})
     with (directory / "samples.csv").open("w", newline="", encoding="utf-8") as file:
         writer = csv.writer(file)
-        writer.writerow(["benchmark", "language", "phase", "round", "status", "elapsed_ms", "process_elapsed_ms", "result", "error"])
+        writer.writerow(["benchmark", "language", "mode", "phase", "round", "status", "elapsed_ms",
+                         "run_elapsed_ms", "process_elapsed_ms", "result", "error"])
         for record in report["cases"].values():
             for phase in ("warmups", "samples"):
                 for sample in record[phase]:
-                    writer.writerow([record["benchmark"], record["language"], phase, sample["round"],
-                                     sample["status"], sample["elapsed_ms"], sample["process_elapsed_ms"], sample.get("result", ""), sample.get("error", "")])
+                    runs = ";".join(repr(value) for value in sample.get("run_elapsed_ms", []))
+                    writer.writerow([record["benchmark"], record["language"], record["mode"], phase, sample["round"],
+                                     sample["status"], sample["elapsed_ms"], runs, sample["process_elapsed_ms"],
+                                     sample.get("result", ""), sample.get("error", "")])
     readme.parent.mkdir(parents=True, exist_ok=True)
     readme.write_text(generate_readme(report), encoding="utf-8")
 
@@ -302,6 +320,14 @@ def timeout_value(value):
     if not math.isfinite(parsed) or parsed <= 0:
         raise argparse.ArgumentTypeError("Must be a finite positive number")
     return parsed
+
+
+def substitute(text, name, value, source):
+    """Replace the single numeric declaration of a driver variable; typed scripts annotate it (benchmark_n: 整數 = 28)."""
+    text, count = re.subn(rf"(\b{name}(?:\s*:\s*\S+)?\s*=\s*)\d+", lambda match: match.group(1) + str(value), text)
+    if count != 1:
+        raise ValueError(f"Expected one {name} declaration in {source}")
+    return text
 
 
 def build_csharp(executable, source, stage, timeout):
@@ -339,8 +365,12 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--profile", choices=["standard", "smoke", "large"], default="standard")
     parser.add_argument("--benchmarks", choices=list(manifest), nargs="+", default=list(manifest))
-    parser.add_argument("--repetitions", type=positive, default=5)
-    parser.add_argument("--warmups", type=nonnegative, default=1)
+    parser.add_argument("--repetitions", type=positive, default=5, help="measured processes per case")
+    parser.add_argument("--warmups", type=nonnegative, default=1, help="discarded warm-up processes per case and round")
+    parser.add_argument("--modes", choices=list(MODES), nargs="+", default=list(MODES),
+                        help="standard: one cold timed run per process; warmed: in-process warm-up runs, then timed runs")
+    parser.add_argument("--in-process-warmups", type=nonnegative, default=5, help="untimed runs per process in warmed mode")
+    parser.add_argument("--in-process-runs", type=positive, default=5, help="timed runs per process in warmed mode (median)")
     parser.add_argument("--timeout", type=timeout_value, default=120.0)
     parser.add_argument("--seed", type=int, default=20261010)
     parser.add_argument("--timezone", default="Asia/Taipei")
@@ -372,10 +402,13 @@ def main(argv=None):
                    "python": resolve_executable(args.python, []),
                    "node": resolve_executable(args.node, ["node"]),
                    "csharp": resolve_dotnet(args.dotnet)}
-    report = {"schema_version": 3, "started_at": started.isoformat(),
+    modes = {mode: {"in_process_warmups": 0, "in_process_runs": 1} if mode == "standard" else
+             {"in_process_warmups": args.in_process_warmups, "in_process_runs": args.in_process_runs}
+             for mode in MODES if mode in args.modes}
+    report = {"schema_version": 4, "started_at": started.isoformat(),
               "config": {"profile": args.profile, "repetitions": args.repetitions, "warmups": args.warmups,
                          "timeout_seconds": args.timeout, "seed": args.seed, "timezone": args.timezone, "aquarius_mode": "precompiled",
-                         "csharp_tiered_compilation": False, "in_process_warmups": 3,
+                         "csharp_tiered_compilation": False, "modes": modes,
                          "timing": "in-process", "timing_boundary": "data initialization and computation; startup/compilation/output excluded",
                          "score_normalization": "fastest language = 100; equal-weight geometric mean of relative speeds"},
               "environment": environment_info(),
@@ -397,20 +430,19 @@ def main(argv=None):
             spec = manifest[name]
             n = spec[args.profile]
             report["benchmarks"][name] = {**spec, "n": n, "expected": expected(name, n)}
-            for lang, (_, extension) in LANGUAGES.items():
+            for (lang, (_, extension)), (mode, params) in itertools.product(LANGUAGES.items(), modes.items()):
                 source = ROOT / "benchmarks" / lang / (name + extension)
-                text = source.read_text(encoding="utf-8")
-                # The typed scripts annotate it (benchmark_n: 整數 = 28).
-                text, count = re.subn(r"(benchmark_n(?:\s*:\s*\S+)?\s*=\s*)\d+", lambda match: match.group(1) + str(n), text)
-                if count != 1:
-                    raise ValueError(f"Expected one benchmark_n declaration in {source}")
-                target = stage / lang / source.name
+                text = substitute(source.read_text(encoding="utf-8"), "benchmark_n", n, source)
+                # The mode only changes the driver's counts, so each mode gets its own staged copy.
+                text = substitute(text, "benchmark_warmups", params["in_process_warmups"], source)
+                text = substitute(text, "benchmark_timed_runs", params["in_process_runs"], source)
+                target = stage / mode / lang / source.name
                 if lang == "csharp":
-                    target = stage / lang / name / source.name
+                    target = stage / mode / lang / name / source.name
                 target.parent.mkdir(parents=True, exist_ok=True)
                 target.write_text(text, encoding="utf-8")
                 exe = executables[lang]
-                record = {"benchmark": name, "language": lang, "n": n,
+                record = {"benchmark": name, "language": lang, "mode": mode, "n": n, **params,
                           "source": str(source.relative_to(ROOT)), "source_sha256": sha256(source),
                           "staged_sha256": sha256(target), "command": [exe, str(target)] if exe else None,
                           "warmups": [], "samples": []}
@@ -433,7 +465,7 @@ def main(argv=None):
                     if not record["build"].get("error"):
                         record["assembly_sha256"] = sha256(assembly)
                         record["command"] = [exe, str(assembly)]
-                report["cases"][f"{name}/{lang}"] = record
+                report["cases"][f"{name}/{lang}/{mode}"] = record
         for phase, rounds in [("warmups", args.warmups), ("samples", args.repetitions)]:
             for round_number in range(1, rounds + 1):
                 keys = [key for key, record in report["cases"].items() if record["command"]]
@@ -441,7 +473,8 @@ def main(argv=None):
                 for key in keys:
                     record = report["cases"][key]
                     spec = report["benchmarks"][record["benchmark"]]
-                    sample = execute(record["command"], spec["expected"], spec, args.timeout, stage)
+                    sample = execute(record["command"], spec["expected"], spec, args.timeout, stage,
+                                     runs=record["in_process_runs"])
                     sample["round"] = round_number
                     record[phase].append(sample)
                     report["execution_order"].append({"case": key, "phase": phase, "round": round_number})
