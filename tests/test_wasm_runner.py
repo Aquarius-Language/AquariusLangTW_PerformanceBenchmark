@@ -38,14 +38,18 @@ class WasmRunnerTests(unittest.TestCase):
         work.mkdir(exist_ok=True)
         with tempfile.TemporaryDirectory(dir=work) as directory:
             path = Path(directory)
-            result = subprocess.run([sys.executable, str(ROOT / 'run_benchmarks.py'), '--profile', 'smoke', '--benchmarks', 'fibonacci', '--repetitions', '1', '--warmups', '0', '--aquarius', os.environ['AQUARIUS_COMPILER_EXE'], '--output-dir', str(path / 'results'), '--readme', str(path / 'README.md')], capture_output=True, text=True, encoding='utf-8', timeout=60)
+            result = subprocess.run([sys.executable, str(ROOT / 'run_benchmarks.py'), '--profile', 'smoke', '--benchmarks', 'fibonacci', '--repetitions', '1', '--warmups', '0', '--in-process-warmups', '1', '--in-process-runs', '2', '--aquarius', os.environ['AQUARIUS_COMPILER_EXE'], '--output-dir', str(path / 'results'), '--readme', str(path / 'README.md')], capture_output=True, text=True, encoding='utf-8', timeout=60)
             self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
             report = json.loads((path / 'results/latest.json').read_text(encoding='utf-8'))
             self.assertEqual(report['config']['aquarius_mode'], 'precompiled')
-            self.assertEqual(report['schema_version'], 3)
+            self.assertEqual(report['schema_version'], 4)
             self.assertEqual(report['config']['timing'], 'in-process')
-            self.assertEqual(max(report['scores'].values()), 100)
-            case = report['cases']['fibonacci/aquarius']
+            for mode in ('standard', 'warmed'):
+                self.assertEqual(max(report['scores'][mode].values()), 100)
+                for language in ('aquarius', 'aquarius_typed'):
+                    self.assertEqual(report['cases'][f'fibonacci/{language}/{mode}']['summary']['status'], 'ok')
+            self.assertEqual(len(report['cases']['fibonacci/aquarius_typed/warmed']['samples'][0]['run_elapsed_ms']), 2)
+            case = report['cases']['fibonacci/aquarius/standard']
             self.assertEqual(case['build']['command'][1], 'build')
             self.assertEqual(case['build']['exit_code'], 0)
             self.assertEqual(case['command'][1], 'run')

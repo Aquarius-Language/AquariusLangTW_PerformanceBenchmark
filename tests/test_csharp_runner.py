@@ -1,4 +1,5 @@
 import csv
+import itertools
 import json
 import math
 from pathlib import Path
@@ -56,19 +57,22 @@ class CSharpRunnerTests(unittest.TestCase):
         dotnet = resolve_dotnet()
         if not runtime_info("csharp", dotnet)["available"]:
             self.skipTest("Install a .NET 8 SDK for the C# integration check")
-        for profile in ["smoke", "standard"]:
+        # Both modes at the smoke size; the standard size checks the cold mode only to limit builds.
+        for profile, modes in [("smoke", ["standard", "warmed"]), ("standard", ["standard"])]:
             with self.subTest(profile=profile), tempfile.TemporaryDirectory(dir=self.work) as directory:
                 path = Path(directory)
                 proc = subprocess.run(
                     [sys.executable, str(ROOT / "run_benchmarks.py"), "--profile", profile,
+                     "--modes", *modes, "--in-process-warmups", "1", "--in-process-runs", "2",
                      "--repetitions", "1", "--warmups", "1", "--dotnet", dotnet,
                      "--aquarius", str(path / "missing-aqua"), "--node", str(path / "missing-node"),
                      "--output-dir", str(path / "results"), "--readme", str(path / "README.md")],
                     capture_output=True, text=True, encoding="utf-8", timeout=180)
                 self.assertEqual(proc.returncode, 1, proc.stdout + proc.stderr)  # Other runtimes deliberately absent.
                 report = json.loads((path / "results/latest.json").read_text(encoding="utf-8"))
-                for name, spec in report["benchmarks"].items():
-                    case = report["cases"][f"{name}/csharp"]
+                for (name, spec), mode in itertools.product(report["benchmarks"].items(), modes):
+                    case = report["cases"][f"{name}/csharp/{mode}"]
+                    self.assertEqual(len(case["samples"][0]["run_elapsed_ms"]), case["in_process_runs"])
                     self.assertEqual(case["summary"]["status"], "ok", case)
                     self.assertEqual(case["n"], spec[profile])
                     self.assertEqual(case["build"]["exit_code"], 0)
@@ -86,7 +90,7 @@ class CSharpRunnerTests(unittest.TestCase):
                 self.assertIn("C#／Python 耗時倍率", readme)
                 with Path(report["artifacts"]["summary_csv"]).open(encoding="utf-8", newline="") as file:
                     rows = [row for row in csv.DictReader(file) if row["language"] == "csharp"]
-                self.assertEqual(len(rows), 10)
+                self.assertEqual(len(rows), 10 * len(modes))
                 self.assertTrue(all(row["status"] == "ok" for row in rows))
 
 
