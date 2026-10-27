@@ -264,7 +264,7 @@ def generate_readme(report):
               "- 星泉一律使用 `aqua build` 在測量前建立 Wasm，再執行 `aqua run`；Wasm 生成不計入樣本耗時，每個模式的副本各自建立。"
               "「星泉（型別）」使用同一個編譯器與相同演算法，只在變數、參數與回傳值加上選用型別標註（`benchmarks/aquarius_typed/`）；"
               "型別函式必須宣告回傳型別，因此快速排序與譜範數的原地修改函式多了一行 `回傳 0;`，"
-              "二元樹的樹狀陣列無法標註，只標註計數變數。"
+              "二元樹以 `陣列`（元素可為任何值的陣列）標註樹狀陣列。"
               "Python 執行原始碼，Node.js 使用 V8。" +
               ("C# 以 `dotnet build --configuration Release` 預先編譯為 net8.0 組件，再直接以 `dotnet Benchmark.dll` 執行；"
                "建置與還原不計時，不使用外部 NuGet 套件。進入 Main 前的初始 JIT 不計時，計時區間內的按需 JIT 仍計入。" +
