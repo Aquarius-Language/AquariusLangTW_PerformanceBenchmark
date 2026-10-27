@@ -1,4 +1,6 @@
 變數 benchmark_n: 整數 = 2000;
+變數 benchmark_warmups: 整數 = 0;
+變數 benchmark_timed_runs: 整數 = 1;
 # A typed function declares its result, so sort returns 0 after sorting in place.
 變數 sort = 函式(a: 整數[], lo: 整數, hi: 整數): 整數 {
     變數 i: 整數 = lo; 變數 j: 整數 = hi;
@@ -35,10 +37,12 @@
     如果 (ordered) { 回傳 checksum; }
     回傳 -1;
 };
-# Untimed warm-up runs, identical in every language.
-迴圈 (變數 benchmark_warmup: 整數 = 0; benchmark_warmup < 3; benchmark_warmup++) { benchmark_run(); }
-變數 benchmark_start = 目前時間();
-變數 benchmark_result = benchmark_run();
-變數 benchmark_elapsed_ms = 目前時間() - benchmark_start;
-印出("RESULT", benchmark_result);
-印出("ELAPSED_MS", benchmark_elapsed_ms);
+# Untimed in-process warm-up runs, then timed runs; the harness substitutes both counts.
+迴圈 (變數 benchmark_warmup: 整數 = 0; benchmark_warmup < benchmark_warmups; benchmark_warmup++) { benchmark_run(); }
+迴圈 (變數 benchmark_round: 整數 = 0; benchmark_round < benchmark_timed_runs; benchmark_round++) {
+    變數 benchmark_start = 目前時間();
+    變數 benchmark_result = benchmark_run();
+    變數 benchmark_elapsed_ms = 目前時間() - benchmark_start;
+    印出("RESULT", benchmark_result);
+    印出("ELAPSED_MS", benchmark_elapsed_ms);
+}

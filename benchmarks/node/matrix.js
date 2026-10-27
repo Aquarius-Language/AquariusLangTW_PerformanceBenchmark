@@ -1,5 +1,7 @@
 "use strict";
 const benchmark_n = 45;
+const benchmark_warmups = 0;
+const benchmark_timed_runs = 1;
 function benchmark_run() {
   const a = [], b = [];
   for (let i = 0; i < benchmark_n * benchmark_n; i++) { a.push(0); b.push(0); }
@@ -20,10 +22,12 @@ function benchmark_run() {
   }
   return checksum;
 }
-// Untimed warm-up runs, identical in every language.
-for (let benchmark_warmup = 0; benchmark_warmup < 3; benchmark_warmup++) benchmark_run();
-const benchmark_start = process.hrtime.bigint();
-const benchmark_result = benchmark_run();
-const benchmark_elapsed_ms = Number(process.hrtime.bigint() - benchmark_start) / 1e6;
-console.log("RESULT", benchmark_result);
-console.log("ELAPSED_MS", benchmark_elapsed_ms);
+// Untimed in-process warm-up runs, then timed runs; the harness substitutes both counts.
+for (let benchmark_warmup = 0; benchmark_warmup < benchmark_warmups; benchmark_warmup++) benchmark_run();
+for (let benchmark_round = 0; benchmark_round < benchmark_timed_runs; benchmark_round++) {
+  const benchmark_start = process.hrtime.bigint();
+  const benchmark_result = benchmark_run();
+  const benchmark_elapsed_ms = Number(process.hrtime.bigint() - benchmark_start) / 1e6;
+  console.log("RESULT", benchmark_result);
+  console.log("ELAPSED_MS", benchmark_elapsed_ms);
+}
