@@ -1,0 +1,23 @@
+變數 benchmark_n: 整數 = 45;
+變數 benchmark_start = 目前時間();
+變數 a: 整數[] = 陣列.建立(benchmark_n * benchmark_n, 0);
+變數 b: 整數[] = 陣列.建立(benchmark_n * benchmark_n, 0);
+迴圈 (變數 i: 整數 = 0; i < benchmark_n; i++) {
+    迴圈 (變數 j: 整數 = 0; j < benchmark_n; j++) {
+        變數 x: 整數 = i + j; 變數 y: 整數 = i * 2 + j;
+        a[i * benchmark_n + j] = x - (x / 7) * 7;
+        b[i * benchmark_n + j] = y - (y / 5) * 5;
+    }
+}
+變數 checksum: 整數 = 0;
+迴圈 (變數 i: 整數 = 0; i < benchmark_n; i++) {
+    迴圈 (變數 j: 整數 = 0; j < benchmark_n; j++) {
+        變數 total: 整數 = 0;
+        迴圈 (變數 k: 整數 = 0; k < benchmark_n; k++) { total += a[i * benchmark_n + k] * b[k * benchmark_n + j]; }
+        checksum += total;
+    }
+}
+變數 benchmark_result = checksum;
+變數 benchmark_elapsed_ms = 目前時間() - benchmark_start;
+印出("RESULT", benchmark_result);
+印出("ELAPSED_MS", benchmark_elapsed_ms);

@@ -26,9 +26,12 @@ from reference import expected
 from readme_report import composite_scores, generate_readme
 
 ROOT = Path(__file__).resolve().parent
-LANGUAGES = {"aquarius": ("AquariusLang", ".aqua"), "python": ("Python", ".py"),
-             "node": ("Node.js", ".js"), "csharp": ("C#", ".cs")}
+# aquarius_typed: the same AquariusLang algorithms with optional type annotations, run by the same aqua compiler.
+LANGUAGES = {"aquarius": ("AquariusLang", ".aqua"), "aquarius_typed": ("AquariusLang (optional types)", ".aqua"),
+             "python": ("Python", ".py"), "node": ("Node.js", ".js"), "csharp": ("C#", ".cs")}
+AQUARIUS = {"aquarius", "aquarius_typed"}
 TIMERS = {"aquarius": "目前時間() / currentTime() (monotonic milliseconds)",
+          "aquarius_typed": "目前時間() / currentTime() (monotonic milliseconds)",
           "python": "time.perf_counter_ns() (nanoseconds / 1e6)",
           "node": "process.hrtime.bigint() (nanoseconds / 1e6)",
           "csharp": "System.Diagnostics.Stopwatch.GetTimestamp() (ticks * 1000 / Frequency)"}
@@ -100,7 +103,7 @@ def runtime_info(language, executable):
         return {"available": False, "error": "Executable not found; use the explicit runtime option."}
     info = {"available": True, "executable": executable, "executable_sha256": sha256(executable),
             "benchmark_timer": TIMERS[language]}
-    if language == "aquarius":
+    if language in AQUARIUS:
         # Fingerprint the selected compiler, core, engine and native engine binary.
         info["version"] = "No version flag; see binary fingerprint and release directory"
         info["release_directory"] = str(Path(executable).parent)
@@ -364,7 +367,8 @@ def main(argv=None):
             parser.error("Timezone database unavailable or unknown timezone; use Asia/Taipei or install tzdata")
     started = datetime.now(tz)
     directory = args.output_dir.resolve() / started.strftime("%Y%m%d-%H%M%S-%f")
-    executables = {"aquarius": resolve_executable(args.aquarius, ["aqua.exe", "aqua"]),
+    aqua = resolve_executable(args.aquarius, ["aqua.exe", "aqua"])
+    executables = {"aquarius": aqua, "aquarius_typed": aqua,
                    "python": resolve_executable(args.python, []),
                    "node": resolve_executable(args.node, ["node"]),
                    "csharp": resolve_dotnet(args.dotnet)}
@@ -395,7 +399,8 @@ def main(argv=None):
             for lang, (_, extension) in LANGUAGES.items():
                 source = ROOT / "benchmarks" / lang / (name + extension)
                 text = source.read_text(encoding="utf-8")
-                text, count = re.subn(r"(benchmark_n\s*=\s*)\d+", lambda match: match.group(1) + str(n), text)
+                # The typed scripts annotate it (benchmark_n: 整數 = 28).
+                text, count = re.subn(r"(benchmark_n(?:\s*:\s*\S+)?\s*=\s*)\d+", lambda match: match.group(1) + str(n), text)
                 if count != 1:
                     raise ValueError(f"Expected one benchmark_n declaration in {source}")
                 target = stage / lang / source.name
@@ -408,7 +413,7 @@ def main(argv=None):
                           "source": str(source.relative_to(ROOT)), "source_sha256": sha256(source),
                           "staged_sha256": sha256(target), "command": [exe, str(target)] if exe else None,
                           "warmups": [], "samples": []}
-                if exe and lang == "aquarius":
+                if exe and lang in AQUARIUS:
                     wasm = target.with_suffix(".wasm")
                     command = [exe, "build", str(target), "--root", str(target.parent), "-o", str(wasm)]
                     begin = time.perf_counter_ns()

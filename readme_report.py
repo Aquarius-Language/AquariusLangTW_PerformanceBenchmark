@@ -2,7 +2,7 @@
 import math
 from itertools import combinations
 
-LANGUAGES = {"aquarius": "星泉", "python": "Python", "node": "Node.js", "csharp": "C#"}
+LANGUAGES = {"aquarius": "星泉", "aquarius_typed": "星泉（型別）", "python": "Python", "node": "Node.js", "csharp": "C#"}
 WORKLOADS = {
     "fibonacci": ("遞迴費波那契", "使用樸素遞迴，不使用記憶化。"),
     "ackermann": ("阿克曼函數", "計算 A(3, n)，測試巢狀遞迴呼叫。"),
@@ -126,6 +126,9 @@ def generate_readme(report):
                "`process_elapsed_ms` 另保留完整程序耗時供診斷，不參與統計與排名。"
                if internal_timing else "- 歷史資料保留原始測量值，重新產生報告不會將程序外耗時轉換成程序內耗時。"),
               "- 星泉一律使用 `aqua build` 在測量前建立 Wasm，再執行 `aqua run`；Wasm 生成不計入樣本耗時。"
+              "「星泉（型別）」使用同一個編譯器與相同演算法，只在變數、參數與回傳值加上選用型別標註（`benchmarks/aquarius_typed/`）；"
+              "型別函式必須宣告回傳型別，因此快速排序與譜範數的原地修改函式多了一行 `回傳 0;`，"
+              "二元樹的樹狀陣列無法標註，只標註計數變數。"
               "Python 執行原始碼，Node.js 使用 V8。" +
               ("C# 以 `dotnet build --configuration Release` 預先編譯為 net8.0 組件，再直接以 `dotnet Benchmark.dll` 執行；"
                "建置與還原不計時，不使用外部 NuGet 套件。進入 Main 前的初始 JIT 不計時，計時區間內的按需 JIT 仍計入。" if has_csharp else "") +
@@ -169,7 +172,7 @@ def generate_readme(report):
         version = runtime.get("version", "無法使用：找不到執行檔")
         if not runtime.get("available"):
             version = "無法使用：" + runtime.get("error", "找不到執行檔")
-        if lang == "aquarius" and runtime.get("available"):
+        if lang in ("aquarius", "aquarius_typed") and runtime.get("available"):
             version = "未提供版本參數；以發行目錄與二進位檔雜湊識別"
         lines.append(f"| {title} | {md(version)} | {md(runtime.get('executable', '無法取得'))} |")
     aqua = report["runtimes"]["aquarius"]

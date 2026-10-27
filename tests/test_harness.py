@@ -125,10 +125,11 @@ class HarnessTests(unittest.TestCase):
                             str(path / "results/latest.json"), "--readme", str(path / "README.md")],
                            check=True, capture_output=True, timeout=30)
             self.assertEqual((path / "README.md").read_bytes(), before)
-            # Saved reports from before C# was added still render and score only
+            # Saved reports from before C# and typed AquariusLang were added still render and score only
             # the languages that were actually measured.
-            del report["runtimes"]["csharp"]
-            del report["cases"]["fibonacci/csharp"]
+            for language in ("csharp", "aquarius_typed"):
+                del report["runtimes"][language]
+                del report["cases"][f"fibonacci/{language}"]
             legacy_readme = generate_readme(report)
             self.assertTrue(legacy_readme.startswith("# 星泉、Python、Node.js 桌面執行效能評比"))
             self.assertNotIn("C#", legacy_readme)

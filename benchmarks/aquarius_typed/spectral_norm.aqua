@@ -1,0 +1,32 @@
+變數 benchmark_n: 整數 = 60;
+變數 element = 函式(i: 整數, j: 整數): 雙精度 {
+    變數 s: 整數 = i + j;
+    回傳 1.0d / (s * (s + 1) / 2 + i + 1);
+};
+# A typed function declares its result, so multiply returns 0 after filling dst.
+變數 multiply = 函式(src: 雙精度[], dst: 雙精度[], transpose: 布林): 整數 {
+    迴圈 (變數 i: 整數 = 0; i < benchmark_n; i++) {
+        變數 total: 雙精度 = 0.0d;
+        迴圈 (變數 j: 整數 = 0; j < benchmark_n; j++) {
+            變數 coefficient: 雙精度 = 0.0d;
+            如果 (transpose) { coefficient = element(j, i); } 否則 { coefficient = element(i, j); }
+            total += coefficient * src[j];
+        }
+        dst[i] = total;
+    }
+    回傳 0;
+};
+變數 benchmark_start = 目前時間();
+變數 u: 雙精度[] = 陣列.建立(benchmark_n, 1.0d);
+變數 v: 雙精度[] = 陣列.建立(benchmark_n, 0.0d);
+變數 temp: 雙精度[] = 陣列.建立(benchmark_n, 0.0d);
+迴圈 (變數 iteration: 整數 = 0; iteration < 10; iteration++) {
+    multiply(u, temp, 假); multiply(temp, v, 真);
+    multiply(v, temp, 假); multiply(temp, u, 真);
+}
+變數 uv: 雙精度 = 0.0d; 變數 vv: 雙精度 = 0.0d;
+迴圈 (變數 i: 整數 = 0; i < benchmark_n; i++) { uv += u[i] * v[i]; vv += v[i] * v[i]; }
+變數 benchmark_result = uv / vv;
+變數 benchmark_elapsed_ms = 目前時間() - benchmark_start;
+印出("RESULT", benchmark_result);
+印出("ELAPSED_MS", benchmark_elapsed_ms);
