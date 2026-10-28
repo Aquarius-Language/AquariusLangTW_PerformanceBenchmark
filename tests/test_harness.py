@@ -183,19 +183,28 @@ class HarnessTests(unittest.TestCase):
             self.assertNotEqual(report["cases"]["fibonacci/python/standard"]["staged_sha256"],
                                 report["cases"]["fibonacci/python/warmed"]["staged_sha256"])
             self.assertEqual({entry["case"].rsplit("/", 1)[1] for entry in report["execution_order"]}, {"standard", "warmed"})
-            readme = generate_readme(report)
+            readme = (path / "README.tw.md").read_text(encoding="utf-8")
+            self.assertEqual(readme, generate_readme(report, "tw"))
+            self.assertIn('<p><strong>繁體中文</strong> | <a href="README.md">English</a></p>', readme)
             self.assertIn("無法使用", readme)
             self.assertIn("## 標準模式（冷啟動，每個程序計時一次）", readme)
             self.assertIn("## 暖機模式（程序內先暖機 2 次，再計時 3 次取中位數）", readme)
             self.assertIn("### 星泉（型別） vs Node.js（暖機模式）", readme)
+            english = (path / "README.md").read_text(encoding="utf-8")
+            self.assertEqual(english, generate_readme(report))
+            self.assertIn('<p><a href="README.tw.md">繁體中文</a> | <strong>English</strong></p>', english)
+            self.assertIn("unavailable", english)
+            self.assertIn("## Standard mode (cold start, one timed run per process)", english)
+            self.assertIn("## Warmed mode (2 in-process warm-up runs, then the median of 3 timed runs)", english)
+            self.assertIn("### AquariusLang (typed) vs Node.js (warmed mode)", english)
             self.assertEqual(report["scores"], {"standard": None, "warmed": None})
             with Path(report["artifacts"]["samples_csv"]).open(encoding="utf-8") as file:
                 self.assertIn("run_elapsed_ms", file.readline())
-            before = (path / "README.md").read_bytes()
+            before = [(path / name).read_bytes() for name in ("README.md", "README.tw.md")]
             subprocess.run([sys.executable, str(ROOT / "run_benchmarks.py"), "--report-only",
                             str(path / "results/latest.json"), "--readme", str(path / "README.md")],
                            check=True, capture_output=True, timeout=30)
-            self.assertEqual((path / "README.md").read_bytes(), before)
+            self.assertEqual([(path / name).read_bytes() for name in ("README.md", "README.tw.md")], before)
             # Saved single-mode reports (schema 3 and older) keyed `benchmark/language` still render, labelled
             # from their configuration, and score only the languages that were actually measured.
             legacy = {**report, "schema_version": 3,
@@ -204,22 +213,25 @@ class HarnessTests(unittest.TestCase):
                                 if record["mode"] == "warmed"}}
             for record in legacy["cases"].values():
                 del record["mode"]
-            legacy_readme = generate_readme(legacy)
+            legacy_readme = generate_readme(legacy, "tw")
             self.assertIn("## 暖機模式（程序內先暖機 3 次，再計時 1 次）", legacy_readme)
             self.assertNotIn("## 標準模式（", legacy_readme)
             for language in ("csharp", "aquarius_typed"):
                 del legacy["runtimes"][language]
                 del legacy["cases"][f"fibonacci/{language}"]
-            legacy_readme = generate_readme(legacy)
+            legacy_readme = generate_readme(legacy, "tw")
             self.assertTrue(legacy_readme.startswith("# 星泉、Python、Node.js 桌面執行效能評比"))
             self.assertNotIn("C#", legacy_readme)
             self.assertNotIn("星泉（型別） vs Node.js", legacy_readme)
+            self.assertTrue(generate_readme(legacy).startswith(
+                "# Desktop performance benchmark: AquariusLang, Python, Node.js"))
             legacy["config"]["in_process_warmups"] = 0  # The original cold design.
-            self.assertIn("## 標準模式（冷啟動，每個程序計時一次）", generate_readme(legacy))
+            self.assertIn("## 標準模式（冷啟動，每個程序計時一次）", generate_readme(legacy, "tw"))
 
     def test_committed_report_renders(self):
         report = json.loads((ROOT / "results" / "latest.json").read_text(encoding="utf-8"))
-        self.assertIn("模式（", generate_readme(report))
+        self.assertIn("模式（", generate_readme(report, "tw"))
+        self.assertIn("mode (", generate_readme(report))
 
     def test_modes_are_scored_separately(self):
         report = {"benchmarks": {"first": {}}, "runtimes": {"python": {}, "node": {}},
@@ -240,15 +252,20 @@ class HarnessTests(unittest.TestCase):
             "fibonacci/node": {"summary": {"status": "ok", "median_ms": 8.0}},
             "sieve/aquarius_typed": {"summary": {"status": "ok", "median_ms": 4.0}},
             "sieve/node": {"summary": {"status": "ok", "median_ms": 2.0}}}}
-        lines = "\n".join(typed_vs_node_lines(view, titles, "暖機模式"))
+        lines = "\n".join(typed_vs_node_lines(view, titles, "暖機模式", "tw"))
         self.assertIn("| 4.00 倍 | 星泉（型別） 快 4.00 倍 |", lines)
         self.assertIn("| 0.50 倍 | Node.js 快 2.00 倍 |", lines)
         self.assertIn("**1.41 倍**", lines)  # Geometric mean of 4 and 0.5.
+        english = "\n".join(typed_vs_node_lines(view, {"aquarius_typed": "AquariusLang (typed)", "node": "Node.js"},
+                                                 "warmed mode", "en"))
+        self.assertIn("| 4.00× | AquariusLang (typed), 4.00× faster |", english)
+        self.assertIn("| 0.50× | Node.js, 2.00× faster |", english)
+        self.assertIn("| **Geometric mean** | | | | **1.41×** |", english)
         view["cases"]["sieve/node"]["summary"] = {"status": "failed"}
-        lines = "\n".join(typed_vs_node_lines(view, titles, "暖機模式"))
+        lines = "\n".join(typed_vs_node_lines(view, titles, "暖機模式", "tw"))
         self.assertIn("失敗", lines)
         self.assertNotIn("幾何平均", lines)
-        self.assertEqual(typed_vs_node_lines(view, {"node": "Node.js"}, "暖機模式"), [])
+        self.assertEqual(typed_vs_node_lines(view, {"node": "Node.js"}, "暖機模式", "tw"), [])
 
     def test_composite_score_uses_equal_weight_geometric_mean(self):
         report = {"benchmarks": {"first": {}, "second": {}}, "cases": {}}

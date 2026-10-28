@@ -1,338 +1,340 @@
-# 星泉、星泉（型別）、Python、Node.js、C# 桌面執行效能評比
+# Desktop performance benchmark: AquariusLang, AquariusLang (typed), Python, Node.js, C#
 
-> **注意：標準規模多數項目只需約 1 毫秒，結果主要反映短程式的啟動後延遲（JIT 暖機、記憶體初始配置），不代表持續執行的速度。比較語言速度請參考 `--profile large`。**
+<p><a href="README.tw.md">繁體中文</a> | <strong>English</strong></p>
 
-本次測量 2 種模式，各自計算綜合分數（越高越快，最快語言為 100 分）：
+> **Note: at the standard size most tests take about 1 millisecond, so the results mainly reflect a short program's latency after start-up (JIT warm-up, initial memory allocation), not sustained speed. To compare language speed, use `--profile large`.**
 
-- **標準模式（冷啟動，每個程序計時一次）**：星泉（型別） 100.00 分、星泉 85.12 分、C# 65.28 分、Node.js 27.09 分、Python 5.29 分
-- **暖機模式（程序內先暖機 5 次，再計時 5 次取中位數）**：C# 100.00 分、星泉（型別） 49.04 分、Node.js 41.43 分、星泉 37.65 分、Python 2.13 分
+This run measured 2 modes, each with its own composite score (higher is faster; the fastest language scores 100):
 
-本專案提供十種經典演算法、50 份可獨立執行的測試程式，以及負責驗證結果、產生 README 與 JSON／CSV 報告的 Python 主控程式。
+- **Standard mode (cold start, one timed run per process)**: AquariusLang (typed) 100.00, AquariusLang 85.12, C# 65.28, Node.js 27.09, Python 5.29
+- **Warmed mode (5 in-process warm-up runs, then the median of 5 timed runs)**: C# 100.00, AquariusLang (typed) 49.04, Node.js 41.43, AquariusLang 37.65, Python 2.13
 
-## 標準模式（冷啟動，每個程序計時一次）
+The project provides ten classic algorithms, 50 standalone benchmark programs, and a Python harness that validates the results and generates the READMEs and the JSON and CSV reports.
 
-每個程序只執行一次工作負載並計時，不在程序內暖機，與最初的設計相同。C# 與 Node.js 的 JIT 編譯與最佳化落在計時區間內，星泉的 Wasm 則已在計時前由 Wasmtime 編譯完成，因此此模式反映短程式從程序啟動後第一次執行的表現。每組的值為 5 個程序計時值的中位數。
+## Standard mode (cold start, one timed run per process)
 
-**綜合效能：星泉（型別） 100.00 分、星泉 85.12 分、C# 65.28 分、Node.js 27.09 分、Python 5.29 分（越高越快）。**
+Each process runs and times the workload once, with no in-process warm-up, as in the original design. The JIT compilation and optimization of C# and Node.js fall inside the timed interval, while Wasmtime has already compiled the AquariusLang Wasm before timing starts, so this mode reflects a short program's first run after process start. Each value is the median of 5 process timings.
 
-綜合速度兩兩比較：星泉（型別） 的綜合速度是 星泉 的 1.17 倍；星泉（型別） 的綜合速度是 C# 的 1.53 倍；星泉（型別） 的綜合速度是 Node.js 的 3.69 倍；星泉（型別） 的綜合速度是 Python 的 18.92 倍；星泉 的綜合速度是 C# 的 1.30 倍；星泉 的綜合速度是 Node.js 的 3.14 倍；星泉 的綜合速度是 Python 的 16.10 倍；C# 的綜合速度是 Node.js 的 2.41 倍；C# 的綜合速度是 Python 的 12.35 倍；Node.js 的綜合速度是 Python 的 5.12 倍。
+**Composite performance: AquariusLang (typed) 100.00, AquariusLang 85.12, C# 65.28, Node.js 27.09, Python 5.29 (higher is faster).**
 
-| 排名 | 程式語言 | 綜合分數 | 相對 星泉（型別） 的速度 | 相對 星泉 的速度 | 相對 C# 的速度 | 相對 Node.js 的速度 | 相對 Python 的速度 |
+Pairwise composite speed: AquariusLang (typed) is 1.17× as fast as AquariusLang; AquariusLang (typed) is 1.53× as fast as C#; AquariusLang (typed) is 3.69× as fast as Node.js; AquariusLang (typed) is 18.92× as fast as Python; AquariusLang is 1.30× as fast as C#; AquariusLang is 3.14× as fast as Node.js; AquariusLang is 16.10× as fast as Python; C# is 2.41× as fast as Node.js; C# is 12.35× as fast as Python; Node.js is 5.12× as fast as Python.
+
+| Rank | Language | Composite score | Speed vs AquariusLang (typed) | Speed vs AquariusLang | Speed vs C# | Speed vs Node.js | Speed vs Python |
 | ---: | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| 1 | 星泉（型別） | 100.00 | 1.000 倍 | 1.175 倍 | 1.532 倍 | 3.691 倍 | 18.915 倍 |
-| 2 | 星泉 | 85.12 | 0.851 倍 | 1.000 倍 | 1.304 倍 | 3.142 倍 | 16.101 倍 |
-| 3 | C# | 65.28 | 0.653 倍 | 0.767 倍 | 1.000 倍 | 2.410 倍 | 12.348 倍 |
-| 4 | Node.js | 27.09 | 0.271 倍 | 0.318 倍 | 0.415 倍 | 1.000 倍 | 5.124 倍 |
-| 5 | Python | 5.29 | 0.053 倍 | 0.062 倍 | 0.081 倍 | 0.195 倍 | 1.000 倍 |
+| 1 | AquariusLang (typed) | 100.00 | 1.000× | 1.175× | 1.532× | 3.691× | 18.915× |
+| 2 | AquariusLang | 85.12 | 0.851× | 1.000× | 1.304× | 3.142× | 16.101× |
+| 3 | C# | 65.28 | 0.653× | 0.767× | 1.000× | 2.410× | 12.348× |
+| 4 | Node.js | 27.09 | 0.271× | 0.318× | 0.415× | 1.000× | 5.124× |
+| 5 | Python | 5.29 | 0.053× | 0.062× | 0.081× | 0.195× | 1.000× |
 
-### 各項效能結果（標準模式）
+### Results per benchmark (standard mode)
 
-耗時單位為毫秒（ms），越低越快。耗時倍率 = 該語言耗時中位數 ÷ Python 耗時中位數；小於 1 表示該項測試比 Python 快。此耗時倍率與綜合分數的方向相反。
+Times are in milliseconds (ms); lower is faster. Time ratio = the language's median time ÷ Python's median time; below 1 means that test ran faster than Python. This ratio points the opposite way from the composite score.
 
-| 演算法 | n | 星泉 中位數 | 星泉（型別） 中位數 | Python 中位數 | Node.js 中位數 | C# 中位數 | 星泉／Python 耗時倍率 | 星泉（型別）／Python 耗時倍率 | Node.js／Python 耗時倍率 | C#／Python 耗時倍率 |
+| Benchmark | n | AquariusLang median | AquariusLang (typed) median | Python median | Node.js median | C# median | AquariusLang / Python time ratio | AquariusLang (typed) / Python time ratio | Node.js / Python time ratio | C# / Python time ratio |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| 遞迴費波那契 | 28 | 1.562 | 1.691 | 33.336 | 2.429 | 0.832 | 0.05 倍 | 0.05 倍 | 0.07 倍 | 0.02 倍 |
-| 阿克曼函數 | 6 | 0.747 | 0.731 | 10.813 | 0.667 | 0.241 | 0.07 倍 | 0.07 倍 | 0.06 倍 | 0.02 倍 |
-| 埃拉托斯特尼篩法 | 10000 | 0.081 | 0.042 | 0.570 | 0.656 | 0.477 | 0.14 倍 | 0.07 倍 | 1.15 倍 | 0.84 倍 |
-| 快速排序 | 2000 | 0.257 | 0.129 | 1.440 | 0.946 | 0.537 | 0.18 倍 | 0.09 倍 | 0.66 倍 | 0.37 倍 |
-| 矩陣乘法 | 45 | 0.253 | 0.136 | 5.575 | 1.362 | 0.302 | 0.05 倍 | 0.02 倍 | 0.24 倍 | 0.05 倍 |
-| 曼德布洛特集合 | 80 | 0.314 | 0.327 | 12.132 | 1.053 | 0.379 | 0.03 倍 | 0.03 倍 | 0.09 倍 | 0.03 倍 |
-| N 皇后問題 | 8 | 0.230 | 0.250 | 3.595 | 0.842 | 0.410 | 0.06 倍 | 0.07 倍 | 0.23 倍 | 0.11 倍 |
-| 二元樹 | 12 | 2.346 | 2.448 | 8.904 | 3.510 | 1.516 | 0.26 倍 | 0.27 倍 | 0.39 倍 | 0.17 倍 |
-| 譜範數 | 60 | 0.298 | 0.276 | 15.287 | 1.681 | 1.165 | 0.02 倍 | 0.02 倍 | 0.11 倍 | 0.08 倍 |
-| 考拉茲猜想 | 10000 | 1.359 | 1.658 | 50.573 | 5.547 | 1.410 | 0.03 倍 | 0.03 倍 | 0.11 倍 | 0.03 倍 |
+| Recursive Fibonacci | 28 | 1.562 | 1.691 | 33.336 | 2.429 | 0.832 | 0.05× | 0.05× | 0.07× | 0.02× |
+| Ackermann function | 6 | 0.747 | 0.731 | 10.813 | 0.667 | 0.241 | 0.07× | 0.07× | 0.06× | 0.02× |
+| Sieve of Eratosthenes | 10000 | 0.081 | 0.042 | 0.570 | 0.656 | 0.477 | 0.14× | 0.07× | 1.15× | 0.84× |
+| Quicksort | 2000 | 0.257 | 0.129 | 1.440 | 0.946 | 0.537 | 0.18× | 0.09× | 0.66× | 0.37× |
+| Matrix multiplication | 45 | 0.253 | 0.136 | 5.575 | 1.362 | 0.302 | 0.05× | 0.02× | 0.24× | 0.05× |
+| Mandelbrot set | 80 | 0.314 | 0.327 | 12.132 | 1.053 | 0.379 | 0.03× | 0.03× | 0.09× | 0.03× |
+| N-Queens | 8 | 0.230 | 0.250 | 3.595 | 0.842 | 0.410 | 0.06× | 0.07× | 0.23× | 0.11× |
+| Binary trees | 12 | 2.346 | 2.448 | 8.904 | 3.510 | 1.516 | 0.26× | 0.27× | 0.39× | 0.17× |
+| Spectral norm | 60 | 0.298 | 0.276 | 15.287 | 1.681 | 1.165 | 0.02× | 0.02× | 0.11× | 0.08× |
+| Collatz conjecture | 10000 | 1.359 | 1.658 | 50.573 | 5.547 | 1.410 | 0.03× | 0.03× | 0.11× | 0.03× |
 
-### 星泉（型別） vs Node.js（標準模式）
+### AquariusLang (typed) vs Node.js (standard mode)
 
-倍率 = Node.js 耗時中位數 ÷ 星泉（型別）耗時中位數；大於 1 表示星泉（型別）較快，小於 1 表示 Node.js 較快。
+Ratio = Node.js median time ÷ AquariusLang (typed) median time; above 1 means AquariusLang (typed) is faster, below 1 means Node.js is faster.
 
-| 演算法 | n | 星泉（型別） 中位數 | Node.js 中位數 | Node.js ÷ 星泉（型別） | 較快者 |
+| Benchmark | n | AquariusLang (typed) median | Node.js median | Node.js ÷ AquariusLang (typed) | Faster |
 | --- | ---: | ---: | ---: | ---: | --- |
-| 遞迴費波那契 | 28 | 1.691 | 2.429 | 1.44 倍 | 星泉（型別） 快 1.44 倍 |
-| 阿克曼函數 | 6 | 0.731 | 0.667 | 0.91 倍 | Node.js 快 1.10 倍 |
-| 埃拉托斯特尼篩法 | 10000 | 0.042 | 0.656 | 15.43 倍 | 星泉（型別） 快 15.43 倍 |
-| 快速排序 | 2000 | 0.129 | 0.946 | 7.31 倍 | 星泉（型別） 快 7.31 倍 |
-| 矩陣乘法 | 45 | 0.136 | 1.362 | 10.02 倍 | 星泉（型別） 快 10.02 倍 |
-| 曼德布洛特集合 | 80 | 0.327 | 1.053 | 3.22 倍 | 星泉（型別） 快 3.22 倍 |
-| N 皇后問題 | 8 | 0.250 | 0.842 | 3.37 倍 | 星泉（型別） 快 3.37 倍 |
-| 二元樹 | 12 | 2.448 | 3.510 | 1.43 倍 | 星泉（型別） 快 1.43 倍 |
-| 譜範數 | 60 | 0.276 | 1.681 | 6.09 倍 | 星泉（型別） 快 6.09 倍 |
-| 考拉茲猜想 | 10000 | 1.658 | 5.547 | 3.35 倍 | 星泉（型別） 快 3.35 倍 |
-| **幾何平均** | | | | **3.69 倍** | 星泉（型別） 快 3.69 倍 |
+| Recursive Fibonacci | 28 | 1.691 | 2.429 | 1.44× | AquariusLang (typed), 1.44× faster |
+| Ackermann function | 6 | 0.731 | 0.667 | 0.91× | Node.js, 1.10× faster |
+| Sieve of Eratosthenes | 10000 | 0.042 | 0.656 | 15.43× | AquariusLang (typed), 15.43× faster |
+| Quicksort | 2000 | 0.129 | 0.946 | 7.31× | AquariusLang (typed), 7.31× faster |
+| Matrix multiplication | 45 | 0.136 | 1.362 | 10.02× | AquariusLang (typed), 10.02× faster |
+| Mandelbrot set | 80 | 0.327 | 1.053 | 3.22× | AquariusLang (typed), 3.22× faster |
+| N-Queens | 8 | 0.250 | 0.842 | 3.37× | AquariusLang (typed), 3.37× faster |
+| Binary trees | 12 | 2.448 | 3.510 | 1.43× | AquariusLang (typed), 1.43× faster |
+| Spectral norm | 60 | 0.276 | 1.681 | 6.09× | AquariusLang (typed), 6.09× faster |
+| Collatz conjecture | 10000 | 1.658 | 5.547 | 3.35× | AquariusLang (typed), 3.35× faster |
+| **Geometric mean** | | | | **3.69×** | AquariusLang (typed), 3.69× faster |
 
-### 耗時波動（標準模式）
+### Timing variability (standard mode)
 
-變異係數（CV）= 程序值的樣本標準差 ÷ 平均值。只有一筆樣本時，無法估計波動，以破折號表示。
+Coefficient of variation (CV) = sample standard deviation of the process values ÷ their mean. With a single sample the variability cannot be estimated and a dash is shown.
 
-| 演算法 | 語言 | 最小值 ms | 最大值 ms | 標準差 ms | 變異係數 | 有效樣本 |
+| Benchmark | Language | Min ms | Max ms | Std dev ms | CV | Valid samples |
 | --- | --- | ---: | ---: | ---: | ---: | ---: |
-| 遞迴費波那契 | 星泉 | 1.558 | 1.747 | 0.081 | 5.0% | 5/5 |
-| 遞迴費波那契 | 星泉（型別） | 1.565 | 2.134 | 0.262 | 14.5% | 5/5 |
-| 遞迴費波那契 | Python | 28.826 | 61.629 | 13.127 | 34.0% | 5/5 |
-| 遞迴費波那契 | Node.js | 2.341 | 3.148 | 0.410 | 15.3% | 5/5 |
-| 遞迴費波那契 | C# | 0.824 | 1.118 | 0.153 | 16.3% | 5/5 |
-| 阿克曼函數 | 星泉 | 0.553 | 0.814 | 0.099 | 13.7% | 5/5 |
-| 阿克曼函數 | 星泉（型別） | 0.557 | 0.738 | 0.097 | 14.5% | 5/5 |
-| 阿克曼函數 | Python | 10.658 | 11.151 | 0.183 | 1.7% | 5/5 |
-| 阿克曼函數 | Node.js | 0.654 | 0.949 | 0.144 | 18.9% | 5/5 |
-| 阿克曼函數 | C# | 0.230 | 0.389 | 0.069 | 24.7% | 5/5 |
-| 埃拉托斯特尼篩法 | 星泉 | 0.075 | 0.102 | 0.011 | 13.4% | 5/5 |
-| 埃拉托斯特尼篩法 | 星泉（型別） | 0.039 | 0.050 | 0.005 | 11.5% | 5/5 |
-| 埃拉托斯特尼篩法 | Python | 0.565 | 1.034 | 0.205 | 29.3% | 5/5 |
-| 埃拉托斯特尼篩法 | Node.js | 0.569 | 1.113 | 0.224 | 30.8% | 5/5 |
-| 埃拉托斯特尼篩法 | C# | 0.358 | 0.486 | 0.065 | 15.0% | 5/5 |
-| 快速排序 | 星泉 | 0.255 | 0.275 | 0.009 | 3.4% | 5/5 |
-| 快速排序 | 星泉（型別） | 0.123 | 0.191 | 0.030 | 20.4% | 5/5 |
-| 快速排序 | Python | 1.314 | 1.806 | 0.201 | 13.5% | 5/5 |
-| 快速排序 | Node.js | 0.840 | 1.035 | 0.079 | 8.3% | 5/5 |
-| 快速排序 | C# | 0.526 | 0.593 | 0.028 | 5.1% | 5/5 |
-| 矩陣乘法 | 星泉 | 0.199 | 0.451 | 0.104 | 38.2% | 5/5 |
-| 矩陣乘法 | 星泉（型別） | 0.128 | 0.192 | 0.026 | 17.9% | 5/5 |
-| 矩陣乘法 | Python | 5.274 | 7.343 | 0.850 | 14.5% | 5/5 |
-| 矩陣乘法 | Node.js | 1.294 | 1.531 | 0.094 | 6.8% | 5/5 |
-| 矩陣乘法 | C# | 0.287 | 0.336 | 0.019 | 6.4% | 5/5 |
-| 曼德布洛特集合 | 星泉 | 0.311 | 0.361 | 0.021 | 6.6% | 5/5 |
-| 曼德布洛特集合 | 星泉（型別） | 0.312 | 0.414 | 0.052 | 14.6% | 5/5 |
-| 曼德布洛特集合 | Python | 9.582 | 13.009 | 1.547 | 13.5% | 5/5 |
-| 曼德布洛特集合 | Node.js | 0.920 | 1.258 | 0.133 | 12.7% | 5/5 |
-| 曼德布洛特集合 | C# | 0.371 | 0.494 | 0.053 | 13.1% | 5/5 |
-| N 皇后問題 | 星泉 | 0.227 | 0.238 | 0.004 | 1.9% | 5/5 |
-| N 皇后問題 | 星泉（型別） | 0.195 | 0.273 | 0.036 | 15.2% | 5/5 |
-| N 皇后問題 | Python | 3.548 | 4.128 | 0.245 | 6.6% | 5/5 |
-| N 皇后問題 | Node.js | 0.678 | 1.118 | 0.183 | 21.3% | 5/5 |
-| N 皇后問題 | C# | 0.372 | 0.693 | 0.138 | 28.9% | 5/5 |
-| 二元樹 | 星泉 | 2.135 | 3.432 | 0.533 | 21.4% | 5/5 |
-| 二元樹 | 星泉（型別） | 2.153 | 2.596 | 0.187 | 7.8% | 5/5 |
-| 二元樹 | Python | 8.097 | 10.721 | 1.033 | 11.4% | 5/5 |
-| 二元樹 | Node.js | 3.062 | 4.412 | 0.600 | 16.2% | 5/5 |
-| 二元樹 | C# | 1.416 | 1.853 | 0.186 | 11.8% | 5/5 |
-| 譜範數 | 星泉 | 0.279 | 0.476 | 0.101 | 28.1% | 5/5 |
-| 譜範數 | 星泉（型別） | 0.266 | 0.422 | 0.071 | 22.2% | 5/5 |
-| 譜範數 | Python | 13.629 | 18.444 | 2.009 | 12.5% | 5/5 |
-| 譜範數 | Node.js | 1.494 | 13.266 | 5.947 | 101.2% | 5/5 |
-| 譜範數 | C# | 1.152 | 1.676 | 0.228 | 18.0% | 5/5 |
-| 考拉茲猜想 | 星泉 | 1.288 | 1.637 | 0.141 | 10.0% | 5/5 |
-| 考拉茲猜想 | 星泉（型別） | 1.253 | 3.939 | 1.118 | 56.1% | 5/5 |
-| 考拉茲猜想 | Python | 47.312 | 58.914 | 4.934 | 9.3% | 5/5 |
-| 考拉茲猜想 | Node.js | 4.753 | 6.451 | 0.740 | 13.3% | 5/5 |
-| 考拉茲猜想 | C# | 1.401 | 1.466 | 0.026 | 1.8% | 5/5 |
+| Recursive Fibonacci | AquariusLang | 1.558 | 1.747 | 0.081 | 5.0% | 5/5 |
+| Recursive Fibonacci | AquariusLang (typed) | 1.565 | 2.134 | 0.262 | 14.5% | 5/5 |
+| Recursive Fibonacci | Python | 28.826 | 61.629 | 13.127 | 34.0% | 5/5 |
+| Recursive Fibonacci | Node.js | 2.341 | 3.148 | 0.410 | 15.3% | 5/5 |
+| Recursive Fibonacci | C# | 0.824 | 1.118 | 0.153 | 16.3% | 5/5 |
+| Ackermann function | AquariusLang | 0.553 | 0.814 | 0.099 | 13.7% | 5/5 |
+| Ackermann function | AquariusLang (typed) | 0.557 | 0.738 | 0.097 | 14.5% | 5/5 |
+| Ackermann function | Python | 10.658 | 11.151 | 0.183 | 1.7% | 5/5 |
+| Ackermann function | Node.js | 0.654 | 0.949 | 0.144 | 18.9% | 5/5 |
+| Ackermann function | C# | 0.230 | 0.389 | 0.069 | 24.7% | 5/5 |
+| Sieve of Eratosthenes | AquariusLang | 0.075 | 0.102 | 0.011 | 13.4% | 5/5 |
+| Sieve of Eratosthenes | AquariusLang (typed) | 0.039 | 0.050 | 0.005 | 11.5% | 5/5 |
+| Sieve of Eratosthenes | Python | 0.565 | 1.034 | 0.205 | 29.3% | 5/5 |
+| Sieve of Eratosthenes | Node.js | 0.569 | 1.113 | 0.224 | 30.8% | 5/5 |
+| Sieve of Eratosthenes | C# | 0.358 | 0.486 | 0.065 | 15.0% | 5/5 |
+| Quicksort | AquariusLang | 0.255 | 0.275 | 0.009 | 3.4% | 5/5 |
+| Quicksort | AquariusLang (typed) | 0.123 | 0.191 | 0.030 | 20.4% | 5/5 |
+| Quicksort | Python | 1.314 | 1.806 | 0.201 | 13.5% | 5/5 |
+| Quicksort | Node.js | 0.840 | 1.035 | 0.079 | 8.3% | 5/5 |
+| Quicksort | C# | 0.526 | 0.593 | 0.028 | 5.1% | 5/5 |
+| Matrix multiplication | AquariusLang | 0.199 | 0.451 | 0.104 | 38.2% | 5/5 |
+| Matrix multiplication | AquariusLang (typed) | 0.128 | 0.192 | 0.026 | 17.9% | 5/5 |
+| Matrix multiplication | Python | 5.274 | 7.343 | 0.850 | 14.5% | 5/5 |
+| Matrix multiplication | Node.js | 1.294 | 1.531 | 0.094 | 6.8% | 5/5 |
+| Matrix multiplication | C# | 0.287 | 0.336 | 0.019 | 6.4% | 5/5 |
+| Mandelbrot set | AquariusLang | 0.311 | 0.361 | 0.021 | 6.6% | 5/5 |
+| Mandelbrot set | AquariusLang (typed) | 0.312 | 0.414 | 0.052 | 14.6% | 5/5 |
+| Mandelbrot set | Python | 9.582 | 13.009 | 1.547 | 13.5% | 5/5 |
+| Mandelbrot set | Node.js | 0.920 | 1.258 | 0.133 | 12.7% | 5/5 |
+| Mandelbrot set | C# | 0.371 | 0.494 | 0.053 | 13.1% | 5/5 |
+| N-Queens | AquariusLang | 0.227 | 0.238 | 0.004 | 1.9% | 5/5 |
+| N-Queens | AquariusLang (typed) | 0.195 | 0.273 | 0.036 | 15.2% | 5/5 |
+| N-Queens | Python | 3.548 | 4.128 | 0.245 | 6.6% | 5/5 |
+| N-Queens | Node.js | 0.678 | 1.118 | 0.183 | 21.3% | 5/5 |
+| N-Queens | C# | 0.372 | 0.693 | 0.138 | 28.9% | 5/5 |
+| Binary trees | AquariusLang | 2.135 | 3.432 | 0.533 | 21.4% | 5/5 |
+| Binary trees | AquariusLang (typed) | 2.153 | 2.596 | 0.187 | 7.8% | 5/5 |
+| Binary trees | Python | 8.097 | 10.721 | 1.033 | 11.4% | 5/5 |
+| Binary trees | Node.js | 3.062 | 4.412 | 0.600 | 16.2% | 5/5 |
+| Binary trees | C# | 1.416 | 1.853 | 0.186 | 11.8% | 5/5 |
+| Spectral norm | AquariusLang | 0.279 | 0.476 | 0.101 | 28.1% | 5/5 |
+| Spectral norm | AquariusLang (typed) | 0.266 | 0.422 | 0.071 | 22.2% | 5/5 |
+| Spectral norm | Python | 13.629 | 18.444 | 2.009 | 12.5% | 5/5 |
+| Spectral norm | Node.js | 1.494 | 13.266 | 5.947 | 101.2% | 5/5 |
+| Spectral norm | C# | 1.152 | 1.676 | 0.228 | 18.0% | 5/5 |
+| Collatz conjecture | AquariusLang | 1.288 | 1.637 | 0.141 | 10.0% | 5/5 |
+| Collatz conjecture | AquariusLang (typed) | 1.253 | 3.939 | 1.118 | 56.1% | 5/5 |
+| Collatz conjecture | Python | 47.312 | 58.914 | 4.934 | 9.3% | 5/5 |
+| Collatz conjecture | Node.js | 4.753 | 6.451 | 0.740 | 13.3% | 5/5 |
+| Collatz conjecture | C# | 1.401 | 1.466 | 0.026 | 1.8% | 5/5 |
 
-## 暖機模式（程序內先暖機 5 次，再計時 5 次取中位數）
+## Warmed mode (5 in-process warm-up runs, then the median of 5 timed runs)
 
-每個程序先在同一程序內不計時執行同一工作負載 5 次，讓 C# 與 Node.js 的 JIT 在計時前完成最佳化，再於同一程序內連續計時 5 次，該程序的值為這 5 次的中位數；每組的值為 5 個程序值的中位數。各語言的暖機與計時次數相同。
+Each process first runs the same workload 5 times untimed in the same process so the JIT of C# and Node.js finishes optimizing before timing, then times 5 consecutive runs in the same process and takes their median as the process value; each value is the median of 5 process values. Every language gets the same warm-up and timed run counts.
 
-**綜合效能：C# 100.00 分、星泉（型別） 49.04 分、Node.js 41.43 分、星泉 37.65 分、Python 2.13 分（越高越快）。**
+**Composite performance: C# 100.00, AquariusLang (typed) 49.04, Node.js 41.43, AquariusLang 37.65, Python 2.13 (higher is faster).**
 
-綜合速度兩兩比較：C# 的綜合速度是 星泉（型別） 的 2.04 倍；C# 的綜合速度是 Node.js 的 2.41 倍；C# 的綜合速度是 星泉 的 2.66 倍；C# 的綜合速度是 Python 的 46.92 倍；星泉（型別） 的綜合速度是 Node.js 的 1.18 倍；星泉（型別） 的綜合速度是 星泉 的 1.30 倍；星泉（型別） 的綜合速度是 Python 的 23.01 倍；Node.js 的綜合速度是 星泉 的 1.10 倍；Node.js 的綜合速度是 Python 的 19.44 倍；星泉 的綜合速度是 Python 的 17.67 倍。
+Pairwise composite speed: C# is 2.04× as fast as AquariusLang (typed); C# is 2.41× as fast as Node.js; C# is 2.66× as fast as AquariusLang; C# is 46.92× as fast as Python; AquariusLang (typed) is 1.18× as fast as Node.js; AquariusLang (typed) is 1.30× as fast as AquariusLang; AquariusLang (typed) is 23.01× as fast as Python; Node.js is 1.10× as fast as AquariusLang; Node.js is 19.44× as fast as Python; AquariusLang is 17.67× as fast as Python.
 
-| 排名 | 程式語言 | 綜合分數 | 相對 C# 的速度 | 相對 星泉（型別） 的速度 | 相對 Node.js 的速度 | 相對 星泉 的速度 | 相對 Python 的速度 |
+| Rank | Language | Composite score | Speed vs C# | Speed vs AquariusLang (typed) | Speed vs Node.js | Speed vs AquariusLang | Speed vs Python |
 | ---: | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| 1 | C# | 100.00 | 1.000 倍 | 2.039 倍 | 2.414 倍 | 2.656 倍 | 46.924 倍 |
-| 2 | 星泉（型別） | 49.04 | 0.490 倍 | 1.000 倍 | 1.184 倍 | 1.303 倍 | 23.013 倍 |
-| 3 | Node.js | 41.43 | 0.414 倍 | 0.845 倍 | 1.000 倍 | 1.100 倍 | 19.442 倍 |
-| 4 | 星泉 | 37.65 | 0.377 倍 | 0.768 倍 | 0.909 倍 | 1.000 倍 | 17.668 倍 |
-| 5 | Python | 2.13 | 0.021 倍 | 0.043 倍 | 0.051 倍 | 0.057 倍 | 1.000 倍 |
+| 1 | C# | 100.00 | 1.000× | 2.039× | 2.414× | 2.656× | 46.924× |
+| 2 | AquariusLang (typed) | 49.04 | 0.490× | 1.000× | 1.184× | 1.303× | 23.013× |
+| 3 | Node.js | 41.43 | 0.414× | 0.845× | 1.000× | 1.100× | 19.442× |
+| 4 | AquariusLang | 37.65 | 0.377× | 0.768× | 0.909× | 1.000× | 17.668× |
+| 5 | Python | 2.13 | 0.021× | 0.043× | 0.051× | 0.057× | 1.000× |
 
-### 各項效能結果（暖機模式）
+### Results per benchmark (warmed mode)
 
-耗時單位為毫秒（ms），越低越快。耗時倍率 = 該語言耗時中位數 ÷ Python 耗時中位數；小於 1 表示該項測試比 Python 快。此耗時倍率與綜合分數的方向相反。
+Times are in milliseconds (ms); lower is faster. Time ratio = the language's median time ÷ Python's median time; below 1 means that test ran faster than Python. This ratio points the opposite way from the composite score.
 
-| 演算法 | n | 星泉 中位數 | 星泉（型別） 中位數 | Python 中位數 | Node.js 中位數 | C# 中位數 | 星泉／Python 耗時倍率 | 星泉（型別）／Python 耗時倍率 | Node.js／Python 耗時倍率 | C#／Python 耗時倍率 |
+| Benchmark | n | AquariusLang median | AquariusLang (typed) median | Python median | Node.js median | C# median | AquariusLang / Python time ratio | AquariusLang (typed) / Python time ratio | Node.js / Python time ratio | C# / Python time ratio |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| 遞迴費波那契 | 28 | 1.705 | 1.706 | 30.415 | 2.155 | 0.749 | 0.06 倍 | 0.06 倍 | 0.07 倍 | 0.02 倍 |
-| 阿克曼函數 | 6 | 0.557 | 0.712 | 13.994 | 0.471 | 0.141 | 0.04 倍 | 0.05 倍 | 0.03 倍 | 0.01 倍 |
-| 埃拉托斯特尼篩法 | 10000 | 0.086 | 0.039 | 0.539 | 0.124 | 0.019 | 0.16 倍 | 0.07 倍 | 0.23 倍 | 0.04 倍 |
-| 快速排序 | 2000 | 0.230 | 0.114 | 1.494 | 0.168 | 0.076 | 0.15 倍 | 0.08 倍 | 0.11 倍 | 0.05 倍 |
-| 矩陣乘法 | 45 | 0.243 | 0.134 | 7.777 | 0.239 | 0.065 | 0.03 倍 | 0.02 倍 | 0.03 倍 | 0.01 倍 |
-| 曼德布洛特集合 | 80 | 0.318 | 0.321 | 12.369 | 0.233 | 0.247 | 0.03 倍 | 0.03 倍 | 0.02 倍 | 0.02 倍 |
-| N 皇后問題 | 8 | 0.291 | 0.202 | 4.646 | 0.157 | 0.119 | 0.06 倍 | 0.04 倍 | 0.03 倍 | 0.03 倍 |
-| 二元樹 | 12 | 2.797 | 2.032 | 8.609 | 0.828 | 0.451 | 0.32 倍 | 0.24 倍 | 0.10 倍 | 0.05 倍 |
-| 譜範數 | 60 | 0.272 | 0.252 | 14.204 | 0.310 | 0.132 | 0.02 倍 | 0.02 倍 | 0.02 倍 | 0.01 倍 |
-| 考拉茲猜想 | 10000 | 1.284 | 1.234 | 65.128 | 3.331 | 1.351 | 0.02 倍 | 0.02 倍 | 0.05 倍 | 0.02 倍 |
+| Recursive Fibonacci | 28 | 1.705 | 1.706 | 30.415 | 2.155 | 0.749 | 0.06× | 0.06× | 0.07× | 0.02× |
+| Ackermann function | 6 | 0.557 | 0.712 | 13.994 | 0.471 | 0.141 | 0.04× | 0.05× | 0.03× | 0.01× |
+| Sieve of Eratosthenes | 10000 | 0.086 | 0.039 | 0.539 | 0.124 | 0.019 | 0.16× | 0.07× | 0.23× | 0.04× |
+| Quicksort | 2000 | 0.230 | 0.114 | 1.494 | 0.168 | 0.076 | 0.15× | 0.08× | 0.11× | 0.05× |
+| Matrix multiplication | 45 | 0.243 | 0.134 | 7.777 | 0.239 | 0.065 | 0.03× | 0.02× | 0.03× | 0.01× |
+| Mandelbrot set | 80 | 0.318 | 0.321 | 12.369 | 0.233 | 0.247 | 0.03× | 0.03× | 0.02× | 0.02× |
+| N-Queens | 8 | 0.291 | 0.202 | 4.646 | 0.157 | 0.119 | 0.06× | 0.04× | 0.03× | 0.03× |
+| Binary trees | 12 | 2.797 | 2.032 | 8.609 | 0.828 | 0.451 | 0.32× | 0.24× | 0.10× | 0.05× |
+| Spectral norm | 60 | 0.272 | 0.252 | 14.204 | 0.310 | 0.132 | 0.02× | 0.02× | 0.02× | 0.01× |
+| Collatz conjecture | 10000 | 1.284 | 1.234 | 65.128 | 3.331 | 1.351 | 0.02× | 0.02× | 0.05× | 0.02× |
 
-### 星泉（型別） vs Node.js（暖機模式）
+### AquariusLang (typed) vs Node.js (warmed mode)
 
-倍率 = Node.js 耗時中位數 ÷ 星泉（型別）耗時中位數；大於 1 表示星泉（型別）較快，小於 1 表示 Node.js 較快。
+Ratio = Node.js median time ÷ AquariusLang (typed) median time; above 1 means AquariusLang (typed) is faster, below 1 means Node.js is faster.
 
-| 演算法 | n | 星泉（型別） 中位數 | Node.js 中位數 | Node.js ÷ 星泉（型別） | 較快者 |
+| Benchmark | n | AquariusLang (typed) median | Node.js median | Node.js ÷ AquariusLang (typed) | Faster |
 | --- | ---: | ---: | ---: | ---: | --- |
-| 遞迴費波那契 | 28 | 1.706 | 2.155 | 1.26 倍 | 星泉（型別） 快 1.26 倍 |
-| 阿克曼函數 | 6 | 0.712 | 0.471 | 0.66 倍 | Node.js 快 1.51 倍 |
-| 埃拉托斯特尼篩法 | 10000 | 0.039 | 0.124 | 3.21 倍 | 星泉（型別） 快 3.21 倍 |
-| 快速排序 | 2000 | 0.114 | 0.168 | 1.47 倍 | 星泉（型別） 快 1.47 倍 |
-| 矩陣乘法 | 45 | 0.134 | 0.239 | 1.78 倍 | 星泉（型別） 快 1.78 倍 |
-| 曼德布洛特集合 | 80 | 0.321 | 0.233 | 0.73 倍 | Node.js 快 1.38 倍 |
-| N 皇后問題 | 8 | 0.202 | 0.157 | 0.78 倍 | Node.js 快 1.29 倍 |
-| 二元樹 | 12 | 2.032 | 0.828 | 0.41 倍 | Node.js 快 2.45 倍 |
-| 譜範數 | 60 | 0.252 | 0.310 | 1.23 倍 | 星泉（型別） 快 1.23 倍 |
-| 考拉茲猜想 | 10000 | 1.234 | 3.331 | 2.70 倍 | 星泉（型別） 快 2.70 倍 |
-| **幾何平均** | | | | **1.18 倍** | 星泉（型別） 快 1.18 倍 |
+| Recursive Fibonacci | 28 | 1.706 | 2.155 | 1.26× | AquariusLang (typed), 1.26× faster |
+| Ackermann function | 6 | 0.712 | 0.471 | 0.66× | Node.js, 1.51× faster |
+| Sieve of Eratosthenes | 10000 | 0.039 | 0.124 | 3.21× | AquariusLang (typed), 3.21× faster |
+| Quicksort | 2000 | 0.114 | 0.168 | 1.47× | AquariusLang (typed), 1.47× faster |
+| Matrix multiplication | 45 | 0.134 | 0.239 | 1.78× | AquariusLang (typed), 1.78× faster |
+| Mandelbrot set | 80 | 0.321 | 0.233 | 0.73× | Node.js, 1.38× faster |
+| N-Queens | 8 | 0.202 | 0.157 | 0.78× | Node.js, 1.29× faster |
+| Binary trees | 12 | 2.032 | 0.828 | 0.41× | Node.js, 2.45× faster |
+| Spectral norm | 60 | 0.252 | 0.310 | 1.23× | AquariusLang (typed), 1.23× faster |
+| Collatz conjecture | 10000 | 1.234 | 3.331 | 2.70× | AquariusLang (typed), 2.70× faster |
+| **Geometric mean** | | | | **1.18×** | AquariusLang (typed), 1.18× faster |
 
-### 耗時波動（暖機模式）
+### Timing variability (warmed mode)
 
-變異係數（CV）= 程序值的樣本標準差 ÷ 平均值。只有一筆樣本時，無法估計波動，以破折號表示。
+Coefficient of variation (CV) = sample standard deviation of the process values ÷ their mean. With a single sample the variability cannot be estimated and a dash is shown.
 
-| 演算法 | 語言 | 最小值 ms | 最大值 ms | 標準差 ms | 變異係數 | 有效樣本 |
+| Benchmark | Language | Min ms | Max ms | Std dev ms | CV | Valid samples |
 | --- | --- | ---: | ---: | ---: | ---: | ---: |
-| 遞迴費波那契 | 星泉 | 1.528 | 1.857 | 0.148 | 8.8% | 5/5 |
-| 遞迴費波那契 | 星泉（型別） | 1.524 | 2.003 | 0.212 | 12.2% | 5/5 |
-| 遞迴費波那契 | Python | 26.158 | 45.552 | 7.652 | 23.0% | 5/5 |
-| 遞迴費波那契 | Node.js | 1.994 | 2.270 | 0.111 | 5.2% | 5/5 |
-| 遞迴費波那契 | C# | 0.733 | 0.969 | 0.099 | 12.5% | 5/5 |
-| 阿克曼函數 | 星泉 | 0.555 | 0.733 | 0.092 | 14.8% | 5/5 |
-| 阿克曼函數 | 星泉（型別） | 0.545 | 0.748 | 0.094 | 14.3% | 5/5 |
-| 阿克曼函數 | Python | 10.973 | 17.812 | 2.862 | 20.6% | 5/5 |
-| 阿克曼函數 | Node.js | 0.358 | 0.491 | 0.063 | 14.5% | 5/5 |
-| 阿克曼函數 | C# | 0.128 | 0.195 | 0.027 | 18.3% | 5/5 |
-| 埃拉托斯特尼篩法 | 星泉 | 0.082 | 0.106 | 0.010 | 10.9% | 5/5 |
-| 埃拉托斯特尼篩法 | 星泉（型別） | 0.038 | 0.051 | 0.007 | 15.2% | 5/5 |
-| 埃拉托斯特尼篩法 | Python | 0.528 | 0.721 | 0.081 | 14.1% | 5/5 |
-| 埃拉托斯特尼篩法 | Node.js | 0.117 | 0.181 | 0.027 | 19.6% | 5/5 |
-| 埃拉托斯特尼篩法 | C# | 0.019 | 0.031 | 0.005 | 24.4% | 5/5 |
-| 快速排序 | 星泉 | 0.227 | 0.443 | 0.096 | 35.1% | 5/5 |
-| 快速排序 | 星泉（型別） | 0.111 | 0.154 | 0.018 | 14.5% | 5/5 |
-| 快速排序 | Python | 1.261 | 1.929 | 0.271 | 17.9% | 5/5 |
-| 快速排序 | Node.js | 0.150 | 0.190 | 0.015 | 8.8% | 5/5 |
-| 快速排序 | C# | 0.073 | 0.111 | 0.017 | 19.8% | 5/5 |
-| 矩陣乘法 | 星泉 | 0.193 | 0.264 | 0.029 | 12.3% | 5/5 |
-| 矩陣乘法 | 星泉（型別） | 0.129 | 0.172 | 0.018 | 12.3% | 5/5 |
-| 矩陣乘法 | Python | 7.339 | 8.952 | 0.635 | 8.0% | 5/5 |
-| 矩陣乘法 | Node.js | 0.122 | 0.323 | 0.081 | 36.5% | 5/5 |
-| 矩陣乘法 | C# | 0.058 | 0.075 | 0.007 | 10.1% | 5/5 |
-| 曼德布洛特集合 | 星泉 | 0.300 | 0.400 | 0.041 | 12.5% | 5/5 |
-| 曼德布洛特集合 | 星泉（型別） | 0.299 | 0.397 | 0.040 | 12.1% | 5/5 |
-| 曼德布洛特集合 | Python | 9.653 | 19.111 | 3.918 | 30.2% | 5/5 |
-| 曼德布洛特集合 | Node.js | 0.227 | 0.237 | 0.004 | 1.6% | 5/5 |
-| 曼德布洛特集合 | C# | 0.226 | 0.297 | 0.034 | 13.2% | 5/5 |
-| N 皇后問題 | 星泉 | 0.286 | 0.332 | 0.019 | 6.2% | 5/5 |
-| N 皇后問題 | 星泉（型別） | 0.186 | 0.267 | 0.037 | 17.0% | 5/5 |
-| N 皇后問題 | Python | 3.760 | 11.342 | 3.181 | 55.6% | 5/5 |
-| N 皇后問題 | Node.js | 0.157 | 0.198 | 0.018 | 10.7% | 5/5 |
-| N 皇后問題 | C# | 0.112 | 0.166 | 0.023 | 17.8% | 5/5 |
-| 二元樹 | 星泉 | 2.306 | 3.320 | 0.367 | 13.0% | 5/5 |
-| 二元樹 | 星泉（型別） | 1.677 | 2.714 | 0.438 | 20.5% | 5/5 |
-| 二元樹 | Python | 7.880 | 24.511 | 7.203 | 61.7% | 5/5 |
-| 二元樹 | Node.js | 0.765 | 0.866 | 0.040 | 4.9% | 5/5 |
-| 二元樹 | C# | 0.448 | 0.575 | 0.064 | 12.9% | 5/5 |
-| 譜範數 | 星泉 | 0.266 | 0.310 | 0.018 | 6.5% | 5/5 |
-| 譜範數 | 星泉（型別） | 0.245 | 0.332 | 0.037 | 13.7% | 5/5 |
-| 譜範數 | Python | 13.799 | 27.926 | 6.065 | 35.3% | 5/5 |
-| 譜範數 | Node.js | 0.248 | 0.324 | 0.037 | 12.8% | 5/5 |
-| 譜範數 | C# | 0.129 | 0.138 | 0.004 | 2.7% | 5/5 |
-| 考拉茲猜想 | 星泉 | 1.250 | 1.647 | 0.196 | 13.9% | 5/5 |
-| 考拉茲猜想 | 星泉（型別） | 1.221 | 1.694 | 0.204 | 15.3% | 5/5 |
-| 考拉茲猜想 | Python | 45.843 | 67.460 | 8.791 | 14.5% | 5/5 |
-| 考拉茲猜想 | Node.js | 3.314 | 5.058 | 0.895 | 22.5% | 5/5 |
-| 考拉茲猜想 | C# | 1.321 | 1.777 | 0.205 | 13.9% | 5/5 |
+| Recursive Fibonacci | AquariusLang | 1.528 | 1.857 | 0.148 | 8.8% | 5/5 |
+| Recursive Fibonacci | AquariusLang (typed) | 1.524 | 2.003 | 0.212 | 12.2% | 5/5 |
+| Recursive Fibonacci | Python | 26.158 | 45.552 | 7.652 | 23.0% | 5/5 |
+| Recursive Fibonacci | Node.js | 1.994 | 2.270 | 0.111 | 5.2% | 5/5 |
+| Recursive Fibonacci | C# | 0.733 | 0.969 | 0.099 | 12.5% | 5/5 |
+| Ackermann function | AquariusLang | 0.555 | 0.733 | 0.092 | 14.8% | 5/5 |
+| Ackermann function | AquariusLang (typed) | 0.545 | 0.748 | 0.094 | 14.3% | 5/5 |
+| Ackermann function | Python | 10.973 | 17.812 | 2.862 | 20.6% | 5/5 |
+| Ackermann function | Node.js | 0.358 | 0.491 | 0.063 | 14.5% | 5/5 |
+| Ackermann function | C# | 0.128 | 0.195 | 0.027 | 18.3% | 5/5 |
+| Sieve of Eratosthenes | AquariusLang | 0.082 | 0.106 | 0.010 | 10.9% | 5/5 |
+| Sieve of Eratosthenes | AquariusLang (typed) | 0.038 | 0.051 | 0.007 | 15.2% | 5/5 |
+| Sieve of Eratosthenes | Python | 0.528 | 0.721 | 0.081 | 14.1% | 5/5 |
+| Sieve of Eratosthenes | Node.js | 0.117 | 0.181 | 0.027 | 19.6% | 5/5 |
+| Sieve of Eratosthenes | C# | 0.019 | 0.031 | 0.005 | 24.4% | 5/5 |
+| Quicksort | AquariusLang | 0.227 | 0.443 | 0.096 | 35.1% | 5/5 |
+| Quicksort | AquariusLang (typed) | 0.111 | 0.154 | 0.018 | 14.5% | 5/5 |
+| Quicksort | Python | 1.261 | 1.929 | 0.271 | 17.9% | 5/5 |
+| Quicksort | Node.js | 0.150 | 0.190 | 0.015 | 8.8% | 5/5 |
+| Quicksort | C# | 0.073 | 0.111 | 0.017 | 19.8% | 5/5 |
+| Matrix multiplication | AquariusLang | 0.193 | 0.264 | 0.029 | 12.3% | 5/5 |
+| Matrix multiplication | AquariusLang (typed) | 0.129 | 0.172 | 0.018 | 12.3% | 5/5 |
+| Matrix multiplication | Python | 7.339 | 8.952 | 0.635 | 8.0% | 5/5 |
+| Matrix multiplication | Node.js | 0.122 | 0.323 | 0.081 | 36.5% | 5/5 |
+| Matrix multiplication | C# | 0.058 | 0.075 | 0.007 | 10.1% | 5/5 |
+| Mandelbrot set | AquariusLang | 0.300 | 0.400 | 0.041 | 12.5% | 5/5 |
+| Mandelbrot set | AquariusLang (typed) | 0.299 | 0.397 | 0.040 | 12.1% | 5/5 |
+| Mandelbrot set | Python | 9.653 | 19.111 | 3.918 | 30.2% | 5/5 |
+| Mandelbrot set | Node.js | 0.227 | 0.237 | 0.004 | 1.6% | 5/5 |
+| Mandelbrot set | C# | 0.226 | 0.297 | 0.034 | 13.2% | 5/5 |
+| N-Queens | AquariusLang | 0.286 | 0.332 | 0.019 | 6.2% | 5/5 |
+| N-Queens | AquariusLang (typed) | 0.186 | 0.267 | 0.037 | 17.0% | 5/5 |
+| N-Queens | Python | 3.760 | 11.342 | 3.181 | 55.6% | 5/5 |
+| N-Queens | Node.js | 0.157 | 0.198 | 0.018 | 10.7% | 5/5 |
+| N-Queens | C# | 0.112 | 0.166 | 0.023 | 17.8% | 5/5 |
+| Binary trees | AquariusLang | 2.306 | 3.320 | 0.367 | 13.0% | 5/5 |
+| Binary trees | AquariusLang (typed) | 1.677 | 2.714 | 0.438 | 20.5% | 5/5 |
+| Binary trees | Python | 7.880 | 24.511 | 7.203 | 61.7% | 5/5 |
+| Binary trees | Node.js | 0.765 | 0.866 | 0.040 | 4.9% | 5/5 |
+| Binary trees | C# | 0.448 | 0.575 | 0.064 | 12.9% | 5/5 |
+| Spectral norm | AquariusLang | 0.266 | 0.310 | 0.018 | 6.5% | 5/5 |
+| Spectral norm | AquariusLang (typed) | 0.245 | 0.332 | 0.037 | 13.7% | 5/5 |
+| Spectral norm | Python | 13.799 | 27.926 | 6.065 | 35.3% | 5/5 |
+| Spectral norm | Node.js | 0.248 | 0.324 | 0.037 | 12.8% | 5/5 |
+| Spectral norm | C# | 0.129 | 0.138 | 0.004 | 2.7% | 5/5 |
+| Collatz conjecture | AquariusLang | 1.250 | 1.647 | 0.196 | 13.9% | 5/5 |
+| Collatz conjecture | AquariusLang (typed) | 1.221 | 1.694 | 0.204 | 15.3% | 5/5 |
+| Collatz conjecture | Python | 45.843 | 67.460 | 8.791 | 14.5% | 5/5 |
+| Collatz conjecture | Node.js | 3.314 | 5.058 | 0.895 | 22.5% | 5/5 |
+| Collatz conjecture | C# | 1.321 | 1.777 | 0.205 | 13.9% | 5/5 |
 
-## 綜合分數計算方式
+## How the composite score is computed
 
-每個模式分別將本次 10 項演算法的相對速度等權重取幾何平均，再以最快語言為 100 分。計時採用各語言程序內的單調計時器，涵蓋資料初始化與演算法／校驗值計算，排除程序啟動、原始碼／Wasm 載入與初始編譯、輸出。
+For each mode, the relative speeds on this run's 10 algorithms are combined with equal weights as a geometric mean, and the fastest language is set to 100. Timing uses each language's in-process monotonic timer and covers data initialization and the algorithm and checksum, excluding process start, source or Wasm loading and initial compilation, and output.
 
-相對速度 G = 幾何平均（各項 Python 耗時中位數 ÷ 該語言耗時中位數）；綜合分數 = 100 × G ÷ 5 種語言中最大的 G，因此最高分固定為 100。每項演算法權重相同；只有5 種語言在該模式所有選定測試都通過時，才計算該模式的綜合分數。不同模式、測試組合與輸入規模的分數不可直接比較。
+Relative speed G = geometric mean (Python median time ÷ the language's median time, per benchmark); composite score = 100 × G ÷ the largest G among all 5 languages, so the top score is always 100. Every algorithm has the same weight; a mode gets composite scores only when all 5 languages pass every selected test in that mode. Scores from different modes, test sets or input sizes cannot be compared directly.
 
-排名表中速度倍率 = 該列語言綜合分數 ÷ 欄位基準語言綜合分數，使用未四捨五入的分數計算；大於 1 表示比該基準語言快，小於 1 表示較慢。
+In the ranking tables, speed = the row language's composite score ÷ the column's baseline language's composite score, computed from unrounded scores; above 1 is faster than that baseline, below 1 slower.
 
-## 執行方式
+## Running
 
-需求：Python 3.10 以上、Node.js、.NET 8 SDK（含 net8.0 目標套件與執行階段）、以及支援 `目前時間()`／`currentTime()` 的星泉 Wasm 編譯器（`aqua` 與隨附相依檔案）。不需要安裝 Python 套件或執行 npm install。星泉腳本使用星泉繁體中文版的繁體中文關鍵字與雙語內建函式，舊版僅支援英文的直譯器無法執行。
+Requirements: Python 3.10 or later, Node.js, .NET 8 SDK (with the net8.0 targeting pack and runtime), and an AquariusLang Wasm compiler that supports `目前時間()` / `currentTime()` (`aqua` with its bundled files). No Python packages or npm install are needed. The AquariusLang scripts use the Traditional Chinese keywords and bilingual built-ins of AquariusLang's Traditional Chinese edition, so the older English-only interpreter cannot run them.
 
 ```powershell
 python run_benchmarks.py
-# 使用較小輸入，快速檢查正確性：
+# Small inputs, a quick correctness check:
 python run_benchmarks.py --profile smoke --repetitions 1 --warmups 0
-# 使用較大輸入，降低 JIT 暖機的影響：
+# Larger inputs, reducing the effect of JIT warm-up:
 python run_benchmarks.py --profile large --timeout 300
-# 只測暖機模式，並自訂程序內暖機與計時次數：
+# Warmed mode only, with custom in-process warm-up and timed run counts:
 python run_benchmarks.py --modes warmed --in-process-warmups 10 --in-process-runs 7
-# 必要時指定執行檔路徑：
+# Executable paths, when needed:
 python run_benchmarks.py --aquarius "C:\Aquarius\aqua.exe" --node "C:\Program Files\nodejs\node.exe" --dotnet "C:\Program Files\dotnet\dotnet.exe"
-# 僅執行指定演算法：
+# Selected algorithms only:
 python run_benchmarks.py --benchmarks fibonacci sieve matrix
-# 使用既有資料重新產生 README，不重新測量：
+# Regenerate the READMEs from saved data, without measuring:
 python run_benchmarks.py --report-only results/latest.json
-# 執行主控程式與參考答案測試：
+# Run the harness and reference-answer tests:
 python -m unittest discover -s tests -v
 ```
 
-若 `python` 是尚未設定版本的 pyenv 代理程式，請直接呼叫已安裝的 `python.exe`。主控程式預設使用自身的 Python 直譯器執行測試，也可用 `--python PATH` 指定其他版本。它會搜尋目前程序的 PATH；在 Windows 上也會搜尋使用者與系統的最新 PATH，因此舊終端工作階段也能找到新加入的星泉路徑。執行環境參數只接受單一執行檔路徑。C# 會優先選用具有 SDK 的 dotnet，也會搜尋 DOTNET_ROOT 與使用者的 `.dotnet` 目錄；可用 `--dotnet PATH` 指定。
+If `python` is a pyenv shim with no version set, call the installed `python.exe` directly. The harness runs the Python tests with its own interpreter by default; `--python PATH` selects another. It searches the current process's PATH, and on Windows also the latest user and system PATH, so an older terminal session still finds a newly added AquariusLang path. Runtime options take a single executable path. C# prefers a dotnet that has the SDK and also searches DOTNET_ROOT and the user's `.dotnet` folder; `--dotnet PATH` selects one.
 
-單獨執行 C# 測試（例如篩法）：
+To run one C# test on its own (the sieve, for example):
 
 ```powershell
 dotnet run --project benchmarks/csharp/Benchmark.csproj --configuration Release -p:BenchmarkSource=sieve.cs
 ```
 
-主控程式會在暫存目錄為每個模式建立原始碼副本，只替換 `benchmark_n`（輸入規模）、`benchmark_warmups`（程序內暖機次數）與 `benchmark_timed_runs`（程序內計時次數）三個宣告。直接執行原始腳本時，採用標準規模與標準模式（不暖機、計時一次）。每次測量會建立帶有日期的 `results/` 子目錄，並重新產生 `results/latest.json` 與 `README.md`。`--modes` 選擇模式（預設 `standard warmed` 兩者），`--in-process-warmups`（預設 5）與 `--in-process-runs`（預設 5）設定暖機模式的程序內次數；`--repetitions` 是每組計入統計的程序數，`--warmups` 是每組捨棄的暖身程序數。也可使用 `--output-dir`、`--readme`、`--timeout`、`--seed` 自訂測試。結束碼 1 表示至少一個執行環境無法使用或測試驗證失敗；報告仍會保留失敗資訊。
+For each mode the harness copies the sources into a temporary folder and replaces only three declarations: `benchmark_n` (input size), `benchmark_warmups` (in-process warm-up runs) and `benchmark_timed_runs` (in-process timed runs). Running a script directly uses the standard size and standard mode (no warm-up, one timed run). Each measurement creates a dated subfolder of `results/` and regenerates `results/latest.json`, `README.md` (English) and `README.tw.md` (Traditional Chinese). `--modes` selects the modes (both `standard warmed` by default); `--in-process-warmups` (default 5) and `--in-process-runs` (default 5) set the in-process counts of warmed mode; `--repetitions` is the number of processes per case that count toward the statistics, and `--warmups` the number of discarded warm-up processes per case. `--output-dir`, `--readme` (the English README's path; the Traditional Chinese one is written beside it as `.tw.md`), `--timeout` and `--seed` customize a run further. Exit code 1 means at least one runtime was unavailable or a test failed validation; the report still keeps the failure details.
 
-## 測量方法
+## Methodology
 
-- 每筆樣本都啟動新的程序，但排名只採用腳本自行回報的 `ELAPSED_MS`。星泉使用 `目前時間()`（毫秒）、Python 使用 `time.perf_counter_ns()`（奈秒差值 ÷ 1e6）、Node.js 使用 `process.hrtime.bigint()`（奈秒差值 ÷ 1e6）。C# 使用 `Stopwatch.GetTimestamp()`（刻度差值 × 1000 ÷ Frequency）。所有計時器皆為單調計時器。
-- 5 種語言皆在函式定義完成後、資料初始化前開始計時，並在演算法與校驗值計算完成後、輸出前停止。執行中的記憶體配置、垃圾回收及按需 JIT 仍計入。JSON／CSV 的 `elapsed_ms` 為程序值（程序內各次計時的中位數，`run_elapsed_ms` 保留每次計時）；`process_elapsed_ms` 另保留完整程序耗時供診斷，不參與統計與排名。
-- 標準模式：每個程序只執行一次工作負載並計時，不在程序內暖機，與最初的設計相同。C# 與 Node.js 的 JIT 編譯與最佳化落在計時區間內，星泉的 Wasm 則已在計時前由 Wasmtime 編譯完成，因此此模式反映短程式從程序啟動後第一次執行的表現。每組的值為 5 個程序計時值的中位數。
-- 暖機模式：每個程序先在同一程序內不計時執行同一工作負載 5 次，讓 C# 與 Node.js 的 JIT 在計時前完成最佳化，再於同一程序內連續計時 5 次，該程序的值為這 5 次的中位數；每組的值為 5 個程序值的中位數。各語言的暖機與計時次數相同。
-- 每支腳本把計時工作包成 `benchmark_run` 函式；程序內暖機只多呼叫這個函式，不改變演算法或計時區間。
-- 星泉一律使用 `aqua build` 在測量前建立 Wasm，再執行 `aqua run`；Wasm 生成不計入樣本耗時，每個模式的副本各自建立。「星泉（型別）」使用同一個編譯器與相同演算法，只在變數、參數與回傳值加上選用型別標註（`benchmarks/aquarius_typed/`）；型別函式必須宣告回傳型別，因此快速排序與譜範數的原地修改函式多了一行 `回傳 0;`，二元樹以 `陣列`（元素可為任何值的陣列）標註樹狀陣列。Python 執行原始碼，Node.js 使用 V8。C# 以 `dotnet build --configuration Release` 預先編譯為 net8.0 組件，再直接以 `dotnet Benchmark.dll` 執行；建置與還原不計時，不使用外部 NuGet 套件。進入 Main 前的初始 JIT 不計時，計時區間內的按需 JIT 仍計入。組件關閉分層編譯（`TieredCompilation=false`），每個方法第一次呼叫就以最佳化 JIT 編譯，對應星泉在計時前完成的 Wasmtime 最佳化編譯。沒有 NumPy、原生演算法函式庫、工作執行緒或內建排序。
-- 暖身程序的樣本會捨棄，作用是預熱作業系統檔案快取；不同程序之間不保留 JIT 或 VM 狀態。每輪以記錄的隨機種子打亂所有演算法／語言／模式組合，再依序執行。
-- 每筆暖身與正式樣本的每次計時結果都必須符合未納入計時的 Python 參考答案。整數必須完全相同；譜範數平方的相對容許誤差為 1e-9，絕對容許誤差為 1e-12。非零結束碼、逾時、缺少或多餘的標準輸出、非有限數值、校驗值不符，都會使該測試失敗。計時輸出必須為有限且大於零的毫秒值；缺少計時值時不會退回程序外計時。
-- 星泉的整數 `/` 會截斷小數，Python `//` 與 Node.js `Math.trunc` 使用相對應的運算。浮點測試採用雙精度（星泉使用 `d` 字面值）；標準輸入的整數中間值均在帶正負號的 32 位元範圍內。
-- 陣列建構在各語言採用相同的線性成本：星泉使用 `陣列.建立` 預先配置（快速排序以預留容量的 `陣列.追加`），Python 使用 `[值] * n`／`append`，Node.js 使用 `push`，C# 使用 `new T[n]`（必要時 `Array.Fill`）；不使用每次複製整個陣列的追加方式。
-- 編譯時機：星泉的 Wasm 在計時開始前已由 Wasmtime 完整編譯為機器碼。C# 關閉分層編譯，方法在第一次呼叫時即以最佳化 JIT 編譯；標準模式中這次 JIT 仍在計時區間內。Node.js（V8）無法預先最佳化，先以直譯器與基準編譯器執行；標準模式中熱點函式的最佳化發生在計時區間內，因此偏向星泉；暖機模式靠程序內暖機讓熱點函式在計時前完成最佳化，但仍可能有少量 JIT 或垃圾回收落在計時區間內。標準規模每項只需約 1 毫秒，計時器與記憶體配置雜訊比例較高；`--profile large` 以較大輸入降低此影響，兩種規模的分數不可混用。
-- 小型工作負載可能受計時器與函式呼叫成本影響；暖機模式只暖機數次，不等於長時間執行的穩態速度，標準模式則只反映第一次執行；兩者都不代表所有程式的語言排名。CPU 頻率、溫度、背景工作與排程雜訊未受控制。未測量程序記憶體用量與 CPU 時間；下方 RAM 為機器配備。
+- Every sample starts a new process, but the ranking uses only the `ELAPSED_MS` each script reports itself. AquariusLang uses `目前時間()` (`currentTime()`, milliseconds), Python `time.perf_counter_ns()` (nanosecond difference ÷ 1e6), Node.js `process.hrtime.bigint()` (nanosecond difference ÷ 1e6), C# `Stopwatch.GetTimestamp()` (tick difference × 1000 ÷ Frequency). All timers are monotonic.
+- All 5 languages start timing after the function definitions and before data initialization, and stop after the algorithm and checksum, before output. Memory allocation, garbage collection and on-demand JIT during the run still count. `elapsed_ms` in the JSON and CSV is the process value (the median of the in-process timed runs; `run_elapsed_ms` keeps each run); `process_elapsed_ms` also keeps the whole-process time for diagnosis and takes no part in the statistics or ranking.
+- Standard mode: Each process runs and times the workload once, with no in-process warm-up, as in the original design. The JIT compilation and optimization of C# and Node.js fall inside the timed interval, while Wasmtime has already compiled the AquariusLang Wasm before timing starts, so this mode reflects a short program's first run after process start. Each value is the median of 5 process timings.
+- Warmed mode: Each process first runs the same workload 5 times untimed in the same process so the JIT of C# and Node.js finishes optimizing before timing, then times 5 consecutive runs in the same process and takes their median as the process value; each value is the median of 5 process values. Every language gets the same warm-up and timed run counts.
+- Each script wraps the timed work in a `benchmark_run` function; in-process warm-up only calls that function more often and changes neither the algorithm nor the timed interval.
+- AquariusLang always builds the Wasm with `aqua build` before measuring, then runs `aqua run`; Wasm generation is not part of the sample time, and each mode's copy is built separately. "AquariusLang (typed)" uses the same compiler and the same algorithms, adding only optional type annotations on variables, parameters and return values (`benchmarks/aquarius_typed/`); typed functions must declare a return type, so the in-place functions of quicksort and spectral norm gain a `回傳 0;` (`return 0;`) line, and binary trees annotate the tree arrays as `陣列` (`Array`, an array whose elements can be any value). Python runs the source, and Node.js uses V8. C# is compiled ahead of time into a net8.0 assembly with `dotnet build --configuration Release` and run directly as `dotnet Benchmark.dll`; build and restore are not timed, and no external NuGet packages are used. The initial JIT before Main is not timed; on-demand JIT inside the timed interval still counts. The assembly turns tiered compilation off (`TieredCompilation=false`), so each method is compiled by the optimizing JIT on its first call, matching the optimized Wasmtime compilation AquariusLang finishes before timing. No NumPy, native algorithm libraries, worker threads or built-in sorts are used.
+- Warm-up process samples are discarded; they warm the operating system's file cache, and no JIT or VM state carries over between processes. Each round shuffles every algorithm, language and mode combination with the recorded random seed, then runs them in that order.
+- Every timed run of every warm-up and counted sample must match the untimed Python reference answer. Integers must be identical; the squared spectral norm allows a relative error of 1e-9 and an absolute error of 1e-12. A non-zero exit code, a timeout, missing or extra standard output, a non-finite value or a checksum mismatch fails the test. The timing output must be a finite millisecond value above zero; a missing timing does not fall back to whole-process timing.
+- AquariusLang's integer `/` truncates; Python uses `//` and Node.js `Math.trunc` to match. Floating-point tests use double precision (AquariusLang uses `d` literals); at the standard size every intermediate integer stays within the signed 32-bit range.
+- Array construction has the same linear cost in every language: AquariusLang preallocates with `陣列.建立` (`Array.Make`; quicksort uses `陣列.追加`, `Array.Append`, with reserved capacity), Python uses `[value] * n` / `append`, Node.js `push`, C# `new T[n]` (with `Array.Fill` where needed); no append that copies the whole array each time is used.
+- Compilation timing: Wasmtime has fully compiled the AquariusLang Wasm to machine code before timing starts. C# has tiered compilation off, so methods are compiled by the optimizing JIT on their first call; in standard mode that JIT is still inside the timed interval. Node.js (V8) cannot optimize ahead of time and starts in its interpreter and baseline compiler; in standard mode hot functions are optimized inside the timed interval, which favors AquariusLang; warmed mode relies on in-process warm-up to optimize hot functions before timing, though a little JIT or garbage collection may still fall inside the timed interval. At the standard size each test takes about 1 millisecond, so timer and allocation noise weigh more; `--profile large` reduces this with larger inputs, and the scores of the two sizes must not be mixed.
+- Small workloads can be affected by timer and function call costs; warmed mode warms up only a few times and is not the steady-state speed of a long run, while standard mode reflects only the first run; neither represents a language ranking for every program. CPU frequency, temperature, background work and scheduling noise are not controlled. Process memory use and CPU time are not measured; the RAM below is the machine's installed memory.
 
-## 測試日期與環境
+## Test date and environment
 
-- 開始時間：2026-10-28T19:57:29.802469+08:00
-- 結束時間：2026-10-28T19:59:37.960873+08:00
-- 時區：Asia/Taipei
-- 輸入規模：標準（`standard`）；每組 5 個計入統計的程序、1 個捨棄的暖身程序
-- 模式：標準模式（冷啟動，每個程序計時一次）；暖機模式（程序內先暖機 5 次，再計時 5 次取中位數）
-- 排序隨機種子：20261010；每個程序逾時上限：120 秒
-- 作業系統：Windows-11-10.0.26200-SP0
-- 架構：AMD64
-- CPU：13th Gen Intel(R) Core(TM) i9-13900H；邏輯處理器：20
-- 實體 RAM：31.71 GiB
-- 使用中的電源計畫：Power Scheme GUID: 381b4222-f694-41f0-9685-ff5bb260df2e  (Balanced)
-- Python 主控程式版本：3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]
-- 行程 CPU 親和性遮罩：`0xfffff`
-- 主控程式診斷計時器解析度：1e-07 秒（非所有語言的計時器解析度）
+- Started: 2026-10-28T19:57:29.802469+08:00
+- Finished: 2026-10-28T19:59:37.960873+08:00
+- Time zone: Asia/Taipei
+- Input size: standard (`standard`); 5 counted and 1 discarded warm-up processes per case
+- Modes: Standard mode (cold start, one timed run per process); Warmed mode (5 in-process warm-up runs, then the median of 5 timed runs)
+- Order random seed: 20261010; timeout per process: 120 s
+- Operating system: Windows-11-10.0.26200-SP0
+- Architecture: AMD64
+- CPU: 13th Gen Intel(R) Core(TM) i9-13900H; logical processors: 20
+- Physical RAM: 31.71 GiB
+- Active power plan: Power Scheme GUID: 381b4222-f694-41f0-9685-ff5bb260df2e  (Balanced)
+- Python harness version: 3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]
+- Process CPU affinity mask: `0xfffff`
+- Harness diagnostic timer resolution: 1e-07 s (not the resolution of every language's timer)
 
-| 執行環境 | 版本／組建 | 執行檔 |
+| Runtime | Version / build | Executable |
 | --- | --- | --- |
-| 星泉 | 未提供版本參數；以發行目錄與二進位檔雜湊識別 | C:\OfficialProjects\AquariusLangTW\dist\aqua\aqua.exe |
-| 星泉（型別） | 未提供版本參數；以發行目錄與二進位檔雜湊識別 | C:\OfficialProjects\AquariusLangTW\dist\aqua\aqua.exe |
+| AquariusLang | no version option; identified by release folder and binary hashes | C:\OfficialProjects\AquariusLangTW\dist\aqua\aqua.exe |
+| AquariusLang (typed) | no version option; identified by release folder and binary hashes | C:\OfficialProjects\AquariusLangTW\dist\aqua\aqua.exe |
 | Python | Python 3.12.10 | C:\Users\templ\.pyenv\pyenv-win\versions\3.12.10\python.exe |
 | Node.js | v24.18.0 | C:\Program Files\nodejs\node.exe |
 | C# | SDKs: 8.0.426 [C:\Program Files\dotnet\sdk] Runtimes: Microsoft.AspNetCore.App 8.0.32 [C:\Program Files\dotnet\shared\Microsoft.AspNetCore.App] Microsoft.NETCore.App 6.0.36 [C:\Program Files\dotnet\shared\Microsoft.NETCore.App] Microsoft.NETCore.App 8.0.19 [C:\Program Files\dotnet\shared\Microsoft.NETCore.App] Microsoft.NETCore.App 8.0.32 [C:\Program Files\dotnet\shared\Microsoft.NETCore.App] Microsoft.WindowsDesktop.App 8.0.19 [C:\Program Files\dotnet\shared\Microsoft.WindowsDesktop.App] Microsoft.WindowsDesktop.App 8.0.32 [C:\Program Files\dotnet\shared\Microsoft.WindowsDesktop.App] | C:\Program Files\dotnet\dotnet.exe |
 
-星泉發行目錄：`C:\OfficialProjects\AquariusLangTW\dist\aqua`。
+AquariusLang release folder: `C:\OfficialProjects\AquariusLangTW\dist\aqua`.
 
-星泉啟動執行檔 SHA-256：`9c8bee82ed9c872ab2b0e055b90a4ecf50de4c1be8a34135459329f3736b2712`。
+AquariusLang launcher SHA-256: `9c8bee82ed9c872ab2b0e055b90a4ecf50de4c1be8a34135459329f3736b2712`.
 
 
-## 正確性驗證
+## Correctness
 
-所有語言、所有模式的每筆暖身與正式樣本輸出，均符合 Python 參考答案。
+Every warm-up and counted sample output, in every language and mode, matches the Python reference answer.
 
-| 演算法 | 預期結果 | 工作負載 |
+| Benchmark | Expected result | Workload |
 | --- | ---: | --- |
-| 遞迴費波那契 | 317811 | 使用樸素遞迴，不使用記憶化。 |
-| 阿克曼函數 | 509 | 計算 A(3, n)，測試巢狀遞迴呼叫。 |
-| 埃拉托斯特尼篩法 | 1229 | 使用布林陣列，計算 2 至 n（含）的質數數量。 |
-| 快速排序 | 616973 | 以中間元素為樞紐，原地排序固定種子的線性同餘序列；檢查排序順序與加權校驗值。 |
-| 矩陣乘法 | 545940 | 使用列優先的一維陣列與 i/j/k 三層迴圈，計算結果矩陣所有元素的總和。 |
-| 曼德布洛特集合 | 129059 | 在 [-2, 1) × [-1, 1) 上取 n × n 個點，最多迭代 60 次，累計逃逸迭代次數。 |
-| N 皇后問題 | 92 | 以回溯法逐一檢查欄與對角線，計算所有解的數量。 |
-| 二元樹 | 65528 | 建立八棵深度為 n 的完整二元樹，並遞迴計算節點總數。 |
-| 譜範數 | 1.6236011690579917 | 對隱式矩陣執行十輪冪次迭代，輸出譜範數平方，避免使用函式庫平方根。 |
-| 考拉茲猜想 | 849666 | 累計起始整數 1 至 n 到達 1 的步數，不使用記憶化。 |
+| Recursive Fibonacci | 317811 | Naive recursion, no memoization. |
+| Ackermann function | 509 | Computes A(3, n), exercising nested recursive calls. |
+| Sieve of Eratosthenes | 1229 | Counts the primes from 2 to n (inclusive) with a Boolean array. |
+| Quicksort | 616973 | Sorts a fixed-seed linear congruential sequence in place with the middle element as pivot; checks the order and a weighted checksum. |
+| Matrix multiplication | 545940 | Row-major one-dimensional arrays and an i/j/k triple loop; sums every element of the result matrix. |
+| Mandelbrot set | 129059 | Samples n × n points over [-2, 1) × [-1, 1) with at most 60 iterations and sums the escape iteration counts. |
+| N-Queens | 92 | Counts every solution by backtracking, checking columns and diagonals. |
+| Binary trees | 65528 | Builds eight complete binary trees of depth n and counts their nodes recursively. |
+| Spectral norm | 1.6236011690579917 | Runs ten power iterations on an implicit matrix and prints the squared spectral norm, avoiding a library square root. |
+| Collatz conjecture | 849666 | Sums the steps for each start from 1 to n to reach 1, no memoization. |
 
-## 可重現測試資料
+## Reproducible data
 
-- 原始樣本、輸出、指令、執行順序、環境資訊與執行檔／原始碼雜湊：`C:\OfficialProjects\AquariusLang_PerformanceBenchmark\results\20261028-195729-802469\results.json`
-- 統計摘要與逐筆樣本 CSV：`C:\OfficialProjects\AquariusLang_PerformanceBenchmark\results\20261028-195729-802469\summary.csv`、`C:\OfficialProjects\AquariusLang_PerformanceBenchmark\results\20261028-195729-802469\samples.csv`
-- `benchmarks.json`：標準／快速檢查的輸入規模與工作負載定義。
-- `benchmarks/aquarius/`、`benchmarks/aquarius_typed/`、`benchmarks/python/`、`benchmarks/node/`、`benchmarks/csharp/`：可獨立執行的測試程式。
-- `reference.py`：未納入計時的參考答案；`tests/`：主控程式與參考答案的回歸測試。
+- Raw samples, outputs, commands, execution order, environment and executable and source hashes: `C:\OfficialProjects\AquariusLang_PerformanceBenchmark\results\20261028-195729-802469\results.json`
+- Summary and per-sample CSV: `C:\OfficialProjects\AquariusLang_PerformanceBenchmark\results\20261028-195729-802469\summary.csv`, `C:\OfficialProjects\AquariusLang_PerformanceBenchmark\results\20261028-195729-802469\samples.csv`
+- `benchmarks.json`: the standard and smoke-check input sizes and workload definitions.
+- `benchmarks/aquarius/`, `benchmarks/aquarius_typed/`, `benchmarks/python/`, `benchmarks/node/`, `benchmarks/csharp/`: the standalone benchmark programs.
+- `reference.py`: the untimed reference answers; `tests/`: regression tests for the harness and reference answers.
 
-本 README 由 `run_benchmarks.py` 產生，下次執行時會覆寫。JSON 保留測量當時的原始與暫存腳本、測試清單、主控程式及參考答案雜湊。指令中的暫存路徑對應當次執行的檔案，測試後會移除。比較不同測試時，請保留原始碼與相對應的報告。
+This README and `README.tw.md` (Traditional Chinese) are generated by `run_benchmarks.py` from the same report and are overwritten on the next run. The JSON keeps the hashes of the original and staged scripts, the test list, the harness and the reference answers at measurement time. Temporary paths in the commands refer to that run's files and are removed after the run. Keep the sources and the matching report when comparing different runs.

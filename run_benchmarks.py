@@ -24,7 +24,7 @@ import time
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
 from reference import expected
-from readme_report import composite_scores, generate_readme, mode_views
+from readme_report import composite_scores, generate_readme, mode_views, write_readmes
 
 ROOT = Path(__file__).resolve().parent
 # aquarius_typed: the same AquariusLang algorithms with optional type annotations, run by the same aqua compiler.
@@ -297,8 +297,7 @@ def write_artifacts(report, directory, readme):
                     writer.writerow([record["benchmark"], record["language"], record["mode"], phase, sample["round"],
                                      sample["status"], sample["elapsed_ms"], runs, sample["process_elapsed_ms"],
                                      sample.get("result", ""), sample.get("error", "")])
-    readme.parent.mkdir(parents=True, exist_ok=True)
-    readme.write_text(generate_readme(report), encoding="utf-8")
+    return write_readmes(report, readme)
 
 
 def positive(value):
@@ -379,14 +378,14 @@ def main(argv=None):
     parser.add_argument("--node", help="Node.js executable")
     parser.add_argument("--dotnet", help=".NET SDK host executable for C# (net8.0, Release)")
     parser.add_argument("--output-dir", type=Path, default=ROOT / "results")
-    parser.add_argument("--readme", type=Path, default=ROOT / "README.md")
-    parser.add_argument("--report-only", type=Path, help="Generate README from a saved JSON report, without executing scripts")
+    parser.add_argument("--readme", type=Path, default=ROOT / "README.md",
+                        help="English README; the Traditional Chinese README is written beside it as .tw.md")
+    parser.add_argument("--report-only", type=Path, help="Generate the READMEs from a saved JSON report, without executing scripts")
     args = parser.parse_args(argv)
     if args.report_only:
         report = json.loads(args.report_only.read_text(encoding="utf-8"))
-        args.readme.parent.mkdir(parents=True, exist_ok=True)
-        args.readme.write_text(generate_readme(report), encoding="utf-8")
-        print(f"README generated: {args.readme.resolve()}")
+        for readme in write_readmes(report, args.readme):
+            print(f"README generated: {readme.resolve()}")
         return 0
     try:
         tz = ZoneInfo(args.timezone)
@@ -483,8 +482,8 @@ def main(argv=None):
         for record in report["cases"].values():
             record["summary"] = summarize(record, args.repetitions)
     report["finished_at"] = datetime.now(tz).isoformat()
-    write_artifacts(report, directory, args.readme.resolve())
-    print(f"Report: {directory / 'results.json'}\nREADME: {args.readme.resolve()}")
+    english, chinese = write_artifacts(report, directory, args.readme.resolve())
+    print(f"Report: {directory / 'results.json'}\nREADME: {english}\nREADME: {chinese}")
     return 0 if all(r["summary"]["status"] == "ok" for r in report["cases"].values()) else 1
 
 

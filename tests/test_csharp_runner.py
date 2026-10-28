@@ -85,9 +85,12 @@ class CSharpRunnerTests(unittest.TestCase):
                         self.assertTrue(math.isclose(float(sample["result"]), answer, rel_tol=1e-9, abs_tol=1e-12))
                         self.assertGreater(sample["elapsed_ms"], 0)
                         self.assertGreater(sample["process_elapsed_ms"], sample["elapsed_ms"])
-                readme = (path / "README.md").read_text(encoding="utf-8")
+                readme = (path / "README.tw.md").read_text(encoding="utf-8")
                 self.assertIn("C# 中位數", readme)
                 self.assertIn("C#／Python 耗時倍率", readme)
+                readme = (path / "README.md").read_text(encoding="utf-8")
+                self.assertIn("C# median", readme)
+                self.assertIn("C# / Python time ratio", readme)
                 with Path(report["artifacts"]["summary_csv"]).open(encoding="utf-8", newline="") as file:
                     rows = [row for row in csv.DictReader(file) if row["language"] == "csharp"]
                 self.assertEqual(len(rows), 10 * len(modes))
