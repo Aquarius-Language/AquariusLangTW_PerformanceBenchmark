@@ -467,6 +467,9 @@ def generate_readme(report, lang="en", english="README.md", chinese="README.tw.m
                  "「星泉（型別）」使用同一個編譯器與相同演算法，只在變數、參數與回傳值加上選用型別標註（`benchmarks/aquarius_typed/`）；"
                  "型別函式必須宣告回傳型別，因此快速排序與譜範數的原地修改函式多了一行 `回傳 0;`，"
                  "二元樹以 `陣列`（元素可為任何值的陣列）標註樹狀陣列。"
+                 "輸入大小 `benchmark_n` 以 `常數`（`const`）宣告" +
+                 ("，對應 C# 的 `static readonly int benchmark_n`（JIT 視為常數）" if has_csharp else "") +
+                 "，需要支援 `常數` 的編譯器；未標註的星泉腳本仍以 `變數` 宣告。"
                  "Python 執行原始碼，Node.js 使用 V8。" +
                  ("C# 以 `dotnet build --configuration Release` 預先編譯為 net8.0 組件，再直接以 `dotnet Benchmark.dll` 執行；"
                   "建置與還原不計時，不使用外部 NuGet 套件。進入 Main 前的初始 JIT 不計時，計時區間內的按需 JIT 仍計入。" +
@@ -479,7 +482,11 @@ def generate_readme(report, lang="en", english="README.md", chinese="README.tw.m
                  "annotations on variables, parameters and return values (`benchmarks/aquarius_typed/`); typed "
                  "functions must declare a return type, so the in-place functions of quicksort and spectral norm "
                  "gain a `回傳 0;` (`return 0;`) line, and binary trees annotate the tree arrays as `陣列` (`Array`, "
-                 "an array whose elements can be any value). Python runs the source, and Node.js uses V8. " +
+                 "an array whose elements can be any value). The input size `benchmark_n` is declared `常數` (`const`)" +
+                 (", the counterpart of C#'s `static readonly int benchmark_n`, which the JIT treats as a constant"
+                  if has_csharp else "") +
+                 "; this needs a compiler that supports `常數`, and the untyped scripts keep `變數`. "
+                 "Python runs the source, and Node.js uses V8. " +
                  ("C# is compiled ahead of time into a net8.0 assembly with `dotnet build --configuration Release` "
                   "and run directly as `dotnet Benchmark.dll`; build and restore are not timed, and no external "
                   "NuGet packages are used. The initial JIT before Main is not timed; on-demand JIT inside the timed "

@@ -1,4 +1,4 @@
-變數 benchmark_n: 整數 = 28;
+常數 benchmark_n: 整數 = 28;
 變數 benchmark_warmups: 整數 = 0;
 變數 benchmark_timed_runs: 整數 = 1;
 變數 fib = 函式(n: 整數): 整數 {

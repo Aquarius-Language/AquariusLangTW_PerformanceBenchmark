@@ -1,4 +1,4 @@
-變數 benchmark_n: 整數 = 6;
+常數 benchmark_n: 整數 = 6;
 變數 benchmark_warmups: 整數 = 0;
 變數 benchmark_timed_runs: 整數 = 1;
 變數 ack = 函式(m: 整數, n: 整數): 整數 {

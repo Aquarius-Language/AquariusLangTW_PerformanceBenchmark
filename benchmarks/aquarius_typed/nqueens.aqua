@@ -1,4 +1,4 @@
-變數 benchmark_n: 整數 = 8;
+常數 benchmark_n: 整數 = 8;
 變數 benchmark_warmups: 整數 = 0;
 變數 benchmark_timed_runs: 整數 = 1;
 變數 solve = 函式(row: 整數): 整數 {

@@ -1,4 +1,4 @@
-變數 benchmark_n: 整數 = 2000;
+常數 benchmark_n: 整數 = 2000;
 變數 benchmark_warmups: 整數 = 0;
 變數 benchmark_timed_runs: 整數 = 1;
 # A typed function declares its result, so sort returns 0 after sorting in place.
