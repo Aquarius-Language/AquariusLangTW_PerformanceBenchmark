@@ -1,4 +1,4 @@
-變數 benchmark_n: 整數 = 12;
+常數 benchmark_n: 整數 = 12;
 變數 benchmark_warmups: 整數 = 0;
 變數 benchmark_timed_runs: 整數 = 1;
 # Trees are arrays of arrays: 陣列 annotates an array whose elements may be any values.
