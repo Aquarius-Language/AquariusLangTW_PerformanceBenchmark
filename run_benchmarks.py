@@ -28,13 +28,22 @@ from readme_report import composite_scores, generate_readme, mode_views, write_r
 
 ROOT = Path(__file__).resolve().parent
 # aquarius_typed: the same AquariusLang algorithms with optional type annotations, run by the same aqua compiler.
+# aquarius_aot / aquarius_typed_aot (with --aquarius-aot): the same AquariusLang sources built and run by an aqua whose
+# compiler is published with Native AOT; their workload times match the others', their build and process times differ.
 LANGUAGES = {"aquarius": ("AquariusLang", ".aqua"), "aquarius_typed": ("AquariusLang (optional types)", ".aqua"),
+             "aquarius_aot": ("AquariusLang (Native AOT compiler)", ".aqua"),
+             "aquarius_typed_aot": ("AquariusLang (optional types, Native AOT compiler)", ".aqua"),
              "python": ("Python", ".py"), "node": ("Node.js", ".js"), "csharp": ("C#", ".cs")}
-AQUARIUS = {"aquarius", "aquarius_typed"}
+AQUARIUS = {"aquarius", "aquarius_typed", "aquarius_aot", "aquarius_typed_aot"}
+# Languages whose programs live in another language's folder, and the ones that run only when their option is given.
+SOURCE_FOLDERS = {"aquarius_aot": "aquarius", "aquarius_typed_aot": "aquarius_typed"}
+OPTIONAL = {"aquarius_aot", "aquarius_typed_aot"}
 # standard: one cold timed run per process; warmed: untimed in-process runs first, then the median of several timed runs.
 MODES = ("standard", "warmed")
 TIMERS = {"aquarius": "目前時間() / currentTime() (monotonic milliseconds)",
           "aquarius_typed": "目前時間() / currentTime() (monotonic milliseconds)",
+          "aquarius_aot": "目前時間() / currentTime() (monotonic milliseconds)",
+          "aquarius_typed_aot": "目前時間() / currentTime() (monotonic milliseconds)",
           "python": "time.perf_counter_ns() (nanoseconds / 1e6)",
           "node": "process.hrtime.bigint() (nanoseconds / 1e6)",
           "csharp": "System.Diagnostics.Stopwatch.GetTimestamp() (ticks * 1000 / Frequency)"}
@@ -383,6 +392,8 @@ def main(argv=None):
     parser.add_argument("--seed", type=int, default=20261010)
     parser.add_argument("--timezone", default="Asia/Taipei")
     parser.add_argument("--aquarius", help="aqua compiler executable (defaults to searching PATH); builds Wasm before timing")
+    parser.add_argument("--aquarius-aot", help="an aqua whose compiler is published with Native AOT: adds the aquarius_aot and "
+                        "aquarius_typed_aot candidates (same sources, built and run by it)")
     parser.add_argument("--python", default=sys.executable, help="Python executable (defaults to this interpreter)")
     parser.add_argument("--node", help="Node.js executable")
     parser.add_argument("--dotnet", help=".NET SDK host executable for C# (net8.0, Release)")
@@ -410,6 +421,10 @@ def main(argv=None):
                    "python": resolve_executable(args.python, []),
                    "node": resolve_executable(args.node, ["node"]),
                    "csharp": resolve_dotnet(args.dotnet)}
+    if args.aquarius_aot:
+        aot = resolve_executable(args.aquarius_aot, [])
+        executables.update(aquarius_aot=aot, aquarius_typed_aot=aot)
+    languages = {lang: spec for lang, spec in LANGUAGES.items() if lang in executables}
     modes = {mode: {"in_process_warmups": 0, "in_process_runs": 1} if mode == "standard" else
              {"in_process_warmups": args.in_process_warmups, "in_process_runs": args.in_process_runs}
              for mode in MODES if mode in args.modes}
@@ -438,8 +453,8 @@ def main(argv=None):
             spec = manifest[name]
             n = spec[args.profile]
             report["benchmarks"][name] = {**spec, "n": n, "expected": expected(name, n)}
-            for (lang, (_, extension)), (mode, params) in itertools.product(LANGUAGES.items(), modes.items()):
-                source = ROOT / "benchmarks" / lang / (name + extension)
+            for (lang, (_, extension)), (mode, params) in itertools.product(languages.items(), modes.items()):
+                source = ROOT / "benchmarks" / SOURCE_FOLDERS.get(lang, lang) / (name + extension)
                 text = substitute(source.read_text(encoding="utf-8"), "benchmark_n", n, source)
                 # The mode only changes the driver's counts, so each mode gets its own staged copy.
                 text = substitute(text, "benchmark_warmups", params["in_process_warmups"], source)

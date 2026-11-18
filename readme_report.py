@@ -3,12 +3,15 @@
 Both READMEs come from the same code: every sentence is written once in each language with `tr(tw, en)`.
 """
 import math
+import statistics
 from itertools import combinations
 from pathlib import Path
 
 LANGUAGES = {
-    "tw": {"aquarius": "星泉", "aquarius_typed": "星泉（型別）", "python": "Python", "node": "Node.js", "csharp": "C#"},
-    "en": {"aquarius": "AquariusLang", "aquarius_typed": "AquariusLang (typed)", "python": "Python", "node": "Node.js",
+    "tw": {"aquarius": "星泉", "aquarius_typed": "星泉（型別）", "aquarius_aot": "星泉（Native AOT 編譯器）",
+           "aquarius_typed_aot": "星泉（型別，Native AOT 編譯器）", "python": "Python", "node": "Node.js", "csharp": "C#"},
+    "en": {"aquarius": "AquariusLang", "aquarius_typed": "AquariusLang (typed)", "aquarius_aot": "AquariusLang (Native AOT compiler)",
+           "aquarius_typed_aot": "AquariusLang (typed, Native AOT compiler)", "python": "Python", "node": "Node.js",
            "csharp": "C#"},
 }
 WORKLOADS = {
@@ -284,6 +287,36 @@ def variability_lines(view, languages, short, repetitions, lang):
     return lines + [""]
 
 
+def compiler_lines(report, languages, lang):
+    """Build and whole-process times of each AquariusLang candidate: what its compiler adds around the timed workload."""
+    tr = translator(lang)
+    candidates = [language for language in languages if language.startswith("aquarius")]
+    if not any(language.endswith("_aot") for language in candidates):
+        return []
+    def median(values):
+        return statistics.median(values) if values else float("nan")
+    lines = [tr("## 星泉編譯器的建置與啟動時間", "## AquariusLang compiler build and start times"), "",
+             tr("每個星泉候選版本以自己的 `aqua` 建置每份程式（`aqua build`）並執行（`aqua run`）。工作負載的計時不含這些；"
+                "下表是所有演算法與模式的建置時間中位數，以及每個模式完整程序耗時（含 `aqua` 啟動與執行環境載入）的中位數。",
+                "Each AquariusLang candidate builds every program with its own `aqua` (`aqua build`) and runs it "
+                "(`aqua run`). Workload timings exclude both; the table shows the median build time over every benchmark and "
+                "mode, and per mode the median whole-process time (starting `aqua` and the runtime included)."), "",
+             "| " + tr("候選版本", "Candidate") + " | " + tr("建置時間中位數", "Median build") + " | "
+             + " | ".join(tr(f"{MODE_NAMES['tw'][m]}程序耗時中位數", f"Median process, {MODE_NAMES['en'][m]}")
+                          for m in report["config"]["modes"]) + " |",
+             "| --- | ---: |" + " ---: |" * len(report["config"]["modes"])]
+    for language in candidates:
+        records = [r for r in report["cases"].values() if r["language"] == language]
+        build = median([r["build"]["elapsed_ms"] for r in records if "elapsed_ms" in r.get("build", {})])
+        cells = []
+        for mode in report["config"]["modes"]:
+            per_case = [median([s["process_elapsed_ms"] for s in r["samples"] if s["status"] == "ok"])
+                        for r in records if r["mode"] == mode]
+            cells.append(f"{median([v for v in per_case if v == v]):.1f} ms")
+        lines.append(f"| {languages[language]} | {build:.1f} ms | " + " | ".join(cells) + " |")
+    return lines + [""]
+
+
 def switcher(lang, english, chinese):
     """The language switcher at the top of each README, linking the two generated files."""
     if lang == "tw":
@@ -358,6 +391,7 @@ def generate_readme(report, lang="en", english="README.md", chinese="README.tw.m
         lines += median_lines(view, languages, short, lang)
         lines += typed_vs_node_lines(view, languages, short, lang)
         lines += variability_lines(view, languages, short, config["repetitions"], lang)
+    lines += compiler_lines(report, languages, lang)
     lines += [tr("## 綜合分數計算方式", "## How the composite score is computed"), "",
               tr(f"每個模式分別將本次 {len(report['benchmarks'])} 項演算法的相對速度等權重取幾何平均，再以最快語言為 100 分。"
                  f"{timing_description}",
@@ -616,7 +650,7 @@ def generate_readme(report, lang="en", english="README.md", chinese="README.tw.m
         version = runtime.get("version", tr("無法使用：找不到執行檔", "unavailable: executable not found"))
         if not runtime.get("available"):
             version = tr("無法使用：", "unavailable: ") + runtime.get("error", tr("找不到執行檔", "executable not found"))
-        if language in ("aquarius", "aquarius_typed") and runtime.get("available"):
+        if language.startswith("aquarius") and runtime.get("available"):
             version = tr("未提供版本參數；以發行目錄與二進位檔雜湊識別",
                          "no version option; identified by release folder and binary hashes")
         lines.append(f"| {title} | {md(version)} | {md(runtime.get('executable', tr('無法取得', 'unavailable')))} |")
