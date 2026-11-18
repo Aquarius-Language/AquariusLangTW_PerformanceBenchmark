@@ -71,4 +71,28 @@ def expected(name, n):
                 lengths[value] = steps
             checksum += lengths[start]
         return checksum
+    # App-shaped probes (app_benchmarks.json).
+    if name == "string_build":
+        return 3 * n
+    if name == "hash_str":
+        return (n // 1000 + (1 if n % 1000 > 7 else 0)) * 1000 + min(n, 1000)
+    if name == "hash_int":
+        size = n // 5
+        return sum((i * 13) % size for i in range(n)) % 1000003
+    if name == "closure":
+        return sum(2 + i % 3 for i in range(n)) % 1000003
+    if name == "struct_update":
+        # Particle j is stepped at calls j, j + 1000, ...; its k-th step yields (j + k * v) % 10007.
+        steps = [0] * 1000
+        total = 0
+        for i in range(n):
+            j = i % 1000
+            steps[j] += 1
+            total += (j + steps[j] * (j % 17 + 1)) % 10007
+        return total % 1000003
+    if name == "calls":
+        acc = 0
+        for i in range(n):
+            acc = (acc * 31 + i) % 1000003
+        return acc
     raise ValueError(f"Unknown benchmark: {name}")

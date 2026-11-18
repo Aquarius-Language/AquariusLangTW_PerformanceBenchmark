@@ -1,0 +1,19 @@
+var benchmark_n = 1000;
+var benchmark_warmups = 0;
+var benchmark_timed_runs = 1;
+# Appends to a string that a closure can also see (the closure keeps the variable in a shared scope).
+var benchmark_run = function() {
+    var text = "";
+    var size = function() { return len(text); };
+    for (var i = 0; i < benchmark_n; i++) { text = text + "ab,"; }
+    return size();
+};
+# Untimed in-process warm-up runs, then timed runs; the harness substitutes both counts.
+for (var benchmark_warmup = 0; benchmark_warmup < benchmark_warmups; benchmark_warmup++) { benchmark_run(); }
+for (var benchmark_round = 0; benchmark_round < benchmark_timed_runs; benchmark_round++) {
+    var benchmark_start = currentTime();
+    var benchmark_result = benchmark_run();
+    var benchmark_elapsed_ms = currentTime() - benchmark_start;
+    print("RESULT", benchmark_result);
+    print("ELAPSED_MS", benchmark_elapsed_ms);
+}

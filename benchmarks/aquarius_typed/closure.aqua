@@ -1,0 +1,20 @@
+const benchmark_n: int = 1000;
+var benchmark_warmups: int = 0;
+var benchmark_timed_runs: int = 1;
+# Maps an array with a function literal, then calls a closure that updates a captured variable n times.
+var benchmark_run = function(): int {
+    var doubled: int[] = Array.Map(Array.Make(benchmark_n, 1), function(x: int): int { return x * 2; });
+    var total: int = 0;
+    var add = function(value: int) { total = (total + value) % 1000003; };
+    for (var i: int = 0; i < benchmark_n; i++) { add(doubled[i] + i % 3); }
+    return total;
+};
+# Untimed in-process warm-up runs, then timed runs; the harness substitutes both counts.
+for (var benchmark_warmup = 0; benchmark_warmup < benchmark_warmups; benchmark_warmup++) { benchmark_run(); }
+for (var benchmark_round = 0; benchmark_round < benchmark_timed_runs; benchmark_round++) {
+    var benchmark_start = currentTime();
+    var benchmark_result = benchmark_run();
+    var benchmark_elapsed_ms = currentTime() - benchmark_start;
+    print("RESULT", benchmark_result);
+    print("ELAPSED_MS", benchmark_elapsed_ms);
+}

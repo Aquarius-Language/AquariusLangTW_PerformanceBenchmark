@@ -1,0 +1,23 @@
+const benchmark_n: int = 1000;
+var benchmark_warmups: int = 0;
+var benchmark_timed_runs: int = 1;
+# Counts string keys in a hash: one read and one write per update, 1000 distinct keys.
+var benchmark_run = function(): int {
+    var keys: string[] = Array.Make(1000, "");
+    for (var j: int = 0; j < 1000; j++) { keys[j] = "key" + String.From(j); }
+    var counts = {};
+    for (var i: int = 0; i < benchmark_n; i++) {
+        var key: string = keys[i % 1000];
+        counts[key] = Hash.Get(counts, key, 0) + 1;
+    }
+    return Hash.Get(counts, "key7", 0) * 1000 + len(counts);
+};
+# Untimed in-process warm-up runs, then timed runs; the harness substitutes both counts.
+for (var benchmark_warmup = 0; benchmark_warmup < benchmark_warmups; benchmark_warmup++) { benchmark_run(); }
+for (var benchmark_round = 0; benchmark_round < benchmark_timed_runs; benchmark_round++) {
+    var benchmark_start = currentTime();
+    var benchmark_result = benchmark_run();
+    var benchmark_elapsed_ms = currentTime() - benchmark_start;
+    print("RESULT", benchmark_result);
+    print("ELAPSED_MS", benchmark_elapsed_ms);
+}

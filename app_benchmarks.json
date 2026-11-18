@@ -1,0 +1,8 @@
+{
+  "string_build": {"title": "String building", "description": "Append \"ab,\" n times to a string that a closure can also see; the result's length.", "standard": 5000, "smoke": 100, "large": 20000},
+  "hash_str": {"title": "String-key hash", "description": "n count updates (read and write) over 1000 string keys.", "standard": 100000, "smoke": 1000, "large": 500000},
+  "hash_int": {"title": "Integer-key hash", "description": "n / 5 integer-key inserts, then n reads.", "standard": 200000, "smoke": 1000, "large": 1000000},
+  "closure": {"title": "Closures", "description": "Map n elements with a function literal, then n calls of a closure that updates a captured variable.", "standard": 200000, "smoke": 1000, "large": 1000000},
+  "struct_update": {"title": "Struct updates", "description": "n calls of a step function on 1000 struct particles taken from an array.", "standard": 200000, "smoke": 1000, "large": 1000000},
+  "calls": {"title": "Function calls", "description": "n calls of a small two-argument function.", "standard": 500000, "smoke": 1000, "large": 2000000}
+}

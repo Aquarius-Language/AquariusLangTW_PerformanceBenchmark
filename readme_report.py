@@ -37,6 +37,21 @@ WORKLOADS = {
                                         "spectral norm, avoiding a library square root.")),
     "collatz": (("考拉茲猜想", "累計起始整數 1 至 n 到達 1 的步數，不使用記憶化。"),
                 ("Collatz conjecture", "Sums the steps for each start from 1 to n to reach 1, no memoization.")),
+    # App-shaped probes (app_benchmarks.json, --suite app).
+    "string_build": (("字串串接", "對閉包也看得到的字串變數附加 n 次 \"ab,\"，回傳長度。"),
+                     ("String building", "Appends \"ab,\" n times to a string that a closure can also see; returns "
+                                         "its length.")),
+    "hash_str": (("字串鍵雜湊表", "以 1000 個字串鍵做 n 次計數更新（一讀一寫）。"),
+                 ("String-key hash", "n count updates (one read, one write) over 1000 string keys.")),
+    "hash_int": (("整數鍵雜湊表", "插入 n / 5 個整數鍵，再讀取 n 次。"),
+                 ("Integer-key hash", "Inserts n / 5 integer keys, then reads n times.")),
+    "closure": (("閉包", "以函式字面值映射 n 個元素，再呼叫 n 次會更新擷取變數的閉包。"),
+                ("Closures", "Maps n elements with a function literal, then calls a closure that updates a captured "
+                             "variable n times.")),
+    "struct_update": (("結構更新", "對陣列中的 1000 個結構粒子呼叫 n 次更新函式。"),
+                      ("Struct updates", "n calls of a step function on 1000 struct particles taken from an array.")),
+    "calls": (("函式呼叫", "呼叫 n 次小型的雙參數函式。"),
+              ("Function calls", "n calls of a small two-argument function.")),
 }
 STATUS = {"tw": {"ok": "通過", "failed": "失敗", "incomplete": "未完成", "unavailable": "無法使用"},
           "en": {"ok": "passed", "failed": "failed", "incomplete": "incomplete", "unavailable": "unavailable"}}

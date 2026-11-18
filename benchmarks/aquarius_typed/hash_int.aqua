@@ -1,0 +1,21 @@
+const benchmark_n: int = 1000;
+var benchmark_warmups: int = 0;
+var benchmark_timed_runs: int = 1;
+# Fills a hash with n / 5 integer keys, then reads n of them.
+var benchmark_run = function(): int {
+    var size: int = benchmark_n / 5;
+    var table = {};
+    for (var i: int = 0; i < size; i++) { table[i * 7] = i; }
+    var sum: int = 0;
+    for (var i: int = 0; i < benchmark_n; i++) { sum = (sum + table[((i * 13) % size) * 7]) % 1000003; }
+    return sum;
+};
+# Untimed in-process warm-up runs, then timed runs; the harness substitutes both counts.
+for (var benchmark_warmup = 0; benchmark_warmup < benchmark_warmups; benchmark_warmup++) { benchmark_run(); }
+for (var benchmark_round = 0; benchmark_round < benchmark_timed_runs; benchmark_round++) {
+    var benchmark_start = currentTime();
+    var benchmark_result = benchmark_run();
+    var benchmark_elapsed_ms = currentTime() - benchmark_start;
+    print("RESULT", benchmark_result);
+    print("ELAPSED_MS", benchmark_elapsed_ms);
+}

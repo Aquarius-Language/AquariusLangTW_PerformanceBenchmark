@@ -358,10 +358,19 @@ def build_csharp(executable, source, stage, timeout):
     return build, assembly
 
 
+# Suites: the classic algorithms (the composite score's history) and the app-shaped probes (hashes, strings, closures,
+# structs, calls), each with its own manifest, results folder and README so neither changes the other's scores.
+SUITES = {"classic": {"manifest": "benchmarks.json", "results": "results", "readme": "README.md"},
+          "app": {"manifest": "app_benchmarks.json", "results": "results/app", "readme": "app/README.md"}}
+
+
 def main(argv=None):
-    manifest_path = ROOT / "benchmarks.json"
+    suite_parser = argparse.ArgumentParser(add_help=False)
+    suite_parser.add_argument("--suite", choices=list(SUITES), default="classic")
+    suite = SUITES[suite_parser.parse_known_args(argv)[0].suite]
+    manifest_path = ROOT / suite["manifest"]
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
-    parser = argparse.ArgumentParser(description=__doc__)
+    parser = argparse.ArgumentParser(description=__doc__, parents=[suite_parser])
     parser.add_argument("--profile", choices=["standard", "smoke", "large"], default="standard")
     parser.add_argument("--benchmarks", choices=list(manifest), nargs="+", default=list(manifest))
     parser.add_argument("--repetitions", type=positive, default=5, help="measured processes per case")
@@ -377,8 +386,8 @@ def main(argv=None):
     parser.add_argument("--python", default=sys.executable, help="Python executable (defaults to this interpreter)")
     parser.add_argument("--node", help="Node.js executable")
     parser.add_argument("--dotnet", help=".NET SDK host executable for C# (net8.0, Release)")
-    parser.add_argument("--output-dir", type=Path, default=ROOT / "results")
-    parser.add_argument("--readme", type=Path, default=ROOT / "README.md",
+    parser.add_argument("--output-dir", type=Path, default=ROOT / suite["results"])
+    parser.add_argument("--readme", type=Path, default=ROOT / suite["readme"],
                         help="English README; the Traditional Chinese README is written beside it as .tw.md")
     parser.add_argument("--report-only", type=Path, help="Generate the READMEs from a saved JSON report, without executing scripts")
     args = parser.parse_args(argv)
