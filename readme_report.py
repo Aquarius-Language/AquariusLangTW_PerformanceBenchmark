@@ -379,11 +379,23 @@ def generate_readme(report, lang="en", english="README.md", chinese="README.tw.m
         summary = score_summary(scores, languages, lang) if scores else tr("資料不足，無法計算", "not enough data to compute")
         lines.append(tr(f"- **{mode_title(mode, params, lang)}**：{summary}",
                         f"- **{mode_title(mode, params, lang)}**: {summary}"))
-    lines += ["", tr(f"本專案提供十種經典演算法、{len(WORKLOADS) * count} 份可獨立執行的測試程式，"
-                     "以及負責驗證結果、產生 README 與 JSON／CSV 報告的 Python 主控程式。",
-                     f"The project provides ten classic algorithms, {len(WORKLOADS) * count} standalone benchmark "
-                     "programs, and a Python harness that validates the results and generates the READMEs and the "
-                     "JSON and CSV reports."), ""]
+    programs = len(report["benchmarks"]) * count
+    if "string_build" in report["benchmarks"]:
+        # The app suite (run_benchmarks.py --suite app), whose README lives in app/.
+        lines += ["", tr(f"這是應用程式型測試：{len(report['benchmarks'])} 種日常程式會用到的操作（雜湊表、字串、閉包、結構、函式呼叫），"
+                         f"共 {programs} 份可獨立執行的測試程式，以 `run_benchmarks.py --suite app` 執行。"
+                         "十種經典演算法的結果見 [../README.tw.md](../README.tw.md)。",
+                         f"This is the app suite: {len(report['benchmarks'])} operations everyday programs use (hashes, strings, "
+                         f"closures, structs and calls), {programs} standalone programs, run with `run_benchmarks.py --suite app`. "
+                         "The ten classic algorithms are in [../README.md](../README.md)."), ""]
+    else:
+        lines += ["", tr(f"本專案提供十種經典演算法、{programs} 份可獨立執行的測試程式，"
+                         "以及負責驗證結果、產生 README 與 JSON／CSV 報告的 Python 主控程式。"
+                         "日常程式常用操作（雜湊表、字串、閉包、結構、函式呼叫）的應用程式型測試見 [app/README.tw.md](app/README.tw.md)。",
+                         f"The project provides ten classic algorithms, {programs} standalone benchmark "
+                         "programs, and a Python harness that validates the results and generates the READMEs and the "
+                         "JSON and CSV reports. The app suite (hashes, strings, closures, structs and calls, the operations "
+                         "everyday programs use) is in [app/README.md](app/README.md)."), ""]
     for mode, params, view in views:
         short = MODE_NAMES[lang].get(mode, mode)
         lines += [f"## {mode_title(mode, params, lang)}", "", mode_method(mode, params, config, has_csharp, lang), ""]

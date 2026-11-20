@@ -7,7 +7,7 @@ This run measured 2 modes, each with its own composite score (higher is faster; 
 - **Standard mode (cold start, one timed run per process)**: Node.js 100.00, C# 60.54, AquariusLang (typed) 18.80, AquariusLang (typed, Native AOT compiler) 18.51, AquariusLang (Native AOT compiler) 14.35, AquariusLang 14.25, Python 10.45
 - **Warmed mode (5 in-process warm-up runs, then the median of 5 timed runs)**: Node.js 100.00, C# 49.96, AquariusLang (typed, Native AOT compiler) 14.09, AquariusLang (typed) 13.92, AquariusLang (Native AOT compiler) 11.11, AquariusLang 11.10, Python 7.45
 
-The project provides ten classic algorithms, 112 standalone benchmark programs, and a Python harness that validates the results and generates the READMEs and the JSON and CSV reports.
+This is the app suite: 6 operations everyday programs use (hashes, strings, closures, structs and calls), 42 standalone programs, run with `run_benchmarks.py --suite app`. The ten classic algorithms are in [../README.md](../README.md).
 
 ## Standard mode (cold start, one timed run per process)
 
