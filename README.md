@@ -4,8 +4,8 @@
 
 This run measured 2 modes, each with its own composite score (higher is faster; the fastest language scores 100):
 
-- **Standard mode (cold start, one timed run per process)**: C# 100.00, AquariusLang (typed, Native AOT compiler) 67.11, AquariusLang (typed) 66.52, AquariusLang (Native AOT compiler) 49.78, AquariusLang 49.15, Node.js 36.77, Python 2.61
-- **Warmed mode (5 in-process warm-up runs, then the median of 5 timed runs)**: C# 100.00, AquariusLang (typed) 57.49, AquariusLang (typed, Native AOT compiler) 55.92, Node.js 46.78, AquariusLang (Native AOT compiler) 44.24, AquariusLang 43.95, Python 2.20
+- **Standard mode (cold start, one timed run per process)**: C# 100.00, AquariusLang (typed, Native AOT compiler) 67.81, AquariusLang (typed) 66.28, AquariusLang 50.62, AquariusLang (Native AOT compiler) 49.45, Node.js 38.72, Python 2.80
+- **Warmed mode (5 in-process warm-up runs, then the median of 5 timed runs)**: C# 100.00, AquariusLang (typed) 56.79, AquariusLang (typed, Native AOT compiler) 56.65, Node.js 46.98, AquariusLang 45.17, AquariusLang (Native AOT compiler) 43.81, Python 2.27
 
 The project provides ten classic algorithms, 112 standalone benchmark programs, and a Python harness that validates the results and generates the READMEs and the JSON and CSV reports.
 
@@ -13,19 +13,19 @@ The project provides ten classic algorithms, 112 standalone benchmark programs, 
 
 Each process runs and times the workload once, with no in-process warm-up, as in the original design. The JIT compilation and optimization of C# and Node.js fall inside the timed interval, while Wasmtime has already compiled the AquariusLang Wasm before timing starts, so this mode reflects a short program's first run after process start. Each value is the median of 5 process timings.
 
-**Composite performance: C# 100.00, AquariusLang (typed, Native AOT compiler) 67.11, AquariusLang (typed) 66.52, AquariusLang (Native AOT compiler) 49.78, AquariusLang 49.15, Node.js 36.77, Python 2.61 (higher is faster).**
+**Composite performance: C# 100.00, AquariusLang (typed, Native AOT compiler) 67.81, AquariusLang (typed) 66.28, AquariusLang 50.62, AquariusLang (Native AOT compiler) 49.45, Node.js 38.72, Python 2.80 (higher is faster).**
 
-Pairwise composite speed: C# is 1.49× as fast as AquariusLang (typed, Native AOT compiler); C# is 1.50× as fast as AquariusLang (typed); C# is 2.01× as fast as AquariusLang (Native AOT compiler); C# is 2.03× as fast as AquariusLang; C# is 2.72× as fast as Node.js; C# is 38.30× as fast as Python; AquariusLang (typed, Native AOT compiler) is 1.01× as fast as AquariusLang (typed); AquariusLang (typed, Native AOT compiler) is 1.35× as fast as AquariusLang (Native AOT compiler); AquariusLang (typed, Native AOT compiler) is 1.37× as fast as AquariusLang; AquariusLang (typed, Native AOT compiler) is 1.83× as fast as Node.js; AquariusLang (typed, Native AOT compiler) is 25.71× as fast as Python; AquariusLang (typed) is 1.34× as fast as AquariusLang (Native AOT compiler); AquariusLang (typed) is 1.35× as fast as AquariusLang; AquariusLang (typed) is 1.81× as fast as Node.js; AquariusLang (typed) is 25.48× as fast as Python; AquariusLang (Native AOT compiler) is 1.01× as fast as AquariusLang; AquariusLang (Native AOT compiler) is 1.35× as fast as Node.js; AquariusLang (Native AOT compiler) is 19.07× as fast as Python; AquariusLang is 1.34× as fast as Node.js; AquariusLang is 18.83× as fast as Python; Node.js is 14.08× as fast as Python.
+Pairwise composite speed: C# is 1.47× as fast as AquariusLang (typed, Native AOT compiler); C# is 1.51× as fast as AquariusLang (typed); C# is 1.98× as fast as AquariusLang; C# is 2.02× as fast as AquariusLang (Native AOT compiler); C# is 2.58× as fast as Node.js; C# is 35.73× as fast as Python; AquariusLang (typed, Native AOT compiler) is 1.02× as fast as AquariusLang (typed); AquariusLang (typed, Native AOT compiler) is 1.34× as fast as AquariusLang; AquariusLang (typed, Native AOT compiler) is 1.37× as fast as AquariusLang (Native AOT compiler); AquariusLang (typed, Native AOT compiler) is 1.75× as fast as Node.js; AquariusLang (typed, Native AOT compiler) is 24.23× as fast as Python; AquariusLang (typed) is 1.31× as fast as AquariusLang; AquariusLang (typed) is 1.34× as fast as AquariusLang (Native AOT compiler); AquariusLang (typed) is 1.71× as fast as Node.js; AquariusLang (typed) is 23.68× as fast as Python; AquariusLang is 1.02× as fast as AquariusLang (Native AOT compiler); AquariusLang is 1.31× as fast as Node.js; AquariusLang is 18.08× as fast as Python; AquariusLang (Native AOT compiler) is 1.28× as fast as Node.js; AquariusLang (Native AOT compiler) is 17.67× as fast as Python; Node.js is 13.84× as fast as Python.
 
-| Rank | Language | Composite score | Speed vs C# | Speed vs AquariusLang (typed, Native AOT compiler) | Speed vs AquariusLang (typed) | Speed vs AquariusLang (Native AOT compiler) | Speed vs AquariusLang | Speed vs Node.js | Speed vs Python |
+| Rank | Language | Composite score | Speed vs C# | Speed vs AquariusLang (typed, Native AOT compiler) | Speed vs AquariusLang (typed) | Speed vs AquariusLang | Speed vs AquariusLang (Native AOT compiler) | Speed vs Node.js | Speed vs Python |
 | ---: | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| 1 | C# | 100.00 | 1.000× | 1.490× | 1.503× | 2.009× | 2.034× | 2.719× | 38.301× |
-| 2 | AquariusLang (typed, Native AOT compiler) | 67.11 | 0.671× | 1.000× | 1.009× | 1.348× | 1.365× | 1.825× | 25.706× |
-| 3 | AquariusLang (typed) | 66.52 | 0.665× | 0.991× | 1.000× | 1.336× | 1.353× | 1.809× | 25.478× |
-| 4 | AquariusLang (Native AOT compiler) | 49.78 | 0.498× | 0.742× | 0.748× | 1.000× | 1.013× | 1.354× | 19.066× |
-| 5 | AquariusLang | 49.15 | 0.492× | 0.732× | 0.739× | 0.987× | 1.000× | 1.337× | 18.827× |
-| 6 | Node.js | 36.77 | 0.368× | 0.548× | 0.553× | 0.739× | 0.748× | 1.000× | 14.084× |
-| 7 | Python | 2.61 | 0.026× | 0.039× | 0.039× | 0.052× | 0.053× | 0.071× | 1.000× |
+| 1 | C# | 100.00 | 1.000× | 1.475× | 1.509× | 1.976× | 2.022× | 2.582× | 35.727× |
+| 2 | AquariusLang (typed, Native AOT compiler) | 67.81 | 0.678× | 1.000× | 1.023× | 1.340× | 1.371× | 1.751× | 24.228× |
+| 3 | AquariusLang (typed) | 66.28 | 0.663× | 0.977× | 1.000× | 1.309× | 1.340× | 1.712× | 23.679× |
+| 4 | AquariusLang | 50.62 | 0.506× | 0.746× | 0.764× | 1.000× | 1.024× | 1.307× | 18.083× |
+| 5 | AquariusLang (Native AOT compiler) | 49.45 | 0.495× | 0.729× | 0.746× | 0.977× | 1.000× | 1.277× | 17.668× |
+| 6 | Node.js | 38.72 | 0.387× | 0.571× | 0.584× | 0.765× | 0.783× | 1.000× | 13.835× |
+| 7 | Python | 2.80 | 0.028× | 0.041× | 0.042× | 0.055× | 0.057× | 0.072× | 1.000× |
 
 ### Results per benchmark (standard mode)
 
@@ -33,16 +33,16 @@ Times are in milliseconds (ms); lower is faster. Time ratio = the language's med
 
 | Benchmark | n | AquariusLang median | AquariusLang (typed) median | AquariusLang (Native AOT compiler) median | AquariusLang (typed, Native AOT compiler) median | Python median | Node.js median | C# median | AquariusLang / Python time ratio | AquariusLang (typed) / Python time ratio | AquariusLang (Native AOT compiler) / Python time ratio | AquariusLang (typed, Native AOT compiler) / Python time ratio | Node.js / Python time ratio | C# / Python time ratio |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| Recursive Fibonacci | 32 | 14.622 | 16.237 | 15.039 | 14.780 | 262.839 | 18.248 | 7.104 | 0.06× | 0.06× | 0.06× | 0.06× | 0.07× | 0.03× |
-| Ackermann function | 8 | 12.272 | 11.096 | 10.954 | 11.524 | 277.475 | 10.822 | 2.869 | 0.04× | 0.04× | 0.04× | 0.04× | 0.04× | 0.01× |
-| Sieve of Eratosthenes | 200000 | 2.159 | 0.930 | 1.895 | 0.941 | 16.911 | 7.631 | 1.049 | 0.13× | 0.06× | 0.11× | 0.06× | 0.45× | 0.06× |
-| Quicksort | 30000 | 6.048 | 3.380 | 6.064 | 2.976 | 39.146 | 7.972 | 2.965 | 0.15× | 0.09× | 0.15× | 0.08× | 0.20× | 0.08× |
-| Matrix multiplication | 150 | 8.421 | 3.211 | 7.858 | 3.441 | 287.791 | 12.466 | 2.786 | 0.03× | 0.01× | 0.03× | 0.01× | 0.04× | 0.01× |
-| Mandelbrot set | 300 | 6.455 | 6.204 | 6.646 | 6.328 | 202.454 | 7.330 | 4.546 | 0.03× | 0.03× | 0.03× | 0.03× | 0.04× | 0.02× |
-| N-Queens | 10 | 8.477 | 5.607 | 8.679 | 5.817 | 137.904 | 6.364 | 4.503 | 0.06× | 0.04× | 0.06× | 0.04× | 0.05× | 0.03× |
-| Binary trees | 16 | 67.347 | 73.082 | 73.269 | 64.943 | 509.740 | 34.341 | 23.461 | 0.13× | 0.14× | 0.14× | 0.13× | 0.07× | 0.05× |
-| Spectral norm | 250 | 6.597 | 5.055 | 6.687 | 5.159 | 367.786 | 13.034 | 4.511 | 0.02× | 0.01× | 0.02× | 0.01× | 0.04× | 0.01× |
-| Collatz conjecture | 100000 | 23.412 | 23.323 | 23.545 | 24.642 | 863.712 | 65.406 | 24.166 | 0.03× | 0.03× | 0.03× | 0.03× | 0.08× | 0.03× |
+| Recursive Fibonacci | 32 | 13.097 | 14.529 | 14.080 | 14.203 | 227.480 | 16.122 | 7.035 | 0.06× | 0.06× | 0.06× | 0.06× | 0.07× | 0.03× |
+| Ackermann function | 8 | 11.830 | 10.120 | 11.282 | 10.670 | 255.947 | 9.281 | 3.028 | 0.05× | 0.04× | 0.04× | 0.04× | 0.04× | 0.01× |
+| Sieve of Eratosthenes | 200000 | 1.997 | 1.204 | 2.006 | 0.964 | 16.948 | 6.959 | 1.002 | 0.12× | 0.07× | 0.12× | 0.06× | 0.41× | 0.06× |
+| Quicksort | 30000 | 6.041 | 3.016 | 6.317 | 3.035 | 34.556 | 7.624 | 2.744 | 0.17× | 0.09× | 0.18× | 0.09× | 0.22× | 0.08× |
+| Matrix multiplication | 150 | 8.005 | 2.656 | 8.462 | 2.812 | 263.462 | 10.056 | 2.663 | 0.03× | 0.01× | 0.03× | 0.01× | 0.04× | 0.01× |
+| Mandelbrot set | 300 | 5.533 | 6.254 | 5.637 | 5.514 | 185.413 | 5.613 | 4.225 | 0.03× | 0.03× | 0.03× | 0.03× | 0.03× | 0.02× |
+| N-Queens | 10 | 6.978 | 5.620 | 7.363 | 5.490 | 119.824 | 5.923 | 4.243 | 0.06× | 0.05× | 0.06× | 0.05× | 0.05× | 0.04× |
+| Binary trees | 16 | 69.036 | 62.243 | 67.338 | 66.435 | 425.454 | 33.175 | 21.431 | 0.16× | 0.15× | 0.16× | 0.16× | 0.08× | 0.05× |
+| Spectral norm | 250 | 6.536 | 4.844 | 6.577 | 4.850 | 335.411 | 14.591 | 4.271 | 0.02× | 0.01× | 0.02× | 0.01× | 0.04× | 0.01× |
+| Collatz conjecture | 100000 | 21.006 | 24.575 | 22.063 | 24.173 | 718.901 | 62.042 | 23.609 | 0.03× | 0.03× | 0.03× | 0.03× | 0.09× | 0.03× |
 
 ### AquariusLang (typed) vs Node.js (standard mode)
 
@@ -50,17 +50,17 @@ Ratio = Node.js median time ÷ AquariusLang (typed) median time; above 1 means A
 
 | Benchmark | n | AquariusLang (typed) median | Node.js median | Node.js ÷ AquariusLang (typed) | Faster |
 | --- | ---: | ---: | ---: | ---: | --- |
-| Recursive Fibonacci | 32 | 16.237 | 18.248 | 1.12× | AquariusLang (typed), 1.12× faster |
-| Ackermann function | 8 | 11.096 | 10.822 | 0.98× | Node.js, 1.03× faster |
-| Sieve of Eratosthenes | 200000 | 0.930 | 7.631 | 8.20× | AquariusLang (typed), 8.20× faster |
-| Quicksort | 30000 | 3.380 | 7.972 | 2.36× | AquariusLang (typed), 2.36× faster |
-| Matrix multiplication | 150 | 3.211 | 12.466 | 3.88× | AquariusLang (typed), 3.88× faster |
-| Mandelbrot set | 300 | 6.204 | 7.330 | 1.18× | AquariusLang (typed), 1.18× faster |
-| N-Queens | 10 | 5.607 | 6.364 | 1.13× | AquariusLang (typed), 1.13× faster |
-| Binary trees | 16 | 73.082 | 34.341 | 0.47× | Node.js, 2.13× faster |
-| Spectral norm | 250 | 5.055 | 13.034 | 2.58× | AquariusLang (typed), 2.58× faster |
-| Collatz conjecture | 100000 | 23.323 | 65.406 | 2.80× | AquariusLang (typed), 2.80× faster |
-| **Geometric mean** | | | | **1.81×** | AquariusLang (typed), 1.81× faster |
+| Recursive Fibonacci | 32 | 14.529 | 16.122 | 1.11× | AquariusLang (typed), 1.11× faster |
+| Ackermann function | 8 | 10.120 | 9.281 | 0.92× | Node.js, 1.09× faster |
+| Sieve of Eratosthenes | 200000 | 1.204 | 6.959 | 5.78× | AquariusLang (typed), 5.78× faster |
+| Quicksort | 30000 | 3.016 | 7.624 | 2.53× | AquariusLang (typed), 2.53× faster |
+| Matrix multiplication | 150 | 2.656 | 10.056 | 3.79× | AquariusLang (typed), 3.79× faster |
+| Mandelbrot set | 300 | 6.254 | 5.613 | 0.90× | Node.js, 1.11× faster |
+| N-Queens | 10 | 5.620 | 5.923 | 1.05× | AquariusLang (typed), 1.05× faster |
+| Binary trees | 16 | 62.243 | 33.175 | 0.53× | Node.js, 1.88× faster |
+| Spectral norm | 250 | 4.844 | 14.591 | 3.01× | AquariusLang (typed), 3.01× faster |
+| Collatz conjecture | 100000 | 24.575 | 62.042 | 2.52× | AquariusLang (typed), 2.52× faster |
+| **Geometric mean** | | | | **1.71×** | AquariusLang (typed), 1.71× faster |
 
 ### Timing variability (standard mode)
 
@@ -68,94 +68,94 @@ Coefficient of variation (CV) = sample standard deviation of the process values 
 
 | Benchmark | Language | Min ms | Max ms | Std dev ms | CV | Valid samples |
 | --- | --- | ---: | ---: | ---: | ---: | ---: |
-| Recursive Fibonacci | AquariusLang | 12.263 | 20.219 | 2.971 | 19.2% | 5/5 |
-| Recursive Fibonacci | AquariusLang (typed) | 14.666 | 17.685 | 1.282 | 7.8% | 5/5 |
-| Recursive Fibonacci | AquariusLang (Native AOT compiler) | 12.397 | 16.754 | 1.631 | 11.0% | 5/5 |
-| Recursive Fibonacci | AquariusLang (typed, Native AOT compiler) | 12.999 | 15.515 | 0.936 | 6.5% | 5/5 |
-| Recursive Fibonacci | Python | 210.782 | 269.114 | 23.824 | 9.4% | 5/5 |
-| Recursive Fibonacci | Node.js | 16.552 | 20.154 | 1.446 | 8.0% | 5/5 |
-| Recursive Fibonacci | C# | 6.313 | 7.759 | 0.537 | 7.5% | 5/5 |
-| Ackermann function | AquariusLang | 11.809 | 13.230 | 0.528 | 4.2% | 5/5 |
-| Ackermann function | AquariusLang (typed) | 9.848 | 13.364 | 1.273 | 11.3% | 5/5 |
-| Ackermann function | AquariusLang (Native AOT compiler) | 9.197 | 13.004 | 1.463 | 13.0% | 5/5 |
-| Ackermann function | AquariusLang (typed, Native AOT compiler) | 9.133 | 12.351 | 1.295 | 11.8% | 5/5 |
-| Ackermann function | Python | 235.870 | 332.379 | 39.566 | 13.7% | 5/5 |
-| Ackermann function | Node.js | 9.412 | 11.421 | 0.806 | 7.5% | 5/5 |
-| Ackermann function | C# | 2.857 | 3.318 | 0.202 | 6.7% | 5/5 |
-| Sieve of Eratosthenes | AquariusLang | 1.965 | 2.196 | 0.093 | 4.4% | 5/5 |
-| Sieve of Eratosthenes | AquariusLang (typed) | 0.878 | 1.125 | 0.112 | 11.4% | 5/5 |
-| Sieve of Eratosthenes | AquariusLang (Native AOT compiler) | 1.822 | 2.298 | 0.193 | 9.8% | 5/5 |
-| Sieve of Eratosthenes | AquariusLang (typed, Native AOT compiler) | 0.744 | 1.176 | 0.157 | 16.4% | 5/5 |
-| Sieve of Eratosthenes | Python | 13.768 | 18.423 | 1.859 | 11.4% | 5/5 |
-| Sieve of Eratosthenes | Node.js | 5.789 | 8.785 | 1.095 | 14.8% | 5/5 |
-| Sieve of Eratosthenes | C# | 0.994 | 1.059 | 0.027 | 2.6% | 5/5 |
-| Quicksort | AquariusLang | 5.230 | 6.275 | 0.431 | 7.4% | 5/5 |
-| Quicksort | AquariusLang (typed) | 2.891 | 3.596 | 0.292 | 8.9% | 5/5 |
-| Quicksort | AquariusLang (Native AOT compiler) | 4.998 | 7.157 | 0.806 | 13.2% | 5/5 |
-| Quicksort | AquariusLang (typed, Native AOT compiler) | 2.642 | 3.381 | 0.263 | 8.8% | 5/5 |
-| Quicksort | Python | 27.539 | 43.311 | 6.804 | 18.3% | 5/5 |
-| Quicksort | Node.js | 7.425 | 8.167 | 0.283 | 3.6% | 5/5 |
-| Quicksort | C# | 2.663 | 3.355 | 0.273 | 9.0% | 5/5 |
-| Matrix multiplication | AquariusLang | 7.748 | 8.823 | 0.421 | 5.1% | 5/5 |
-| Matrix multiplication | AquariusLang (typed) | 3.067 | 6.616 | 1.526 | 39.2% | 5/5 |
-| Matrix multiplication | AquariusLang (Native AOT compiler) | 6.395 | 9.338 | 1.072 | 13.5% | 5/5 |
-| Matrix multiplication | AquariusLang (typed, Native AOT compiler) | 3.107 | 4.191 | 0.445 | 12.5% | 5/5 |
-| Matrix multiplication | Python | 235.661 | 310.099 | 35.887 | 13.0% | 5/5 |
-| Matrix multiplication | Node.js | 9.412 | 12.881 | 1.728 | 15.2% | 5/5 |
-| Matrix multiplication | C# | 2.492 | 3.240 | 0.285 | 10.2% | 5/5 |
-| Mandelbrot set | AquariusLang | 6.235 | 7.447 | 0.530 | 7.9% | 5/5 |
-| Mandelbrot set | AquariusLang (typed) | 5.685 | 7.248 | 0.591 | 9.2% | 5/5 |
-| Mandelbrot set | AquariusLang (Native AOT compiler) | 6.344 | 6.799 | 0.173 | 2.6% | 5/5 |
-| Mandelbrot set | AquariusLang (typed, Native AOT compiler) | 6.073 | 7.088 | 0.495 | 7.6% | 5/5 |
-| Mandelbrot set | Python | 169.607 | 232.037 | 22.851 | 11.3% | 5/5 |
-| Mandelbrot set | Node.js | 5.974 | 7.989 | 0.763 | 10.5% | 5/5 |
-| Mandelbrot set | C# | 3.817 | 4.923 | 0.433 | 9.6% | 5/5 |
-| N-Queens | AquariusLang | 7.647 | 8.855 | 0.466 | 5.5% | 5/5 |
-| N-Queens | AquariusLang (typed) | 5.090 | 6.238 | 0.430 | 7.7% | 5/5 |
-| N-Queens | AquariusLang (Native AOT compiler) | 7.230 | 9.178 | 0.732 | 8.6% | 5/5 |
-| N-Queens | AquariusLang (typed, Native AOT compiler) | 4.421 | 5.967 | 0.651 | 11.7% | 5/5 |
-| N-Queens | Python | 108.593 | 159.466 | 18.174 | 13.3% | 5/5 |
-| N-Queens | Node.js | 4.612 | 6.834 | 0.875 | 14.3% | 5/5 |
-| N-Queens | C# | 3.371 | 5.450 | 0.745 | 16.6% | 5/5 |
-| Binary trees | AquariusLang | 59.663 | 76.259 | 7.352 | 10.9% | 5/5 |
-| Binary trees | AquariusLang (typed) | 52.044 | 82.182 | 11.314 | 16.3% | 5/5 |
-| Binary trees | AquariusLang (Native AOT compiler) | 67.614 | 74.157 | 2.679 | 3.7% | 5/5 |
-| Binary trees | AquariusLang (typed, Native AOT compiler) | 58.946 | 71.653 | 5.405 | 8.2% | 5/5 |
-| Binary trees | Python | 445.102 | 568.270 | 46.905 | 9.1% | 5/5 |
-| Binary trees | Node.js | 26.016 | 41.183 | 5.817 | 16.7% | 5/5 |
-| Binary trees | C# | 21.036 | 26.215 | 1.843 | 7.8% | 5/5 |
-| Spectral norm | AquariusLang | 5.410 | 7.449 | 0.729 | 11.2% | 5/5 |
-| Spectral norm | AquariusLang (typed) | 4.530 | 6.476 | 0.785 | 14.5% | 5/5 |
-| Spectral norm | AquariusLang (Native AOT compiler) | 6.263 | 7.289 | 0.392 | 5.8% | 5/5 |
-| Spectral norm | AquariusLang (typed, Native AOT compiler) | 4.803 | 5.736 | 0.346 | 6.6% | 5/5 |
-| Spectral norm | Python | 306.564 | 412.989 | 37.903 | 10.4% | 5/5 |
-| Spectral norm | Node.js | 10.841 | 14.437 | 1.320 | 10.3% | 5/5 |
-| Spectral norm | C# | 3.821 | 4.924 | 0.399 | 9.0% | 5/5 |
-| Collatz conjecture | AquariusLang | 18.898 | 26.464 | 3.240 | 14.3% | 5/5 |
-| Collatz conjecture | AquariusLang (typed) | 21.716 | 23.865 | 0.927 | 4.1% | 5/5 |
-| Collatz conjecture | AquariusLang (Native AOT compiler) | 20.372 | 27.231 | 2.446 | 10.4% | 5/5 |
-| Collatz conjecture | AquariusLang (typed, Native AOT compiler) | 21.620 | 27.474 | 2.241 | 9.1% | 5/5 |
-| Collatz conjecture | Python | 720.942 | 998.240 | 98.749 | 11.5% | 5/5 |
-| Collatz conjecture | Node.js | 60.674 | 88.085 | 10.990 | 16.0% | 5/5 |
-| Collatz conjecture | C# | 21.558 | 26.301 | 1.943 | 8.2% | 5/5 |
+| Recursive Fibonacci | AquariusLang | 10.021 | 15.460 | 2.176 | 16.3% | 5/5 |
+| Recursive Fibonacci | AquariusLang (typed) | 12.223 | 16.570 | 1.620 | 11.0% | 5/5 |
+| Recursive Fibonacci | AquariusLang (Native AOT compiler) | 11.666 | 15.586 | 1.507 | 11.0% | 5/5 |
+| Recursive Fibonacci | AquariusLang (typed, Native AOT compiler) | 12.758 | 16.393 | 1.447 | 9.9% | 5/5 |
+| Recursive Fibonacci | Python | 184.864 | 236.526 | 21.087 | 9.7% | 5/5 |
+| Recursive Fibonacci | Node.js | 12.882 | 17.814 | 2.249 | 14.5% | 5/5 |
+| Recursive Fibonacci | C# | 5.619 | 7.329 | 0.683 | 10.1% | 5/5 |
+| Ackermann function | AquariusLang | 11.020 | 12.924 | 0.759 | 6.4% | 5/5 |
+| Ackermann function | AquariusLang (typed) | 8.964 | 11.571 | 0.952 | 9.3% | 5/5 |
+| Ackermann function | AquariusLang (Native AOT compiler) | 8.051 | 12.451 | 1.778 | 16.6% | 5/5 |
+| Ackermann function | AquariusLang (typed, Native AOT compiler) | 10.117 | 11.929 | 0.691 | 6.4% | 5/5 |
+| Ackermann function | Python | 194.142 | 343.417 | 65.990 | 25.2% | 5/5 |
+| Ackermann function | Node.js | 7.396 | 10.477 | 1.231 | 13.2% | 5/5 |
+| Ackermann function | C# | 2.120 | 5.232 | 1.168 | 34.1% | 5/5 |
+| Sieve of Eratosthenes | AquariusLang | 1.901 | 2.155 | 0.103 | 5.1% | 5/5 |
+| Sieve of Eratosthenes | AquariusLang (typed) | 0.857 | 1.327 | 0.180 | 15.5% | 5/5 |
+| Sieve of Eratosthenes | AquariusLang (Native AOT compiler) | 1.982 | 2.216 | 0.103 | 5.0% | 5/5 |
+| Sieve of Eratosthenes | AquariusLang (typed, Native AOT compiler) | 0.847 | 1.285 | 0.177 | 17.5% | 5/5 |
+| Sieve of Eratosthenes | Python | 13.945 | 18.860 | 1.768 | 10.6% | 5/5 |
+| Sieve of Eratosthenes | Node.js | 5.229 | 8.092 | 1.024 | 15.0% | 5/5 |
+| Sieve of Eratosthenes | C# | 0.791 | 1.078 | 0.115 | 11.7% | 5/5 |
+| Quicksort | AquariusLang | 4.314 | 7.053 | 1.102 | 18.3% | 5/5 |
+| Quicksort | AquariusLang (typed) | 2.624 | 3.653 | 0.381 | 12.2% | 5/5 |
+| Quicksort | AquariusLang (Native AOT compiler) | 5.485 | 7.222 | 0.723 | 11.5% | 5/5 |
+| Quicksort | AquariusLang (typed, Native AOT compiler) | 2.860 | 3.460 | 0.254 | 8.2% | 5/5 |
+| Quicksort | Python | 29.836 | 36.984 | 2.825 | 8.2% | 5/5 |
+| Quicksort | Node.js | 6.004 | 8.154 | 0.825 | 11.2% | 5/5 |
+| Quicksort | C# | 2.047 | 3.782 | 0.753 | 26.8% | 5/5 |
+| Matrix multiplication | AquariusLang | 7.321 | 8.631 | 0.579 | 7.2% | 5/5 |
+| Matrix multiplication | AquariusLang (typed) | 2.028 | 3.040 | 0.432 | 16.9% | 5/5 |
+| Matrix multiplication | AquariusLang (Native AOT compiler) | 6.709 | 9.547 | 1.224 | 15.0% | 5/5 |
+| Matrix multiplication | AquariusLang (typed, Native AOT compiler) | 2.208 | 3.135 | 0.396 | 14.8% | 5/5 |
+| Matrix multiplication | Python | 221.908 | 289.668 | 27.584 | 10.6% | 5/5 |
+| Matrix multiplication | Node.js | 8.321 | 11.345 | 1.416 | 14.3% | 5/5 |
+| Matrix multiplication | C# | 1.944 | 3.332 | 0.589 | 23.2% | 5/5 |
+| Mandelbrot set | AquariusLang | 4.293 | 6.079 | 0.672 | 12.5% | 5/5 |
+| Mandelbrot set | AquariusLang (typed) | 5.566 | 7.185 | 0.581 | 9.2% | 5/5 |
+| Mandelbrot set | AquariusLang (Native AOT compiler) | 4.187 | 5.836 | 0.827 | 16.1% | 5/5 |
+| Mandelbrot set | AquariusLang (typed, Native AOT compiler) | 4.129 | 6.993 | 1.218 | 22.7% | 5/5 |
+| Mandelbrot set | Python | 176.751 | 190.623 | 5.295 | 2.9% | 5/5 |
+| Mandelbrot set | Node.js | 4.914 | 6.874 | 0.870 | 15.2% | 5/5 |
+| Mandelbrot set | C# | 3.298 | 4.670 | 0.555 | 13.5% | 5/5 |
+| N-Queens | AquariusLang | 5.489 | 7.650 | 1.043 | 15.7% | 5/5 |
+| N-Queens | AquariusLang (typed) | 4.873 | 5.892 | 0.420 | 7.6% | 5/5 |
+| N-Queens | AquariusLang (Native AOT compiler) | 5.479 | 7.469 | 0.879 | 12.9% | 5/5 |
+| N-Queens | AquariusLang (typed, Native AOT compiler) | 3.961 | 6.115 | 0.817 | 15.4% | 5/5 |
+| N-Queens | Python | 96.196 | 153.358 | 21.464 | 17.8% | 5/5 |
+| N-Queens | Node.js | 4.322 | 6.329 | 0.776 | 13.8% | 5/5 |
+| N-Queens | C# | 3.275 | 4.961 | 0.796 | 19.1% | 5/5 |
+| Binary trees | AquariusLang | 47.148 | 73.377 | 12.457 | 20.3% | 5/5 |
+| Binary trees | AquariusLang (typed) | 51.144 | 70.981 | 8.329 | 13.8% | 5/5 |
+| Binary trees | AquariusLang (Native AOT compiler) | 48.284 | 70.464 | 9.151 | 14.3% | 5/5 |
+| Binary trees | AquariusLang (typed, Native AOT compiler) | 53.511 | 70.561 | 7.769 | 12.3% | 5/5 |
+| Binary trees | Python | 270.448 | 477.428 | 97.227 | 25.6% | 5/5 |
+| Binary trees | Node.js | 27.022 | 38.288 | 5.189 | 15.7% | 5/5 |
+| Binary trees | C# | 18.503 | 24.477 | 2.227 | 10.4% | 5/5 |
+| Spectral norm | AquariusLang | 6.119 | 6.716 | 0.252 | 3.9% | 5/5 |
+| Spectral norm | AquariusLang (typed) | 3.576 | 5.636 | 0.789 | 16.5% | 5/5 |
+| Spectral norm | AquariusLang (Native AOT compiler) | 6.123 | 8.136 | 0.822 | 12.1% | 5/5 |
+| Spectral norm | AquariusLang (typed, Native AOT compiler) | 3.745 | 5.262 | 0.568 | 12.2% | 5/5 |
+| Spectral norm | Python | 287.006 | 358.178 | 26.228 | 8.0% | 5/5 |
+| Spectral norm | Node.js | 8.624 | 24.916 | 5.989 | 39.2% | 5/5 |
+| Spectral norm | C# | 3.088 | 4.391 | 0.558 | 14.0% | 5/5 |
+| Collatz conjecture | AquariusLang | 15.779 | 22.224 | 2.522 | 12.5% | 5/5 |
+| Collatz conjecture | AquariusLang (typed) | 17.671 | 28.439 | 3.949 | 16.4% | 5/5 |
+| Collatz conjecture | AquariusLang (Native AOT compiler) | 16.483 | 23.105 | 2.915 | 14.3% | 5/5 |
+| Collatz conjecture | AquariusLang (typed, Native AOT compiler) | 23.080 | 28.714 | 2.419 | 9.6% | 5/5 |
+| Collatz conjecture | Python | 636.191 | 808.346 | 82.615 | 11.5% | 5/5 |
+| Collatz conjecture | Node.js | 46.198 | 63.851 | 7.339 | 12.6% | 5/5 |
+| Collatz conjecture | C# | 17.694 | 25.766 | 3.865 | 17.7% | 5/5 |
 
 ## Warmed mode (5 in-process warm-up runs, then the median of 5 timed runs)
 
 Each process first runs the same workload 5 times untimed in the same process so the JIT of C# and Node.js finishes optimizing before timing, then times 5 consecutive runs in the same process and takes their median as the process value; each value is the median of 5 process values. Every language gets the same warm-up and timed run counts.
 
-**Composite performance: C# 100.00, AquariusLang (typed) 57.49, AquariusLang (typed, Native AOT compiler) 55.92, Node.js 46.78, AquariusLang (Native AOT compiler) 44.24, AquariusLang 43.95, Python 2.20 (higher is faster).**
+**Composite performance: C# 100.00, AquariusLang (typed) 56.79, AquariusLang (typed, Native AOT compiler) 56.65, Node.js 46.98, AquariusLang 45.17, AquariusLang (Native AOT compiler) 43.81, Python 2.27 (higher is faster).**
 
-Pairwise composite speed: C# is 1.74× as fast as AquariusLang (typed); C# is 1.79× as fast as AquariusLang (typed, Native AOT compiler); C# is 2.14× as fast as Node.js; C# is 2.26× as fast as AquariusLang (Native AOT compiler); C# is 2.28× as fast as AquariusLang; C# is 45.38× as fast as Python; AquariusLang (typed) is 1.03× as fast as AquariusLang (typed, Native AOT compiler); AquariusLang (typed) is 1.23× as fast as Node.js; AquariusLang (typed) is 1.30× as fast as AquariusLang (Native AOT compiler); AquariusLang (typed) is 1.31× as fast as AquariusLang; AquariusLang (typed) is 26.09× as fast as Python; AquariusLang (typed, Native AOT compiler) is 1.20× as fast as Node.js; AquariusLang (typed, Native AOT compiler) is 1.26× as fast as AquariusLang (Native AOT compiler); AquariusLang (typed, Native AOT compiler) is 1.27× as fast as AquariusLang; AquariusLang (typed, Native AOT compiler) is 25.38× as fast as Python; Node.js is 1.06× as fast as AquariusLang (Native AOT compiler); Node.js is 1.06× as fast as AquariusLang; Node.js is 21.23× as fast as Python; AquariusLang (Native AOT compiler) is 1.01× as fast as AquariusLang; AquariusLang (Native AOT compiler) is 20.08× as fast as Python; AquariusLang is 19.94× as fast as Python.
+Pairwise composite speed: C# is 1.76× as fast as AquariusLang (typed); C# is 1.77× as fast as AquariusLang (typed, Native AOT compiler); C# is 2.13× as fast as Node.js; C# is 2.21× as fast as AquariusLang; C# is 2.28× as fast as AquariusLang (Native AOT compiler); C# is 43.96× as fast as Python; AquariusLang (typed) is 1.00× as fast as AquariusLang (typed, Native AOT compiler); AquariusLang (typed) is 1.21× as fast as Node.js; AquariusLang (typed) is 1.26× as fast as AquariusLang; AquariusLang (typed) is 1.30× as fast as AquariusLang (Native AOT compiler); AquariusLang (typed) is 24.96× as fast as Python; AquariusLang (typed, Native AOT compiler) is 1.21× as fast as Node.js; AquariusLang (typed, Native AOT compiler) is 1.25× as fast as AquariusLang; AquariusLang (typed, Native AOT compiler) is 1.29× as fast as AquariusLang (Native AOT compiler); AquariusLang (typed, Native AOT compiler) is 24.90× as fast as Python; Node.js is 1.04× as fast as AquariusLang; Node.js is 1.07× as fast as AquariusLang (Native AOT compiler); Node.js is 20.65× as fast as Python; AquariusLang is 1.03× as fast as AquariusLang (Native AOT compiler); AquariusLang is 19.85× as fast as Python; AquariusLang (Native AOT compiler) is 19.26× as fast as Python.
 
-| Rank | Language | Composite score | Speed vs C# | Speed vs AquariusLang (typed) | Speed vs AquariusLang (typed, Native AOT compiler) | Speed vs Node.js | Speed vs AquariusLang (Native AOT compiler) | Speed vs AquariusLang | Speed vs Python |
+| Rank | Language | Composite score | Speed vs C# | Speed vs AquariusLang (typed) | Speed vs AquariusLang (typed, Native AOT compiler) | Speed vs Node.js | Speed vs AquariusLang | Speed vs AquariusLang (Native AOT compiler) | Speed vs Python |
 | ---: | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| 1 | C# | 100.00 | 1.000× | 1.740× | 1.788× | 2.138× | 2.260× | 2.276× | 45.383× |
-| 2 | AquariusLang (typed) | 57.49 | 0.575× | 1.000× | 1.028× | 1.229× | 1.299× | 1.308× | 26.090× |
-| 3 | AquariusLang (typed, Native AOT compiler) | 55.92 | 0.559× | 0.973× | 1.000× | 1.195× | 1.264× | 1.272× | 25.377× |
-| 4 | Node.js | 46.78 | 0.468× | 0.814× | 0.837× | 1.000× | 1.057× | 1.065× | 21.231× |
-| 5 | AquariusLang (Native AOT compiler) | 44.24 | 0.442× | 0.770× | 0.791× | 0.946× | 1.000× | 1.007× | 20.078× |
-| 6 | AquariusLang | 43.95 | 0.439× | 0.764× | 0.786× | 0.939× | 0.993× | 1.000× | 19.944× |
-| 7 | Python | 2.20 | 0.022× | 0.038× | 0.039× | 0.047× | 0.050× | 0.050× | 1.000× |
+| 1 | C# | 100.00 | 1.000× | 1.761× | 1.765× | 2.128× | 2.214× | 2.283× | 43.957× |
+| 2 | AquariusLang (typed) | 56.79 | 0.568× | 1.000× | 1.003× | 1.209× | 1.257× | 1.296× | 24.962× |
+| 3 | AquariusLang (typed, Native AOT compiler) | 56.65 | 0.566× | 0.997× | 1.000× | 1.206× | 1.254× | 1.293× | 24.900× |
+| 4 | Node.js | 46.98 | 0.470× | 0.827× | 0.829× | 1.000× | 1.040× | 1.072× | 20.653× |
+| 5 | AquariusLang | 45.17 | 0.452× | 0.795× | 0.797× | 0.961× | 1.000× | 1.031× | 19.854× |
+| 6 | AquariusLang (Native AOT compiler) | 43.81 | 0.438× | 0.771× | 0.773× | 0.932× | 0.970× | 1.000× | 19.258× |
+| 7 | Python | 2.27 | 0.023× | 0.040× | 0.040× | 0.048× | 0.050× | 0.052× | 1.000× |
 
 ### Results per benchmark (warmed mode)
 
@@ -163,16 +163,16 @@ Times are in milliseconds (ms); lower is faster. Time ratio = the language's med
 
 | Benchmark | n | AquariusLang median | AquariusLang (typed) median | AquariusLang (Native AOT compiler) median | AquariusLang (typed, Native AOT compiler) median | Python median | Node.js median | C# median | AquariusLang / Python time ratio | AquariusLang (typed) / Python time ratio | AquariusLang (Native AOT compiler) / Python time ratio | AquariusLang (typed, Native AOT compiler) / Python time ratio | Node.js / Python time ratio | C# / Python time ratio |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| Recursive Fibonacci | 32 | 14.238 | 13.602 | 14.172 | 16.749 | 257.779 | 18.889 | 7.075 | 0.06× | 0.05× | 0.05× | 0.06× | 0.07× | 0.03× |
-| Ackermann function | 8 | 10.685 | 11.099 | 10.583 | 11.492 | 275.301 | 10.166 | 2.741 | 0.04× | 0.04× | 0.04× | 0.04× | 0.04× | 0.01× |
-| Sieve of Eratosthenes | 200000 | 1.839 | 0.996 | 1.772 | 1.020 | 17.912 | 3.058 | 0.517 | 0.10× | 0.06× | 0.10× | 0.06× | 0.17× | 0.03× |
-| Quicksort | 30000 | 6.230 | 3.258 | 5.955 | 3.145 | 36.178 | 4.067 | 2.181 | 0.17× | 0.09× | 0.16× | 0.09× | 0.11× | 0.06× |
-| Matrix multiplication | 150 | 7.784 | 3.192 | 8.075 | 3.194 | 293.275 | 6.128 | 2.417 | 0.03× | 0.01× | 0.03× | 0.01× | 0.02× | 0.01× |
-| Mandelbrot set | 300 | 5.904 | 5.752 | 5.873 | 6.632 | 203.954 | 4.356 | 4.670 | 0.03× | 0.03× | 0.03× | 0.03× | 0.02× | 0.02× |
-| N-Queens | 10 | 7.954 | 5.755 | 8.500 | 5.978 | 132.282 | 5.223 | 3.829 | 0.06× | 0.04× | 0.06× | 0.05× | 0.04× | 0.03× |
-| Binary trees | 16 | 62.116 | 62.403 | 55.359 | 56.589 | 507.089 | 16.463 | 23.338 | 0.12× | 0.12× | 0.11× | 0.11× | 0.03× | 0.05× |
-| Spectral norm | 250 | 6.733 | 5.336 | 6.865 | 5.079 | 374.645 | 9.691 | 2.971 | 0.02× | 0.01× | 0.02× | 0.01× | 0.03× | 0.01× |
-| Collatz conjecture | 100000 | 22.737 | 23.949 | 23.353 | 24.237 | 872.467 | 61.007 | 24.811 | 0.03× | 0.03× | 0.03× | 0.03× | 0.07× | 0.03× |
+| Recursive Fibonacci | 32 | 13.329 | 13.749 | 13.345 | 12.841 | 228.988 | 16.680 | 5.911 | 0.06× | 0.06× | 0.06× | 0.06× | 0.07× | 0.03× |
+| Ackermann function | 8 | 10.648 | 9.247 | 10.457 | 10.087 | 257.438 | 8.962 | 2.905 | 0.04× | 0.04× | 0.04× | 0.04× | 0.03× | 0.01× |
+| Sieve of Eratosthenes | 200000 | 1.443 | 1.019 | 1.543 | 1.042 | 15.346 | 2.829 | 0.472 | 0.09× | 0.07× | 0.10× | 0.07× | 0.18× | 0.03× |
+| Quicksort | 30000 | 5.646 | 3.018 | 5.619 | 2.951 | 33.111 | 3.793 | 2.016 | 0.17× | 0.09× | 0.17× | 0.09× | 0.11× | 0.06× |
+| Matrix multiplication | 150 | 8.095 | 2.909 | 7.898 | 2.899 | 268.273 | 6.589 | 2.374 | 0.03× | 0.01× | 0.03× | 0.01× | 0.02× | 0.01× |
+| Mandelbrot set | 300 | 5.489 | 5.405 | 5.419 | 5.354 | 180.802 | 3.865 | 4.072 | 0.03× | 0.03× | 0.03× | 0.03× | 0.02× | 0.02× |
+| N-Queens | 10 | 7.076 | 5.447 | 7.580 | 5.551 | 120.384 | 4.650 | 3.834 | 0.06× | 0.05× | 0.06× | 0.05× | 0.04× | 0.03× |
+| Binary trees | 16 | 51.023 | 52.811 | 55.509 | 55.180 | 404.134 | 14.996 | 21.274 | 0.13× | 0.13× | 0.14× | 0.14× | 0.04× | 0.05× |
+| Spectral norm | 250 | 5.409 | 5.009 | 5.852 | 4.634 | 335.903 | 8.543 | 2.571 | 0.02× | 0.01× | 0.02× | 0.01× | 0.03× | 0.01× |
+| Collatz conjecture | 100000 | 19.614 | 22.502 | 20.940 | 23.304 | 788.900 | 54.498 | 21.019 | 0.02× | 0.03× | 0.03× | 0.03× | 0.07× | 0.03× |
 
 ### AquariusLang (typed) vs Node.js (warmed mode)
 
@@ -180,17 +180,17 @@ Ratio = Node.js median time ÷ AquariusLang (typed) median time; above 1 means A
 
 | Benchmark | n | AquariusLang (typed) median | Node.js median | Node.js ÷ AquariusLang (typed) | Faster |
 | --- | ---: | ---: | ---: | ---: | --- |
-| Recursive Fibonacci | 32 | 13.602 | 18.889 | 1.39× | AquariusLang (typed), 1.39× faster |
-| Ackermann function | 8 | 11.099 | 10.166 | 0.92× | Node.js, 1.09× faster |
-| Sieve of Eratosthenes | 200000 | 0.996 | 3.058 | 3.07× | AquariusLang (typed), 3.07× faster |
-| Quicksort | 30000 | 3.258 | 4.067 | 1.25× | AquariusLang (typed), 1.25× faster |
-| Matrix multiplication | 150 | 3.192 | 6.128 | 1.92× | AquariusLang (typed), 1.92× faster |
-| Mandelbrot set | 300 | 5.752 | 4.356 | 0.76× | Node.js, 1.32× faster |
-| N-Queens | 10 | 5.755 | 5.223 | 0.91× | Node.js, 1.10× faster |
-| Binary trees | 16 | 62.403 | 16.463 | 0.26× | Node.js, 3.79× faster |
-| Spectral norm | 250 | 5.336 | 9.691 | 1.82× | AquariusLang (typed), 1.82× faster |
-| Collatz conjecture | 100000 | 23.949 | 61.007 | 2.55× | AquariusLang (typed), 2.55× faster |
-| **Geometric mean** | | | | **1.23×** | AquariusLang (typed), 1.23× faster |
+| Recursive Fibonacci | 32 | 13.749 | 16.680 | 1.21× | AquariusLang (typed), 1.21× faster |
+| Ackermann function | 8 | 9.247 | 8.962 | 0.97× | Node.js, 1.03× faster |
+| Sieve of Eratosthenes | 200000 | 1.019 | 2.829 | 2.78× | AquariusLang (typed), 2.78× faster |
+| Quicksort | 30000 | 3.018 | 3.793 | 1.26× | AquariusLang (typed), 1.26× faster |
+| Matrix multiplication | 150 | 2.909 | 6.589 | 2.27× | AquariusLang (typed), 2.27× faster |
+| Mandelbrot set | 300 | 5.405 | 3.865 | 0.72× | Node.js, 1.40× faster |
+| N-Queens | 10 | 5.447 | 4.650 | 0.85× | Node.js, 1.17× faster |
+| Binary trees | 16 | 52.811 | 14.996 | 0.28× | Node.js, 3.52× faster |
+| Spectral norm | 250 | 5.009 | 8.543 | 1.71× | AquariusLang (typed), 1.71× faster |
+| Collatz conjecture | 100000 | 22.502 | 54.498 | 2.42× | AquariusLang (typed), 2.42× faster |
+| **Geometric mean** | | | | **1.21×** | AquariusLang (typed), 1.21× faster |
 
 ### Timing variability (warmed mode)
 
@@ -198,76 +198,76 @@ Coefficient of variation (CV) = sample standard deviation of the process values 
 
 | Benchmark | Language | Min ms | Max ms | Std dev ms | CV | Valid samples |
 | --- | --- | ---: | ---: | ---: | ---: | ---: |
-| Recursive Fibonacci | AquariusLang | 13.211 | 15.366 | 0.779 | 5.5% | 5/5 |
-| Recursive Fibonacci | AquariusLang (typed) | 11.892 | 14.963 | 1.190 | 8.8% | 5/5 |
-| Recursive Fibonacci | AquariusLang (Native AOT compiler) | 12.860 | 18.206 | 2.424 | 16.0% | 5/5 |
-| Recursive Fibonacci | AquariusLang (typed, Native AOT compiler) | 12.578 | 17.886 | 2.150 | 13.6% | 5/5 |
-| Recursive Fibonacci | Python | 212.843 | 277.865 | 24.445 | 9.6% | 5/5 |
-| Recursive Fibonacci | Node.js | 18.167 | 18.979 | 0.415 | 2.2% | 5/5 |
-| Recursive Fibonacci | C# | 5.880 | 8.002 | 0.800 | 11.3% | 5/5 |
-| Ackermann function | AquariusLang | 9.326 | 11.797 | 0.945 | 8.9% | 5/5 |
-| Ackermann function | AquariusLang (typed) | 9.834 | 11.994 | 0.921 | 8.5% | 5/5 |
-| Ackermann function | AquariusLang (Native AOT compiler) | 9.683 | 11.064 | 0.647 | 6.2% | 5/5 |
-| Ackermann function | AquariusLang (typed, Native AOT compiler) | 9.303 | 11.965 | 1.079 | 9.6% | 5/5 |
-| Ackermann function | Python | 259.961 | 289.931 | 12.601 | 4.6% | 5/5 |
-| Ackermann function | Node.js | 9.094 | 10.239 | 0.544 | 5.6% | 5/5 |
-| Ackermann function | C# | 2.252 | 3.224 | 0.431 | 15.8% | 5/5 |
-| Sieve of Eratosthenes | AquariusLang | 1.382 | 1.967 | 0.240 | 13.7% | 5/5 |
-| Sieve of Eratosthenes | AquariusLang (typed) | 0.944 | 1.068 | 0.051 | 5.1% | 5/5 |
-| Sieve of Eratosthenes | AquariusLang (Native AOT compiler) | 1.618 | 1.916 | 0.114 | 6.4% | 5/5 |
-| Sieve of Eratosthenes | AquariusLang (typed, Native AOT compiler) | 0.914 | 1.069 | 0.072 | 7.2% | 5/5 |
-| Sieve of Eratosthenes | Python | 13.036 | 19.070 | 2.363 | 13.8% | 5/5 |
-| Sieve of Eratosthenes | Node.js | 2.928 | 3.564 | 0.244 | 7.8% | 5/5 |
-| Sieve of Eratosthenes | C# | 0.515 | 0.523 | 0.003 | 0.6% | 5/5 |
-| Quicksort | AquariusLang | 5.708 | 7.655 | 0.775 | 12.1% | 5/5 |
-| Quicksort | AquariusLang (typed) | 2.903 | 3.387 | 0.218 | 6.9% | 5/5 |
-| Quicksort | AquariusLang (Native AOT compiler) | 5.553 | 6.936 | 0.522 | 8.6% | 5/5 |
-| Quicksort | AquariusLang (typed, Native AOT compiler) | 2.609 | 3.273 | 0.265 | 8.6% | 5/5 |
-| Quicksort | Python | 31.095 | 37.667 | 2.844 | 8.1% | 5/5 |
-| Quicksort | Node.js | 3.696 | 4.768 | 0.421 | 10.1% | 5/5 |
-| Quicksort | C# | 1.997 | 2.437 | 0.159 | 7.2% | 5/5 |
-| Matrix multiplication | AquariusLang | 7.428 | 10.066 | 1.130 | 13.5% | 5/5 |
-| Matrix multiplication | AquariusLang (typed) | 2.554 | 3.704 | 0.490 | 15.2% | 5/5 |
-| Matrix multiplication | AquariusLang (Native AOT compiler) | 7.265 | 9.222 | 0.707 | 8.7% | 5/5 |
-| Matrix multiplication | AquariusLang (typed, Native AOT compiler) | 2.633 | 3.761 | 0.402 | 12.6% | 5/5 |
-| Matrix multiplication | Python | 265.369 | 304.630 | 15.190 | 5.2% | 5/5 |
-| Matrix multiplication | Node.js | 4.151 | 6.866 | 1.061 | 17.9% | 5/5 |
-| Matrix multiplication | C# | 2.277 | 2.625 | 0.129 | 5.3% | 5/5 |
-| Mandelbrot set | AquariusLang | 5.462 | 6.006 | 0.233 | 4.0% | 5/5 |
-| Mandelbrot set | AquariusLang (typed) | 5.005 | 6.501 | 0.650 | 11.3% | 5/5 |
-| Mandelbrot set | AquariusLang (Native AOT compiler) | 5.492 | 6.360 | 0.400 | 6.8% | 5/5 |
-| Mandelbrot set | AquariusLang (typed, Native AOT compiler) | 5.595 | 7.101 | 0.686 | 10.8% | 5/5 |
-| Mandelbrot set | Python | 176.205 | 230.558 | 22.766 | 11.3% | 5/5 |
-| Mandelbrot set | Node.js | 3.516 | 4.821 | 0.511 | 11.9% | 5/5 |
-| Mandelbrot set | C# | 4.314 | 5.030 | 0.260 | 5.6% | 5/5 |
-| N-Queens | AquariusLang | 7.033 | 9.178 | 0.808 | 10.2% | 5/5 |
-| N-Queens | AquariusLang (typed) | 5.367 | 6.399 | 0.421 | 7.3% | 5/5 |
-| N-Queens | AquariusLang (Native AOT compiler) | 6.427 | 12.819 | 2.362 | 25.7% | 5/5 |
-| N-Queens | AquariusLang (typed, Native AOT compiler) | 4.839 | 7.440 | 0.991 | 16.4% | 5/5 |
-| N-Queens | Python | 118.126 | 141.517 | 8.661 | 6.6% | 5/5 |
-| N-Queens | Node.js | 4.817 | 6.341 | 0.611 | 11.2% | 5/5 |
-| N-Queens | C# | 2.883 | 4.530 | 0.621 | 16.2% | 5/5 |
-| Binary trees | AquariusLang | 50.495 | 75.128 | 9.453 | 15.2% | 5/5 |
-| Binary trees | AquariusLang (typed) | 50.885 | 66.962 | 6.248 | 10.4% | 5/5 |
-| Binary trees | AquariusLang (Native AOT compiler) | 49.033 | 64.325 | 6.183 | 10.9% | 5/5 |
-| Binary trees | AquariusLang (typed, Native AOT compiler) | 52.841 | 69.070 | 6.190 | 10.5% | 5/5 |
-| Binary trees | Python | 502.050 | 612.601 | 47.167 | 8.9% | 5/5 |
-| Binary trees | Node.js | 13.206 | 21.257 | 2.980 | 18.0% | 5/5 |
-| Binary trees | C# | 17.786 | 24.636 | 2.721 | 12.3% | 5/5 |
-| Spectral norm | AquariusLang | 5.537 | 7.294 | 0.670 | 10.3% | 5/5 |
-| Spectral norm | AquariusLang (typed) | 5.080 | 5.784 | 0.284 | 5.3% | 5/5 |
-| Spectral norm | AquariusLang (Native AOT compiler) | 6.848 | 7.029 | 0.088 | 1.3% | 5/5 |
-| Spectral norm | AquariusLang (typed, Native AOT compiler) | 4.568 | 5.417 | 0.348 | 7.0% | 5/5 |
-| Spectral norm | Python | 334.214 | 386.838 | 25.662 | 7.0% | 5/5 |
-| Spectral norm | Node.js | 8.186 | 11.909 | 1.338 | 13.5% | 5/5 |
-| Spectral norm | C# | 2.276 | 3.180 | 0.356 | 12.4% | 5/5 |
-| Collatz conjecture | AquariusLang | 18.988 | 25.295 | 2.403 | 10.9% | 5/5 |
-| Collatz conjecture | AquariusLang (typed) | 18.978 | 24.570 | 2.305 | 10.1% | 5/5 |
-| Collatz conjecture | AquariusLang (Native AOT compiler) | 21.203 | 27.809 | 2.419 | 10.2% | 5/5 |
-| Collatz conjecture | AquariusLang (typed, Native AOT compiler) | 20.596 | 24.573 | 1.652 | 7.1% | 5/5 |
-| Collatz conjecture | Python | 767.009 | 931.253 | 61.870 | 7.2% | 5/5 |
-| Collatz conjecture | Node.js | 49.410 | 62.407 | 5.296 | 9.1% | 5/5 |
-| Collatz conjecture | C# | 20.099 | 29.561 | 3.540 | 14.5% | 5/5 |
+| Recursive Fibonacci | AquariusLang | 10.451 | 14.220 | 1.501 | 11.9% | 5/5 |
+| Recursive Fibonacci | AquariusLang (typed) | 11.221 | 14.424 | 1.475 | 11.3% | 5/5 |
+| Recursive Fibonacci | AquariusLang (Native AOT compiler) | 12.909 | 13.896 | 0.387 | 2.9% | 5/5 |
+| Recursive Fibonacci | AquariusLang (typed, Native AOT compiler) | 10.339 | 13.654 | 1.357 | 10.8% | 5/5 |
+| Recursive Fibonacci | Python | 196.124 | 243.037 | 21.167 | 9.6% | 5/5 |
+| Recursive Fibonacci | Node.js | 14.137 | 17.766 | 1.360 | 8.3% | 5/5 |
+| Recursive Fibonacci | C# | 5.171 | 6.908 | 0.713 | 11.8% | 5/5 |
+| Ackermann function | AquariusLang | 7.782 | 11.349 | 1.389 | 13.7% | 5/5 |
+| Ackermann function | AquariusLang (typed) | 7.282 | 9.869 | 1.026 | 11.4% | 5/5 |
+| Ackermann function | AquariusLang (Native AOT compiler) | 9.180 | 11.525 | 0.844 | 8.2% | 5/5 |
+| Ackermann function | AquariusLang (typed, Native AOT compiler) | 7.484 | 10.421 | 1.467 | 15.9% | 5/5 |
+| Ackermann function | Python | 209.231 | 261.275 | 21.715 | 8.8% | 5/5 |
+| Ackermann function | Node.js | 7.344 | 9.561 | 0.837 | 9.6% | 5/5 |
+| Ackermann function | C# | 2.247 | 2.981 | 0.320 | 11.8% | 5/5 |
+| Sieve of Eratosthenes | AquariusLang | 1.237 | 2.043 | 0.303 | 19.6% | 5/5 |
+| Sieve of Eratosthenes | AquariusLang (typed) | 0.889 | 1.080 | 0.073 | 7.2% | 5/5 |
+| Sieve of Eratosthenes | AquariusLang (Native AOT compiler) | 1.360 | 1.702 | 0.132 | 8.5% | 5/5 |
+| Sieve of Eratosthenes | AquariusLang (typed, Native AOT compiler) | 0.889 | 1.187 | 0.124 | 12.2% | 5/5 |
+| Sieve of Eratosthenes | Python | 14.140 | 19.019 | 2.142 | 13.1% | 5/5 |
+| Sieve of Eratosthenes | Node.js | 2.203 | 3.097 | 0.409 | 15.1% | 5/5 |
+| Sieve of Eratosthenes | C# | 0.378 | 0.539 | 0.061 | 12.8% | 5/5 |
+| Quicksort | AquariusLang | 4.900 | 6.701 | 0.798 | 13.9% | 5/5 |
+| Quicksort | AquariusLang (typed) | 2.794 | 3.380 | 0.231 | 7.6% | 5/5 |
+| Quicksort | AquariusLang (Native AOT compiler) | 4.458 | 6.082 | 0.716 | 13.2% | 5/5 |
+| Quicksort | AquariusLang (typed, Native AOT compiler) | 2.507 | 3.271 | 0.293 | 10.2% | 5/5 |
+| Quicksort | Python | 26.351 | 36.977 | 4.748 | 14.9% | 5/5 |
+| Quicksort | Node.js | 2.949 | 4.122 | 0.436 | 11.9% | 5/5 |
+| Quicksort | C# | 1.525 | 2.175 | 0.326 | 17.3% | 5/5 |
+| Matrix multiplication | AquariusLang | 6.093 | 14.865 | 3.392 | 37.3% | 5/5 |
+| Matrix multiplication | AquariusLang (typed) | 2.288 | 3.041 | 0.325 | 11.9% | 5/5 |
+| Matrix multiplication | AquariusLang (Native AOT compiler) | 6.189 | 8.394 | 0.871 | 11.6% | 5/5 |
+| Matrix multiplication | AquariusLang (typed, Native AOT compiler) | 2.187 | 3.088 | 0.365 | 13.3% | 5/5 |
+| Matrix multiplication | Python | 209.007 | 275.311 | 27.755 | 11.0% | 5/5 |
+| Matrix multiplication | Node.js | 3.142 | 7.003 | 1.717 | 30.8% | 5/5 |
+| Matrix multiplication | C# | 1.755 | 2.701 | 0.355 | 15.5% | 5/5 |
+| Mandelbrot set | AquariusLang | 4.418 | 6.394 | 0.829 | 15.4% | 5/5 |
+| Mandelbrot set | AquariusLang (typed) | 4.372 | 5.867 | 0.657 | 12.5% | 5/5 |
+| Mandelbrot set | AquariusLang (Native AOT compiler) | 4.642 | 5.950 | 0.502 | 9.2% | 5/5 |
+| Mandelbrot set | AquariusLang (typed, Native AOT compiler) | 4.080 | 5.905 | 0.734 | 13.8% | 5/5 |
+| Mandelbrot set | Python | 144.489 | 188.078 | 22.520 | 13.3% | 5/5 |
+| Mandelbrot set | Node.js | 3.155 | 4.805 | 0.785 | 20.0% | 5/5 |
+| Mandelbrot set | C# | 3.023 | 4.326 | 0.529 | 13.6% | 5/5 |
+| N-Queens | AquariusLang | 6.052 | 8.065 | 0.767 | 10.7% | 5/5 |
+| N-Queens | AquariusLang (typed) | 4.553 | 5.715 | 0.542 | 10.5% | 5/5 |
+| N-Queens | AquariusLang (Native AOT compiler) | 5.565 | 7.974 | 1.209 | 17.4% | 5/5 |
+| N-Queens | AquariusLang (typed, Native AOT compiler) | 4.230 | 5.920 | 0.660 | 12.3% | 5/5 |
+| N-Queens | Python | 99.873 | 132.898 | 15.384 | 13.2% | 5/5 |
+| N-Queens | Node.js | 4.032 | 5.298 | 0.474 | 10.2% | 5/5 |
+| N-Queens | C# | 3.117 | 3.934 | 0.331 | 9.0% | 5/5 |
+| Binary trees | AquariusLang | 40.996 | 61.409 | 7.921 | 15.3% | 5/5 |
+| Binary trees | AquariusLang (typed) | 47.745 | 59.657 | 4.305 | 8.0% | 5/5 |
+| Binary trees | AquariusLang (Native AOT compiler) | 37.077 | 59.492 | 10.315 | 20.5% | 5/5 |
+| Binary trees | AquariusLang (typed, Native AOT compiler) | 49.086 | 58.937 | 4.112 | 7.6% | 5/5 |
+| Binary trees | Python | 296.135 | 458.608 | 71.979 | 18.9% | 5/5 |
+| Binary trees | Node.js | 13.915 | 17.947 | 1.997 | 12.7% | 5/5 |
+| Binary trees | C# | 13.955 | 24.303 | 4.078 | 19.6% | 5/5 |
+| Spectral norm | AquariusLang | 4.940 | 5.885 | 0.391 | 7.2% | 5/5 |
+| Spectral norm | AquariusLang (typed) | 3.988 | 5.334 | 0.523 | 10.9% | 5/5 |
+| Spectral norm | AquariusLang (Native AOT compiler) | 4.856 | 6.386 | 0.631 | 10.8% | 5/5 |
+| Spectral norm | AquariusLang (typed, Native AOT compiler) | 4.076 | 5.903 | 0.752 | 15.2% | 5/5 |
+| Spectral norm | Python | 278.254 | 352.966 | 35.787 | 11.2% | 5/5 |
+| Spectral norm | Node.js | 7.117 | 9.473 | 1.088 | 13.1% | 5/5 |
+| Spectral norm | C# | 2.070 | 3.187 | 0.482 | 18.7% | 5/5 |
+| Collatz conjecture | AquariusLang | 15.620 | 21.830 | 2.790 | 15.0% | 5/5 |
+| Collatz conjecture | AquariusLang (typed) | 17.657 | 25.741 | 2.940 | 13.3% | 5/5 |
+| Collatz conjecture | AquariusLang (Native AOT compiler) | 15.894 | 23.441 | 2.785 | 13.7% | 5/5 |
+| Collatz conjecture | AquariusLang (typed, Native AOT compiler) | 17.887 | 25.872 | 3.190 | 13.9% | 5/5 |
+| Collatz conjecture | Python | 633.429 | 849.057 | 80.994 | 10.5% | 5/5 |
+| Collatz conjecture | Node.js | 43.397 | 59.281 | 7.488 | 14.5% | 5/5 |
+| Collatz conjecture | C# | 17.551 | 25.232 | 3.404 | 16.2% | 5/5 |
 
 ## AquariusLang compiler build and start times
 
@@ -275,10 +275,10 @@ Each AquariusLang candidate builds every program with its own `aqua` (`aqua buil
 
 | Candidate | Median build | Median process, standard mode | Median process, warmed mode |
 | --- | ---: | ---: | ---: |
-| AquariusLang | 254.2 ms | 192.7 ms | 296.0 ms |
-| AquariusLang (typed) | 238.3 ms | 197.7 ms | 255.9 ms |
-| AquariusLang (Native AOT compiler) | 48.5 ms | 91.0 ms | 206.9 ms |
-| AquariusLang (typed, Native AOT compiler) | 47.6 ms | 119.6 ms | 184.7 ms |
+| AquariusLang | 157.6 ms | 146.9 ms | 234.6 ms |
+| AquariusLang (typed) | 158.9 ms | 177.2 ms | 216.3 ms |
+| AquariusLang (Native AOT compiler) | 35.7 ms | 120.9 ms | 158.3 ms |
+| AquariusLang (typed, Native AOT compiler) | 36.2 ms | 96.1 ms | 167.9 ms |
 
 ## How the composite score is computed
 
@@ -337,8 +337,8 @@ For each mode the harness copies the sources into a temporary folder and replace
 
 ## Test date and environment
 
-- Started: 2026-11-18T14:02:01.290329+08:00
-- Finished: 2026-11-18T14:09:45.087448+08:00
+- Started: 2026-11-20T17:43:43.993405+08:00
+- Finished: 2026-11-20T17:49:59.062170+08:00
 - Time zone: Asia/Taipei
 - Input size: large (`large`); 5 counted and 1 discarded warm-up processes per case
 - Modes: Standard mode (cold start, one timed run per process); Warmed mode (5 in-process warm-up runs, then the median of 5 timed runs)
@@ -386,8 +386,8 @@ Every warm-up and counted sample output, in every language and mode, matches the
 
 ## Reproducible data
 
-- Raw samples, outputs, commands, execution order, environment and executable and source hashes: `C:\OfficialProjects\AquariusLang_PerformanceBenchmark\results\20261118-140201-290329\results.json`
-- Summary and per-sample CSV: `C:\OfficialProjects\AquariusLang_PerformanceBenchmark\results\20261118-140201-290329\summary.csv`, `C:\OfficialProjects\AquariusLang_PerformanceBenchmark\results\20261118-140201-290329\samples.csv`
+- Raw samples, outputs, commands, execution order, environment and executable and source hashes: `C:\OfficialProjects\AquariusLang_PerformanceBenchmark\results\20261120-174343-993405\results.json`
+- Summary and per-sample CSV: `C:\OfficialProjects\AquariusLang_PerformanceBenchmark\results\20261120-174343-993405\summary.csv`, `C:\OfficialProjects\AquariusLang_PerformanceBenchmark\results\20261120-174343-993405\samples.csv`
 - `benchmarks.json`: the standard and smoke-check input sizes and workload definitions.
 - `benchmarks/aquarius/`, `benchmarks/aquarius_typed/`, `benchmarks/aquarius_aot/`, `benchmarks/aquarius_typed_aot/`, `benchmarks/python/`, `benchmarks/node/`, `benchmarks/csharp/`: the standalone benchmark programs.
 - `reference.py`: the untimed reference answers; `tests/`: regression tests for the harness and reference answers.

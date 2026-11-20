@@ -4,8 +4,8 @@
 
 This run measured 2 modes, each with its own composite score (higher is faster; the fastest language scores 100):
 
-- **Standard mode (cold start, one timed run per process)**: Node.js 100.00, C# 61.84, AquariusLang (Native AOT compiler) 14.18, AquariusLang 14.17, AquariusLang (typed) 12.78, AquariusLang (typed, Native AOT compiler) 12.67, Python 10.84
-- **Warmed mode (5 in-process warm-up runs, then the median of 5 timed runs)**: Node.js 100.00, C# 51.23, AquariusLang 11.06, AquariusLang (Native AOT compiler) 10.95, AquariusLang (typed, Native AOT compiler) 9.90, AquariusLang (typed) 9.64, Python 7.81
+- **Standard mode (cold start, one timed run per process)**: Node.js 100.00, C# 60.54, AquariusLang (typed) 18.80, AquariusLang (typed, Native AOT compiler) 18.51, AquariusLang (Native AOT compiler) 14.35, AquariusLang 14.25, Python 10.45
+- **Warmed mode (5 in-process warm-up runs, then the median of 5 timed runs)**: Node.js 100.00, C# 49.96, AquariusLang (typed, Native AOT compiler) 14.09, AquariusLang (typed) 13.92, AquariusLang (Native AOT compiler) 11.11, AquariusLang 11.10, Python 7.45
 
 The project provides ten classic algorithms, 112 standalone benchmark programs, and a Python harness that validates the results and generates the READMEs and the JSON and CSV reports.
 
@@ -13,19 +13,19 @@ The project provides ten classic algorithms, 112 standalone benchmark programs, 
 
 Each process runs and times the workload once, with no in-process warm-up, as in the original design. The JIT compilation and optimization of C# and Node.js fall inside the timed interval, while Wasmtime has already compiled the AquariusLang Wasm before timing starts, so this mode reflects a short program's first run after process start. Each value is the median of 5 process timings.
 
-**Composite performance: Node.js 100.00, C# 61.84, AquariusLang (Native AOT compiler) 14.18, AquariusLang 14.17, AquariusLang (typed) 12.78, AquariusLang (typed, Native AOT compiler) 12.67, Python 10.84 (higher is faster).**
+**Composite performance: Node.js 100.00, C# 60.54, AquariusLang (typed) 18.80, AquariusLang (typed, Native AOT compiler) 18.51, AquariusLang (Native AOT compiler) 14.35, AquariusLang 14.25, Python 10.45 (higher is faster).**
 
-Pairwise composite speed: Node.js is 1.62× as fast as C#; Node.js is 7.05× as fast as AquariusLang (Native AOT compiler); Node.js is 7.06× as fast as AquariusLang; Node.js is 7.82× as fast as AquariusLang (typed); Node.js is 7.89× as fast as AquariusLang (typed, Native AOT compiler); Node.js is 9.23× as fast as Python; C# is 4.36× as fast as AquariusLang (Native AOT compiler); C# is 4.37× as fast as AquariusLang; C# is 4.84× as fast as AquariusLang (typed); C# is 4.88× as fast as AquariusLang (typed, Native AOT compiler); C# is 5.71× as fast as Python; AquariusLang (Native AOT compiler) is 1.00× as fast as AquariusLang; AquariusLang (Native AOT compiler) is 1.11× as fast as AquariusLang (typed); AquariusLang (Native AOT compiler) is 1.12× as fast as AquariusLang (typed, Native AOT compiler); AquariusLang (Native AOT compiler) is 1.31× as fast as Python; AquariusLang is 1.11× as fast as AquariusLang (typed); AquariusLang is 1.12× as fast as AquariusLang (typed, Native AOT compiler); AquariusLang is 1.31× as fast as Python; AquariusLang (typed) is 1.01× as fast as AquariusLang (typed, Native AOT compiler); AquariusLang (typed) is 1.18× as fast as Python; AquariusLang (typed, Native AOT compiler) is 1.17× as fast as Python.
+Pairwise composite speed: Node.js is 1.65× as fast as C#; Node.js is 5.32× as fast as AquariusLang (typed); Node.js is 5.40× as fast as AquariusLang (typed, Native AOT compiler); Node.js is 6.97× as fast as AquariusLang (Native AOT compiler); Node.js is 7.02× as fast as AquariusLang; Node.js is 9.57× as fast as Python; C# is 3.22× as fast as AquariusLang (typed); C# is 3.27× as fast as AquariusLang (typed, Native AOT compiler); C# is 4.22× as fast as AquariusLang (Native AOT compiler); C# is 4.25× as fast as AquariusLang; C# is 5.79× as fast as Python; AquariusLang (typed) is 1.02× as fast as AquariusLang (typed, Native AOT compiler); AquariusLang (typed) is 1.31× as fast as AquariusLang (Native AOT compiler); AquariusLang (typed) is 1.32× as fast as AquariusLang; AquariusLang (typed) is 1.80× as fast as Python; AquariusLang (typed, Native AOT compiler) is 1.29× as fast as AquariusLang (Native AOT compiler); AquariusLang (typed, Native AOT compiler) is 1.30× as fast as AquariusLang; AquariusLang (typed, Native AOT compiler) is 1.77× as fast as Python; AquariusLang (Native AOT compiler) is 1.01× as fast as AquariusLang; AquariusLang (Native AOT compiler) is 1.37× as fast as Python; AquariusLang is 1.36× as fast as Python.
 
-| Rank | Language | Composite score | Speed vs Node.js | Speed vs C# | Speed vs AquariusLang (Native AOT compiler) | Speed vs AquariusLang | Speed vs AquariusLang (typed) | Speed vs AquariusLang (typed, Native AOT compiler) | Speed vs Python |
+| Rank | Language | Composite score | Speed vs Node.js | Speed vs C# | Speed vs AquariusLang (typed) | Speed vs AquariusLang (typed, Native AOT compiler) | Speed vs AquariusLang (Native AOT compiler) | Speed vs AquariusLang | Speed vs Python |
 | ---: | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| 1 | Node.js | 100.00 | 1.000× | 1.617× | 7.054× | 7.058× | 7.824× | 7.893× | 9.227× |
-| 2 | C# | 61.84 | 0.618× | 1.000× | 4.362× | 4.365× | 4.839× | 4.881× | 5.706× |
-| 3 | AquariusLang (Native AOT compiler) | 14.18 | 0.142× | 0.229× | 1.000× | 1.001× | 1.109× | 1.119× | 1.308× |
-| 4 | AquariusLang | 14.17 | 0.142× | 0.229× | 0.999× | 1.000× | 1.108× | 1.118× | 1.307× |
-| 5 | AquariusLang (typed) | 12.78 | 0.128× | 0.207× | 0.902× | 0.902× | 1.000× | 1.009× | 1.179× |
-| 6 | AquariusLang (typed, Native AOT compiler) | 12.67 | 0.127× | 0.205× | 0.894× | 0.894× | 0.991× | 1.000× | 1.169× |
-| 7 | Python | 10.84 | 0.108× | 0.175× | 0.765× | 0.765× | 0.848× | 0.855× | 1.000× |
+| 1 | Node.js | 100.00 | 1.000× | 1.652× | 5.319× | 5.402× | 6.968× | 7.016× | 9.566× |
+| 2 | C# | 60.54 | 0.605× | 1.000× | 3.220× | 3.270× | 4.218× | 4.247× | 5.791× |
+| 3 | AquariusLang (typed) | 18.80 | 0.188× | 0.311× | 1.000× | 1.016× | 1.310× | 1.319× | 1.798× |
+| 4 | AquariusLang (typed, Native AOT compiler) | 18.51 | 0.185× | 0.306× | 0.985× | 1.000× | 1.290× | 1.299× | 1.771× |
+| 5 | AquariusLang (Native AOT compiler) | 14.35 | 0.144× | 0.237× | 0.763× | 0.775× | 1.000× | 1.007× | 1.373× |
+| 6 | AquariusLang | 14.25 | 0.143× | 0.235× | 0.758× | 0.770× | 0.993× | 1.000× | 1.363× |
+| 7 | Python | 10.45 | 0.105× | 0.173× | 0.556× | 0.565× | 0.728× | 0.733× | 1.000× |
 
 ### Results per benchmark (standard mode)
 
@@ -33,12 +33,12 @@ Times are in milliseconds (ms); lower is faster. Time ratio = the language's med
 
 | Benchmark | n | AquariusLang median | AquariusLang (typed) median | AquariusLang (Native AOT compiler) median | AquariusLang (typed, Native AOT compiler) median | Python median | Node.js median | C# median | AquariusLang / Python time ratio | AquariusLang (typed) / Python time ratio | AquariusLang (Native AOT compiler) / Python time ratio | AquariusLang (typed, Native AOT compiler) / Python time ratio | Node.js / Python time ratio | C# / Python time ratio |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| String building | 20000 | 73.313 | 72.706 | 70.915 | 72.304 | 12.109 | 0.553 | 72.212 | 6.05× | 6.00× | 5.86× | 5.97× | 0.05× | 5.96× |
-| String-key hash | 500000 | 36.432 | 34.361 | 35.108 | 37.299 | 33.754 | 10.583 | 12.001 | 1.08× | 1.02× | 1.04× | 1.11× | 0.31× | 0.36× |
-| Integer-key hash | 1000000 | 105.789 | 115.486 | 103.064 | 105.536 | 107.624 | 35.162 | 11.368 | 0.98× | 1.07× | 0.96× | 0.98× | 0.33× | 0.11× |
-| Closures | 1000000 | 96.874 | 126.185 | 103.037 | 121.070 | 122.446 | 14.918 | 11.800 | 0.79× | 1.03× | 0.84× | 0.99× | 0.12× | 0.10× |
-| Struct updates | 1000000 | 68.429 | 101.345 | 72.924 | 103.873 | 117.498 | 4.562 | 3.075 | 0.58× | 0.86× | 0.62× | 0.88× | 0.04× | 0.03× |
-| Function calls | 2000000 | 8.905 | 8.387 | 8.618 | 9.109 | 131.484 | 9.629 | 6.743 | 0.07× | 0.06× | 0.07× | 0.07× | 0.07× | 0.05× |
+| String building | 20000 | 62.842 | 57.080 | 64.284 | 58.405 | 11.191 | 0.521 | 61.111 | 5.62× | 5.10× | 5.74× | 5.22× | 0.05× | 5.46× |
+| String-key hash | 500000 | 32.119 | 34.420 | 31.069 | 33.859 | 30.717 | 10.084 | 10.523 | 1.05× | 1.12× | 1.01× | 1.10× | 0.33× | 0.34× |
+| Integer-key hash | 1000000 | 71.519 | 73.759 | 69.957 | 78.203 | 101.273 | 30.798 | 10.550 | 0.71× | 0.73× | 0.69× | 0.77× | 0.30× | 0.10× |
+| Closures | 1000000 | 97.391 | 103.893 | 97.105 | 100.759 | 108.566 | 13.993 | 10.648 | 0.90× | 0.96× | 0.89× | 0.93× | 0.13× | 0.10× |
+| Struct updates | 1000000 | 69.456 | 14.810 | 69.151 | 15.810 | 109.340 | 3.935 | 2.926 | 0.64× | 0.14× | 0.63× | 0.14× | 0.04× | 0.03× |
+| Function calls | 2000000 | 7.986 | 6.644 | 7.977 | 6.598 | 121.236 | 7.344 | 6.285 | 0.07× | 0.05× | 0.07× | 0.05× | 0.06× | 0.05× |
 
 ### AquariusLang (typed) vs Node.js (standard mode)
 
@@ -46,13 +46,13 @@ Ratio = Node.js median time ÷ AquariusLang (typed) median time; above 1 means A
 
 | Benchmark | n | AquariusLang (typed) median | Node.js median | Node.js ÷ AquariusLang (typed) | Faster |
 | --- | ---: | ---: | ---: | ---: | --- |
-| String building | 20000 | 72.706 | 0.553 | 0.01× | Node.js, 131.45× faster |
-| String-key hash | 500000 | 34.361 | 10.583 | 0.31× | Node.js, 3.25× faster |
-| Integer-key hash | 1000000 | 115.486 | 35.162 | 0.30× | Node.js, 3.28× faster |
-| Closures | 1000000 | 126.185 | 14.918 | 0.12× | Node.js, 8.46× faster |
-| Struct updates | 1000000 | 101.345 | 4.562 | 0.05× | Node.js, 22.21× faster |
-| Function calls | 2000000 | 8.387 | 9.629 | 1.15× | AquariusLang (typed), 1.15× faster |
-| **Geometric mean** | | | | **0.13×** | Node.js, 7.82× faster |
+| String building | 20000 | 57.080 | 0.521 | 0.01× | Node.js, 109.62× faster |
+| String-key hash | 500000 | 34.420 | 10.084 | 0.29× | Node.js, 3.41× faster |
+| Integer-key hash | 1000000 | 73.759 | 30.798 | 0.42× | Node.js, 2.39× faster |
+| Closures | 1000000 | 103.893 | 13.993 | 0.13× | Node.js, 7.42× faster |
+| Struct updates | 1000000 | 14.810 | 3.935 | 0.27× | Node.js, 3.76× faster |
+| Function calls | 2000000 | 6.644 | 7.344 | 1.11× | AquariusLang (typed), 1.11× faster |
+| **Geometric mean** | | | | **0.19×** | Node.js, 5.32× faster |
 
 ### Timing variability (standard mode)
 
@@ -60,66 +60,66 @@ Coefficient of variation (CV) = sample standard deviation of the process values 
 
 | Benchmark | Language | Min ms | Max ms | Std dev ms | CV | Valid samples |
 | --- | --- | ---: | ---: | ---: | ---: | ---: |
-| String building | AquariusLang | 67.385 | 86.513 | 7.146 | 9.6% | 5/5 |
-| String building | AquariusLang (typed) | 68.719 | 79.493 | 4.023 | 5.5% | 5/5 |
-| String building | AquariusLang (Native AOT compiler) | 60.845 | 73.084 | 5.265 | 7.7% | 5/5 |
-| String building | AquariusLang (typed, Native AOT compiler) | 66.058 | 75.748 | 3.946 | 5.6% | 5/5 |
-| String building | Python | 11.867 | 13.609 | 0.821 | 6.5% | 5/5 |
-| String building | Node.js | 0.505 | 0.629 | 0.055 | 9.8% | 5/5 |
-| String building | C# | 66.102 | 94.285 | 11.848 | 15.6% | 5/5 |
-| String-key hash | AquariusLang | 34.753 | 37.758 | 1.234 | 3.4% | 5/5 |
-| String-key hash | AquariusLang (typed) | 33.559 | 39.511 | 2.455 | 6.9% | 5/5 |
-| String-key hash | AquariusLang (Native AOT compiler) | 33.893 | 41.486 | 3.124 | 8.5% | 5/5 |
-| String-key hash | AquariusLang (typed, Native AOT compiler) | 34.120 | 39.815 | 2.426 | 6.6% | 5/5 |
-| String-key hash | Python | 30.910 | 34.984 | 1.516 | 4.6% | 5/5 |
-| String-key hash | Node.js | 9.833 | 13.624 | 1.530 | 13.7% | 5/5 |
-| String-key hash | C# | 11.355 | 13.991 | 1.015 | 8.3% | 5/5 |
-| Integer-key hash | AquariusLang | 80.875 | 128.739 | 19.161 | 18.2% | 5/5 |
-| Integer-key hash | AquariusLang (typed) | 102.821 | 145.504 | 18.711 | 15.4% | 5/5 |
-| Integer-key hash | AquariusLang (Native AOT compiler) | 87.048 | 121.409 | 13.040 | 12.5% | 5/5 |
-| Integer-key hash | AquariusLang (typed, Native AOT compiler) | 83.257 | 106.855 | 10.111 | 10.0% | 5/5 |
-| Integer-key hash | Python | 105.036 | 125.117 | 8.503 | 7.6% | 5/5 |
-| Integer-key hash | Node.js | 30.351 | 39.526 | 3.542 | 10.3% | 5/5 |
-| Integer-key hash | C# | 10.333 | 12.547 | 0.830 | 7.3% | 5/5 |
-| Closures | AquariusLang | 93.557 | 103.627 | 4.580 | 4.7% | 5/5 |
-| Closures | AquariusLang (typed) | 119.343 | 138.533 | 7.288 | 5.7% | 5/5 |
-| Closures | AquariusLang (Native AOT compiler) | 90.599 | 104.960 | 5.975 | 5.9% | 5/5 |
-| Closures | AquariusLang (typed, Native AOT compiler) | 114.316 | 126.826 | 4.659 | 3.8% | 5/5 |
-| Closures | Python | 113.600 | 132.062 | 7.031 | 5.7% | 5/5 |
-| Closures | Node.js | 14.500 | 20.154 | 2.379 | 14.9% | 5/5 |
-| Closures | C# | 10.524 | 12.100 | 0.759 | 6.7% | 5/5 |
-| Struct updates | AquariusLang | 64.126 | 80.112 | 6.725 | 9.6% | 5/5 |
-| Struct updates | AquariusLang (typed) | 94.954 | 116.767 | 9.468 | 9.0% | 5/5 |
-| Struct updates | AquariusLang (Native AOT compiler) | 69.281 | 77.424 | 3.188 | 4.3% | 5/5 |
-| Struct updates | AquariusLang (typed, Native AOT compiler) | 101.615 | 106.672 | 1.984 | 1.9% | 5/5 |
-| Struct updates | Python | 113.053 | 124.348 | 4.573 | 3.9% | 5/5 |
-| Struct updates | Node.js | 3.893 | 5.368 | 0.547 | 11.9% | 5/5 |
-| Struct updates | C# | 2.994 | 3.297 | 0.118 | 3.8% | 5/5 |
-| Function calls | AquariusLang | 6.913 | 10.307 | 1.231 | 14.2% | 5/5 |
-| Function calls | AquariusLang (typed) | 7.718 | 10.576 | 1.150 | 12.9% | 5/5 |
-| Function calls | AquariusLang (Native AOT compiler) | 8.233 | 9.918 | 0.682 | 7.8% | 5/5 |
-| Function calls | AquariusLang (typed, Native AOT compiler) | 8.005 | 10.218 | 0.926 | 10.4% | 5/5 |
-| Function calls | Python | 122.857 | 146.372 | 9.857 | 7.3% | 5/5 |
-| Function calls | Node.js | 8.322 | 10.627 | 0.998 | 10.6% | 5/5 |
-| Function calls | C# | 6.424 | 7.353 | 0.408 | 6.0% | 5/5 |
+| String building | AquariusLang | 57.183 | 68.307 | 4.094 | 6.5% | 5/5 |
+| String building | AquariusLang (typed) | 54.535 | 59.049 | 1.890 | 3.3% | 5/5 |
+| String building | AquariusLang (Native AOT compiler) | 55.749 | 66.156 | 4.240 | 6.7% | 5/5 |
+| String building | AquariusLang (typed, Native AOT compiler) | 55.026 | 62.178 | 2.660 | 4.5% | 5/5 |
+| String building | Python | 10.582 | 11.865 | 0.534 | 4.8% | 5/5 |
+| String building | Node.js | 0.459 | 0.528 | 0.031 | 6.2% | 5/5 |
+| String building | C# | 54.867 | 66.951 | 5.045 | 8.2% | 5/5 |
+| String-key hash | AquariusLang | 29.897 | 35.883 | 2.281 | 7.0% | 5/5 |
+| String-key hash | AquariusLang (typed) | 31.142 | 41.340 | 4.325 | 11.9% | 5/5 |
+| String-key hash | AquariusLang (Native AOT compiler) | 30.128 | 35.412 | 2.341 | 7.2% | 5/5 |
+| String-key hash | AquariusLang (typed, Native AOT compiler) | 30.866 | 39.071 | 3.401 | 10.0% | 5/5 |
+| String-key hash | Python | 30.169 | 33.037 | 1.191 | 3.8% | 5/5 |
+| String-key hash | Node.js | 8.634 | 10.223 | 0.682 | 7.0% | 5/5 |
+| String-key hash | C# | 9.724 | 12.320 | 0.953 | 8.9% | 5/5 |
+| Integer-key hash | AquariusLang | 68.222 | 81.607 | 5.194 | 7.1% | 5/5 |
+| Integer-key hash | AquariusLang (typed) | 71.804 | 91.083 | 7.879 | 10.1% | 5/5 |
+| Integer-key hash | AquariusLang (Native AOT compiler) | 67.242 | 79.936 | 5.829 | 8.0% | 5/5 |
+| Integer-key hash | AquariusLang (typed, Native AOT compiler) | 74.861 | 85.038 | 3.927 | 5.0% | 5/5 |
+| Integer-key hash | Python | 94.772 | 119.944 | 10.090 | 9.8% | 5/5 |
+| Integer-key hash | Node.js | 28.159 | 46.139 | 7.272 | 21.8% | 5/5 |
+| Integer-key hash | C# | 9.992 | 11.299 | 0.486 | 4.6% | 5/5 |
+| Closures | AquariusLang | 87.578 | 102.178 | 6.102 | 6.4% | 5/5 |
+| Closures | AquariusLang (typed) | 102.042 | 118.338 | 6.959 | 6.5% | 5/5 |
+| Closures | AquariusLang (Native AOT compiler) | 90.969 | 103.404 | 4.608 | 4.7% | 5/5 |
+| Closures | AquariusLang (typed, Native AOT compiler) | 98.897 | 110.124 | 4.635 | 4.5% | 5/5 |
+| Closures | Python | 104.945 | 113.977 | 3.354 | 3.1% | 5/5 |
+| Closures | Node.js | 13.206 | 15.017 | 0.667 | 4.7% | 5/5 |
+| Closures | C# | 9.525 | 11.635 | 0.885 | 8.5% | 5/5 |
+| Struct updates | AquariusLang | 63.196 | 72.928 | 4.509 | 6.6% | 5/5 |
+| Struct updates | AquariusLang (typed) | 13.103 | 17.457 | 1.718 | 11.2% | 5/5 |
+| Struct updates | AquariusLang (Native AOT compiler) | 66.008 | 70.817 | 1.745 | 2.5% | 5/5 |
+| Struct updates | AquariusLang (typed, Native AOT compiler) | 14.049 | 17.406 | 1.463 | 9.2% | 5/5 |
+| Struct updates | Python | 104.014 | 121.092 | 7.086 | 6.4% | 5/5 |
+| Struct updates | Node.js | 3.893 | 5.136 | 0.531 | 12.7% | 5/5 |
+| Struct updates | C# | 2.699 | 2.991 | 0.120 | 4.1% | 5/5 |
+| Function calls | AquariusLang | 7.131 | 10.566 | 1.292 | 15.4% | 5/5 |
+| Function calls | AquariusLang (typed) | 6.035 | 7.178 | 0.471 | 7.1% | 5/5 |
+| Function calls | AquariusLang (Native AOT compiler) | 6.421 | 8.138 | 0.708 | 9.3% | 5/5 |
+| Function calls | AquariusLang (typed, Native AOT compiler) | 6.293 | 8.165 | 0.845 | 12.0% | 5/5 |
+| Function calls | Python | 117.162 | 124.823 | 3.619 | 3.0% | 5/5 |
+| Function calls | Node.js | 7.053 | 7.660 | 0.233 | 3.2% | 5/5 |
+| Function calls | C# | 5.607 | 6.505 | 0.423 | 6.9% | 5/5 |
 
 ## Warmed mode (5 in-process warm-up runs, then the median of 5 timed runs)
 
 Each process first runs the same workload 5 times untimed in the same process so the JIT of C# and Node.js finishes optimizing before timing, then times 5 consecutive runs in the same process and takes their median as the process value; each value is the median of 5 process values. Every language gets the same warm-up and timed run counts.
 
-**Composite performance: Node.js 100.00, C# 51.23, AquariusLang 11.06, AquariusLang (Native AOT compiler) 10.95, AquariusLang (typed, Native AOT compiler) 9.90, AquariusLang (typed) 9.64, Python 7.81 (higher is faster).**
+**Composite performance: Node.js 100.00, C# 49.96, AquariusLang (typed, Native AOT compiler) 14.09, AquariusLang (typed) 13.92, AquariusLang (Native AOT compiler) 11.11, AquariusLang 11.10, Python 7.45 (higher is faster).**
 
-Pairwise composite speed: Node.js is 1.95× as fast as C#; Node.js is 9.04× as fast as AquariusLang; Node.js is 9.13× as fast as AquariusLang (Native AOT compiler); Node.js is 10.10× as fast as AquariusLang (typed, Native AOT compiler); Node.js is 10.38× as fast as AquariusLang (typed); Node.js is 12.81× as fast as Python; C# is 4.63× as fast as AquariusLang; C# is 4.68× as fast as AquariusLang (Native AOT compiler); C# is 5.17× as fast as AquariusLang (typed, Native AOT compiler); C# is 5.32× as fast as AquariusLang (typed); C# is 6.56× as fast as Python; AquariusLang is 1.01× as fast as AquariusLang (Native AOT compiler); AquariusLang is 1.12× as fast as AquariusLang (typed, Native AOT compiler); AquariusLang is 1.15× as fast as AquariusLang (typed); AquariusLang is 1.42× as fast as Python; AquariusLang (Native AOT compiler) is 1.11× as fast as AquariusLang (typed, Native AOT compiler); AquariusLang (Native AOT compiler) is 1.14× as fast as AquariusLang (typed); AquariusLang (Native AOT compiler) is 1.40× as fast as Python; AquariusLang (typed, Native AOT compiler) is 1.03× as fast as AquariusLang (typed); AquariusLang (typed, Native AOT compiler) is 1.27× as fast as Python; AquariusLang (typed) is 1.23× as fast as Python.
+Pairwise composite speed: Node.js is 2.00× as fast as C#; Node.js is 7.10× as fast as AquariusLang (typed, Native AOT compiler); Node.js is 7.18× as fast as AquariusLang (typed); Node.js is 9.00× as fast as AquariusLang (Native AOT compiler); Node.js is 9.01× as fast as AquariusLang; Node.js is 13.41× as fast as Python; C# is 3.55× as fast as AquariusLang (typed, Native AOT compiler); C# is 3.59× as fast as AquariusLang (typed); C# is 4.50× as fast as AquariusLang (Native AOT compiler); C# is 4.50× as fast as AquariusLang; C# is 6.70× as fast as Python; AquariusLang (typed, Native AOT compiler) is 1.01× as fast as AquariusLang (typed); AquariusLang (typed, Native AOT compiler) is 1.27× as fast as AquariusLang (Native AOT compiler); AquariusLang (typed, Native AOT compiler) is 1.27× as fast as AquariusLang; AquariusLang (typed, Native AOT compiler) is 1.89× as fast as Python; AquariusLang (typed) is 1.25× as fast as AquariusLang (Native AOT compiler); AquariusLang (typed) is 1.25× as fast as AquariusLang; AquariusLang (typed) is 1.87× as fast as Python; AquariusLang (Native AOT compiler) is 1.00× as fast as AquariusLang; AquariusLang (Native AOT compiler) is 1.49× as fast as Python; AquariusLang is 1.49× as fast as Python.
 
-| Rank | Language | Composite score | Speed vs Node.js | Speed vs C# | Speed vs AquariusLang | Speed vs AquariusLang (Native AOT compiler) | Speed vs AquariusLang (typed, Native AOT compiler) | Speed vs AquariusLang (typed) | Speed vs Python |
+| Rank | Language | Composite score | Speed vs Node.js | Speed vs C# | Speed vs AquariusLang (typed, Native AOT compiler) | Speed vs AquariusLang (typed) | Speed vs AquariusLang (Native AOT compiler) | Speed vs AquariusLang | Speed vs Python |
 | ---: | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| 1 | Node.js | 100.00 | 1.000× | 1.952× | 9.038× | 9.133× | 10.099× | 10.375× | 12.806× |
-| 2 | C# | 51.23 | 0.512× | 1.000× | 4.630× | 4.679× | 5.174× | 5.315× | 6.561× |
-| 3 | AquariusLang | 11.06 | 0.111× | 0.216× | 1.000× | 1.011× | 1.117× | 1.148× | 1.417× |
-| 4 | AquariusLang (Native AOT compiler) | 10.95 | 0.109× | 0.214× | 0.990× | 1.000× | 1.106× | 1.136× | 1.402× |
-| 5 | AquariusLang (typed, Native AOT compiler) | 9.90 | 0.099× | 0.193× | 0.895× | 0.904× | 1.000× | 1.027× | 1.268× |
-| 6 | AquariusLang (typed) | 9.64 | 0.096× | 0.188× | 0.871× | 0.880× | 0.973× | 1.000× | 1.234× |
-| 7 | Python | 7.81 | 0.078× | 0.152× | 0.706× | 0.713× | 0.789× | 0.810× | 1.000× |
+| 1 | Node.js | 100.00 | 1.000× | 2.002× | 7.097× | 7.183× | 9.004× | 9.007× | 13.414× |
+| 2 | C# | 49.96 | 0.500× | 1.000× | 3.546× | 3.589× | 4.498× | 4.500× | 6.702× |
+| 3 | AquariusLang (typed, Native AOT compiler) | 14.09 | 0.141× | 0.282× | 1.000× | 1.012× | 1.269× | 1.269× | 1.890× |
+| 4 | AquariusLang (typed) | 13.92 | 0.139× | 0.279× | 0.988× | 1.000× | 1.254× | 1.254× | 1.868× |
+| 5 | AquariusLang (Native AOT compiler) | 11.11 | 0.111× | 0.222× | 0.788× | 0.798× | 1.000× | 1.000× | 1.490× |
+| 6 | AquariusLang | 11.10 | 0.111× | 0.222× | 0.788× | 0.797× | 1.000× | 1.000× | 1.489× |
+| 7 | Python | 7.45 | 0.075× | 0.149× | 0.529× | 0.535× | 0.671× | 0.671× | 1.000× |
 
 ### Results per benchmark (warmed mode)
 
@@ -127,12 +127,12 @@ Times are in milliseconds (ms); lower is faster. Time ratio = the language's med
 
 | Benchmark | n | AquariusLang median | AquariusLang (typed) median | AquariusLang (Native AOT compiler) median | AquariusLang (typed, Native AOT compiler) median | Python median | Node.js median | C# median | AquariusLang / Python time ratio | AquariusLang (typed) / Python time ratio | AquariusLang (Native AOT compiler) / Python time ratio | AquariusLang (typed, Native AOT compiler) / Python time ratio | Node.js / Python time ratio | C# / Python time ratio |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| String building | 20000 | 64.208 | 69.464 | 61.901 | 66.208 | 12.369 | 0.170 | 68.808 | 5.19× | 5.62× | 5.00× | 5.35× | 0.01× | 5.56× |
-| String-key hash | 500000 | 36.571 | 37.035 | 35.464 | 37.540 | 31.790 | 8.781 | 10.499 | 1.15× | 1.17× | 1.12× | 1.18× | 0.28× | 0.33× |
-| Integer-key hash | 1000000 | 99.462 | 112.715 | 110.934 | 106.503 | 125.116 | 34.492 | 11.009 | 0.79× | 0.90× | 0.89× | 0.85× | 0.28× | 0.09× |
-| Closures | 1000000 | 96.000 | 113.815 | 94.302 | 103.015 | 120.136 | 15.170 | 8.055 | 0.80× | 0.95× | 0.78× | 0.86× | 0.13× | 0.07× |
-| Struct updates | 1000000 | 67.823 | 99.335 | 68.277 | 99.093 | 118.252 | 3.610 | 2.825 | 0.57× | 0.84× | 0.58× | 0.84× | 0.03× | 0.02× |
-| Function calls | 2000000 | 7.381 | 7.834 | 7.621 | 8.085 | 129.967 | 7.320 | 6.294 | 0.06× | 0.06× | 0.06× | 0.06× | 0.06× | 0.05× |
+| String building | 20000 | 55.951 | 58.012 | 57.202 | 57.006 | 11.137 | 0.150 | 56.019 | 5.02× | 5.21× | 5.14× | 5.12× | 0.01× | 5.03× |
+| String-key hash | 500000 | 30.405 | 29.723 | 30.374 | 30.466 | 31.086 | 7.945 | 9.818 | 0.98× | 0.96× | 0.98× | 0.98× | 0.26× | 0.32× |
+| Integer-key hash | 1000000 | 74.831 | 67.307 | 73.233 | 66.334 | 105.338 | 29.306 | 9.158 | 0.71× | 0.64× | 0.70× | 0.63× | 0.28× | 0.09× |
+| Closures | 1000000 | 89.734 | 103.785 | 89.671 | 101.107 | 110.331 | 13.991 | 6.802 | 0.81× | 0.94× | 0.81× | 0.92× | 0.13× | 0.06× |
+| Struct updates | 1000000 | 63.857 | 14.919 | 63.259 | 14.738 | 106.307 | 2.841 | 2.705 | 0.60× | 0.14× | 0.60× | 0.14× | 0.03× | 0.03× |
+| Function calls | 2000000 | 6.422 | 6.706 | 6.477 | 6.534 | 119.534 | 6.304 | 6.090 | 0.05× | 0.06× | 0.05× | 0.05× | 0.05× | 0.05× |
 
 ### AquariusLang (typed) vs Node.js (warmed mode)
 
@@ -140,13 +140,13 @@ Ratio = Node.js median time ÷ AquariusLang (typed) median time; above 1 means A
 
 | Benchmark | n | AquariusLang (typed) median | Node.js median | Node.js ÷ AquariusLang (typed) | Faster |
 | --- | ---: | ---: | ---: | ---: | --- |
-| String building | 20000 | 69.464 | 0.170 | 0.00× | Node.js, 409.58× faster |
-| String-key hash | 500000 | 37.035 | 8.781 | 0.24× | Node.js, 4.22× faster |
-| Integer-key hash | 1000000 | 112.715 | 34.492 | 0.31× | Node.js, 3.27× faster |
-| Closures | 1000000 | 113.815 | 15.170 | 0.13× | Node.js, 7.50× faster |
-| Struct updates | 1000000 | 99.335 | 3.610 | 0.04× | Node.js, 27.52× faster |
-| Function calls | 2000000 | 7.834 | 7.320 | 0.93× | Node.js, 1.07× faster |
-| **Geometric mean** | | | | **0.10×** | Node.js, 10.38× faster |
+| String building | 20000 | 58.012 | 0.150 | 0.00× | Node.js, 385.72× faster |
+| String-key hash | 500000 | 29.723 | 7.945 | 0.27× | Node.js, 3.74× faster |
+| Integer-key hash | 1000000 | 67.307 | 29.306 | 0.44× | Node.js, 2.30× faster |
+| Closures | 1000000 | 103.785 | 13.991 | 0.13× | Node.js, 7.42× faster |
+| Struct updates | 1000000 | 14.919 | 2.841 | 0.19× | Node.js, 5.25× faster |
+| Function calls | 2000000 | 6.706 | 6.304 | 0.94× | Node.js, 1.06× faster |
+| **Geometric mean** | | | | **0.14×** | Node.js, 7.18× faster |
 
 ### Timing variability (warmed mode)
 
@@ -154,48 +154,48 @@ Coefficient of variation (CV) = sample standard deviation of the process values 
 
 | Benchmark | Language | Min ms | Max ms | Std dev ms | CV | Valid samples |
 | --- | --- | ---: | ---: | ---: | ---: | ---: |
-| String building | AquariusLang | 62.219 | 74.712 | 5.132 | 7.8% | 5/5 |
-| String building | AquariusLang (typed) | 63.478 | 77.275 | 5.791 | 8.4% | 5/5 |
-| String building | AquariusLang (Native AOT compiler) | 58.639 | 75.069 | 6.935 | 10.7% | 5/5 |
-| String building | AquariusLang (typed, Native AOT compiler) | 61.206 | 74.225 | 5.237 | 7.8% | 5/5 |
-| String building | Python | 11.849 | 15.189 | 1.590 | 12.1% | 5/5 |
-| String building | Node.js | 0.160 | 0.178 | 0.007 | 4.1% | 5/5 |
-| String building | C# | 62.561 | 87.445 | 9.432 | 13.2% | 5/5 |
-| String-key hash | AquariusLang | 34.163 | 38.446 | 1.594 | 4.4% | 5/5 |
-| String-key hash | AquariusLang (typed) | 35.808 | 43.740 | 3.152 | 8.2% | 5/5 |
-| String-key hash | AquariusLang (Native AOT compiler) | 33.518 | 38.582 | 1.956 | 5.4% | 5/5 |
-| String-key hash | AquariusLang (typed, Native AOT compiler) | 36.436 | 40.239 | 1.781 | 4.7% | 5/5 |
-| String-key hash | Python | 31.271 | 35.151 | 1.565 | 4.8% | 5/5 |
-| String-key hash | Node.js | 8.318 | 9.982 | 0.651 | 7.3% | 5/5 |
-| String-key hash | C# | 9.607 | 11.608 | 0.789 | 7.5% | 5/5 |
-| Integer-key hash | AquariusLang | 88.802 | 107.373 | 6.843 | 6.9% | 5/5 |
-| Integer-key hash | AquariusLang (typed) | 103.280 | 123.279 | 7.937 | 7.0% | 5/5 |
-| Integer-key hash | AquariusLang (Native AOT compiler) | 107.066 | 124.217 | 7.031 | 6.2% | 5/5 |
-| Integer-key hash | AquariusLang (typed, Native AOT compiler) | 103.784 | 119.018 | 7.471 | 6.7% | 5/5 |
-| Integer-key hash | Python | 109.674 | 130.018 | 8.078 | 6.5% | 5/5 |
-| Integer-key hash | Node.js | 32.904 | 40.289 | 3.262 | 9.1% | 5/5 |
-| Integer-key hash | C# | 10.463 | 12.592 | 0.834 | 7.4% | 5/5 |
-| Closures | AquariusLang | 91.081 | 103.934 | 5.912 | 6.1% | 5/5 |
-| Closures | AquariusLang (typed) | 102.704 | 121.090 | 8.215 | 7.4% | 5/5 |
-| Closures | AquariusLang (Native AOT compiler) | 88.375 | 108.162 | 9.191 | 9.4% | 5/5 |
-| Closures | AquariusLang (typed, Native AOT compiler) | 101.224 | 116.844 | 6.492 | 6.1% | 5/5 |
-| Closures | Python | 114.484 | 124.765 | 3.659 | 3.1% | 5/5 |
-| Closures | Node.js | 14.562 | 15.573 | 0.363 | 2.4% | 5/5 |
-| Closures | C# | 7.033 | 8.691 | 0.619 | 7.8% | 5/5 |
-| Struct updates | AquariusLang | 64.874 | 75.250 | 4.104 | 5.9% | 5/5 |
-| Struct updates | AquariusLang (typed) | 92.121 | 106.585 | 5.515 | 5.6% | 5/5 |
-| Struct updates | AquariusLang (Native AOT compiler) | 63.868 | 77.983 | 5.817 | 8.4% | 5/5 |
-| Struct updates | AquariusLang (typed, Native AOT compiler) | 90.454 | 104.244 | 5.500 | 5.6% | 5/5 |
-| Struct updates | Python | 111.844 | 121.902 | 4.193 | 3.6% | 5/5 |
-| Struct updates | Node.js | 2.911 | 3.720 | 0.323 | 9.4% | 5/5 |
-| Struct updates | C# | 2.751 | 3.203 | 0.214 | 7.3% | 5/5 |
-| Function calls | AquariusLang | 7.051 | 10.253 | 1.347 | 17.1% | 5/5 |
-| Function calls | AquariusLang (typed) | 7.348 | 8.080 | 0.289 | 3.7% | 5/5 |
-| Function calls | AquariusLang (Native AOT compiler) | 6.429 | 9.094 | 1.059 | 14.1% | 5/5 |
-| Function calls | AquariusLang (typed, Native AOT compiler) | 7.688 | 8.276 | 0.227 | 2.8% | 5/5 |
-| Function calls | Python | 121.704 | 132.129 | 4.918 | 3.8% | 5/5 |
-| Function calls | Node.js | 7.028 | 7.631 | 0.264 | 3.6% | 5/5 |
-| Function calls | C# | 6.149 | 6.472 | 0.126 | 2.0% | 5/5 |
+| String building | AquariusLang | 52.861 | 62.845 | 3.992 | 7.0% | 5/5 |
+| String building | AquariusLang (typed) | 53.420 | 62.032 | 3.625 | 6.3% | 5/5 |
+| String building | AquariusLang (Native AOT compiler) | 51.898 | 65.029 | 4.815 | 8.4% | 5/5 |
+| String building | AquariusLang (typed, Native AOT compiler) | 54.079 | 61.401 | 2.679 | 4.7% | 5/5 |
+| String building | Python | 10.261 | 11.922 | 0.669 | 6.1% | 5/5 |
+| String building | Node.js | 0.125 | 0.175 | 0.019 | 12.5% | 5/5 |
+| String building | C# | 53.924 | 67.529 | 5.447 | 9.3% | 5/5 |
+| String-key hash | AquariusLang | 30.329 | 32.639 | 1.009 | 3.3% | 5/5 |
+| String-key hash | AquariusLang (typed) | 29.054 | 31.078 | 0.885 | 3.0% | 5/5 |
+| String-key hash | AquariusLang (Native AOT compiler) | 28.863 | 30.629 | 0.708 | 2.4% | 5/5 |
+| String-key hash | AquariusLang (typed, Native AOT compiler) | 29.229 | 30.817 | 0.705 | 2.3% | 5/5 |
+| String-key hash | Python | 30.126 | 32.187 | 0.760 | 2.4% | 5/5 |
+| String-key hash | Node.js | 7.394 | 8.429 | 0.431 | 5.4% | 5/5 |
+| String-key hash | C# | 9.421 | 11.277 | 0.720 | 7.1% | 5/5 |
+| Integer-key hash | AquariusLang | 67.812 | 92.103 | 9.971 | 13.0% | 5/5 |
+| Integer-key hash | AquariusLang (typed) | 61.860 | 71.605 | 4.062 | 6.0% | 5/5 |
+| Integer-key hash | AquariusLang (Native AOT compiler) | 68.521 | 82.578 | 5.626 | 7.6% | 5/5 |
+| Integer-key hash | AquariusLang (typed, Native AOT compiler) | 63.448 | 71.863 | 3.197 | 4.7% | 5/5 |
+| Integer-key hash | Python | 99.802 | 132.961 | 13.392 | 12.1% | 5/5 |
+| Integer-key hash | Node.js | 27.591 | 29.539 | 0.787 | 2.7% | 5/5 |
+| Integer-key hash | C# | 8.702 | 10.689 | 0.825 | 8.7% | 5/5 |
+| Closures | AquariusLang | 88.359 | 93.190 | 1.859 | 2.1% | 5/5 |
+| Closures | AquariusLang (typed) | 97.449 | 104.549 | 3.218 | 3.2% | 5/5 |
+| Closures | AquariusLang (Native AOT compiler) | 87.156 | 93.045 | 2.609 | 2.9% | 5/5 |
+| Closures | AquariusLang (typed, Native AOT compiler) | 94.748 | 104.844 | 3.816 | 3.8% | 5/5 |
+| Closures | Python | 107.443 | 112.790 | 2.019 | 1.8% | 5/5 |
+| Closures | Node.js | 12.759 | 14.161 | 0.570 | 4.2% | 5/5 |
+| Closures | C# | 6.718 | 7.819 | 0.472 | 6.7% | 5/5 |
+| Struct updates | AquariusLang | 61.661 | 71.103 | 3.796 | 5.9% | 5/5 |
+| Struct updates | AquariusLang (typed) | 14.451 | 15.933 | 0.544 | 3.6% | 5/5 |
+| Struct updates | AquariusLang (Native AOT compiler) | 62.067 | 64.660 | 1.044 | 1.7% | 5/5 |
+| Struct updates | AquariusLang (typed, Native AOT compiler) | 14.636 | 15.024 | 0.152 | 1.0% | 5/5 |
+| Struct updates | Python | 104.086 | 110.823 | 2.456 | 2.3% | 5/5 |
+| Struct updates | Node.js | 2.723 | 4.018 | 0.541 | 17.5% | 5/5 |
+| Struct updates | C# | 2.451 | 2.745 | 0.130 | 4.9% | 5/5 |
+| Function calls | AquariusLang | 6.012 | 6.910 | 0.335 | 5.2% | 5/5 |
+| Function calls | AquariusLang (typed) | 6.033 | 7.443 | 0.528 | 7.9% | 5/5 |
+| Function calls | AquariusLang (Native AOT compiler) | 6.387 | 7.238 | 0.364 | 5.5% | 5/5 |
+| Function calls | AquariusLang (typed, Native AOT compiler) | 6.031 | 6.788 | 0.316 | 4.9% | 5/5 |
+| Function calls | Python | 115.897 | 125.227 | 3.431 | 2.9% | 5/5 |
+| Function calls | Node.js | 6.025 | 7.734 | 0.687 | 10.5% | 5/5 |
+| Function calls | C# | 5.889 | 6.478 | 0.229 | 3.7% | 5/5 |
 
 ## AquariusLang compiler build and start times
 
@@ -203,10 +203,10 @@ Each AquariusLang candidate builds every program with its own `aqua` (`aqua buil
 
 | Candidate | Median build | Median process, standard mode | Median process, warmed mode |
 | --- | ---: | ---: | ---: |
-| AquariusLang | 208.1 ms | 197.3 ms | 815.8 ms |
-| AquariusLang (typed) | 196.3 ms | 250.0 ms | 939.6 ms |
-| AquariusLang (Native AOT compiler) | 45.8 ms | 143.4 ms | 774.2 ms |
-| AquariusLang (typed, Native AOT compiler) | 44.5 ms | 171.6 ms | 884.9 ms |
+| AquariusLang | 178.4 ms | 189.0 ms | 745.2 ms |
+| AquariusLang (typed) | 196.7 ms | 166.5 ms | 568.8 ms |
+| AquariusLang (Native AOT compiler) | 41.8 ms | 134.9 ms | 717.6 ms |
+| AquariusLang (typed, Native AOT compiler) | 38.1 ms | 114.9 ms | 510.7 ms |
 
 ## How the composite score is computed
 
@@ -265,8 +265,8 @@ For each mode the harness copies the sources into a temporary folder and replace
 
 ## Test date and environment
 
-- Started: 2026-11-18T14:09:48.930889+08:00
-- Finished: 2026-11-18T14:13:58.824061+08:00
+- Started: 2026-11-20T17:50:00.370526+08:00
+- Finished: 2026-11-20T17:53:16.515865+08:00
 - Time zone: Asia/Taipei
 - Input size: large (`large`); 5 counted and 1 discarded warm-up processes per case
 - Modes: Standard mode (cold start, one timed run per process); Warmed mode (5 in-process warm-up runs, then the median of 5 timed runs)
@@ -310,8 +310,8 @@ Every warm-up and counted sample output, in every language and mode, matches the
 
 ## Reproducible data
 
-- Raw samples, outputs, commands, execution order, environment and executable and source hashes: `C:\OfficialProjects\AquariusLang_PerformanceBenchmark\results\app\20261118-140948-930889\results.json`
-- Summary and per-sample CSV: `C:\OfficialProjects\AquariusLang_PerformanceBenchmark\results\app\20261118-140948-930889\summary.csv`, `C:\OfficialProjects\AquariusLang_PerformanceBenchmark\results\app\20261118-140948-930889\samples.csv`
+- Raw samples, outputs, commands, execution order, environment and executable and source hashes: `C:\OfficialProjects\AquariusLang_PerformanceBenchmark\results\app\20261120-175000-370526\results.json`
+- Summary and per-sample CSV: `C:\OfficialProjects\AquariusLang_PerformanceBenchmark\results\app\20261120-175000-370526\summary.csv`, `C:\OfficialProjects\AquariusLang_PerformanceBenchmark\results\app\20261120-175000-370526\samples.csv`
 - `benchmarks.json`: the standard and smoke-check input sizes and workload definitions.
 - `benchmarks/aquarius/`, `benchmarks/aquarius_typed/`, `benchmarks/aquarius_aot/`, `benchmarks/aquarius_typed_aot/`, `benchmarks/python/`, `benchmarks/node/`, `benchmarks/csharp/`: the standalone benchmark programs.
 - `reference.py`: the untimed reference answers; `tests/`: regression tests for the harness and reference answers.
